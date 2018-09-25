@@ -38,4 +38,16 @@ public class Kind extends AbstractBaseEntity{
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "kind")
     protected List<Unterricht> unterrichts;
+
+    public Kind(Integer id, @NotBlank @Size(max = 50) String name, @NotBlank @Size(min = 3, max = 50) String adresse, boolean aktiv, @NotNull Date registriert) {
+        super(id);
+        this.name = name;
+        this.adresse = adresse;
+        this.aktiv = aktiv;
+        this.registriert = registriert;
+    }
+
+    public Kind(Integer id, @NotBlank @Size(max = 50) String name, @NotBlank @Size(min = 3, max = 50) String adresse) {
+        this(id, name, adresse, true, new Date());
+    }
 }

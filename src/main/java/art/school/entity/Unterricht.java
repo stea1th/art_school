@@ -1,84 +1,56 @@
 package art.school.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 @Entity
+@Table(name = "unterricht")
 public class Unterricht extends AbstractBaseEntity {
 
-    private Timestamp datum;
-    private boolean bezahlt;
-    private String notiz;
-    private Kind kindByKId;
-    private Zahlung zahlungByZId;
+    @Column(name = "datum", nullable = false, columnDefinition = "timestamp default now()")
+    @NotNull
+    private LocalDateTime datum;
 
+    @Column(name = "bezahlt", nullable = false, columnDefinition = "bool default true")
+    private boolean bezahlt = true;
 
-
-    @Basic
-    @Column(name = "datum")
-    public Timestamp getDatum() {
-        return datum;
-    }
-
-    public void setDatum(Timestamp datum) {
-        this.datum = datum;
-    }
-
-    @Basic
-    @Column(name = "bezahlt")
-    public boolean isBezahlt() {
-        return bezahlt;
-    }
-
-    public void setBezahlt(boolean bezahlt) {
-        this.bezahlt = bezahlt;
-    }
-
-    @Basic
     @Column(name = "notiz")
-    public String getNotiz() {
-        return notiz;
-    }
+    private String notiz;
 
-    public void setNotiz(String notiz) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "k_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
+    private Kind kind;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "z_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
+    private Zahlung zahlung;
+
+    public Unterricht(Integer id, @NotNull LocalDateTime datum, boolean bezahlt, String notiz) {
+        super(id);
+        this.datum = datum;
+        this.bezahlt = bezahlt;
         this.notiz = notiz;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Unterricht that = (Unterricht) o;
-        return id == that.id &&
-                bezahlt == that.bezahlt &&
-                Objects.equals(datum, that.datum) &&
-                Objects.equals(notiz, that.notiz);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, datum, bezahlt, notiz);
-    }
-
-    @ManyToOne
-    @JoinTable(name = "kind", catalog = "artschool", schema = "public", joinColumns = @JoinColumn(name = "id", referencedColumnName = "k_id", nullable = false))
-    public Kind getKindByKId() {
-        return kindByKId;
-    }
-
-    public void setKindByKId(Kind kindByKId) {
-        this.kindByKId = kindByKId;
-    }
-
-    @ManyToOne
-    @JoinTable(name = "kind", catalog = "artschool", schema = "public", joinColumns = @JoinColumn(name = "id", referencedColumnName = "z_id", nullable = false))
-    public Zahlung getZahlungByZId() {
-        return zahlungByZId;
-    }
-
-    public void setZahlungByZId(Zahlung zahlungByZId) {
-        this.zahlungByZId = zahlungByZId;
+    public Unterricht(Integer id, String notiz) {
+        this(id, LocalDateTime.now(), true, notiz);
     }
 }
