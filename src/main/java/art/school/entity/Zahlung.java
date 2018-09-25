@@ -7,21 +7,13 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Zahlung {
-    private int id;
+public class Zahlung extends AbstractBaseEntity{
+
     private BigInteger preis;
     private Time dauer;
     private List<Unterricht> unterrichtsById;
 
-    @Id
-    @Column(name = "id")
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @Basic
     @Column(name = "preis")

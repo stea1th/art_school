@@ -3,6 +3,10 @@ package art.school.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,53 +16,26 @@ import java.util.Objects;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @Entity
+@Table(name = "kind", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "adresse"}, name = "kind_unique_name_adresse_idx")})
 public class Kind extends AbstractBaseEntity{
 
-
-
+    @Column(name = "name", nullable = false)
+    @NotBlank
+    @Size(max = 50)
     private String name;
+
+    @Column(name = "adresse", nullable = false)
+    @NotBlank
+    @Size(min = 3, max = 50)
     private String adresse;
-    private boolean aktiv;
-    private List<Unterricht> unterrichtsById;
 
+    @Column(name = "aktiv", nullable = false, columnDefinition = "bool default true")
+    private boolean aktiv = true;
 
+    @Column(name = "registriert", columnDefinition = "timestamp default now()")
+    @NotNull
+    private Date registriert = new Date();
 
-    @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Basic
-    @Column(name = "adresse")
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
-    @Basic
-    @Column(name = "aktiv")
-    public boolean isAktiv() {
-        return aktiv;
-    }
-
-    public void setAktiv(boolean aktiv) {
-        this.aktiv = aktiv;
-    }
-
-    @OneToMany(mappedBy = "kindByKId")
-    public List<Unterricht> getUnterrichtsById() {
-        return unterrichtsById;
-    }
-
-    public void setUnterrichtsById(List<Unterricht> unterrichtsById) {
-        this.unterrichtsById = unterrichtsById;
-    }
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "kind")
+    protected List<Unterricht> unterrichts;
 }

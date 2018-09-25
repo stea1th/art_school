@@ -11,15 +11,18 @@ create table kind
   id integer primary key default nextval('global_seq'),
   name varchar not null,
   adresse varchar not null,
-  aktiv bool default true not null
+  aktiv bool default true not null,
+  registriert timestamp default now() not null,
+  constraint kind_unique_name_adresse_idx unique(name, adresse)
 );
+
 
 create table zahlung
 (
   id integer primary key default nextval('global_seq'),
   preis numeric not null,
   dauer time not null,
-  constraint preis_dauer_idx unique(preis, dauer)
+  constraint zahlung_unique_preis_dauer_idx unique(preis, dauer)
 );
 
 create table unterricht

@@ -5,23 +5,15 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-public class Unterricht {
-    private int id;
+public class Unterricht extends AbstractBaseEntity {
+
     private Timestamp datum;
     private boolean bezahlt;
     private String notiz;
     private Kind kindByKId;
     private Zahlung zahlungByZId;
 
-    @Id
-    @Column(name = "id")
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @Basic
     @Column(name = "datum")
