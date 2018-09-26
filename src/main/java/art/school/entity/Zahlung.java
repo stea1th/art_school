@@ -1,62 +1,37 @@
 package art.school.entity;
 
-import javax.persistence.*;
-import java.math.BigInteger;
-import java.sql.Time;
-import java.util.List;
-import java.util.Objects;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.time.LocalTime;
+import java.util.List;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
+@NoArgsConstructor
 @Entity
+@Table(name = "zahlung", uniqueConstraints = {@UniqueConstraint(columnNames = {"preis", "dauer"}, name = "zahlung_unique_preis_dauer_idx")})
 public class Zahlung extends AbstractBaseEntity{
 
-    private BigInteger preis;
-    private Time dauer;
-    private List<Unterricht> unterrichtsById;
+    @Column(name = "preis", nullable = false)
+    @NotNull
+    private BigDecimal preis;
 
+    @Column(name = "dauer", nullable = false)
+    @NotBlank
+    private LocalTime dauer;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "zahlung")
+    private List<Unterricht> unterrichts;
 
-    @Basic
-    @Column(name = "preis")
-    public BigInteger getPreis() {
-        return preis;
-    }
-
-    public void setPreis(BigInteger preis) {
+    public Zahlung(Integer id, @NotNull BigDecimal preis, @NotBlank LocalTime dauer) {
+        super(id);
         this.preis = preis;
-    }
-
-    @Basic
-    @Column(name = "dauer")
-    public Time getDauer() {
-        return dauer;
-    }
-
-    public void setDauer(Time dauer) {
         this.dauer = dauer;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Zahlung zahlung = (Zahlung) o;
-        return id == zahlung.id &&
-                Objects.equals(preis, zahlung.preis) &&
-                Objects.equals(dauer, zahlung.dauer);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, preis, dauer);
-    }
-
-    @OneToMany(mappedBy = "zahlungByZId")
-    public List<Unterricht> getUnterrichtsById() {
-        return unterrichtsById;
-    }
-
-    public void setUnterrichtsById(List<Unterricht> unterrichtsById) {
-        this.unterrichtsById = unterrichtsById;
     }
 }
