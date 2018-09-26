@@ -26,7 +26,7 @@ public class Zahlung extends AbstractBaseEntity{
     @NotBlank
     private LocalTime dauer;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "zahlung")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "zahlung")
     private List<Unterricht> unterrichts;
 
     public Zahlung(Integer id, @NotNull BigDecimal preis, @NotBlank LocalTime dauer) {
