@@ -3,8 +3,8 @@ package art.school.service;
 
 import art.school.entity.Kind;
 
-public interface KindService {
+public interface KindService extends MainServiceInterface<Kind> {
 
-    Kind get(int id);
+    void setAktiv(int id, boolean aktiv);
 
 }

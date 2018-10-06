@@ -45,7 +45,18 @@ public class Kind extends AbstractBaseEntity{
         this.registriert = registriert;
     }
 
+    public Kind(@NotBlank @Size(max = 50) String name, @NotBlank @Size(min = 3, max = 50) String adresse, boolean aktiv, @NotNull Date registriert) {
+        this.name = name;
+        this.adresse = adresse;
+        this.aktiv = aktiv;
+        this.registriert = registriert;
+    }
+
     public Kind(Integer id, @NotBlank @Size(max = 50) String name, @NotBlank @Size(min = 3, max = 50) String adresse) {
         this(id, name, adresse, true, new Date());
+    }
+
+    public Kind(Kind k){
+        this(k.getId(), k.getName(), k.getAdresse(), k.isAktiv(), k.getRegistriert());
     }
 }
