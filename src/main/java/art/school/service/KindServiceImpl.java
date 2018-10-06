@@ -43,8 +43,8 @@ public class KindServiceImpl implements KindService {
 
     @Override
     @Transactional
-    public void setAktiv(int id, boolean aktiv) {
+    public void toggleAktiv(int id) {
         Kind kind = get(id);
-        kind.setAktiv(aktiv);
+        kind.setAktiv(!kind.isAktiv());
     }
 }

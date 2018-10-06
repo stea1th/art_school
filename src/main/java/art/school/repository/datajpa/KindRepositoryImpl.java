@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class KindRepositoryImpl implements KindRepository {
 
-    private static final Sort SORT_BY_NAME = new Sort(Sort.Direction.DESC, "name");
+    private static final Sort SORT_BY_NAME = new Sort(Sort.Direction.ASC, "name");
 
     @Autowired
     CrudKindRepository crudKindRepository;

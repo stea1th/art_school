@@ -26,8 +26,8 @@ public class KindController {
         kindService.delete(id);
     }
 
-    public void setAktiv(int id, boolean aktiv){
-        kindService.setAktiv(id, aktiv);
+    public void toggleAktiv(int id){
+        kindService.toggleAktiv(id);
     }
 
 

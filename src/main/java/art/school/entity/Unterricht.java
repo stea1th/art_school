@@ -37,14 +37,14 @@ public class Unterricht extends AbstractBaseEntity {
     @NotNull
     private Zahlung zahlung;
 
-    public Unterricht(@NotNull LocalDateTime datum, boolean bezahlt, String notiz) {
-        super();
+    public Unterricht(Integer id, @NotNull LocalDateTime datum, boolean bezahlt, String notiz) {
+        super(id);
         this.datum = datum;
         this.bezahlt = bezahlt;
         this.notiz = notiz;
     }
 
     public Unterricht(String notiz) {
-        this(LocalDateTime.now(), true, notiz);
+        this(null, LocalDateTime.now(), true, notiz);
     }
 }
