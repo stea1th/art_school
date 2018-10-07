@@ -1,6 +1,7 @@
 package art.school.entity;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -13,6 +14,7 @@ import java.util.Objects;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
+@ToString(exclude = "unterrichts")
 @Entity
 @Table(name = "kind", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "adresse"}, name = "kind_unique_name_adresse_idx")})
 public class Kind extends AbstractBaseEntity{
@@ -32,6 +34,7 @@ public class Kind extends AbstractBaseEntity{
 
     @Column(name = "registriert", columnDefinition = "timestamp default now()")
     @NotNull
+    @DateTimeFormat
     private Date registriert = new Date();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "kind")
@@ -47,9 +50,5 @@ public class Kind extends AbstractBaseEntity{
 
     public Kind(@NotBlank @Size(max = 50) String name, @NotBlank @Size(min = 3, max = 50) String adresse) {
         this(null, name, adresse, true, new Date());
-    }
-
-    public Kind(Kind k){
-        this(k.getId(), k.getName(), k.getAdresse(), k.isAktiv(), k.getRegistriert());
     }
 }

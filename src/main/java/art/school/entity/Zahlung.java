@@ -3,6 +3,7 @@ package art.school.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -14,6 +15,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
+@ToString(exclude = "unterrichts")
 @Entity
 @Table(name = "zahlung", uniqueConstraints = {@UniqueConstraint(columnNames = {"preis", "dauer"}, name = "zahlung_unique_preis_dauer_idx")})
 public class Zahlung extends AbstractBaseEntity{

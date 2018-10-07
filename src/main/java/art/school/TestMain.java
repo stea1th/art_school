@@ -89,6 +89,11 @@ public class TestMain {
             System.out.println("Всего за "+list.size()+" урока я заработала "
                     +list.stream().filter(Unterricht::isBezahlt).mapToDouble(i->i.getZahlung().getPreis().doubleValue()).sum()+" евро");
 
+//            unterrichtController.get(1100);
+            System.out.println(unterrichtController.create(new Unterricht("Error"), 1001, 1004).toString());
+            System.out.println(controller.get(1001));
+            System.out.println(zahlungController.get(1003));
+
         }
     }
 }

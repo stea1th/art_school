@@ -4,8 +4,11 @@ import art.school.entity.Zahlung;
 import art.school.repository.ZahlungRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.List;
+
+import static art.school.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class ZahlungServiceImpl implements ZahlungService {
@@ -15,24 +18,24 @@ public class ZahlungServiceImpl implements ZahlungService {
 
     @Override
     public Zahlung create(Zahlung zahlung) {
+        Assert.notNull(zahlung, "zahlung must not be null");
         return repository.save(zahlung);
     }
 
     @Override
     public void delete(int id) {
-        repository.delete(id);
-
+       checkNotFoundWithId(repository.delete(id), id);
     }
 
     @Override
     public Zahlung get(int id) {
-        return repository.get(id);
+        return checkNotFoundWithId(repository.get(id), id);
     }
 
     @Override
     public void update(Zahlung zahlung) {
-        repository.save(zahlung);
-
+        Assert.notNull(zahlung, "zahlung must not be null");
+        checkNotFoundWithId(repository.save(zahlung), zahlung.getId());
     }
 
     @Override

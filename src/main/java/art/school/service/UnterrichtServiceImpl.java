@@ -5,8 +5,11 @@ import art.school.repository.UnterrichtRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.List;
+
+import static art.school.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class UnterrichtServiceImpl implements UnterrichtService {
@@ -16,12 +19,14 @@ public class UnterrichtServiceImpl implements UnterrichtService {
 
     @Override
     public Unterricht create(Unterricht unterricht, Integer... arr) {
+        Assert.notNull(unterricht, "unterricht must not be null");
         return repository.save(unterricht, arr);
     }
 
     @Override
     public void update(Unterricht unterricht, Integer... arr) {
-        repository.save(unterricht, arr);
+        Assert.notNull(unterricht, "unterricht must not be null");
+        checkNotFoundWithId(repository.save(unterricht, arr), unterricht.getId());
 
     }
 
@@ -39,13 +44,13 @@ public class UnterrichtServiceImpl implements UnterrichtService {
 
     @Override
     public void delete(int id) {
-        repository.delete(id);
+       checkNotFoundWithId(repository.delete(id), id);
 
     }
 
     @Override
     public Unterricht get(int id) {
-        return repository.get(id);
+        return checkNotFoundWithId(repository.get(id), id);
     }
 
     @Override

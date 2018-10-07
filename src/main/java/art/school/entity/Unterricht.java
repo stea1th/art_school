@@ -3,6 +3,7 @@ package art.school.entity;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,12 +12,14 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
+@ToString(exclude = {"kind", "zahlung"})
 @Entity
 @Table(name = "unterricht")
 public class Unterricht extends AbstractBaseEntity {
 
     @Column(name = "datum", nullable = false, columnDefinition = "timestamp default now()")
     @NotNull
+    @DateTimeFormat
     private LocalDateTime datum;
 
     @Column(name = "bezahlt", nullable = false, columnDefinition = "bool default true")
