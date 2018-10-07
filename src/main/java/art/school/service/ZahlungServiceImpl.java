@@ -11,7 +11,7 @@ import java.util.List;
 public class ZahlungServiceImpl implements ZahlungService {
 
     @Autowired
-    ZahlungRepository repository;
+    private ZahlungRepository repository;
 
     @Override
     public Zahlung create(Zahlung zahlung) {

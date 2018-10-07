@@ -34,7 +34,7 @@ public class Kind extends AbstractBaseEntity{
     @NotNull
     private Date registriert = new Date();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "kind")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "kind")
     protected List<Unterricht> unterrichts;
 
     public Kind(Integer id, @NotBlank @Size(max = 50) String name, @NotBlank @Size(min = 3, max = 50) String adresse, boolean aktiv, @NotNull Date registriert) {

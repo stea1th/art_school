@@ -12,7 +12,7 @@ import java.util.List;
 public class KindServiceImpl implements KindService {
 
     @Autowired
-    KindRepository repository;
+    private KindRepository repository;
 
     @Override
     public Kind create(Kind kind) {

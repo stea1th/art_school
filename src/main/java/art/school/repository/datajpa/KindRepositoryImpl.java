@@ -5,6 +5,7 @@ import art.school.repository.KindRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,9 +15,10 @@ public class KindRepositoryImpl implements KindRepository {
     private static final Sort SORT_BY_NAME = new Sort(Sort.Direction.ASC, "name");
 
     @Autowired
-    CrudKindRepository crudKindRepository;
+    private CrudKindRepository crudKindRepository;
 
     @Override
+    @Transactional
     public Kind save(Kind kind) {
         return crudKindRepository.save(kind);
     }

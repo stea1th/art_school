@@ -25,13 +25,13 @@ public class Unterricht extends AbstractBaseEntity {
     @Column(name = "notiz")
     private String notiz;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "k_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Kind kind;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "z_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
@@ -44,7 +44,23 @@ public class Unterricht extends AbstractBaseEntity {
         this.notiz = notiz;
     }
 
+    public Unterricht(@NotNull LocalDateTime datum, String notiz) {
+        this(null, datum, true, notiz);
+    }
+
+    public Unterricht(@NotNull LocalDateTime datum, boolean bezahlt, String notiz) {
+        this(null, datum, bezahlt, notiz);
+    }
+
     public Unterricht(String notiz) {
         this(null, LocalDateTime.now(), true, notiz);
+    }
+
+    public Unterricht(boolean bezahlt, String notiz) {
+        this(null, LocalDateTime.now(), bezahlt, notiz);
+    }
+
+    public Unterricht(boolean bezahlt) {
+        this(null, LocalDateTime.now(), bezahlt, "");
     }
 }

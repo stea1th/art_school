@@ -1,17 +1,19 @@
 package art.school;
 
 import art.school.entity.Kind;
+import art.school.entity.Unterricht;
 import art.school.entity.Zahlung;
 import art.school.web.kind.KindController;
+import art.school.web.unterricht.UnterrichtController;
 import art.school.web.zahlung.ZahlungController;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.time.LocalTime;
+import java.util.List;
 
 
 public class TestMain {
@@ -31,6 +33,7 @@ public class TestMain {
             KindController controller = appCtx.getBean(KindController.class);
             ConfigurableListableBeanFactory factory = appCtx.getBeanFactory();
             ZahlungController zahlungController = factory.getBean(ZahlungController.class);
+            UnterrichtController unterrichtController = factory.getBean(UnterrichtController.class);
 //            ZahlungController zahlungController = appCtx.ge
 
 
@@ -68,6 +71,24 @@ public class TestMain {
 
             zahlungController.getAll().forEach(i-> System.out.println(i.getId()+" "+i.getPreis()+" -> "+i.getDauer()));
             System.out.println("Summe => "+zahlungController.getAll().stream().mapToDouble(i-> i.getPreis().doubleValue()).sum());
+            kind.getUnterrichts().forEach(i-> System.out.println(i.getNotiz()));
+
+            unterrichtController.create(new Unterricht(true, "Kogda zhe eto vse zakonchitsia??"), 1001, 1011);
+            unterrichtController.create(new Unterricht(false), 1001, 1004);
+            unterrichtController.getAll().forEach(i-> System.out.println(i.getId()+" "+i.getDatum()+" "
+                    +i.isBezahlt()+" "+i.getNotiz()+" "+i.getKind().getName()));
+            unterrichtController.delete(1006);
+
+//            unterrichtController.toggleBezahlt(1013);
+            System.out.println(unterrichtController.get(1013).isBezahlt());
+            List<Unterricht> list = unterrichtController.getAll();
+            list.forEach(i-> System.out.println(i.getId()+" "+i.getDatum().toLocalDate()+" -> "
+                    +i.isBezahlt()+" "+i.getNotiz()+" "+i.getKind().getName()));
+
+
+            System.out.println("Всего за "+list.size()+" урока я заработала "
+                    +list.stream().filter(Unterricht::isBezahlt).mapToDouble(i->i.getZahlung().getPreis().doubleValue()).sum()+" евро");
+
         }
     }
 }

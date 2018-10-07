@@ -4,6 +4,7 @@ import art.school.entity.Zahlung;
 import art.school.repository.ZahlungRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,9 +12,10 @@ import java.util.List;
 public class ZahlungRepositoryImpl implements ZahlungRepository {
 
     @Autowired
-    CrudZahlungRepository repository;
+    private CrudZahlungRepository repository;
 
     @Override
+    @Transactional
     public Zahlung save(Zahlung zahlung) {
         return repository.save(zahlung);
     }
