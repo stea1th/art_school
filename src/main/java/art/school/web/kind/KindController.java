@@ -1,4 +1,4 @@
-package art.school.web;
+package art.school.web.kind;
 
 
 import art.school.entity.Kind;
@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+
+import static art.school.util.ValidationUtil.assureIdConsistent;
+import static art.school.util.ValidationUtil.checkNew;
 
 @Controller
 public class KindController {
@@ -19,6 +22,7 @@ public class KindController {
     }
 
     public Kind create(Kind kind){
+        checkNew(kind);
         return kindService.create(kind);
     }
 
@@ -30,9 +34,8 @@ public class KindController {
         kindService.toggleAktiv(id);
     }
 
-
-
-    public void update(Kind kind){
+    public void update(Kind kind, int id){
+        assureIdConsistent(kind, id);
         kindService.update(kind);
     }
 

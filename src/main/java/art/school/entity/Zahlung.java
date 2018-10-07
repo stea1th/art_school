@@ -34,4 +34,8 @@ public class Zahlung extends AbstractBaseEntity{
         this.preis = preis;
         this.dauer = dauer;
     }
+
+    public Zahlung(@NotNull BigDecimal preis, @NotBlank LocalTime dauer) {
+        this(null, preis, dauer);
+    }
 }
