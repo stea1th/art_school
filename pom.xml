@@ -18,15 +18,30 @@
 
     <properties>
         <java.version>1.8</java.version>
+
+        <!--Spring-->
         <spring.version>5.1.0.RELEASE</spring.version>
         <spring-data-jpa.version>2.1.0.RELEASE</spring-data-jpa.version>
+        <spring-commons.version>2.1.0.RELEASE</spring-commons.version>
+
+        <!--Hibernate-->
         <hibernate.version>5.3.6.Final</hibernate.version>
         <hibernate-validator.version>6.0.13.Final</hibernate-validator.version>
+
+        <!--Connection Pool-->
         <connection-pool.version>9.0.12</connection-pool.version>
         <c3p0.version>0.9.5.2</c3p0.version>
-        <jstl.version>1.2</jstl.version>
+
+        <!--DB-->
         <postgres.version>42.2.2</postgres.version>
-        <spring-commons.version>2.1.0.RELEASE</spring-commons.version>
+
+        <!--Logging-->
+        <logback.version>1.2.3</logback.version>
+        <slf4j.version>1.7.25</slf4j.version>
+
+        <!--Web-->
+        <jstl.version>1.2</jstl.version>
+
     </properties>
 
     <build>
@@ -53,6 +68,27 @@
         </plugins>
     </build>
     <dependencies>
+
+        <!--Logback & Slf4j-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
         <!--Lombock-->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -60,6 +96,7 @@
             <version>1.18.0</version>
             <scope>provided</scope>
         </dependency>
+
         <!--Spring-->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -75,12 +112,14 @@
             <artifactId>spring-data-commons</artifactId>
             <version>${spring-commons.version}</version>
         </dependency>
+
         <!--PostgreSQL-->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgresql.version}</version>
         </dependency>
+
         <!--Hibernate-->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -98,12 +137,14 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
         <!--c3p0 Connection Pool-->
         <dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
             <version>${c3p0.version}</version>
         </dependency>
+
         <!--Tomcat-->
         <dependency>
             <groupId>org.apache.tomcat</groupId>
@@ -115,6 +156,7 @@
             <artifactId>tomcat-jdbc</artifactId>
             <version>${connection-pool.version}</version>
         </dependency>
+
         <!--Web-->
         <dependency>
             <groupId>org.springframework</groupId>

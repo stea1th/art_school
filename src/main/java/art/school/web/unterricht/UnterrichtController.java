@@ -2,6 +2,7 @@ package art.school.web.unterricht;
 
 import art.school.entity.Unterricht;
 import art.school.service.UnterrichtService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -11,34 +12,41 @@ import static art.school.util.ValidationUtil.assureIdConsistent;
 import static art.school.util.ValidationUtil.checkNew;
 
 @Controller
+@Slf4j
 public class UnterrichtController {
 
     @Autowired
     UnterrichtService unterrichtService;
 
     public Unterricht get(int id){
+        log.info("get {}", id);
         return unterrichtService.get(id);
     }
 
     public Unterricht create(Unterricht unterricht, int k_id, int z_id){
+        log.info("create {} with k_id={}, z_id={}", unterricht, k_id, z_id);
         checkNew(unterricht);
         return unterrichtService.create(unterricht, k_id, z_id );
     }
 
     public void delete(int id){
+        log.info("delete {}", id);
         unterrichtService.delete(id);
     }
 
     public void toggleBezahlt(int id){
+        log.info("toggleBezahlt {}", id);
         unterrichtService.toggleBezahlt(id);
     }
 
     public void update(Unterricht unterricht, int id){
+        log.info("update {} with id={}", unterricht, id);
         assureIdConsistent(unterricht, id);
         unterrichtService.update(unterricht);
     }
 
     public List<Unterricht> getAll(){
+        log.info("getAll");
         return unterrichtService.getAll();
     }
 }
