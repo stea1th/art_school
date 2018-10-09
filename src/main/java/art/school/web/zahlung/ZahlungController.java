@@ -19,21 +19,20 @@ public class ZahlungController {
     ZahlungService zahlungService;
 
     public Zahlung get(int id){
-        log.info("get {}", id);
+        log.info("get Zahlung {}", id);
         return zahlungService.get(id);
     }
 
     public Zahlung create(Zahlung zahlung){
-        log.info("create {}", zahlung);
+        log.info("create Zahlung {}", zahlung);
         checkNew(zahlung);
         return zahlungService.create(zahlung);
     }
 
     public void delete(int id){
-        log.info("delete {}", id);
+        log.info("delete Zahlung {}", id);
         zahlungService.delete(id);
     }
-
 
     public void update(Zahlung zahlung, int id){
         log.info("update {} with id={}", zahlung, id);
@@ -42,7 +41,7 @@ public class ZahlungController {
     }
 
     public List<Zahlung> getAll(){
-        log.info("getAll");
+        log.info("getAll Zahlungen");
         return zahlungService.getAll();
     }
 

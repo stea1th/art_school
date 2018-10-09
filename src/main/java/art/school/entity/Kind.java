@@ -34,7 +34,7 @@ public class Kind extends AbstractBaseEntity{
 
     @Column(name = "registriert", columnDefinition = "timestamp default now()")
     @NotNull
-    @DateTimeFormat
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date registriert = new Date();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "kind")

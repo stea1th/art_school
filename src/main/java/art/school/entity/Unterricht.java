@@ -19,7 +19,7 @@ public class Unterricht extends AbstractBaseEntity {
 
     @Column(name = "datum", nullable = false, columnDefinition = "timestamp default now()")
     @NotNull
-    @DateTimeFormat
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime datum;
 
     @Column(name = "bezahlt", nullable = false, columnDefinition = "bool default true")

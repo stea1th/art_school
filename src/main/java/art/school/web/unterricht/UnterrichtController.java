@@ -19,23 +19,23 @@ public class UnterrichtController {
     UnterrichtService unterrichtService;
 
     public Unterricht get(int id){
-        log.info("get {}", id);
+        log.info("get Unterricht {}", id);
         return unterrichtService.get(id);
     }
 
     public Unterricht create(Unterricht unterricht, int k_id, int z_id){
-        log.info("create {} with k_id={}, z_id={}", unterricht, k_id, z_id);
+        log.info("create {} for Kind {} and Zahlung {}", unterricht, k_id, z_id);
         checkNew(unterricht);
         return unterrichtService.create(unterricht, k_id, z_id );
     }
 
     public void delete(int id){
-        log.info("delete {}", id);
+        log.info("delete Unterricht {}", id);
         unterrichtService.delete(id);
     }
 
     public void toggleBezahlt(int id){
-        log.info("toggleBezahlt {}", id);
+        log.info("toggle Unterricht {} Status", id);
         unterrichtService.toggleBezahlt(id);
     }
 
@@ -46,7 +46,7 @@ public class UnterrichtController {
     }
 
     public List<Unterricht> getAll(){
-        log.info("getAll");
+        log.info("getAll Unterrichts");
         return unterrichtService.getAll();
     }
 }

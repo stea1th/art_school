@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import javax.validation.constraints.Size;
 import java.util.List;
 
 import static art.school.util.ValidationUtil.assureIdConsistent;
@@ -21,7 +20,7 @@ public class KindController {
     KindService kindService;
 
     public Kind get(int id){
-        log.info("get {}", id);
+        log.info("get Kind {}", id);
         return kindService.get(id);
     }
 
@@ -32,12 +31,12 @@ public class KindController {
     }
 
     public void delete(int id){
-        log.info("delete {}", id);
+        log.info("delete Kind {}", id);
         kindService.delete(id);
     }
 
     public void toggleAktiv(int id){
-        log.info("toggleAktiv {}", id);
+        log.info("toggle Kind {} Status", id);
         kindService.toggleAktiv(id);
     }
 
@@ -48,7 +47,7 @@ public class KindController {
     }
 
     public List<Kind> getAll(){
-        log.info("getAll");
+        log.info("getAll Kinder");
         return kindService.getAll();
     }
 }
