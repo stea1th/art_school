@@ -6,13 +6,14 @@ import art.school.service.KindService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 import static art.school.util.ValidationUtil.assureIdConsistent;
 import static art.school.util.ValidationUtil.checkNew;
 
-@Controller
+@RestController
 @Slf4j
 public class KindController {
 

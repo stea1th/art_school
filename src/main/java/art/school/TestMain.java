@@ -29,7 +29,7 @@ public class TestMain {
 //        Zahlung z = new Zahlung();
 //        Zahlung z1 = new Zahlung(1005, new BigDecimal(1.24), LocalTime.of(0, 45));
 
-        try(ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-db")){
+        try(ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-db.xml")){
             KindController controller = appCtx.getBean(KindController.class);
             ConfigurableListableBeanFactory factory = appCtx.getBeanFactory();
             ZahlungController zahlungController = factory.getBean(ZahlungController.class);

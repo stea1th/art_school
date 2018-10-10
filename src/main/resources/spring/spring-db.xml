@@ -21,11 +21,6 @@
     <context:component-scan base-package="art.school.**.repository"/>
     <jpa:repositories base-package="art.school.**.repository"/>
 
-    <context:component-scan base-package="art.school.**.service"/>
-
-    <context:component-scan base-package="art.school.**.web"/>
-
-
     <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"
           p:driverClass="org.postgresql.Driver"
