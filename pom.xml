@@ -42,6 +42,9 @@
         <!--Web-->
         <jstl.version>1.2</jstl.version>
 
+        <!--Webjars-->
+        <jquery.version>3.3.1-1</jquery.version>
+
     </properties>
 
     <build>
@@ -172,6 +175,12 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>${jstl.version}</version>
+        </dependency>
+        <!--Webjars-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>${jquery.version}</version>
         </dependency>
 
     </dependencies>

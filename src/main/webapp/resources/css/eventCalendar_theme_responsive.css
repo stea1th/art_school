@@ -107,7 +107,7 @@
 				border-bottom:solid 1px #BCBCBC;
 			}
 			.eventCalendar-daysList.eventCalendar-showAsWeek li {
-				height:auto; margin:0;
+				height:auto; margin:0; color: lightseagreen;
 			}
 				.eventCalendar-daysList.eventCalendar-showAsWeek li.eventCalendar-empty {
 					background-color: #ccc;
@@ -231,6 +231,7 @@
 		.eventCalendar-list li .eventCalendar-eventTitle {
 			display:block;
 			clear:both;
+			cursor: pointer;
 
 			font-weight:bold;
 			text-decoration:none;
