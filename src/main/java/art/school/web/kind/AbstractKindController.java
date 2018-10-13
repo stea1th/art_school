@@ -5,7 +5,6 @@ import art.school.entity.Kind;
 import art.school.service.KindService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,7 +14,7 @@ import static art.school.util.ValidationUtil.checkNew;
 
 @RestController
 @Slf4j
-public class KindController {
+public abstract class AbstractKindController {
 
     @Autowired
     KindService kindService;

@@ -23,10 +23,11 @@
     <script>
         $(function () {
 
-            var data = [
-                { "date": "2018-10-12 10:00:20", "title": "Test Last Year", "description": "Lorem Ipsum dolor set"},
-                { "date": "2018-10-15 22:00:13", "type": "meeting", "title": "Privet Pukeschka", "description": "Kak dela?", "url": "http://tts.lt/" }
-            ];
+            // var data = [
+            //     { "date" : "2018-10-12 10:00:20", "title" : "Test Last Year", "description" : "Lorem Ipsum dolor set"},
+            //     { "date": "2018-10-15 22:00:13", "type": "meeting", "title": "Privet Pukeschka", "description": "Kak dela?", "url": "http://tts.lt/" }
+            // ];
+            var data = ${json};
             $('#eventCalendar').eventCalendar({
                 jsonData: data,
                 jsonDateFormat: 'human',
