@@ -14,6 +14,7 @@ public class UnterrichtTo implements Serializable {
     private String date;
     private String title;
     private String description;
+    private String url;
 
 
 }

@@ -22,11 +22,11 @@ public class TestMain {
             UnterrichtRestController controller = appCtx.getBean(UnterrichtRestController.class);
             List<UnterrichtTo> list = new ArrayList<>();
 
-            controller.getAll().forEach(i-> list.add(new UnterrichtTo(i.getDatum()
-                    .truncatedTo(ChronoUnit.SECONDS)
-                    .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
-                    i.getKind().getName(),
-                    i.getNotiz())));
+//            controller.getAll().forEach(i-> list.add(new UnterrichtTo(i.getDatum()
+//                    .truncatedTo(ChronoUnit.SECONDS)
+//                    .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
+//                    i.getKind().getName(),
+//                    i.getNotiz())));
 
             ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
             String json = ow.writeValueAsString(list);
