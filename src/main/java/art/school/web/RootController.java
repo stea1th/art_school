@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,25 +18,22 @@ import java.util.List;
 @Controller
 public class RootController extends AbstractUnterrichtController {
 
-//    @GetMapping("/")
-//    public String root(Model model) throws JsonProcessingException {
-//        List<UnterrichtTo> list = new ArrayList<>();
-//        super.getAll().forEach(i-> list.add(new UnterrichtTo(i.getDatum()
-//                .truncatedTo(ChronoUnit.SECONDS)
-//                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
-//                i.getKind().getName(),
-//                i.getNotiz(),
-//                "?id="+i.getId())));
-//        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-//        String json = ow.writeValueAsString(list);
-//        model.addAttribute("json", json);
-//
-//        return "eventcalendar";
-//    }
-
     @GetMapping("/")
-    public String root(){
+    public String root(Model model) throws JsonProcessingException {
+        List<UnterrichtTo> list = new ArrayList<>();
+        super.getAll().forEach(i-> list.add(new UnterrichtTo(i.getKind().getName(),
+                i.getDatum().toString(),
+                i.getDatum().plus(i.getZahlung().getDauer().getLong(ChronoField.MINUTE_OF_DAY), ChronoUnit.MINUTES).toString())));
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json = ow.writeValueAsString(list);
+        model.addAttribute("json", json);
+
         return "index";
     }
+
+//    @GetMapping("/")
+//    public String root(){
+//        return "index";
+//    }
 
 }

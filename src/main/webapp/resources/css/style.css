@@ -1,0 +1,12 @@
+#calendar {
+    max-width: 900px;
+    margin: auto;
+}
+
+#calendar .fc-day{
+    transition: all .5s;
+}
+
+#calendar .fc-day:hover {
+    background: aquamarine;
+}

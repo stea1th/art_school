@@ -11,10 +11,12 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class UnterrichtTo implements Serializable {
 
-    private String date;
+
     private String title;
-    private String description;
-    private String url;
+    private String start;
+    private String end;
+//    private String description;
+//    private String url;
 
 
 }
