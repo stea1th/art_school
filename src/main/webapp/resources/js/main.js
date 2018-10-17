@@ -1,22 +1,47 @@
+$( function() {
 
-// $(function () {
     $('#calendar').fullCalendar({
-        dayClick: function (date, jsEvent, view) {
 
-            alert('Clicked on: ' + date.format());
+        header: { center: 'month,agendaWeek,list' }, // buttons for switching between views
+        views: {
+            month: {
+                titleFormat: 'YYYY MMMM '
+            }
+        },
+        // dayClick: function (date, jsEvent, view) {
+        //     $(this).css('background-color', 'lightblue');
+        // },
+        themeSystem: 'bootstrap4',
+        height:650,
+        bootstrapFontAwesome: {
+            prev: 'fas fa-angle-left',
+            next: 'fas fa-angle-right'
+        },
+        firstDay: 1,
+        eventClick: function (event) {
+            if(event.title!=='CLICKED!'){
+                event.title = "CLICKED!";
+            }else{
+                event.title = "YAHOO!!!!";
+            }
+            $('#calendar').fullCalendar('updateEvent', event);
+        },
+        events: myEvents
 
-            alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-
-            alert('Current view: ' + view.name);
-
-            // change the day's background color just for fun
-            $(this).css('background-color', 'red');
+    });
+    $( "#dialog" ).dialog({
+        autoOpen: false,
+        modal: true,
+        show: {
+            effect: "blind",
+            duration: 500
+        },
+        hide: {
+            effect: "explode",
+            duration: 500
         }
     });
-// });
-
-// var calendar = $('#calendar').fullCalendar('getCalendar');
-//
-// calendar.on('dayClick', function (date, jsEvent, view) {
-//     console.log('clicked on' + date.format());
-// });
+    $( ".fc-day" ).on( "click", function() {
+        $( "#dialog" ).dialog( "open" );
+    });
+});
