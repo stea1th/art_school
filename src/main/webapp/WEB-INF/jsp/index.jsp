@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -19,9 +20,18 @@
 
 
     <div id='calendar'></div>
-    <div id="dialog" title="Диалоговое окно">
-        <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+    <div id="dialog" title="Создать урок">
+        <form id="detailsForm">
+            <input type="hidden" id="id" name="id">
+            <div class="form-group" id="test">
+
+            </div>
+
+        </form>
     </div>
+    <%--<div id="dialog2" title="Диалоговое окно 2">--%>
+        <%--<p>Проба 2</p>--%>
+    <%--</div>--%>
 
 
 

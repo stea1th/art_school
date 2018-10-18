@@ -8,9 +8,11 @@ $( function() {
                 titleFormat: 'YYYY MMMM '
             }
         },
-        // dayClick: function (date, jsEvent, view) {
-        //     $(this).css('background-color', 'lightblue');
-        // },
+        dayClick: function (date, jsEvent, view) {
+            // $(this).css('background-color', 'lightblue');
+            // alert(date.format());
+            $('#test').text(date.format());
+        },
         themeSystem: 'bootstrap4',
         height:650,
         bootstrapFontAwesome: {
@@ -25,6 +27,7 @@ $( function() {
                 event.title = "YAHOO!!!!";
             }
             $('#calendar').fullCalendar('updateEvent', event);
+
         },
         events: myEvents
 
@@ -43,5 +46,7 @@ $( function() {
     });
     $( ".fc-day" ).on( "click", function() {
         $( "#dialog" ).dialog( "open" );
+
     });
+
 });

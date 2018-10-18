@@ -15,7 +15,7 @@ insert into zahlung (preis, dauer) values
 insert into unterricht (k_id, z_id, datum, bezahlt, notiz) values
   (1001, 1003, now(), true, 'Segodnia zaplatil'),
   (1001, 1003, '04.10.2018 13:15:00', false, 'Zaplatit v sledujushij raz'),
-  (1002, 1003, '05.10.2018', true, 'Заплатил'),
-  (1000, 1004, '07.10.2018 09:00:00', true, 'Заплатил, даже больше :))'),
+  (1002, 1003, '05-10-2018', true, 'Заплатил'),
+  (1000, 1004, '2018-10-07 09:00:00', true, 'Заплатил, даже больше :))'),
   (1000, 1003, '10.10.2018', false, 'Забыл заплатить.. гад'),
   (1001, 1003, '11.10.2018', false, 'Привет пукешка!!')
