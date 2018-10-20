@@ -47,6 +47,8 @@
         <fullcalendar.version>3.9.0</fullcalendar.version>
         <jquery-ui.version>1.12.1</jquery-ui.version>
         <moment.version>2.22.2</moment.version>
+        <timepicker.version>0.3.3</timepicker.version>
+        <bootstrap.version>4.1.3</bootstrap.version>
 
         <!--JSON-->
         <jackson-json.version>2.9.7</jackson-json.version>
@@ -215,6 +217,16 @@
                     <artifactId>jquery</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>jquery.ui.timepicker</artifactId>
+            <version>${timepicker.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>${bootstrap.version}</version>
         </dependency>
 
 
