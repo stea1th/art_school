@@ -1,26 +1,26 @@
-var ajaxUrl = "ajax/unterricht/";
+// var ajaxUrl = "unterricht";
 // var form = $('#detailsForm');
 
 
 // function save(){
-// //     $.ajax({
-// //         type: "POST",
-// //         url: ajaxUrl,
-// //         data: {
-// //             datum: $('#datum').val(),
-// //             kind: $('#kind').val(),
-// //             zahlung: $('#zahlung').val(),
-// //             timepicker: $('#timepicker').val()
-// //         }
-// //     }).done(function () {
-// //         $('#exampleModal').modal('hide');
-// //         alert("It's all saved");
-// //     });
-// // }
-function save() {
-    // console.log($("#detailsForm").serialize().toString());
-    console.log($('#datum').val()+"T"+$('#timepicker').val()+" "+$('#kind').val()+" "+$('#zahlung').val());
-}
+//     $.ajax({
+//         type: "POST",
+//         url: ajaxUrl,
+//         data: {
+//             datum: $('#datum').val(),
+//             kind: $('#kind').val(),
+//             zahlung: $('#zahlung').val(),
+//             timepicker: $('#timepicker').val()
+//         }
+//     }).done(function () {
+//         $('#exampleModal').modal('hide');
+//         alert("It's all saved");
+//     });
+// }
+// function save() {
+//     // console.log($("#detailsForm").serialize().toString());
+//     console.log($('#datum').val()+"T"+$('#timepicker').val()+" "+$('#kind').val()+" "+$('#zahlung').val());
+// }
 
 // function showValues() {
 //    var str = $("form").serialize();

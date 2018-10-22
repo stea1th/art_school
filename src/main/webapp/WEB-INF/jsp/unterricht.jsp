@@ -19,6 +19,8 @@
 
 </head>
 <body>
+<h1>Hi ALL!!!</h1>
+<div id="events"></div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -92,8 +94,8 @@
     <script type="text/javascript" src='<c:url value="/resources/js/main.js"/>' ></script>
     <script type="text/javascript" src='<c:url value="/resources/js/common.js"/>' ></script>
 
-    <script>
-        var myEvents = ${json};
-    </script>
+    <%--<script>--%>
+        <%--var myEvents = ${json};--%>
+    <%--</script>--%>
 </body>
 </html>
