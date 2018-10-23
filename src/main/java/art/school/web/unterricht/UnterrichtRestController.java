@@ -41,7 +41,7 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
         return "unterricht";
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public String getAllThis() throws JsonProcessingException {
         List<UnterrichtTo> list = new ArrayList<>();
         super.getAll().forEach(i-> list.add(new UnterrichtTo(i.getKind().getName(),

@@ -1,11 +1,11 @@
-var myRequest = new XMLHttpRequest();
-var myEvent;
-myRequest.open('POST', '/unterricht');
-myRequest.onload = function(){
-     myEvent = myRequest.responseText;
-     console.log(myEvent);
-};
-myRequest.send();
+// var myRequest = new XMLHttpRequest();
+// var myEvent;
+// myRequest.open('POST', '/unterricht');
+// myRequest.onload = function(){
+//      myEvent = myRequest.responseText;
+//      console.log(myEvent);
+// };
+// myRequest.send();
 
 // $(function () {
 //     $.getJSON('/getAll', function (data) {
@@ -15,7 +15,6 @@ myRequest.send();
 
 
 $( function() {
-    var ourEvents = myEvents();
 
     $('#calendar').fullCalendar({
         header: { center: 'month,agendaWeek,list' }, // buttons for switching between views
@@ -28,6 +27,9 @@ $( function() {
             // $(this).css('background-color', 'lightblue');
             // alert(date.format());
             $('#datum').val(date.format());
+            $(this).on( "click", function() {
+                $('#exampleModal').modal('toggle');
+            });
         },
         // themeSystem: 'jquery-ui',
         themeSystem: 'bootstrap4',
@@ -53,18 +55,18 @@ $( function() {
         //         events: myEvent
         //     }
         // ]
-        events: myEvent
+        events: 'http://localhost:8080/unterricht'
 
     });
 
-    $( ".fc-day" ).on( "click", function() {
-        $('#exampleModal').modal('toggle');
-    });
+
     $('#timepicker').timepicker({
         showOn: 'focus',
         hourText: 'Часы',             // Define the locale text for "Hours"
         minuteText: 'Минуты'
     });
+
+
 });
 
 var myEvents = function() {
