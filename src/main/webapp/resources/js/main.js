@@ -13,6 +13,8 @@
 //     });
 // });
 
+var ajaxUrl = "unterricht";
+
 
 $( function() {
 
@@ -69,19 +71,41 @@ $( function() {
 
 });
 
-var myEvents = function() {
-    var obj = '';
+// var myEvents = function() {
+//     var obj = '';
+//     $.ajax({
+//         type: 'POST',
+//         url: '/unterricht',
+//         async:false,
+//         contentType: "application/json",
+//         success: function (result) {
+//             obj = JSON.stringify(result);
+//             // obj = result;
+//             // $('#events').text(obj);
+//              console.log(obj);
+//         }
+//     });
+//     return obj;
+// };
+
+function save(){
+    var formDetails = $('#detailsForm').serialize();
     $.ajax({
-        type: 'POST',
-        url: '/unterricht',
-        async:false,
-        contentType: "application/json",
-        success: function (result) {
-            obj = JSON.stringify(result);
-            // obj = result;
-            // $('#events').text(obj);
-             console.log(obj);
-        }
+        type: "POST",
+        url: ajaxUrl+'/save',
+        // data: {
+        //     datum: $('#datum').val(),
+        //     kind: $('#kind').val(),
+        //     zahlung: $('#zahlung').val(),
+        //     timepicker: $('#timepicker').val()
+        //
+        // }
+        data: JSON.stringify(formDetails),
+        dataType: "json",
+        contentType: "application/json"
+    }).done(function () {
+        $('#exampleModal').modal('hide');
+        $('#calendar').fullCalendar('rerenderEvents');
+        alert("It's all saved");
     });
-    return obj;
-};
+}

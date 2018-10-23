@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -32,13 +33,15 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
 //        return super.getAll();
 //    }
 
-    @PostMapping("unterricht/save")
-//    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public String create(HttpServletRequest request){
-        super.create(new Unterricht(LocalDateTime.of(LocalDate.parse(request.getParameter("datum")),
-                LocalTime.parse(request.getParameter("timepicker"))), true, "This is just a test"),
-                Integer.parseInt(request.getParameter("kind")), Integer.parseInt(request.getParameter("zahlung")));
-        return "unterricht";
+    @PostMapping(value="/save", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public ResponseEntity<String> create(@RequestBody String json){
+//        super.create(new Unterricht(LocalDateTime.of(LocalDate.parse(request.getParameter("datum")),
+//                LocalTime.parse(request.getParameter("timepicker"))), true, "This is just a test"),
+//                Integer.parseInt(request.getParameter("kind")), Integer.parseInt(request.getParameter("zahlung")));
+        System.out.println(json);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

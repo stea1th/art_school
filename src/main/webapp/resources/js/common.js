@@ -1,11 +1,11 @@
 // var ajaxUrl = "unterricht";
-// var form = $('#detailsForm');
-
-
+// // var form = $('#detailsForm');
+//
+//
 // function save(){
 //     $.ajax({
 //         type: "POST",
-//         url: ajaxUrl,
+//         url: ajaxUrl+'/save',
 //         data: {
 //             datum: $('#datum').val(),
 //             kind: $('#kind').val(),
@@ -14,6 +14,7 @@
 //         }
 //     }).done(function () {
 //         $('#exampleModal').modal('hide');
+//         $('#calendar').fullCalendar('rerenderEvents');
 //         alert("It's all saved");
 //     });
 // }
