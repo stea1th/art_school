@@ -57,7 +57,8 @@ $( function() {
         //         events: myEvent
         //     }
         // ]
-        events: 'http://localhost:8080/unterricht'
+        events: 'http://localhost:8080/unterricht',
+        timeFormat: 'HH:mm'
 
     });
 
@@ -89,23 +90,20 @@ $( function() {
 // };
 
 function save(){
-    var formDetails = $('#detailsForm').serialize();
     $.ajax({
         type: "POST",
         url: ajaxUrl+'/save',
-        // data: {
-        //     datum: $('#datum').val(),
-        //     kind: $('#kind').val(),
-        //     zahlung: $('#zahlung').val(),
-        //     timepicker: $('#timepicker').val()
-        //
-        // }
-        data: JSON.stringify(formDetails),
-        dataType: "json",
-        contentType: "application/json"
+        data: {
+            datum: $('#datum').val(),
+            kind: $('#kind').val(),
+            zahlung: $('#zahlung').val(),
+            timepicker: $('#timepicker').val(),
+            notiz: $('#notiz').val()
+        }
+
     }).done(function () {
         $('#exampleModal').modal('hide');
-        $('#calendar').fullCalendar('rerenderEvents');
-        alert("It's all saved");
+        $('#calendar').fullCalendar('refetchEvents');
+        // alert("It's all saved");
     });
 }

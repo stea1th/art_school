@@ -50,6 +50,10 @@
                         <%--<label for="timepicker" class="col-sm-2 col-form-label">Время</label>--%>
                         <input type="text" class="form-control"  id="timepicker" placeholder="Время">
                     </div>
+                    <div class="form-group">
+                        <%--<label for="exampleTextarea">Example textarea</label>--%>
+                        <textarea class="form-control" id="notiz" rows="3" placeholder="Заметка"></textarea>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
