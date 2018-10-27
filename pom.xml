@@ -228,6 +228,11 @@
             <artifactId>bootstrap</artifactId>
             <version>${bootstrap.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.webjars</groupId>-->
+            <!--<artifactId>popper.js</artifactId>-->
+            <!--<version>1.14.4</version>-->
+        <!--</dependency>-->
 
 
         <!--JSON-->
@@ -246,6 +251,7 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson-json.version}</version>
         </dependency>
+
 
 
     </dependencies>

@@ -42,7 +42,19 @@ $( function() {
         },
         firstDay: 1,
         eventClick: function (event) {
-            alert(event.id +" "+event.notiz);
+            // alert(event.id +" "+event.notiz);
+            // $(this).popover({html:true,title:event.title,content:event.notiz,placement:'top',container:'body'}).popover('show');
+            $(this).popover({
+                html:true,
+                animation: true,
+                title:event.title,
+                container: 'body',
+                content: event.notiz,
+                placement:'top'}).popover('show');
+
+            return false;
+
+
 
 
             // if(event.title!=='CLICKED!'){
@@ -53,7 +65,12 @@ $( function() {
             // event.css('color', 'red');
             // $('#calendar').fullCalendar('updateEvent', event);
         },
-        events: 'http://localhost:8080/unterricht',
+        eventSources: [{
+            url: 'http://localhost:8080/unterricht'
+        }],
+
+        // events: 'http://localhost:8080/unterricht',
+
         timeFormat: 'HH:mm',
         timezone: 'local'
 
@@ -87,7 +104,6 @@ $( function() {
 // };
 
 function save(){
-
     $.ajax({
         type: "POST",
         url: ajaxUrl+'/save',
@@ -105,4 +121,12 @@ function save(){
         $('#calendar').fullCalendar('refetchEvents');
         // alert("It's all saved");
     });
+}
+
+$(document).on('focus', ':not(.popover)', function(){
+    $('.popover').popover('hide');
+});
+
+function show() {
+
 }
