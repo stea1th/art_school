@@ -41,18 +41,18 @@ $( function() {
             next: 'fas fa-angle-right'
         },
         firstDay: 1,
-        eventClick: function (event) {
-            // alert(event.id +" "+event.notiz);
-            // $(this).popover({html:true,title:event.title,content:event.notiz,placement:'top',container:'body'}).popover('show');
-            $(this).popover({
-                html:true,
-                animation: true,
-                title:event.title,
-                container: 'body',
-                content: event.notiz,
-                placement:'top'}).popover('show');
-
-            return false;
+        // eventClick: function (event) {
+        //     // alert(event.id +" "+event.notiz);
+        //     // $(this).popover({html:true,title:event.title,content:event.notiz,placement:'top',container:'body'}).popover('show');
+        //     $(this).popover({
+        //         html:true,
+        //         animation: true,
+        //         title:event.title,
+        //         container: 'body',
+        //         content: event.notiz,
+        //         placement:'top'}).popover('show');
+        //
+        //     return false;
 
 
 
@@ -64,6 +64,15 @@ $( function() {
             // }
             // event.css('color', 'red');
             // $('#calendar').fullCalendar('updateEvent', event);
+        // },
+        eventRender: function(eventObj, $el) {
+            $el.popover({
+                title: eventObj.title,
+                content: eventObj.notiz,
+                trigger: 'hover',
+                placement: 'top',
+                container: 'body'
+            });
         },
         eventSources: [{
             url: 'http://localhost:8080/unterricht'
@@ -122,10 +131,6 @@ function save(){
         // alert("It's all saved");
     });
 }
-
-$(document).on('focus', ':not(.popover)', function(){
-    $('.popover').popover('hide');
-});
 
 function show() {
 
