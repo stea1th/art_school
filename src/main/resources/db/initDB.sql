@@ -29,7 +29,7 @@ create table unterricht
 (
   id integer primary key default nextval('global_seq'),
   datum timestamp default now() not null,
-  bezahlt bool default true not null,
+  bezahlt bool default false not null,
   notiz text,
   k_id integer not null,
   z_id integer not null,

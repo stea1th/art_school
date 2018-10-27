@@ -53,13 +53,15 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
     @PostMapping(value="/save")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity<String> create(
-            @RequestParam(value = "datum", required = false) String datum,
-            @RequestParam(value = "timepicker", required = false) String zeit,
-            @RequestParam(value = "kind", required = false) String kind,
-            @RequestParam(value = "zahlung", required = false) String zahlung,
+            @RequestParam(value = "id", required = false) String id,
+            @RequestParam(value = "datum") String datum,
+            @RequestParam(value = "timepicker") String zeit,
+            @RequestParam(value = "kind") String kind,
+            @RequestParam(value = "zahlung") String zahlung,
+            @RequestParam(value = "bezahlt", required = false, defaultValue = "false") String bezahlt,
             @RequestParam(value = "notiz", required = false) String notiz
     )  {
-        Unterricht u = new Unterricht(LocalDateTime.of(LocalDate.parse(datum), LocalTime.parse(zeit)), notiz);
+        Unterricht u = new Unterricht(LocalDateTime.of(LocalDate.parse(datum), LocalTime.parse(zeit)), Boolean.valueOf(bezahlt), notiz);
         super.create(u, Integer.parseInt(kind), Integer.parseInt(zahlung));
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -67,9 +69,10 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UnterrichtTo> getAllThis(){
         List<UnterrichtTo> list = new ArrayList<>();
-        super.getAll().forEach(i-> list.add(new UnterrichtTo(i.getKind().getName(),
-                i.getDatum().toString(),
-                i.getDatum().plus(i.getZahlung().getDauer().getLong(ChronoField.MINUTE_OF_DAY), ChronoUnit.MINUTES).toString())));
+        super.getAll().forEach(i-> list.add(new UnterrichtTo(i.getId(), i.getKind().getName(),
+                i.getDatum().minusMonths(1).truncatedTo(ChronoUnit.SECONDS),
+                i.getDatum().minusMonths(1).truncatedTo(ChronoUnit.SECONDS).plusMinutes(i.getZahlung().getDauer().getLong(ChronoField.MINUTE_OF_DAY)), i.getNotiz(),
+                i.isBezahlt()? "green" : "red")));
 
         return list;
     }

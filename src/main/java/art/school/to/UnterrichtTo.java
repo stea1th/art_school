@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
@@ -12,10 +14,12 @@ import java.io.Serializable;
 public class UnterrichtTo implements Serializable {
 
 
-
+    private int id;
     private String title;
-    private String start;
-    private String end;
+    private LocalDateTime start;
+    private LocalDateTime end;
+    private String notiz;
+    private String color;
 //    private String description;
 //    private String url;
 

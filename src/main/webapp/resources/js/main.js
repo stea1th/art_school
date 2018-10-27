@@ -28,12 +28,12 @@ $( function() {
         dayClick: function (date, jsEvent, view) {
             // $(this).css('background-color', 'lightblue');
             // alert(date.format());
+
             $('#datum').val(date.format());
             $(this).on( "click", function() {
-                $('#exampleModal').modal('toggle');
+                $('#createUnterricht').modal('toggle');
             });
         },
-        // themeSystem: 'jquery-ui',
         themeSystem: 'bootstrap4',
         height:650,
         bootstrapFontAwesome: {
@@ -42,6 +42,9 @@ $( function() {
         },
         firstDay: 1,
         eventClick: function (event) {
+            alert(event.id +" "+event.notiz);
+
+
             // if(event.title!=='CLICKED!'){
             //     event.title = "CLICKED!";
             // }else{
@@ -49,16 +52,10 @@ $( function() {
             // }
             // event.css('color', 'red');
             // $('#calendar').fullCalendar('updateEvent', event);
-
         },
-        // events: [{"title":"Vlasov","start":"2018-10-22T20:32:10.352006","end":"2018-10-22T21:17:10.352006"},{"title":"Vlasov","start":"2018-10-11T00:00","end":"2018-10-11T00:45"},{"title":"Osipov","start":"2018-10-10T00:00","end":"2018-10-10T00:45"},{"title":"Osipov","start":"2018-10-07T09:00","end":"2018-10-07T10:30"},{"title":"Tupuliavichius","start":"2018-10-05T00:00","end":"2018-10-05T00:45"},{"title":"Vlasov","start":"2018-10-04T13:15","end":"2018-10-04T14:00"}]
-        // eventSources:[
-        //     {
-        //         events: myEvent
-        //     }
-        // ]
         events: 'http://localhost:8080/unterricht',
-        timeFormat: 'HH:mm'
+        timeFormat: 'HH:mm',
+        timezone: 'local'
 
     });
 
@@ -90,6 +87,7 @@ $( function() {
 // };
 
 function save(){
+
     $.ajax({
         type: "POST",
         url: ajaxUrl+'/save',
@@ -98,11 +96,12 @@ function save(){
             kind: $('#kind').val(),
             zahlung: $('#zahlung').val(),
             timepicker: $('#timepicker').val(),
-            notiz: $('#notiz').val()
+            notiz: $('#notiz').val(),
+            bezahlt:  $('#bezahlt:checked').val(),
+            id: $('#id').val()
         }
-
     }).done(function () {
-        $('#exampleModal').modal('hide');
+        $('#createUnterricht').modal('hide');
         $('#calendar').fullCalendar('refetchEvents');
         // alert("It's all saved");
     });

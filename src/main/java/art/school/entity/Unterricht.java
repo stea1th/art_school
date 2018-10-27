@@ -23,7 +23,7 @@ public class Unterricht extends AbstractBaseEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime datum;
 
-    @Column(name = "bezahlt", nullable = false, columnDefinition = "bool default true")
+    @Column(name = "bezahlt", nullable = false, columnDefinition = "bool default false")
     private boolean bezahlt = true;
 
     @Column(name = "notiz")
@@ -49,7 +49,7 @@ public class Unterricht extends AbstractBaseEntity {
     }
 
     public Unterricht(@NotNull LocalDateTime datum, String notiz) {
-        this(null, datum, true, notiz);
+        this(null, datum, false, notiz);
     }
 
     public Unterricht(@NotNull LocalDateTime datum, boolean bezahlt, String notiz) {
@@ -57,7 +57,7 @@ public class Unterricht extends AbstractBaseEntity {
     }
 
     public Unterricht(String notiz) {
-        this(null, LocalDateTime.now(), true, notiz);
+        this(null, LocalDateTime.now(), false, notiz);
     }
 
     public Unterricht(boolean bezahlt, String notiz) {
