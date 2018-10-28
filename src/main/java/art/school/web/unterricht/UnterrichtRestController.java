@@ -58,7 +58,7 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
             @RequestParam(value = "timepicker") String zeit,
             @RequestParam(value = "kind") String kind,
             @RequestParam(value = "zahlung") String zahlung,
-            @RequestParam(value = "bezahlt", required = false, defaultValue = "false") String bezahlt,
+            @RequestParam(value = "bezahlt", defaultValue = "false") String bezahlt,
             @RequestParam(value = "notiz", required = false) String notiz
     )  {
         Unterricht u = new Unterricht(LocalDateTime.of(LocalDate.parse(datum), LocalTime.parse(zeit)), Boolean.valueOf(bezahlt), notiz);

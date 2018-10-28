@@ -3,24 +3,12 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>FullCalendar</title>
-    <%--<link rel="stylesheet" href='webjars/jquery-ui/1.12.1/jquery-ui.css'>--%>
-    <link rel='stylesheet' href='webjars/fullcalendar/3.9.0/fullcalendar.css' />
-    <link rel='stylesheet' href='https://bootswatch.com/4/sketchy/bootstrap.css' />
-    <%--<link rel='stylesheet' href='resources/css/jquery-ui.theme.css'/>--%>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <link rel='stylesheet' href='webjars/fullcalendar/3.9.0/fullcalendar.print.css' media="print"/>
-    <link rel='stylesheet' href='resources/css/style.css' />
-    <link rel='stylesheet' href='webjars/jquery.ui.timepicker/0.3.3/jquery.ui.timepicker.css' />
-    <script type="text/javascript" src='webjars/jquery/3.3.1/jquery.min.js' ></script>
-    <script type="text/javascript" src='webjars/jquery-ui/1.12.1/jquery-ui.min.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>
-</head>
-<body>
-<h1>Hi ALL!!!</h1>
-<div id="events"></div>
+<jsp:include page="fragments/headTag.jsp"/>
 
+<body>
+<jsp:include page="fragments/bodyNav.jsp"/>
+<br/>
+<br/>
 <div class="modal fade" id="createUnterricht" tabindex="-1" role="dialog" aria-labelledby="createUnterricht" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -93,25 +81,5 @@
             <%--</div>--%>
         <%--</form>--%>
     <%--</div>--%>
-
-
-
-
-
-    <script src="webjars/bootstrap/4.1.3/js/bootstrap.js"></script>
-
-    <script type="text/javascript" src='webjars/moment/2.22.2/min/moment.min.js' ></script>
-    <script type="text/javascript" src='webjars/fullcalendar/3.9.0/fullcalendar.js' ></script>
-    <script type="text/javascript" src='webjars/fullcalendar/3.9.0/locale/ru.js' ></script>
-
-    <script src="webjars/jquery.ui.timepicker/0.3.3/jquery.ui.timepicker.js"></script>
-
-
-    <script type="text/javascript" src='<c:url value="/resources/js/main.js"/>' ></script>
-    <script type="text/javascript" src='<c:url value="/resources/js/common.js"/>' ></script>
-
-    <%--<script>--%>
-        <%--var myEvents = ${json};--%>
-    <%--</script>--%>
 </body>
 </html>

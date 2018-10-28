@@ -77,12 +77,8 @@ $( function() {
         eventSources: [{
             url: 'http://localhost:8080/unterricht'
         }],
-
-        // events: 'http://localhost:8080/unterricht',
-
         timeFormat: 'HH:mm',
         timezone: 'local'
-
     });
 
 
