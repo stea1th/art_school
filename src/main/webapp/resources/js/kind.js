@@ -2,16 +2,23 @@ var ajaxUrl = "kind";
 
 $( function() {
     $('#kids').DataTable({
-        ajax: {
+        "ajax": {
             "url": ajaxUrl,
             "dataSrc": ""
         },
-        columns: [
-            {data: "id"},
-            {data: "name"},
-            {data: "adresse"},
-            {data: "aktiv"},
-            {data: "registriert"}
+        "columnDefs": [
+            {
+                "targets": [ 0 ],
+                "visible": false,
+                "searchable": false
+            }
+        ],
+        "columns": [
+            {"data": "id"},
+            {"data": "name"},
+            {"data": "adresse"},
+            {"data": "aktiv"},
+            {"data": "registriert"}
         ]
     });
 });

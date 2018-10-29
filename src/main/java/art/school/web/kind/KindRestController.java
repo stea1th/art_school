@@ -1,6 +1,5 @@
 package art.school.web.kind;
 
-import art.school.entity.Kind;
 import art.school.to.KindTo;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +19,8 @@ public class KindRestController extends AbstractKindController{
     public List<KindTo> all(){
         List<KindTo> list = new ArrayList<>();
         super.getAll().forEach(i-> list.add(new KindTo(i.getId(),
-                i.getName(), i.getAdresse(), i.isAktiv(), i.getRegistriert().truncatedTo(ChronoUnit.SECONDS).toString().replace("T", " "))));
+                i.getName(), i.getAdresse(), i.isAktiv(),
+                i.getRegistriert().truncatedTo(ChronoUnit.SECONDS).toString().replace("T", " "))));
         return list;
     }
-
 }
