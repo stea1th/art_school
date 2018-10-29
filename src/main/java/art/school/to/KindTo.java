@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -16,5 +15,5 @@ public class KindTo implements Serializable {
     private String name;
     private String adresse;
     private boolean aktiv;
-    private LocalDateTime registriert;
+    private String registriert;
 }

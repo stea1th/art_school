@@ -62,6 +62,7 @@
 </div>
 
     <div id='calendar'></div>
+<script type="text/javascript" src='<c:url value="/resources/js/unterricht.js"/>' ></script>
 
     <%--<div id="dialog" title="Создать урок">--%>
         <%--<form id="detailsForm">--%>

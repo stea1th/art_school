@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -8,7 +9,7 @@
 <br/>
 
 <h1>Kind</h1>
-<table id="kids" class="display" style="width:100%">
+<table id="kids" class="display compact" style="width:100%">
     <thead>
     <tr>
         <th>Id</th>
@@ -31,5 +32,6 @@
 
 <script src="webjars/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src='<c:url value="/resources/js/kind.js"/>' ></script>
 </body>
 </html>
