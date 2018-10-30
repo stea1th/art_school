@@ -7,31 +7,38 @@
 <body>
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>
+<div class="card border-light mb-3" id="table-card">
+    <div class="card-body">
+        <table id="kids" class="display compact">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Имя</th>
+                <th>Адрес</th>
+                <th>Активный</th>
+                <th>Регистрация</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <th>Id</th>
+                <th>Имя</th>
+                <th>Адрес</th>
+                <th>Активный</th>
+                <th>Регистрация</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
 
-<h1>Kind</h1>
-<table id="kids" class="display compact" style="width:100%">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Имя</th>
-        <th>Адрес</th>
-        <th>Активный</th>
-        <th>Регистрация</th>
-    </tr>
-    </thead>
-    <tfoot>
-    <tr>
-        <th>Id</th>
-        <th>Имя</th>
-        <th>Адрес</th>
-        <th>Активный</th>
-        <th>Регистрация</th>
-    </tr>
-    </tfoot>
-</table>
 
 <script src="webjars/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<script type="text/javascript" src='<c:url value="/resources/js/kind.js"/>' ></script>
+<script type="text/javascript" src='<c:url value="/resources/js/kind.js"/>'></script>
 </body>
 </html>

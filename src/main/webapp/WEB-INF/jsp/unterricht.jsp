@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -9,7 +8,8 @@
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>
 <br/>
-<div class="modal fade" id="createUnterricht" tabindex="-1" role="dialog" aria-labelledby="createUnterricht" aria-hidden="true">
+<div class="modal fade" id="createUnterricht" tabindex="-1" role="dialog" aria-labelledby="createUnterricht"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -20,32 +20,59 @@
             </div>
             <div class="modal-body">
                 <form id="detailsForm">
-                <%--<form>--%>
                     <div>
                         <input type="hidden" class="form-control" id="id" name="id">
                     </div>
-                    <div class="form-group" >
+                    <div class="form-group">
                         <input type="text" readonly="" class="form-control" id="datum" hidden>
                     </div>
-                    <div class="form-group">
-                        <%--<label for="kind" class="col-form-label" >Ребёнок</label>--%>
-                        <input type="text" class="form-control" id="kind" placeholder="Ребёнок" required>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="kind">Ребёнок</label>
+                            <input type="text" class="form-control mx-sm-3" id="kind" placeholder="Ребёнок"
+                                   aria-describedby="kindInlineHelp" required>
+                            <small id="kindInlineHelp" class="text-muted">
+                                Выберите ученика
+                            </small>
+                            <div class="invalid-feedback">
+                                Пожалуйста выберите ученика
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="zahlung">Оплата</label>
+                            <input type="text" class="form-control mx-sm-3" id="zahlung" placeholder="Оплата"
+                                   aria-describedby="zahlungInlineHelp" required>
+                            <small id="zahlungInlineHelp" class="text-muted">
+                                Выберите способ оплаты
+                            </small>
+                            <div class="invalid-feedback">
+                                Пожалуйста выберите способ оплаты
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="timepicker">Время</label>
+                            <input type="text" class="form-control mx-sm-3" id="timepicker" placeholder="Время"
+                                   aria-describedby="timeInlineHelp" required>
+                            <small id="timeInlineHelp" class="text-muted">
+                                Выберите начало урока
+                            </small>
+                            <div class="invalid-feedback">
+                                Пожалуйста выберите начало урока
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <%--<label for="kind" class="col-form-label" >Ребёнок</label>--%>
-                        <input type="text" class="form-control" id="zahlung" placeholder="Оплата" required>
-                    </div>
-
-                    <div class="form-group" id="div1">
-                        <%--<label for="timepicker" class="col-sm-2 col-form-label">Время</label>--%>
-                        <input type="text" class="form-control"  id="timepicker" placeholder="Время" style="width: 50%" required>
-                    </div>
-                    <div class="form-group" id="div1">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="bezahlt" checked="checked" value="true" required>
+                            <input type="checkbox" class="custom-control-input" id="bezahlt" checked="checked"
+                                   value="true" required>
                             <label class="custom-control-label" for="bezahlt">Заплатил</label>
                         </div>
                     </div>
+
 
                     <div class="form-group">
                         <%--<label for="exampleTextarea">Example textarea</label>--%>
@@ -55,32 +82,18 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                <button type="button" class="btn btn-success" onclick="save()">Сохранить</button>
+                <button type="button" class="btn btn-success" onclick="save()"><i class='fa fa-pencil'></i>Сохранить</button>
             </div>
         </div>
     </div>
 </div>
 
-    <div id='calendar'></div>
-<script type="text/javascript" src='<c:url value="/resources/js/unterricht.js"/>' ></script>
+<div class="card border-light mb-3" id="calendar-card">
+    <div class="card-body">
+        <div id='calendar'></div>
+    </div>
+</div>
+<script type="text/javascript" src='<c:url value="/resources/js/unterricht.js"/>'></script>
 
-    <%--<div id="dialog" title="Создать урок">--%>
-        <%--<form id="detailsForm">--%>
-            <%--<input type="hidden" id="id" name="id">--%>
-            <%--<div class="form-group" id="test"></div>--%>
-            <%--<div class="form-group">--%>
-                <%--&lt;%&ndash;<label for="kind" class="col-form-label" >Ребёнок</label>&ndash;%&gt;--%>
-                <%--<input type="text" class="form-control" id="kind" placeholder="Ребёнок">--%>
-            <%--</div>--%>
-            <%--<div class="form-group">--%>
-                <%--&lt;%&ndash;<label for="kind" class="col-form-label" >Ребёнок</label>&ndash;%&gt;--%>
-                <%--<input type="text" class="form-control" id="zahlung" placeholder="Оплата">--%>
-            <%--</div>--%>
-            <%--<div class="form-group">--%>
-                <%--&lt;%&ndash;<label for="timepicker" class="col-sm-2 col-form-label">Время</label>&ndash;%&gt;--%>
-                <%--<input type="text" class="form-control"  id="timepicker" placeholder="Время">--%>
-            <%--</div>--%>
-        <%--</form>--%>
-    <%--</div>--%>
 </body>
 </html>

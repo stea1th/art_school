@@ -55,7 +55,7 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
     public ResponseEntity<String> create(
             @RequestParam(value = "id", required = false) String id,
             @RequestParam(value = "datum") String datum,
-            @RequestParam(value = "timepicker") String zeit,
+            @RequestParam(value = "timepicker", required = false) String zeit,
             @RequestParam(value = "kind") String kind,
             @RequestParam(value = "zahlung") String zahlung,
             @RequestParam(value = "bezahlt", defaultValue = "false") String bezahlt,

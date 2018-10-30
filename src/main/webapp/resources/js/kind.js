@@ -1,6 +1,6 @@
 var ajaxUrl = "kind";
 
-$( function() {
+$(function () {
     $('#kids').DataTable({
         "ajax": {
             "url": ajaxUrl,
@@ -8,7 +8,7 @@ $( function() {
         },
         "columnDefs": [
             {
-                "targets": [ 0 ],
+                "targets": [0],
                 "visible": false,
                 "searchable": false
             }
@@ -18,10 +18,33 @@ $( function() {
             {"data": "name"},
             {"data": "adresse"},
             {"data": "aktiv"},
-            {"data": "registriert"}
+            {"data": "registriert"},
+            {
+                "orderable": false,
+                "defaultContent": "",
+                "render": renderEditBtn
+            },
+            {
+                "orderable": false,
+                "defaultContent": "",
+                "render": renderDeleteBtn
+            }
         ]
+
     });
 });
+
+function renderEditBtn(data, type, row) {
+    if (type === "display") {
+        return "<a onclick='#'><i class='fa fa-pencil' aria-hidden='true'></i></a>";
+    }
+}
+
+function renderDeleteBtn(data, type, row) {
+    if (type === "display") {
+        return "<a onclick='#'><i class='fa fa-pencil' aria-hidden='true'></i></a>";
+    }
+}
 
 
 
