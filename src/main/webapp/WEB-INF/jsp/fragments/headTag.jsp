@@ -12,6 +12,8 @@
     <link rel='stylesheet' href='webjars/jquery.ui.timepicker/0.3.3/jquery.ui.timepicker.css' />
     <%--<link rel='stylesheet' href='webjars/datatables/1.10.19/css/dataTables.bootstrap4.min.css' />--%>
     <link rel='stylesheet' href='webjars/datatables/1.10.19/css/jquery.dataTables.min.css' />
+    <link rel='stylesheet' href='webjars/datatables-buttons/1.5.2/css/buttons.bootstrap4.min.css' />
+
 
 
 
@@ -20,10 +22,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.4.2/js/all.js" integrity="sha384-wp96dIgDl5BLlOXb4VMinXPNiB32VYBSoXOoiARzSTXY+tsK8yDTYfvdTyqzdGGN" crossorigin="anonymous"></script>
     <script src="webjars/bootstrap/4.1.3/js/bootstrap.js"></script>
+
+    <script src="webjars/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="webjars/datatables-buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="webjars/datatables-buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+
     <script type="text/javascript" src='webjars/moment/2.22.2/min/moment.min.js' ></script>
     <script type="text/javascript" src='webjars/fullcalendar/3.9.0/fullcalendar.js' ></script>
     <script type="text/javascript" src='webjars/fullcalendar/3.9.0/locale/ru.js' ></script>
     <script src="webjars/jquery.ui.timepicker/0.3.3/jquery.ui.timepicker.js"></script>
+
+
 
 </head>
 

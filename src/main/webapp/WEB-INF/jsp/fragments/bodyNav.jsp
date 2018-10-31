@@ -2,10 +2,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="unterricht">Art School</a>
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbars1" aria-controls="navbars1" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="navbar-collapse collapse" id="navbarsExample01" style="">
+    <div class="navbar-collapse collapse" id="navbars1" style="">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="unterricht">Уроки<span class="sr-only">(current)</span></a>

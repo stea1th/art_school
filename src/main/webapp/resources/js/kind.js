@@ -3,10 +3,12 @@ var datatable;
 
 $(function () {
     datatable = $('#kids').DataTable({
+
         "ajax": {
             "url": ajaxUrl,
             "dataSrc": ""
         },
+
         "columnDefs": [
             {
                 "targets": [0],
@@ -38,7 +40,17 @@ $(function () {
                 "defaultContent": "",
                 "render": renderDeleteBtn
             }
+        ],
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                text: 'My Button',
+                action: function ( e, dt, node, config ) {
+                    alert( 'Button activated' );
+                }
+            }
         ]
+
 
     });
 });
@@ -64,13 +76,6 @@ function deleteRow(id){
     });
 }
 
-function updateTable() {
-    $.get(ajaxUrl, function(newDataArray){
-        datatable.clear();
-        datatable.rows.add(newDataArray);
-        datatable.draw();
-    });
-}
 
 
 
