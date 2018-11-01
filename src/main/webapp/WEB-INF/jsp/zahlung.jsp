@@ -7,16 +7,15 @@
 <body>
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>
-<div class="card border-light mb-3" id="table-card">
+<div class="card border-light mb-3" id="table-card2">
     <div class="card-body">
-        <table id="kids" class="display compact">
+        <table id="zahlungen" class="display compact">
             <thead>
             <tr>
                 <th>Id</th>
-                <th>Имя</th>
-                <th>Адрес</th>
+                <th>Цена</th>
+                <th>Продолжительность</th>
                 <th>Активный</th>
-                <th>Регистрация</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -24,10 +23,9 @@
             <tfoot>
             <tr>
                 <th>Id</th>
-                <th>Имя</th>
-                <th>Адрес</th>
+                <th>Цена</th>
+                <th>Продолжительность</th>
                 <th>Активный</th>
-                <th>Регистрация</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -36,6 +34,8 @@
     </div>
 </div>
 
-<script type="text/javascript" src='<c:url value="/resources/js/kind.js"/>'></script>
+
+
+<script type="text/javascript" src='<c:url value="/resources/js/zahlung.js"/>'></script>
 </body>
 </html>

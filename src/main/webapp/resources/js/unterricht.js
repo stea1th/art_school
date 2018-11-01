@@ -1,19 +1,5 @@
-// var myRequest = new XMLHttpRequest();
-// var myEvent;
-// myRequest.open('POST', '/unterricht');
-// myRequest.onload = function(){
-//      myEvent = myRequest.responseText;
-//      console.log(myEvent);
-// };
-// myRequest.send();
-
-// $(function () {
-//     $.getJSON('/getAll', function (data) {
-//         console.log(data);
-//     });
-// });
-
-var ajaxUrl = "unterricht";
+var ajaxUnterricht = "unterricht";
+var ajaxKind = "kind";
 
 
 $(function () {
@@ -126,7 +112,7 @@ function getKind() {
     var sel = document.getElementById('kind');
     var opt = null;
     $('#kind').empty().append('<option disabled selected>Выберите ученика</option>');
-    $.getJSON('kind', function (data) {
+    $.getJSON(ajaxKind, function (data) {
         $.each(data, function (key, val) {
             opt = document.createElement('option');
             opt.value = val.id;
@@ -140,7 +126,7 @@ function saveUnterricht() {
 
     $.ajax({
         type: "POST",
-        url: ajaxUrl + '/save',
+        url: ajaxUnterricht + '/save',
         data: {
             datum: $('#datum').val(),
             kind: $('#kind').val(),

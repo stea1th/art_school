@@ -30,12 +30,10 @@
                         <div class="form-group">
                             <label for="kind">Ребёнок</label>
                             <select id="kind">
-
-
                             </select>
 
                             <%--<input type="text" class="form-control mx-sm-3" id="kind" placeholder="Ребёнок"--%>
-                                   <%--aria-describedby="kindInlineHelp" required>--%>
+                            <%--aria-describedby="kindInlineHelp" required>--%>
                             <small id="kindInlineHelp" class="text-muted">
                                 Выберите ученика
                             </small>

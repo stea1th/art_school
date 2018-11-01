@@ -1,11 +1,11 @@
-var ajaxKind = "kind";
+var ajaxZahlung = "zahlung";
 var datatable;
 
 $(function () {
-    datatable = $('#kids').DataTable({
+    datatable = $('#zahlungen').DataTable({
 
         "ajax": {
-            "url": ajaxKind,
+            "url": ajaxZahlung,
             "dataSrc": ""
         },
 
@@ -18,8 +18,8 @@ $(function () {
         ],
         "columns": [
             {"data": "id"},
-            {"data": "name"},
-            {"data": "adresse"},
+            {"data": "preis"},
+            {"data": "dauer"},
             {"data": "aktiv",
                 "render": function (data, type, row) {
                     if (type === "display") {
@@ -29,7 +29,6 @@ $(function () {
                 },
                 "className": "dt-body-center"
             },
-            {"data": "registriert"},
             {
                 "orderable": false,
                 "defaultContent": "",
@@ -44,7 +43,7 @@ $(function () {
         dom: 'Bfrtip',
         buttons: [
             {
-                text: 'Добавить ученика',
+                text: 'Добавить способ оплаты',
                 action: function ( e, dt, node, config ) {
                     alert( 'Button activated' );
                 }
@@ -69,19 +68,9 @@ function renderDeleteBtn(data, type, row) {
 
 function deleteRow(id){
     $.ajax({
-        url: ajaxKind +"/"+ id,
+        url: ajaxZahlung +"/"+ id,
         type: "DELETE"
     }).done(function(){
         datatable.ajax.reload();
     });
 }
-
-
-
-
-
-
-
-
-
-

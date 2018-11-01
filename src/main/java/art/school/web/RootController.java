@@ -22,4 +22,7 @@ public class RootController extends AbstractUnterrichtController {
         return "kind";
     }
 
+    @GetMapping("/zahlung")
+    public String zahlung() { return "zahlung";}
+
 }
