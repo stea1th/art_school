@@ -18,6 +18,7 @@ var ajaxUrl = "unterricht";
 
 $(function () {
 
+
     $('#calendar').fullCalendar({
         header: {center: 'month,agendaWeek,list'}, // buttons for switching between views
         views: {
@@ -26,13 +27,16 @@ $(function () {
             }
         },
         dayClick: function (date, jsEvent, view) {
-            // $(this).css('background-color', 'lightblue');
-            // alert(date.format());
+            var myModal = $('#createUnterricht');
 
             $('#datum').val(date.format());
             getKind();
             $(this).on("click", function () {
-                $('#createUnterricht').modal('toggle');
+                myModal.modal('toggle');
+                myModal.on('hidden.bs.modal', function () {
+                    $(this).find('form')[0].reset();
+                })
+
             });
         },
         themeSystem: 'bootstrap4',
@@ -118,11 +122,9 @@ $(function () {
 function getKind() {
     var sel = document.getElementById('kind');
     var opt = null;
+    $('#kind').empty().append('<option disabled selected>Выберите ученика</option>');
     $.getJSON('kind', function (data) {
         $.each(data, function (key, val) {
-            // alert(key.toString()+" "+val.toString());
-            // console.log(JSON.stringify(key)+" "+JSON.stringify(val));
-            // console.log(val.name);
             opt = document.createElement('option');
             opt.value = val.id;
             opt.innerHTML = val.name;
@@ -131,7 +133,8 @@ function getKind() {
     });
 }
 
-function save() {
+function saveUnterricht() {
+
     $.ajax({
         type: "POST",
         url: ajaxUrl + '/save',
@@ -146,8 +149,8 @@ function save() {
         }
     }).done(function () {
         $('#createUnterricht').modal('hide');
+
         $('#calendar').fullCalendar('refetchEvents');
-        // alert("It's all saved");
     });
 }
 

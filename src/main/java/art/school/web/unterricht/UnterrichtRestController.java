@@ -36,7 +36,7 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
 //        return super.getAll();
 //    }
 
-//    @PostMapping(value="/save")
+//    @PostMapping(value="/saveUnterricht")
 //    @ResponseStatus(value = HttpStatus.NO_CONTENT)
 //    public ResponseEntity<String> create(@RequestBody String json) throws IOException {
 ////        super.create(new Unterricht(LocalDateTime.of(LocalDate.parse(request.getParameter("datum")),

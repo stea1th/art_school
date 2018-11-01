@@ -30,9 +30,8 @@
                         <div class="form-group">
                             <label for="kind">Ребёнок</label>
                             <select id="kind">
-                                <option disabled selected>Выберите ученика</option>
-                                <%--<option>Батька Махно</option>--%>
-                                <%--<option>Батька Пихно</option>--%>
+
+
                             </select>
 
                             <%--<input type="text" class="form-control mx-sm-3" id="kind" placeholder="Ребёнок"--%>
@@ -88,7 +87,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                <button type="button" class="btn btn-success" onclick="save()"><i class='fa fa-pencil'></i>Сохранить
+                <button type="button" class="btn btn-success" onclick="saveUnterricht()"><i class='fa fa-pencil'></i>Сохранить
                 </button>
             </div>
         </div>
