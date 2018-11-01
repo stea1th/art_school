@@ -28,16 +28,20 @@ public class Zahlung extends AbstractBaseEntity{
     @NotBlank
     private LocalTime dauer;
 
+    @Column(name = "aktiv", nullable = false, columnDefinition = "bool default true")
+    private boolean aktiv = true;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "zahlung")
     private List<Unterricht> unterrichts;
 
-    public Zahlung(Integer id, @NotNull BigDecimal preis, @NotBlank LocalTime dauer) {
+    public Zahlung(Integer id, @NotNull BigDecimal preis, @NotBlank LocalTime dauer, boolean aktiv) {
         super(id);
         this.preis = preis;
         this.dauer = dauer;
+        this.aktiv = aktiv;
     }
 
-    public Zahlung(@NotNull BigDecimal preis, @NotBlank LocalTime dauer) {
-        this(null, preis, dauer);
+    public Zahlung(@NotNull BigDecimal preis, @NotBlank LocalTime dauer, boolean aktiv) {
+        this(null, preis, dauer, aktiv);
     }
 }

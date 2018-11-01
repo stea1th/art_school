@@ -22,6 +22,7 @@ create table zahlung
   id integer primary key default nextval('global_seq'),
   preis numeric not null,
   dauer time not null,
+  aktiv bool default true not null,
   constraint zahlung_unique_preis_dauer_idx unique(preis, dauer)
 );
 

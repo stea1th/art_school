@@ -4,6 +4,7 @@ import art.school.entity.Zahlung;
 import art.school.repository.ZahlungRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
@@ -41,5 +42,12 @@ public class ZahlungServiceImpl implements ZahlungService {
     @Override
     public List<Zahlung> getAll() {
         return repository.getAll();
+    }
+
+    @Override
+    @Transactional
+    public void toggleAktiv(int id) {
+        Zahlung zahlung = get(id);
+        zahlung.setAktiv(!zahlung.isAktiv());
     }
 }

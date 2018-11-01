@@ -21,11 +21,7 @@ $(function () {
 
     $('#calendar').fullCalendar({
         header: {center: 'month,agendaWeek,list'}, // buttons for switching between views
-        views: {
-            month: {
-                titleFormat: 'YYYY MMMM '
-            }
-        },
+
         dayClick: function (date, jsEvent, view) {
             var myModal = $('#createUnterricht');
 
@@ -81,7 +77,14 @@ $(function () {
             url: 'http://localhost:8080/unterricht'
         }],
         timeFormat: 'HH:mm',
-        timezone: 'local'
+        timezone: 'local',
+        eventLimit: true,
+        views: {
+            month: {
+                titleFormat: 'YYYY MMMM ',
+                eventLimit: 2
+            }
+        }
     });
 
 

@@ -17,11 +17,7 @@ import java.util.List;
 public class UnterrichtRepositoryImpl implements UnterrichtRepository {
     private static final Sort SORT_BY_DATE = new Sort(Sort.Direction.DESC, "datum");
 
-//    @Autowired
-//    private CrudKindRepository kindRepository;
-//
-//    @Autowired
-//    private CrudZahlungRepository zahlungRepository;
+
     @Autowired
     private KindRepository kindRepository;
 
