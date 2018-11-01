@@ -36,6 +36,10 @@
     </div>
 </div>
 
+<script src="webjars/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="webjars/datatables-buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="webjars/datatables-buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
 <script type="text/javascript" src='<c:url value="/resources/js/kind.js"/>'></script>
 </body>
 </html>

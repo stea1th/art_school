@@ -16,10 +16,10 @@
 var ajaxUrl = "unterricht";
 
 
-$( function() {
+$(function () {
 
     $('#calendar').fullCalendar({
-        header: { center: 'month,agendaWeek,list' }, // buttons for switching between views
+        header: {center: 'month,agendaWeek,list'}, // buttons for switching between views
         views: {
             month: {
                 titleFormat: 'YYYY MMMM '
@@ -30,12 +30,13 @@ $( function() {
             // alert(date.format());
 
             $('#datum').val(date.format());
-            $(this).on( "click", function() {
+            getKind();
+            $(this).on("click", function () {
                 $('#createUnterricht').modal('toggle');
             });
         },
         themeSystem: 'bootstrap4',
-        height:650,
+        height: 650,
         bootstrapFontAwesome: {
             prev: 'fas fa-angle-left',
             next: 'fas fa-angle-right'
@@ -55,17 +56,15 @@ $( function() {
         //     return false;
 
 
-
-
-            // if(event.title!=='CLICKED!'){
-            //     event.title = "CLICKED!";
-            // }else{
-            //     event.title = "YAHOO!!!!";
-            // }
-            // event.css('color', 'red');
-            // $('#calendar').fullCalendar('updateEvent', event);
+        // if(event.title!=='CLICKED!'){
+        //     event.title = "CLICKED!";
+        // }else{
+        //     event.title = "YAHOO!!!!";
+        // }
+        // event.css('color', 'red');
+        // $('#calendar').fullCalendar('updateEvent', event);
         // },
-        eventRender: function(eventObj, $el) {
+        eventRender: function (eventObj, $el) {
             $el.popover({
                 title: eventObj.title,
                 content: eventObj.notiz,
@@ -88,7 +87,15 @@ $( function() {
         minuteText: 'Минуты'
     });
 
-
+    // $('#kind').on('change', function () {
+    //     $.getJSON('kind', function (data) {
+    //         $.each(data, function (key, val) {
+    //             // alert(key.toString()+" "+val.toString());
+    //             // console.log(JSON.stringify(key)+" "+JSON.stringify(val));
+    //             console.log(val.name);
+    //         });
+    //     });
+    // });
 });
 
 // var myEvents = function() {
@@ -108,17 +115,33 @@ $( function() {
 //     return obj;
 // };
 
-function save(){
+function getKind() {
+    var sel = document.getElementById('kind');
+    var opt = null;
+    $.getJSON('kind', function (data) {
+        $.each(data, function (key, val) {
+            // alert(key.toString()+" "+val.toString());
+            // console.log(JSON.stringify(key)+" "+JSON.stringify(val));
+            // console.log(val.name);
+            opt = document.createElement('option');
+            opt.value = val.id;
+            opt.innerHTML = val.name;
+            sel.appendChild(opt);
+        });
+    });
+}
+
+function save() {
     $.ajax({
         type: "POST",
-        url: ajaxUrl+'/save',
+        url: ajaxUrl + '/save',
         data: {
             datum: $('#datum').val(),
             kind: $('#kind').val(),
             zahlung: $('#zahlung').val(),
             timepicker: $('#timepicker').val(),
             notiz: $('#notiz').val(),
-            bezahlt:  $('#bezahlt:checked').val(),
+            bezahlt: $('#bezahlt:checked').val(),
             id: $('#id').val()
         }
     }).done(function () {
@@ -128,6 +151,7 @@ function save(){
     });
 }
 
-function show() {
 
-}
+
+
+

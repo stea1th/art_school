@@ -29,8 +29,14 @@
                     <div class="form-inline">
                         <div class="form-group">
                             <label for="kind">Ребёнок</label>
-                            <input type="text" class="form-control mx-sm-3" id="kind" placeholder="Ребёнок"
-                                   aria-describedby="kindInlineHelp" required>
+                            <select id="kind">
+                                <option disabled selected>Выберите ученика</option>
+                                <%--<option>Батька Махно</option>--%>
+                                <%--<option>Батька Пихно</option>--%>
+                            </select>
+
+                            <%--<input type="text" class="form-control mx-sm-3" id="kind" placeholder="Ребёнок"--%>
+                                   <%--aria-describedby="kindInlineHelp" required>--%>
                             <small id="kindInlineHelp" class="text-muted">
                                 Выберите ученика
                             </small>
@@ -82,7 +88,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                <button type="button" class="btn btn-success" onclick="save()"><i class='fa fa-pencil'></i>Сохранить</button>
+                <button type="button" class="btn btn-success" onclick="save()"><i class='fa fa-pencil'></i>Сохранить
+                </button>
             </div>
         </div>
     </div>
@@ -93,7 +100,7 @@
         <div id='calendar'></div>
     </div>
 </div>
-<script type="text/javascript" src='<c:url value="/resources/js/unterricht.js"/>'></script>
+
 
 </body>
 </html>

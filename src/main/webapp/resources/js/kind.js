@@ -44,7 +44,7 @@ $(function () {
         dom: 'Bfrtip',
         buttons: [
             {
-                text: 'My Button',
+                text: 'Добавить ученика',
                 action: function ( e, dt, node, config ) {
                     alert( 'Button activated' );
                 }
