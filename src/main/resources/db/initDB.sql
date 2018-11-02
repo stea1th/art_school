@@ -20,6 +20,7 @@ create table kind
 create table zahlung
 (
   id integer primary key default nextval('global_seq'),
+  name varchar not null,
   preis numeric not null,
   dauer time not null,
   aktiv bool default true not null,

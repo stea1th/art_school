@@ -1,11 +1,14 @@
-var ajaxKind = "kind";
+var ajaxUrl = "kind";
 var datatable;
 
 $(function () {
     datatable = $('#kids').DataTable({
+        "language": {
+            "url": "http://cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json"
+        },
 
         "ajax": {
-            "url": ajaxKind,
+            "url": ajaxUrl,
             "dataSrc": ""
         },
 
@@ -23,7 +26,7 @@ $(function () {
             {"data": "aktiv",
                 "render": function (data, type, row) {
                     if (type === "display") {
-                        return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='#' style=''/>";
+                        return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='toggleThis(" + row.id + ")' style=''/>";
                     }
                     return data;
                 },
@@ -55,26 +58,7 @@ $(function () {
     });
 });
 
-function renderEditBtn(data, type, row) {
-    if (type === "display") {
-        return "<a onclick='#'><i class='far fa-edit'></i></a>";
-    }
-}
 
-function renderDeleteBtn(data, type, row) {
-    if (type === "display") {
-        return "<a onclick='deleteRow(" + row.id + ");'><i class='far fa-calendar-times'></i></a>";
-    }
-}
-
-function deleteRow(id){
-    $.ajax({
-        url: ajaxKind +"/"+ id,
-        type: "DELETE"
-    }).done(function(){
-        datatable.ajax.reload();
-    });
-}
 
 
 

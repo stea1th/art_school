@@ -3,14 +3,14 @@ delete from zahlung;
 delete from kind;
 alter sequence global_seq restart with 1000;
 
-insert into kind (name, adresse) values
-  ('Osipov', 'Schobertweg 5'),
-  ('Vlasov', 'Hauptstrasse'),
-  ('Tupuliavichius', 'Sedulinos al');
+insert into kind (name, adresse, aktiv) values
+  ('Осипов', 'Schobertweg 5', true),
+  ('Власов', 'Hauptstrasse', false),
+  ('Тупулявичус', 'Sedulinos al', true);
 
-insert into zahlung (preis, dauer, aktiv) values
-  (24.69, '00:45', true),
-  (48.34, '01:30', true);
+insert into zahlung (name, preis, dauer, aktiv) values
+  ('Сорок пять минут', 24.69, '00:45', true),
+  ('Полтора часа', 48.34, '01:30', true);
 
 insert into unterricht (k_id, z_id, datum, bezahlt, notiz) values
   (1001, 1003, now(), true, 'Segodnia zaplatil'),

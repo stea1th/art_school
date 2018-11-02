@@ -29,6 +29,6 @@
     <script type="text/javascript" src='webjars/fullcalendar/3.9.0/locale/ru.js' ></script>
     <script src="webjars/jquery.ui.timepicker/0.3.3/jquery.ui.timepicker.js"></script>
 
-    <script type="text/javascript" src='<c:url value="/resources/js/unterricht.js"/>'></script>
+
 </head>
 

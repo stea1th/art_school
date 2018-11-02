@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
@@ -15,11 +14,12 @@ import java.time.LocalTime;
 public class ZahlungTo implements Serializable {
 
     private int id;
+    private String name;
     private BigDecimal preis;
-    private LocalTime dauer;
+    private String dauer;
     private boolean aktiv;
 
     public ZahlungTo(Zahlung z) {
-        this(z.getId(), z.getPreis(), z.getDauer(), z.isAktiv());
+        this(z.getId(), z.getName(), z.getPreis(), z.getDauer().toString(), z.isAktiv());
     }
 }

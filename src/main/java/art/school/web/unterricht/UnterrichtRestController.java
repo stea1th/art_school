@@ -67,12 +67,12 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UnterrichtTo> getAllThis(){
+    public List<UnterrichtTo> all(){
         List<UnterrichtTo> list = new ArrayList<>();
         super.getAll().forEach(i-> list.add(new UnterrichtTo(i.getId(), i.getKind().getName(),
                 i.getDatum().minusMonths(1).truncatedTo(ChronoUnit.SECONDS),
                 i.getDatum().minusMonths(1).truncatedTo(ChronoUnit.SECONDS).plusMinutes(i.getZahlung().getDauer().getLong(ChronoField.MINUTE_OF_DAY)), i.getNotiz(),
-                i.isBezahlt()? "green" : "red")));
+                !i.getKind().isAktiv()? "grey" : i.isBezahlt()? "green" : "red")));
 
         return list;
     }

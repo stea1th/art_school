@@ -3,10 +3,9 @@ package art.school.web.kind;
 import art.school.to.KindTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,5 +24,12 @@ public class KindRestController extends AbstractKindController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) {
         super.delete(id);
+    }
+
+    @PostMapping(value="/toggle/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public ResponseEntity<String> toggle(@PathVariable("id") int id){
+        super.toggleAktiv(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

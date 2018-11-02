@@ -1,11 +1,11 @@
-var ajaxZahlung = "zahlung";
+var ajaxUrl = "zahlung";
 var datatable;
 
 $(function () {
     datatable = $('#zahlungen').DataTable({
 
         "ajax": {
-            "url": ajaxZahlung,
+            "url": ajaxUrl,
             "dataSrc": ""
         },
 
@@ -18,12 +18,13 @@ $(function () {
         ],
         "columns": [
             {"data": "id"},
+            {"data": "name"},
             {"data": "preis"},
             {"data": "dauer"},
             {"data": "aktiv",
                 "render": function (data, type, row) {
                     if (type === "display") {
-                        return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='#' style=''/>";
+                        return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='toggleThis(" + row.id+ ")' />";
                     }
                     return data;
                 },
@@ -49,28 +50,5 @@ $(function () {
                 }
             }
         ]
-
-
     });
 });
-
-function renderEditBtn(data, type, row) {
-    if (type === "display") {
-        return "<a onclick='#'><i class='far fa-edit'></i></a>";
-    }
-}
-
-function renderDeleteBtn(data, type, row) {
-    if (type === "display") {
-        return "<a onclick='deleteRow(" + row.id + ");'><i class='far fa-calendar-times'></i></a>";
-    }
-}
-
-function deleteRow(id){
-    $.ajax({
-        url: ajaxZahlung +"/"+ id,
-        type: "DELETE"
-    }).done(function(){
-        datatable.ajax.reload();
-    });
-}

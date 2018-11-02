@@ -5,6 +5,8 @@
 <jsp:include page="fragments/headTag.jsp"/>
 
 <body>
+<script type="text/javascript" src='<c:url value="/resources/js/common.js"/>' defer></script>
+<script type="text/javascript" src='<c:url value="/resources/js/zahlung.js"/>' defer></script>
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>
 <div class="card border-light mb-3" id="table-card2">
@@ -13,6 +15,7 @@
             <thead>
             <tr>
                 <th>Id</th>
+                <th>Название</th>
                 <th>Цена</th>
                 <th>Продолжительность</th>
                 <th>Активный</th>
@@ -23,6 +26,7 @@
             <tfoot>
             <tr>
                 <th>Id</th>
+                <th>Название</th>
                 <th>Цена</th>
                 <th>Продолжительность</th>
                 <th>Активный</th>
@@ -34,8 +38,5 @@
     </div>
 </div>
 
-
-
-<script type="text/javascript" src='<c:url value="/resources/js/zahlung.js"/>'></script>
 </body>
 </html>
