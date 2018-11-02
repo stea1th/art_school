@@ -5,8 +5,9 @@
 <jsp:include page="fragments/headTag.jsp"/>
 
 <body>
-<script type="text/javascript" src='<c:url value="/resources/js/common.js"/>' defer></script>
 <script type="text/javascript" src='<c:url value="/resources/js/zahlung.js"/>' defer></script>
+<script type="text/javascript" src='<c:url value="/resources/js/common.js"/>' defer></script>
+
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>
 <div class="card border-light mb-3" id="table-card2">
@@ -37,6 +38,38 @@
         </table>
     </div>
 </div>
+
+<div class="modal fade" id="createZahlung" tabindex="-1" role="dialog" aria-labelledby="createUnterricht"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Добавить способ оплаты</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="zahlung-detailsForm">
+                    <div>
+                        <input type="hidden" class="form-control" id="id" name="id">
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-4 col-form-label">Название</label>
+                        <div class="col-8">
+                            <input type="text" id="name" name="name" class="form-control" required="required"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

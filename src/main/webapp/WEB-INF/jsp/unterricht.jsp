@@ -40,100 +40,32 @@
                         <label for="zahlung" class="col-4 col-form-label">Оплата</label>
                         <div class="col-8">
                             <select id="zahlung" name="zahlung" class="custom-select" required="required">
-                                <option value="rabbit">Rabbit</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="timepicker" class="col-4 col-form-label">Время</label>
                         <div class="col-8">
-                            <input id="timepicker" name="timepicker" width="276" />
-                            <%--<div class="input-group date" id="timepicker"  data-target-input="nearest">--%>
-                                <%--<input type="text" class="form-control datetimepicker-input" data-target="#timepicker" name="timepicker"/>--%>
-                                <%--<div class="input-group-append" data-target="timepicker" data-toggle="timepicker">--%>
-                                    <%--<div class="input-group-text"><i class="fas fa-clock"></i></div>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-
-                            <%--<div class="input-group">--%>
-                                <%--<div class="input-group-addon">--%>
-                                    <%--<i class="fas fa-clock"></i>--%>
-                                <%--</div>--%>
-                                <%--<input id="timepicker" name="timepicker" placeholder="Время" type="text" class="form-control here" required="required">--%>
-                            <%--</div>--%>
+                            <input id="timepicker" name="timepicker" required/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-4">Оплатили?</label>
                         <div class="col-8">
-                            <label class="custom-control custom-checkbox">
-                                <input name="bezahlt" type="checkbox" checked="checked" class="custom-control-input" value="true">
-                                <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description">Да</span>
-                            </label>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="bezahlt" name="bezahlt"
+                                       checked="checked"
+                                       value="true" required>
+                                <label class="custom-control-label" for="bezahlt">Да</label>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <%--<label for="notiz" class="col-4 col-form-label">Заметка</label>--%>
-                        <textarea class="form-control" id="notiz" name="notiz" rows="3" placeholder="Заметка"></textarea>
+                        <div class="col-12">
+                        <textarea class="form-control" id="notiz" name="notiz" rows="3"
+                                  placeholder="Заметка"></textarea>
+                        </div>
                     </div>
-
-
-                    <%--<div class="form-inline">--%>
-                        <%--<div class="form-group">--%>
-                            <%--<label for="kind">Ребёнок</label>--%>
-                            <%--<select id="kind" name="kind" aria-describedby="kindInlineHelp">--%>
-                            <%--</select>--%>
-                            <%--<small id="kindInlineHelp" class="text-muted">--%>
-                                <%--Выберите ученика--%>
-                            <%--</small>--%>
-                            <%--<div class="invalid-feedback">--%>
-                                <%--Пожалуйста выберите ученика--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                    <%--<div class="form-inline">--%>
-                        <%--<div class="form-group">--%>
-                            <%--<label for="zahlung">Оплата</label>--%>
-                            <%--<select id="zahlung" name="zahlung" aria-describedby="zahlungInlineHelp">--%>
-                            <%--</select>--%>
-                            <%--<small id="zahlungInlineHelp" class="text-muted">--%>
-                                <%--Выберите способ оплаты--%>
-                            <%--</small>--%>
-                            <%--<div class="invalid-feedback">--%>
-                                <%--Пожалуйста выберите способ оплаты--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                    <%--<div class="form-inline">--%>
-                        <%--<div class="form-group">--%>
-                            <%--<label for="timepicker">Время</label>--%>
-                            <%--<input type="text" class="form-control mx-sm-3" id="timepicker" name="timepicker"--%>
-                                   <%--placeholder="Время"--%>
-                                   <%--aria-describedby="timeInlineHelp">--%>
-                            <%--<small id="timeInlineHelp" class="text-muted">--%>
-                                <%--Выберите начало урока--%>
-                            <%--</small>--%>
-                            <%--<div class="invalid-feedback">--%>
-                                <%--Пожалуйста выберите начало урока--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                    <%--<div class="form-group">--%>
-                        <%--<div class="custom-control custom-checkbox">--%>
-                            <%--<input type="checkbox" class="custom-control-input" id="bezahlt" name="bezahlt"--%>
-                                   <%--checked="checked"--%>
-                                   <%--value="true" required>--%>
-                            <%--<label class="custom-control-label" for="bezahlt">Заплатил</label>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-
-
-                    <%--<div class="form-group">--%>
-                        <%--&lt;%&ndash;<label for="exampleTextarea">Example textarea</label>&ndash;%&gt;--%>
-                        <%--<textarea class="form-control" id="notiz" name="notiz" rows="3"--%>
-                                  <%--placeholder="Заметка"></textarea>--%>
-                    <%--</div>--%>
                 </form>
             </div>
             <div class="modal-footer">
@@ -150,7 +82,5 @@
         <div id='calendar'></div>
     </div>
 </div>
-
-
 </body>
 </html>

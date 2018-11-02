@@ -24,10 +24,11 @@ $(function () {
             {"data": "name"},
             {"data": "preis"},
             {"data": "dauer"},
-            {"data": "aktiv",
+            {
+                "data": "aktiv",
                 "render": function (data, type, row) {
                     if (type === "display") {
-                        return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='toggleThis(" + row.id+ ")' />";
+                        return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='toggleThis(" + row.id + ")' />";
                     }
                     return data;
                 },
@@ -47,11 +48,19 @@ $(function () {
         dom: 'Bfrtip',
         buttons: [
             {
+                name: 'primary',
                 text: 'Добавить способ оплаты',
                 action: function ( e, dt, node, config ) {
-                    alert( 'Button activated' );
+                    var modalName = $('#createZahlung');
+                    showModal(modalName);
                 }
             }
         ]
     });
 });
+
+
+
+
+
+

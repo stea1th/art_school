@@ -26,3 +26,10 @@ function deleteRow(id){
 function toggleThis(id){
     $.post(ajaxUrl+"/toggle/"+id, {"id" : id});
 }
+
+function showModal(modalName){
+    modalName.modal('show');
+    modalName.on('hidden.bs.modal', function () {
+        $(this).find('form')[0].reset();
+    })
+}
