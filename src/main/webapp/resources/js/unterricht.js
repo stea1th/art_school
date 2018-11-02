@@ -74,11 +74,24 @@ $(function () {
         }
     });
 
-    $('#timepicker').timepicker({
-        showOn: 'focus',
-        hourText: 'Часы',             // Define the locale text for "Hours"
-        minuteText: 'Минуты'
+    $(function () {
+        $('#timepicker').timepicker({
+            format: 'HH:MM',
+            modal: false,
+            header: false,
+            footer: false,
+            value: '00:00',
+            mode: '24hr',
+            uiLibrary: 'bootstrap4'
+            // locale: 'ru-ru'
+        });
     });
+
+    // $('#timepicker').datetimepicker({
+    //     // showOn: 'focus',
+    //     // hourText: 'Часы',             // Define the locale text for "Hours"
+    //     // minuteText: 'Минуты'
+    // });
 });
 
 function getKind() {

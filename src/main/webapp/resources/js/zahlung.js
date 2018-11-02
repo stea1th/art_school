@@ -3,6 +3,9 @@ var datatable;
 
 $(function () {
     datatable = $('#zahlungen').DataTable({
+        "language": {
+            "url": "http://cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json"
+        },
 
         "ajax": {
             "url": ajaxUrl,

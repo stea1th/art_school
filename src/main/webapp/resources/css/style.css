@@ -3,13 +3,13 @@
     margin: auto;
 }
 
-#calendar .fc-day{
-    transition: all .5s;
-}
+/*#calendar .fc-day{*/
+    /*transition: all .5s;*/
+/*}*/
 
-#calendar .fc-day:hover {
-    background: aquamarine;
-}
+/*#calendar .fc-day:hover {*/
+    /*background: aquamarine;*/
+/*}*/
 
 #calendar-card, #table-card, #table-card2 {
     box-shadow: 0 1px 15px 1px rgba(39,39,39,.1);
