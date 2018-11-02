@@ -1,9 +1,9 @@
 var ajaxUnterricht = "unterricht";
 var ajaxKind = "kind";
+var ajaxZahlung = "zahlung";
 
 
 $(function () {
-
 
     $('#calendar').fullCalendar({
         header: {center: 'month,agendaWeek,list'}, // buttons for switching between views
@@ -13,6 +13,7 @@ $(function () {
 
             $('#datum').val(date.format());
             getKind();
+            getZahlung();
             $(this).on("click", function () {
                 myModal.modal('toggle');
                 myModal.on('hidden.bs.modal', function () {
@@ -73,40 +74,12 @@ $(function () {
         }
     });
 
-
     $('#timepicker').timepicker({
         showOn: 'focus',
         hourText: 'Часы',             // Define the locale text for "Hours"
         minuteText: 'Минуты'
     });
-
-    // $('#kind').on('change', function () {
-    //     $.getJSON('kind', function (data) {
-    //         $.each(data, function (key, val) {
-    //             // alert(key.toString()+" "+val.toString());
-    //             // console.log(JSON.stringify(key)+" "+JSON.stringify(val));
-    //             console.log(val.name);
-    //         });
-    //     });
-    // });
 });
-
-// var myEvents = function() {
-//     var obj = '';
-//     $.ajax({
-//         type: 'POST',
-//         url: '/unterricht',
-//         async:false,
-//         contentType: "application/json",
-//         success: function (result) {
-//             obj = JSON.stringify(result);
-//             // obj = result;
-//             // $('#events').text(obj);
-//              console.log(obj);
-//         }
-//     });
-//     return obj;
-// };
 
 function getKind() {
     var sel = document.getElementById('kind');
@@ -122,23 +95,24 @@ function getKind() {
     });
 }
 
+function getZahlung() {
+    var sel1 = document.getElementById('zahlung');
+    var opt1 = null;
+    $('#zahlung').empty().append('<option disabled selected>Выберите оплату</option>');
+    $.getJSON(ajaxZahlung, function (data) {
+        $.each(data, function (key, val) {
+            opt1 = document.createElement('option');
+            opt1.value = val.id;
+            opt1.innerHTML = val.name;
+            sel1.appendChild(opt1);
+        });
+    });
+}
+
 function saveUnterricht() {
-
-    $.ajax({
-        type: "POST",
-        url: ajaxUnterricht + '/save',
-        data: {
-            datum: $('#datum').val(),
-            kind: $('#kind').val(),
-            zahlung: $('#zahlung').val(),
-            timepicker: $('#timepicker').val(),
-            notiz: $('#notiz').val(),
-            bezahlt: $('#bezahlt:checked').val(),
-            id: $('#id').val()
-        }
-    }).done(function () {
+    $.post(ajaxUnterricht + '/save', $('#detailsForm').serialize())
+        .done(function () {
         $('#createUnterricht').modal('hide');
-
         $('#calendar').fullCalendar('refetchEvents');
     });
 }

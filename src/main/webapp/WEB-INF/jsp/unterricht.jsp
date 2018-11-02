@@ -25,16 +25,13 @@
                         <input type="hidden" class="form-control" id="id" name="id">
                     </div>
                     <div class="form-group">
-                        <input type="text" readonly="" class="form-control" id="datum" hidden>
+                        <input type="text" readonly="" class="form-control" id="datum" name="datum" hidden>
                     </div>
                     <div class="form-inline">
                         <div class="form-group">
                             <label for="kind">Ребёнок</label>
-                            <select id="kind">
+                            <select id="kind" name="kind" aria-describedby="kindInlineHelp">
                             </select>
-
-                            <%--<input type="text" class="form-control mx-sm-3" id="kind" placeholder="Ребёнок"--%>
-                            <%--aria-describedby="kindInlineHelp" required>--%>
                             <small id="kindInlineHelp" class="text-muted">
                                 Выберите ученика
                             </small>
@@ -46,8 +43,8 @@
                     <div class="form-inline">
                         <div class="form-group">
                             <label for="zahlung">Оплата</label>
-                            <input type="text" class="form-control mx-sm-3" id="zahlung" placeholder="Оплата"
-                                   aria-describedby="zahlungInlineHelp" required>
+                            <select id="zahlung" name="zahlung" aria-describedby="zahlungInlineHelp">
+                            </select>
                             <small id="zahlungInlineHelp" class="text-muted">
                                 Выберите способ оплаты
                             </small>
@@ -59,7 +56,7 @@
                     <div class="form-inline">
                         <div class="form-group">
                             <label for="timepicker">Время</label>
-                            <input type="text" class="form-control mx-sm-3" id="timepicker" placeholder="Время"
+                            <input type="text" class="form-control mx-sm-3" id="timepicker" name="timepicker" placeholder="Время"
                                    aria-describedby="timeInlineHelp" required>
                             <small id="timeInlineHelp" class="text-muted">
                                 Выберите начало урока
@@ -71,7 +68,7 @@
                     </div>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="bezahlt" checked="checked"
+                            <input type="checkbox" class="custom-control-input" id="bezahlt" name="bezahlt" checked="checked"
                                    value="true" required>
                             <label class="custom-control-label" for="bezahlt">Заплатил</label>
                         </div>
@@ -80,7 +77,7 @@
 
                     <div class="form-group">
                         <%--<label for="exampleTextarea">Example textarea</label>--%>
-                        <textarea class="form-control" id="notiz" rows="3" placeholder="Заметка"></textarea>
+                        <textarea class="form-control" id="notiz" name="notiz" rows="3" placeholder="Заметка"></textarea>
                     </div>
                 </form>
             </div>
