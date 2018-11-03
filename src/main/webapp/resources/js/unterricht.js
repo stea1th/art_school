@@ -98,7 +98,7 @@ function getKind() {
     var sel = document.getElementById('kind');
     var opt = null;
     $('#kind').empty().append('<option disabled selected>Выберите ученика</option>');
-    $.getJSON(ajaxKind, function (data) {
+    $.getJSON(ajaxKind + "/filter/aktiv", function (data) {
         $.each(data, function (key, val) {
             opt = document.createElement('option');
             opt.value = val.id;
@@ -112,7 +112,7 @@ function getZahlung() {
     var sel1 = document.getElementById('zahlung');
     var opt1 = null;
     $('#zahlung').empty().append('<option disabled selected>Выберите оплату</option>');
-    $.getJSON(ajaxZahlung, function (data) {
+    $.getJSON(ajaxZahlung + "/filter/aktiv", function (data) {
         $.each(data, function (key, val) {
             opt1 = document.createElement('option');
             opt1.value = val.id;

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static art.school.util.TransformUtil.transformTo;
 
@@ -17,7 +18,6 @@ public class KindRestController extends AbstractKindController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<KindTo> all() {
-
         return transformTo(super.getAll(), KindTo.class);
         }
 
@@ -32,5 +32,14 @@ public class KindRestController extends AbstractKindController {
     public ResponseEntity<String> toggle(@PathVariable("id") int id){
         super.toggleAktiv(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value="/filter/aktiv", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<KindTo> onlyAktiv(){
+//        return transformToFilterAktiv(super.getAll(), KindTo.class);
+        return transformTo(super.getAll(), KindTo.class)
+                .stream()
+                .filter(KindTo::isAktiv)
+                .collect(Collectors.toList());
     }
 }

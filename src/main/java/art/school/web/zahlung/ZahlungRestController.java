@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static art.school.util.TransformUtil.transformTo;
+import static art.school.util.TransformUtil.transformToFilterAktiv;
 
 @RestController
 @RequestMapping("/zahlung")
@@ -25,5 +26,10 @@ public class ZahlungRestController extends AbstractZahlungController {
         super.toggleAktiv(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping(value="/filter/aktiv", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ZahlungTo> onlyAktiv(){
+        return transformToFilterAktiv(super.getAll(), ZahlungTo.class);
+        }
 
 }
