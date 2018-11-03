@@ -7,7 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static art.school.util.TransformUtil.transformTo;
 
 @RestController
 @RequestMapping(value = "/kind")
@@ -16,8 +17,8 @@ public class KindRestController extends AbstractKindController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<KindTo> all() {
-        return super.getAll().stream().map(KindTo::new)
-                .collect(Collectors.toList());
+
+        return transformTo(super.getAll(), KindTo.class);
         }
 
     @DeleteMapping(value = "/{id}")

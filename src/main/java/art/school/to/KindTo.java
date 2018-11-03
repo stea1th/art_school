@@ -11,7 +11,7 @@ import java.time.temporal.ChronoUnit;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class KindTo implements Serializable {
+public class KindTo extends AbstractTo implements Serializable {
 
     private int id;
     private String name;
