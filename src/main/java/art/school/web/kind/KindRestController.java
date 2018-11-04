@@ -36,7 +36,6 @@ public class KindRestController extends AbstractKindController {
 
     @GetMapping(value="/filter/aktiv", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<KindTo> onlyAktiv(){
-//        return transformToFilterAktiv(super.getAll(), KindTo.class);
         return transformTo(super.getAll(), KindTo.class)
                 .stream()
                 .filter(KindTo::isAktiv)

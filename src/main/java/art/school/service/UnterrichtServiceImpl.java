@@ -55,7 +55,8 @@ public class UnterrichtServiceImpl implements UnterrichtService {
 
     @Override
     public void update(Unterricht unterricht) {
-
+        Assert.notNull(unterricht, "unterricht must not be null");
+        checkNotFoundWithId(repository.save(unterricht), unterricht.getId());
     }
 
     @Override

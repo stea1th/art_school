@@ -76,4 +76,18 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
 
         return list;
     }
+
+    @PostMapping(value="/update/ondrop/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public ResponseEntity<String> updateOnDrop(
+            @PathVariable("id") int id,
+            @RequestParam(value = "date") String date){
+//        System.out.println(id + " " + date);
+        String[] dateParts = date.replace("T", " ").split(" ");
+        Unterricht u = super.get(id);
+        u.setDatum(LocalDateTime.of(LocalDate.parse(dateParts[0]), LocalTime.parse(dateParts[1])));
+        super.update(u, id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

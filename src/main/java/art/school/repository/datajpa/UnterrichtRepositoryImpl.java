@@ -41,8 +41,9 @@ public class UnterrichtRepositoryImpl implements UnterrichtRepository {
     }
 
     @Override
+    @Transactional
     public Unterricht save(Unterricht unterricht) {
-        return null;
+        return repository.save(unterricht);
     }
 
     @Override
