@@ -8,7 +8,6 @@
 <script type="text/javascript" src='<c:url value="/resources/js/unterricht.js"/>' defer></script>
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>
-<br/>
 <div class="modal fade" id="createUnterricht" tabindex="-1" role="dialog" aria-labelledby="createUnterricht"
      aria-hidden="true">
     <div class="modal-dialog" role="document">

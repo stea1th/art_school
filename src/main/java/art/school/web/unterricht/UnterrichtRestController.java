@@ -2,6 +2,7 @@ package art.school.web.unterricht;
 
 
 import art.school.entity.Unterricht;
+import art.school.to.RequestUnterrichtTo;
 import art.school.to.UnterrichtTo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -50,19 +51,12 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
 //        return new ResponseEntity<>(HttpStatus.OK);
 //    }
 
-    @PostMapping(value="/save")
+    @PostMapping(value="/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ResponseEntity<String> create(
-            @RequestParam(value = "id", required = false) String id,
-            @RequestParam(value = "datum") String datum,
-            @RequestParam(value = "timepicker", required = false) String zeit,
-            @RequestParam(value = "kind") String kind,
-            @RequestParam(value = "zahlung") String zahlung,
-            @RequestParam(value = "bezahlt", defaultValue = "false") String bezahlt,
-            @RequestParam(value = "notiz", required = false) String notiz
-    )  {
-        Unterricht u = new Unterricht(LocalDateTime.of(LocalDate.parse(datum), LocalTime.parse(zeit)), Boolean.valueOf(bezahlt), notiz);
-        super.create(u, Integer.parseInt(kind), Integer.parseInt(zahlung));
+    public ResponseEntity<String> create(RequestUnterrichtTo unterrichtTo)  {
+//        Unterricht u = new Unterricht(LocalDateTime.of(LocalDate.parse(datum), LocalTime.parse(zeit)), Boolean.valueOf(bezahlt), notiz);
+//        super.create(u, Integer.parseInt(kind), Integer.parseInt(zahlung));
+        System.out.println(unterrichtTo.getDatum()+" "+unterrichtTo.getKind()+" "+unterrichtTo.getId()+" ");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -82,7 +76,6 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
     public ResponseEntity<String> updateOnDrop(
             @PathVariable("id") int id,
             @RequestParam(value = "date") String date){
-//        System.out.println(id + " " + date);
         String[] dateParts = date.replace("T", " ").split(" ");
         Unterricht u = super.get(id);
         u.setDatum(LocalDateTime.of(LocalDate.parse(dateParts[0]), LocalTime.parse(dateParts[1])));

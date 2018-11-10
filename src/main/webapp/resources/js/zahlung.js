@@ -18,13 +18,6 @@ $(function () {
                 "visible": false,
                 "searchable": false,
             }
-            // },
-            // {
-            //
-            //     "width": "25%",
-            //     "targets": [4]
-            //
-            // }
         ],
         "columns": [
             {"data": "id"},

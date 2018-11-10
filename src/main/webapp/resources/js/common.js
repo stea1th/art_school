@@ -15,10 +15,7 @@ function renderDeleteBtn(data, type, row) {
 }
 
 function deleteRow(id){
-    $.ajax({
-        url: ajaxUrl +"/"+ id,
-        type: "DELETE"
-    }).done(function(){
+    $.delete(ajaxUrl +"/"+ id).done(function() {
         datatable.ajax.reload();
     });
 }

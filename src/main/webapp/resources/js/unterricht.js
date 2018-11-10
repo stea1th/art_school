@@ -4,10 +4,14 @@ var ajaxZahlung = "zahlung";
 var calendar = null;
 
 
+
+
 $(function () {
 
+
+
     calendar = $('#calendar').fullCalendar({
-        header: {center: 'month,agendaWeek,list'}, // buttons for switching between views
+        header: {center: 'month,agendaWeek,list'},
 
         dayClick: function (date, jsEvent, view) {
             var myModal = $('#createUnterricht');
@@ -62,9 +66,9 @@ $(function () {
         eventDragStop: function( event, jsEvent, ui, view ) {
             window.eventScrolling = false;
         },
-        eventRender: function (eventObj, $el) {
+        eventRender: function (eventObj, el) {
             if(window.eventScrolling) return;
-            $el.popover({
+            el.popover({
                 title: eventObj.title,
                 content: eventObj.notiz,
                 trigger: 'hover',
@@ -122,40 +126,47 @@ $(function () {
 });
 
 function getKind() {
-    var sel = document.getElementById('kind');
-    var opt = null;
-    $('#kind').empty().append('<option disabled selected>Выберите ученика</option>');
+    var sel = $('#kind');
+    sel.empty().append('<option disabled selected>Выберите ученика</option>');
     $.getJSON(ajaxKind + "/filter/aktiv", function (data) {
         $.each(data, function (key, val) {
-            opt = document.createElement('option');
-            opt.value = val.id;
-            opt.innerHTML = val.name;
-            sel.appendChild(opt);
+            sel.append('<option value="' + val.id + '">' + val.name + '</option>')
         });
     });
 }
 
 
 function getZahlung() {
-    var sel1 = document.getElementById('zahlung');
-    var opt1 = null;
-    $('#zahlung').empty().append('<option disabled selected>Выберите оплату</option>');
+    var sel = $('#zahlung');
+    sel.empty().append('<option disabled selected>Выберите оплату</option>');
     $.getJSON(ajaxZahlung + "/filter/aktiv", function (data) {
         $.each(data, function (key, val) {
-            opt1 = document.createElement('option');
-            opt1.value = val.id;
-            opt1.innerHTML = val.name;
-            sel1.appendChild(opt1);
+            sel.append('<option value="' + val.id + '">' + val.name + '</option>')
         });
     });
 }
 
 function saveUnterricht() {
+
     $.post(ajaxUnterricht + '/save', $('#detailsForm').serialize())
         .done(function () {
         $('#createUnterricht').modal('hide');
         calendar.fullCalendar('refetchEvents');
     });
+
+    // $.ajax({
+    //     url: ajaxUnterricht + '/save',
+    //     type: 'POST',
+    //     contentType: 'application/json; charset=utf-8',
+    //     dataType: 'json',
+    //     data: $('#detailsForm').serialize()
+    //
+    // }).done(function () {
+    //         $('#createUnterricht').modal('hide');
+    //         calendar.fullCalendar('refetchEvents');
+    //     });
+
+
 }
 
 
