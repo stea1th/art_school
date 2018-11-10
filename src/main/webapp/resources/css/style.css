@@ -1,4 +1,4 @@
-#calendar {
+#calendar, #kids, #zahlungen {
     max-width: 900px;
     margin: auto;
 }
@@ -13,7 +13,7 @@
 
 #calendar-card, #table-card, #table-card2 {
     box-shadow: 0 1px 15px 1px rgba(39,39,39,.1);
-    max-width: 50rem;
+    max-width: 80rem;
     margin: auto;
     border: 0;
     border-radius: .1875rem;

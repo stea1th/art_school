@@ -25,4 +25,9 @@ public class RootController extends AbstractUnterrichtController {
     @GetMapping("/zahlung")
     public String zahlung() { return "zahlung";}
 
+    @GetMapping("/statistik")
+    public String statistik() { return "statistik";}
+
+
+
 }

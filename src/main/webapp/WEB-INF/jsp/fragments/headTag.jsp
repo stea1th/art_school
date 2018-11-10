@@ -14,6 +14,7 @@
     <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
     <link rel='stylesheet' href='webjars/datatables/1.10.19/css/jquery.dataTables.min.css' />
+    <link rel='stylesheet' href='https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css' />
     <link rel='stylesheet' href='webjars/datatables-buttons/1.5.2/css/buttons.bootstrap4.min.css' />
 
 
@@ -31,6 +32,7 @@
     <script src="webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <script src="webjars/datatables-buttons/1.5.2/js/dataTables.buttons.min.js"></script>
     <script src="webjars/datatables-buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
     <script type="text/javascript" src='webjars/moment/2.22.2/min/moment.min.js' ></script>
     <script type="text/javascript" src='webjars/fullcalendar/3.9.0/fullcalendar.js' ></script>

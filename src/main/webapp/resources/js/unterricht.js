@@ -1,11 +1,12 @@
 var ajaxUnterricht = "unterricht";
 var ajaxKind = "kind";
 var ajaxZahlung = "zahlung";
+var calendar = null;
 
 
 $(function () {
 
-    $('#calendar').fullCalendar({
+    calendar = $('#calendar').fullCalendar({
         header: {center: 'month,agendaWeek,list'}, // buttons for switching between views
 
         dayClick: function (date, jsEvent, view) {
@@ -22,6 +23,7 @@ $(function () {
 
             });
         },
+
         themeSystem: 'bootstrap4',
         height: 650,
         bootstrapFontAwesome: {
@@ -89,10 +91,9 @@ $(function () {
         editable: true,
         eventDrop: function(event, dayDelta, revertFunc) {
 
-
             $.post(ajaxUnterricht + "/update/ondrop/"+event.id, "date="+event.start.format())
                 .done(function(){
-                    $('#calendar').fullCalendar('refetchEvents');
+                    calendar.fullCalendar('refetchEvents');
                     $(".popover").remove();
                 });
 
@@ -153,7 +154,7 @@ function saveUnterricht() {
     $.post(ajaxUnterricht + '/save', $('#detailsForm').serialize())
         .done(function () {
         $('#createUnterricht').modal('hide');
-        $('#calendar').fullCalendar('refetchEvents');
+        calendar.fullCalendar('refetchEvents');
     });
 }
 

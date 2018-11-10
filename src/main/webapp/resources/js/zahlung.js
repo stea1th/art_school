@@ -16,8 +16,15 @@ $(function () {
             {
                 "targets": [0],
                 "visible": false,
-                "searchable": false
+                "searchable": false,
             }
+            // },
+            // {
+            //
+            //     "width": "25%",
+            //     "targets": [4]
+            //
+            // }
         ],
         "columns": [
             {"data": "id"},
@@ -26,6 +33,7 @@ $(function () {
             {"data": "dauer"},
             {
                 "data": "aktiv",
+
                 "render": function (data, type, row) {
                     if (type === "display") {
                         return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='toggleThis(" + row.id + ")' />";
@@ -45,12 +53,13 @@ $(function () {
                 "render": renderDeleteBtn
             }
         ],
+        responsive: true,
         dom: 'Bfrtip',
         buttons: [
             {
                 name: 'primary',
                 text: 'Добавить способ оплаты',
-                action: function ( e, dt, node, config ) {
+                action: function (e, dt, node, config) {
                     var modalName = $('#createZahlung');
                     showModal(modalName);
                 }

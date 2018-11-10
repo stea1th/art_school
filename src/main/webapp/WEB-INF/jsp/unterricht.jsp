@@ -69,17 +69,23 @@
                 </form>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="saveUnterricht()">Сохранить</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                <button type="button" class="btn btn-success" onclick="saveUnterricht()"><i class='fa fa-pencil'></i>Сохранить
-                </button>
+
             </div>
         </div>
     </div>
 </div>
 
-<div class="card border-light mb-3" id="calendar-card">
-    <div class="card-body">
-        <div id='calendar'></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 ml-auto mr-auto">
+            <div class="card border-light mb-3" id="calendar-card">
+                <div class="card-body">
+                    <div id='calendar'></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

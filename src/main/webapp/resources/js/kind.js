@@ -44,6 +44,7 @@ $(function () {
                 "render": renderDeleteBtn
             }
         ],
+        responsive: true,
         dom: 'Bfrtip',
         buttons: [
             {
