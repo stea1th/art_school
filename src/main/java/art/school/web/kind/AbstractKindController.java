@@ -12,7 +12,7 @@ import java.util.List;
 import static art.school.util.ValidationUtil.assureIdConsistent;
 import static art.school.util.ValidationUtil.checkNew;
 
-@RestController
+
 @Slf4j
 public abstract class AbstractKindController {
 

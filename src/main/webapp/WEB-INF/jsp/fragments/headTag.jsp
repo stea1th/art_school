@@ -33,6 +33,8 @@
     <script src="webjars/datatables-buttons/1.5.2/js/dataTables.buttons.min.js"></script>
     <script src="webjars/datatables-buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
 
     <script type="text/javascript" src='webjars/moment/2.22.2/min/moment.min.js' ></script>
     <script type="text/javascript" src='webjars/fullcalendar/3.9.0/fullcalendar.js' ></script>

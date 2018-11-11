@@ -28,10 +28,7 @@ import java.time.LocalTime;
 import java.time.format.TextStyle;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -73,7 +70,7 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
     }
 
     @GetMapping(value = "/test", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void testStatistik() {
+    public Map<Integer, Double> testStatistik() {
 //        super.getAll()
 //                .forEach(i -> System.out.println(i.getDatum()
 //                        .toLocalDate()
@@ -85,13 +82,24 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
 //                        .getDisplayName(TextStyle.FULL, Locale.GERMANY) + " " + i.getDatum().getYear(),
 //                Collectors.averagingDouble(x -> x.getZahlung().getPreis().doubleValue())));
 
-        Map<String, Double> map = super.getAll().stream().collect(Collectors.groupingBy(i -> i.getDatum()
-                        .toLocalDate()
-                        .getMonth()
-                        .getDisplayName(TextStyle.FULL, Locale.GERMANY) + " " + i.getDatum().getYear(),
-                Collectors.summingDouble(x -> x.getZahlung().getPreis().doubleValue())));
+//        Map<String, Double> map = super.getAll().stream()
+//                .collect(Collectors.groupingBy(i -> i.getDatum()
+//                                .toLocalDate()
+//                                .getMonth()
+//                                .getDisplayName(TextStyle.FULL, Locale.GERMANY) + " " + i.getDatum().getYear(),
+//                        Collectors.summingDouble(x -> x.getZahlung().getPreis().doubleValue())));
+
+        Map<Integer, Double> map = super.getAll().stream()
+                .collect(Collectors.groupingBy(i -> i.getDatum()
+                                .toLocalDate()
+                                .getMonth().getValue(),
+                        Collectors.summingDouble(x -> x.getZahlung().getPreis().doubleValue())));
+
+
 
         map.forEach((k, v) -> System.out.println("Sum for " + k + " are " + BigDecimal.valueOf(v).setScale(2, RoundingMode.CEILING)));
+
+        return map;
     }
 
 }
