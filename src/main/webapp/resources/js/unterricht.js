@@ -8,6 +8,8 @@ var calendar = null;
 
 $(function () {
 
+    var dt = new Date($.now());
+    var zt = dt.getHours()+":"+dt.getMinutes();
 
 
     calendar = $('#calendar').fullCalendar({
@@ -21,9 +23,12 @@ $(function () {
             getZahlung();
             $(this).on("click", function () {
                 myModal.modal('toggle');
+
                 myModal.on('hidden.bs.modal', function () {
                     $(this).find('form')[0].reset();
-                })
+                    $('#zeit').val(zt);
+
+                });
 
             });
         },
@@ -112,15 +117,14 @@ $(function () {
     });
 
     $(function () {
-        $('#timepicker').timepicker({
+        $('#zeit').timepicker({
             format: 'HH:MM',
             modal: false,
             header: false,
             footer: false,
-            value: '00:00',
+            value: zt,
             mode: '24hr',
             uiLibrary: 'bootstrap4'
-            // locale: 'ru-ru'
         });
     });
 });

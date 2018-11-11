@@ -19,8 +19,5 @@ public class UnterrichtTo implements Serializable {
     private LocalDateTime end;
     private String notiz;
     private String color;
-//    private String description;
-//    private String url;
-
 
 }

@@ -12,8 +12,10 @@ public class RequestUnterrichtTo {
     private Integer id;
     private String datum;
     private String zeit;
-    private int kind;
-    private int zahlung;
+    private Integer kind;
+    private Integer zahlung;
     private boolean bezahlt;
     private String notiz;
+
+
 }

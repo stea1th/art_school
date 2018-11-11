@@ -43,9 +43,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="timepicker" class="col-4 col-form-label">Время</label>
+                        <label for="zeit" class="col-4 col-form-label">Время</label>
                         <div class="col-8">
-                            <input id="timepicker" name="timepicker" required/>
+                            <input id="zeit" name="zeit" required/>
                         </div>
                     </div>
                     <div class="form-group row">
