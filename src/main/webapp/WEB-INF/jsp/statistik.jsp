@@ -8,11 +8,10 @@
 <script type="text/javascript" src='<c:url value="/resources/js/statistik.js"/>' defer></script>
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>
-<br/>
 <h1 align="center">Statistik</h1>
-<div align="center">
-    <input type="button" value="Test" id="test-btn"/>
-</div>
+<%--<div align="center">--%>
+    <%--<input type="button" value="Test" id="test-btn"/>--%>
+<%--</div>--%>
 <div class="container">
     <div class="row">
         <div class="col-md-10 ml-auto mr-auto">

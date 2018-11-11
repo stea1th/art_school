@@ -1,12 +1,12 @@
 var ajaxUnterricht = "unterricht";
 
 $(function(){
-    $('#test-btn').on('click', function(){
+    // $('#test-btn').on('click', function(){
         $.get(ajaxUnterricht+"/test")
             .done(function(data){
                 createChart(data);
             });
-    });
+    // });
 
 
 });
