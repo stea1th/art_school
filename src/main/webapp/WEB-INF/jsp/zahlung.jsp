@@ -5,8 +5,11 @@
 <jsp:include page="fragments/headTag.jsp"/>
 
 <body>
+<link rel='stylesheet' href='resources/css/nouislider.css'/>
 <script type="text/javascript" src='<c:url value="/resources/js/zahlung.js"/>' defer></script>
 <script type="text/javascript" src='<c:url value="/resources/js/common.js"/>' defer></script>
+<script type="text/javascript" src='<c:url value="resources/js/slider/nouislider.min.js"/>' defer></script>
+<script type="text/javascript" src='<c:url value="resources/js/slider/range_slider.js"/>' defer></script>
 
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>
@@ -66,11 +69,45 @@
                             <input type="text" id="name" name="name" class="form-control" required="required"/>
                         </div>
                     </div>
+                    <%--<div class="form-group row">--%>
+
+                    <div class="example">
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">Цена</label>
+                            <div class="col-8">
+                                <div class="slider noUi-target noUi-ltr noUi-horizontal" id="slider1">
+                                </div>
+                                <span><i class="fas fa-euro-sign"></i> </span>
+                                <span class="example-val" id="slider1-span"></span>
+                                <input type="hidden" id="preis" name="preis"/>
+                            </div>
+                            <label class="col-4 col-form-label">Время</label>
+                            <div class="col-8">
+                                <div class="slider noUi-target noUi-ltr noUi-horizontal" id="slider2">
+                                </div>
+                                <span><i class="far fa-clock"></i> </span>
+                                <span class="example-val" id="slider2-span"></span>
+                                <input type="hidden" id="dauer" name="dauer"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4">Активный?</label>
+                        <div class="col-8">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="aktiv" name="aktiv"
+                                       checked="checked"
+                                       value="true" required>
+                                <label class="custom-control-label" for="aktiv">Да</label>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save changes</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="lockbutton" class="btn btn-outline-info btn-sm">Заблокировать</button>
+                <button type="button" class="btn btn-primary" id="saveZahlung">Сохранить</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
             </div>
         </div>
     </div>

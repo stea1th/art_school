@@ -1,5 +1,6 @@
 package art.school.entity;
 
+import art.school.to.ZahlungTo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -50,5 +51,9 @@ public class Zahlung extends AbstractBaseEntity{
 
     public Zahlung(@NotBlank String name, @NotNull BigDecimal preis, @NotNull LocalTime dauer, boolean aktiv) {
         this(null, name, preis, dauer, aktiv);
+    }
+
+    public Zahlung(ZahlungTo z){
+        this(z.getId(), z.getName(), z.getPreis(), LocalTime.ofSecondOfDay(Long.valueOf(z.getDauer().split("\\.")[0]) * 60) , z.isAktiv());
     }
 }

@@ -1,8 +1,8 @@
-var ajaxUnterricht = "unterricht";
+var ajaxStatistik = "statistik";
 
 $(function(){
     // $('#test-btn').on('click', function(){
-        $.get(ajaxUnterricht+"/test")
+        $.get(ajaxStatistik+"/test")
             .done(function(data){
                 createChart(data);
             });

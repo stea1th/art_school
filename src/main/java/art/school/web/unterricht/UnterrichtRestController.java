@@ -69,37 +69,6 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = "/test", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Map<Integer, Double> testStatistik() {
-//        super.getAll()
-//                .forEach(i -> System.out.println(i.getDatum()
-//                        .toLocalDate()
-//                        .getMonth()
-//                        .getDisplayName(TextStyle.FULL, Locale.GERMANY) + " " + i.getDatum().getYear()));
-//        Map<String, Double> map = super.getAll().stream().collect(Collectors.groupingBy(i -> i.getDatum()
-//                        .toLocalDate()
-//                        .getMonth()
-//                        .getDisplayName(TextStyle.FULL, Locale.GERMANY) + " " + i.getDatum().getYear(),
-//                Collectors.averagingDouble(x -> x.getZahlung().getPreis().doubleValue())));
 
-//        Map<String, Double> map = super.getAll().stream()
-//                .collect(Collectors.groupingBy(i -> i.getDatum()
-//                                .toLocalDate()
-//                                .getMonth()
-//                                .getDisplayName(TextStyle.FULL, Locale.GERMANY) + " " + i.getDatum().getYear(),
-//                        Collectors.summingDouble(x -> x.getZahlung().getPreis().doubleValue())));
-
-        Map<Integer, Double> map = super.getAll().stream()
-                .collect(Collectors.groupingBy(i -> i.getDatum()
-                                .toLocalDate()
-                                .getMonth().getValue(),
-                        Collectors.summingDouble(x -> x.getZahlung().getPreis().doubleValue())));
-
-
-
-        map.forEach((k, v) -> System.out.println("Sum for " + k + " are " + BigDecimal.valueOf(v).setScale(2, RoundingMode.CEILING)));
-
-        return map;
-    }
 
 }

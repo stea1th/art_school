@@ -22,7 +22,14 @@ $(function () {
         "columns": [
             {"data": "id"},
             {"data": "name"},
-            {"data": "preis"},
+            {"data": "preis",
+            "render": function(data,type,row){
+                if(type==='display'){
+                    return "<span><i class='fas fa-euro-sign'></i></span> " + data;
+                }
+                return data;
+            }
+            },
             {"data": "dauer"},
             {
                 "data": "aktiv",
@@ -59,7 +66,24 @@ $(function () {
             }
         ]
     });
+
+    $('#saveZahlung').on('click', function(){
+        // console.log(document.getElementById('slider2'));
+        // console.log($('#slider1').find('div[aria-valuetext]').attr('aria-valuenow'));
+        // console.log($('#slider2').find('div[aria-valuetext]').attr('aria-valuenow'));
+        // console.log($('#name').val());
+
+        $.post(ajaxUrl+"/save", $('#zahlung-detailsForm').serialize())
+            .done(function(){
+                var myModal = $('#createZahlung');
+                myModal.modal('toggle');
+                location.reload();
+            });
+    });
+
+
 });
+
 
 
 
