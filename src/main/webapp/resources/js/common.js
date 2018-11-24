@@ -3,13 +3,13 @@ var ajaxUrl;
 
 function renderEditBtn(data, type, row) {
     if (type === "display") {
-        return "<a onclick='#'><i class='far fa-edit'></i></a>";
+        return "<a onclick='#'><i class='far fa-edit orange-icon'></i></a>";
     }
 }
 
 function renderDeleteBtn(data, type, row) {
     if (type === "display") {
-        return "<a onclick='deleteRow(" + row.id + ");'><i class='far fa-calendar-times'></i></a>";
+        return "<a onclick='deleteRow(" + row.id + ");'><i class='far fa-calendar-times red-icon'></i></a>";
     }
 }
 

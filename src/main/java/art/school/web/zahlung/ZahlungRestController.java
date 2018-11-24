@@ -36,7 +36,7 @@ public class ZahlungRestController extends AbstractZahlungController {
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity<String> saveOrUpdate(ZahlungTo z){
-        zahlungService.create(new Zahlung(z));
+        super.create(new Zahlung(z));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

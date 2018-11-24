@@ -50,12 +50,24 @@ $(function () {
             {
                 text: 'Добавить ученика',
                 action: function ( e, dt, node, config ) {
-                    alert( 'Button activated' );
+                    var modalName = $('#createKind');
+                    showModal(modalName);
                 }
             }
         ]
 
 
+    });
+
+    $('#saveKind').on('click', function(){
+        // console.log($('#slider1').find('div[aria-valuetext]').attr('aria-valuenow'));
+        // console.log($('#slider2').find('div[aria-valuetext]').attr('aria-valuenow'));
+        $.post(ajaxUrl+"/save", $('#kind-detailsForm').serialize())
+            .done(function(){
+                var myModal = $('#createKind');
+                myModal.modal('toggle');
+                datatable.ajax.reload();
+            });
     });
 });
 

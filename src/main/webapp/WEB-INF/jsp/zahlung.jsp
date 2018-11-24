@@ -47,7 +47,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="createZahlung" tabindex="-1" role="dialog" aria-labelledby="createUnterricht"
+<div class="modal fade" id="createZahlung" tabindex="-1" role="dialog" aria-labelledby="createZahlung"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

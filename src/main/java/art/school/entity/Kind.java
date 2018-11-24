@@ -1,5 +1,6 @@
 package art.school.entity;
 
+import art.school.to.KindTo;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -52,5 +53,9 @@ public class Kind extends AbstractBaseEntity{
 
     public Kind(@NotBlank @Size(max = 50) String name, @NotBlank @Size(min = 3, max = 50) String adresse) {
         this(null, name, adresse, true, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+    }
+
+    public Kind(KindTo k){
+        this(null, k.getName(), k.getAdresse(), k.isAktiv(), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
     }
 }

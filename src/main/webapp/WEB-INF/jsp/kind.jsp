@@ -43,6 +43,56 @@
     </div>
 </div>
 
+<div class="modal fade" id="createKind" tabindex="-1" role="dialog" aria-labelledby="createKind"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Добавить ученика</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="kind-detailsForm">
+                    <div>
+                        <input type="hidden" class="form-control" id="id" name="id">
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-4 col-form-label">Имя</label>
+                        <div class="col-8">
+                            <input type="text" id="name" name="name" class="form-control" required="required"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="name" class="col-4 col-form-label">Адрес</label>
+                        <div class="col-8">
+                            <input type="text" id="adresse" name="adresse" class="form-control" required="required"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-4">Активный?</label>
+                        <div class="col-8">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="aktiv" name="aktiv"
+                                       checked="checked"
+                                       value="true" required>
+                                <label class="custom-control-label" for="aktiv">Да</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="saveKind">Сохранить</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

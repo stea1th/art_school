@@ -24,4 +24,12 @@ body {
     background-color: #e7e5e5;
 }
 
+.red-icon:hover {
+    color: red; !important;
+}
+
+.orange-icon:hover {
+    color: orange; !important;
+}
+
 

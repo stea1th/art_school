@@ -74,7 +74,7 @@ $(function () {
             .done(function(){
                 var myModal = $('#createZahlung');
                 myModal.modal('toggle');
-                location.reload();
+                datatable.ajax.reload();
             });
     });
 });

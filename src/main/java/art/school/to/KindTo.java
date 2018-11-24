@@ -13,7 +13,7 @@ import java.time.temporal.ChronoUnit;
 @NoArgsConstructor
 public class KindTo implements Serializable {
 
-    private int id;
+    private Integer id;
     private String name;
     private String adresse;
     private boolean aktiv;
@@ -24,5 +24,9 @@ public class KindTo implements Serializable {
                 i.getName(), i.getAdresse(), i.isAktiv(),
                 i.getRegistriert().truncatedTo(ChronoUnit.SECONDS)
                         .toString().replace("T", " "));
+    }
+
+    public KindTo(String name, String adresse, boolean aktiv){
+        this(null, name, adresse, aktiv, null);
     }
 }

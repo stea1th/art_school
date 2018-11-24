@@ -1,5 +1,6 @@
 package art.school.web.kind;
 
+import art.school.entity.Kind;
 import art.school.to.KindTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -40,5 +41,12 @@ public class KindRestController extends AbstractKindController {
                 .stream()
                 .filter(KindTo::isAktiv)
                 .collect(Collectors.toList());
+    }
+
+    @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public ResponseEntity<String> saveOrUpdate(KindTo z){
+        super.create(new Kind(z));
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
