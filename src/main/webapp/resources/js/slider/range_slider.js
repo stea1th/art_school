@@ -3,7 +3,7 @@ $(function () {
 
     var lockedState = false;
     var lockedSlider = false;
-    // var lockedValues = [60, 80];
+    var lockedValues = [60, 80];
 
     var slider1 = document.getElementById('slider1');
     var slider2 = document.getElementById('slider2');

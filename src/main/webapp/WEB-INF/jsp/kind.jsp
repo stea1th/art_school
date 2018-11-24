@@ -5,7 +5,6 @@
 <jsp:include page="fragments/headTag.jsp"/>
 
 <body>
-<script type="text/javascript" src='<c:url value="/resources/js/common.js"/>' defer></script>
 <script type="text/javascript" src='<c:url value="/resources/js/kind.js"/>' defer></script>
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>

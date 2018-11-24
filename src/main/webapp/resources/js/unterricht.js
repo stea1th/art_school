@@ -85,7 +85,7 @@ $(function () {
             $(".popover").remove();
         },
         eventSources: [{
-            url: 'http://localhost:8080/unterricht'
+            url: ajaxUnterricht
         }],
         timeFormat: 'HH:mm',
         timezone: 'local',

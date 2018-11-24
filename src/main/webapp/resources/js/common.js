@@ -1,4 +1,3 @@
-
 var ajaxUrl;
 
 
@@ -15,9 +14,12 @@ function renderDeleteBtn(data, type, row) {
 }
 
 function deleteRow(id){
-    $.delete(ajaxUrl +"/"+ id).done(function() {
+    $.ajax({
+        url: ajaxUrl +"/"+ id,
+        type: 'DELETE'
+    }).done(function(){
         datatable.ajax.reload();
-    });
+    })
 }
 
 function toggleThis(id){

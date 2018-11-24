@@ -7,9 +7,8 @@
 <body>
 <link rel='stylesheet' href='resources/css/nouislider.css'/>
 <script type="text/javascript" src='<c:url value="/resources/js/zahlung.js"/>' defer></script>
-<script type="text/javascript" src='<c:url value="/resources/js/common.js"/>' defer></script>
-<script type="text/javascript" src='<c:url value="resources/js/slider/nouislider.min.js"/>' defer></script>
-<script type="text/javascript" src='<c:url value="resources/js/slider/range_slider.js"/>' defer></script>
+<script type="text/javascript" src='<c:url value="/resources/js/slider/nouislider.min.js"/>' defer></script>
+<script type="text/javascript" src='<c:url value="/resources/js/slider/range_slider.js"/>' defer></script>
 
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>

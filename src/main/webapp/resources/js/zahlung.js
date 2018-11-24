@@ -68,11 +68,8 @@ $(function () {
     });
 
     $('#saveZahlung').on('click', function(){
-        // console.log(document.getElementById('slider2'));
         // console.log($('#slider1').find('div[aria-valuetext]').attr('aria-valuenow'));
         // console.log($('#slider2').find('div[aria-valuetext]').attr('aria-valuenow'));
-        // console.log($('#name').val());
-
         $.post(ajaxUrl+"/save", $('#zahlung-detailsForm').serialize())
             .done(function(){
                 var myModal = $('#createZahlung');
@@ -80,8 +77,6 @@ $(function () {
                 location.reload();
             });
     });
-
-
 });
 
 
