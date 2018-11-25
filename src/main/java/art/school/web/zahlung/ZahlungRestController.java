@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.temporal.ChronoField;
 import java.util.List;
 
 import static art.school.util.TransformUtil.transformTo;
@@ -35,14 +36,27 @@ public class ZahlungRestController extends AbstractZahlungController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ResponseEntity<String> saveOrUpdate(ZahlungTo z){
-        super.create(new Zahlung(z));
+    public ResponseEntity<String> saveOrUpdate(ZahlungTo z) {
+        Zahlung zahlung = new Zahlung(z);
+        if (zahlung.isNew()) {
+            super.create(zahlung);
+        } else {
+            super.update(zahlung, zahlung.getId());
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") int id){
+    public void delete(@PathVariable("id") int id) {
         super.delete(id);
+    }
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ZahlungTo getZahlung(@PathVariable("id") int id) {
+        Zahlung z = super.get(id);
+        return new ZahlungTo(z.getId(), z.getName(), z.getPreis(),
+                String.valueOf(z.getDauer().get(ChronoField.MINUTE_OF_DAY)), z.isAktiv());
+
     }
 }

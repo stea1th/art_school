@@ -66,19 +66,17 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="name" class="col-4 col-form-label">Адрес</label>
+                        <label for="adresse" class="col-4 col-form-label">Адрес</label>
                         <div class="col-8">
                             <input type="text" id="adresse" name="adresse" class="form-control" required="required"/>
                         </div>
                     </div>
-
-                    <div class="form-group row">
+                    <div class="form-group row" id="aktiv-checkbox">
                         <label class="col-4">Активный?</label>
                         <div class="col-8">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="aktiv" name="aktiv"
-                                       checked="checked"
-                                       value="true" required>
+                                       checked="checked" required>
                                 <label class="custom-control-label" for="aktiv">Да</label>
                             </div>
                         </div>

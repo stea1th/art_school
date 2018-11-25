@@ -1,16 +1,18 @@
+var lockedState = false;
+var lockedSlider = false;
+var lockedValues = [60, 80];
+
+var slider1 = document.getElementById('slider1');
+var slider2 = document.getElementById('slider2');
+
+var lockButton = document.getElementById('lockbutton');
+var slider1Value = document.getElementById('slider1-span');
+var slider2Value = document.getElementById('slider2-span');
+
 $(function () {
 
 
-    var lockedState = false;
-    var lockedSlider = false;
-    var lockedValues = [60, 80];
 
-    var slider1 = document.getElementById('slider1');
-    var slider2 = document.getElementById('slider2');
-
-    var lockButton = document.getElementById('lockbutton');
-    var slider1Value = document.getElementById('slider1-span');
-    var slider2Value = document.getElementById('slider2-span');
 
 // When the button is clicked, the locked state is inverted.
     lockButton.addEventListener('click', function (e) {
@@ -43,6 +45,8 @@ $(function () {
     });
 
     slider1.noUiSlider.on('update', function (values, handle) {
+        // console.log(handle);
+        // console.log(values);
         var result = values[handle];
         $('#preis').val(result);
         slider1Value.innerHTML = result;
@@ -98,4 +102,23 @@ $(function () {
         slider.noUiSlider.set(value);
     }
 
+
+
 });
+
+function setPreis(value){
+        var result = value;
+        $('#preis').val(result);
+        slider1Value.innerHTML = result;
+}
+
+function setZeit(value){
+    var hour = 60;
+    var result = value;
+    $('#dauer').val(result);
+    if (result >= hour) {
+        slider2Value.innerHTML = Math.floor(result / hour) + (result < hour * 2 ? " час " : " часа ") + (result - Math.floor(result / hour) * hour) + " минут";
+    } else {
+        slider2Value.innerHTML = Math.floor(result) + " минут";
+    }
+}

@@ -56,6 +56,7 @@ public class Kind extends AbstractBaseEntity{
     }
 
     public Kind(KindTo k){
-        this(null, k.getName(), k.getAdresse(), k.isAktiv(), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        this(k.getId(), k.getName(), k.getAdresse(), k.isAktiv(), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
     }
+
 }

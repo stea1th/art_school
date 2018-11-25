@@ -1,4 +1,5 @@
 var ajaxUrl = "kind";
+var myModal = $('#createKind');
 var datatable;
 
 $(function () {
@@ -26,7 +27,7 @@ $(function () {
             {"data": "aktiv",
                 "render": function (data, type, row) {
                     if (type === "display") {
-                        return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='toggleThis(" + row.id + ")' style=''/>";
+                        return "<input type='checkbox' " + (data? "checked" : "") + " onclick='toggleThis(" + row.id + ")' style=''/>";
                     }
                     return data;
                 },
@@ -50,8 +51,7 @@ $(function () {
             {
                 text: 'Добавить ученика',
                 action: function ( e, dt, node, config ) {
-                    var modalName = $('#createKind');
-                    showModal(modalName);
+                    showModal(myModal);
                 }
             }
         ]
@@ -60,11 +60,8 @@ $(function () {
     });
 
     $('#saveKind').on('click', function(){
-        // console.log($('#slider1').find('div[aria-valuetext]').attr('aria-valuenow'));
-        // console.log($('#slider2').find('div[aria-valuetext]').attr('aria-valuenow'));
         $.post(ajaxUrl+"/save", $('#kind-detailsForm').serialize())
             .done(function(){
-                var myModal = $('#createKind');
                 myModal.modal('toggle');
                 datatable.ajax.reload();
             });

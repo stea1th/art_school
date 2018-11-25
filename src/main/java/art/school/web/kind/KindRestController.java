@@ -28,6 +28,11 @@ public class KindRestController extends AbstractKindController {
         super.delete(id);
     }
 
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public KindTo getKind(@PathVariable("id") int id){
+        return new KindTo(super.get(id));
+    }
+
     @PostMapping(value="/toggle/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity<String> toggle(@PathVariable("id") int id){
@@ -46,7 +51,12 @@ public class KindRestController extends AbstractKindController {
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity<String> saveOrUpdate(KindTo z){
-        super.create(new Kind(z));
+        Kind kind = new Kind(z);
+        if (kind.isNew()) {
+            super.create(kind);
+        } else {
+            super.update(kind, kind.getId());
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

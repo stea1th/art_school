@@ -32,4 +32,16 @@ body {
     color: orange; !important;
 }
 
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background-color: white; !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background-color: white; !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:focus {
+    background-color: white; !important;
+}
+
 

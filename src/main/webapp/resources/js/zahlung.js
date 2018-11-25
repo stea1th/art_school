@@ -1,4 +1,5 @@
 var ajaxUrl = "zahlung";
+var myModal = $('#createZahlung');
 var datatable;
 
 $(function () {
@@ -16,7 +17,7 @@ $(function () {
             {
                 "targets": [0],
                 "visible": false,
-                "searchable": false,
+                "searchable": false
             }
         ],
         "columns": [
@@ -54,30 +55,34 @@ $(function () {
             }
         ],
         responsive: true,
+        // sPaginationType: "scrolling",
+        // pagingType: "numbers",
         dom: 'Bfrtip',
         buttons: [
             {
                 name: 'primary',
                 text: 'Добавить способ оплаты',
                 action: function (e, dt, node, config) {
-                    var modalName = $('#createZahlung');
-                    showModal(modalName);
+                    showModal(myModal);
                 }
             }
         ]
     });
 
     $('#saveZahlung').on('click', function(){
-        // console.log($('#slider1').find('div[aria-valuetext]').attr('aria-valuenow'));
+        // console.log($('#slider1').find('div[aria-valuetext]'));
         // console.log($('#slider2').find('div[aria-valuetext]').attr('aria-valuenow'));
         $.post(ajaxUrl+"/save", $('#zahlung-detailsForm').serialize())
             .done(function(){
-                var myModal = $('#createZahlung');
+                // var myModal = $('#createZahlung');
                 myModal.modal('toggle');
                 datatable.ajax.reload();
             });
     });
+
 });
+
+
 
 
 

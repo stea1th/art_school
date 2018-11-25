@@ -6,9 +6,10 @@
 
 <body>
 <link rel='stylesheet' href='resources/css/nouislider.css'/>
-<script type="text/javascript" src='<c:url value="/resources/js/zahlung.js"/>' defer></script>
+
 <script type="text/javascript" src='<c:url value="/resources/js/slider/nouislider.min.js"/>' defer></script>
 <script type="text/javascript" src='<c:url value="/resources/js/slider/range_slider.js"/>' defer></script>
+<script type="text/javascript" src='<c:url value="/resources/js/zahlung.js"/>' defer></script>
 
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>
@@ -90,10 +91,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" id="aktiv-checkbox">
                         <label class="col-4">Активный?</label>
                         <div class="col-8">
-                            <div class="custom-control custom-checkbox">
+                            <div class="custom-control custom-checkbox" >
                                 <input type="checkbox" class="custom-control-input" id="aktiv" name="aktiv"
                                        checked="checked"
                                        value="true" required>
