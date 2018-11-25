@@ -16,6 +16,7 @@
     <link rel='stylesheet' href='webjars/datatables/1.10.19/css/jquery.dataTables.min.css' />
     <link rel='stylesheet' href='https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css' />
     <link rel='stylesheet' href='webjars/datatables-buttons/1.5.2/css/buttons.bootstrap4.min.css' />
+    <link rel='stylesheet' href='webjars/noty/3.1.4/lib/noty.css' />
 
 
 
@@ -35,6 +36,7 @@
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="webjars/noty/3.1.4/lib/noty.min.js"></script>
 
 
     <script type="text/javascript" src='webjars/moment/2.22.2/min/moment.min.js' ></script>

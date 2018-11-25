@@ -46,9 +46,40 @@ function toggleThis(id) {
 }
 
 function showModal(modalName) {
+
     modalName.modal('show');
     $('#aktiv-checkbox').show();
     modalName.on('hidden.bs.modal', function () {
         $(this).find('form')[0].reset();
-    })
+        $("#id").val("");
+    });
+
+}
+
+function succesNoty(text){
+    new Noty({
+        type: 'success',
+        text: "<span><i class='far fa-check-circle '></i></span> &nbsp;" + text,
+        theme: 'bootstrap-v4',
+        layout: 'bottomRight',
+        // timeout: 1500
+        // animation: {
+        //     open : 'animated fadeInRight',
+        //     close: 'animated fadeOutRight'
+        // }
+    }).show();
+}
+
+function failNoty(text){
+    new Noty({
+        type: 'error',
+        text: "<span><i class='far fa-times-circle'></i></span> &nbsp;" + text,
+        theme: 'bootstrap-v4',
+        layout: 'bottomRight'
+        // timeout: 1500
+        // animation: {
+        //     open : 'animated fadeInRight',
+        //     close: 'animated fadeOutRight'
+        // }
+    }).show();
 }

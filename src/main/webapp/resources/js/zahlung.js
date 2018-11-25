@@ -23,13 +23,14 @@ $(function () {
         "columns": [
             {"data": "id"},
             {"data": "name"},
-            {"data": "preis",
-            "render": function(data,type,row){
-                if(type==='display'){
-                    return "<span><i class='fas fa-euro-sign'></i></span> " + data;
+            {
+                "data": "preis",
+                "render": function (data, type, row) {
+                    if (type === 'display') {
+                        return "<span><i class='fas fa-euro-sign'></i></span> " + data;
+                    }
+                    return data;
                 }
-                return data;
-            }
             },
             {"data": "dauer"},
             {
@@ -69,14 +70,27 @@ $(function () {
         ]
     });
 
-    $('#saveZahlung').on('click', function(){
-        // console.log($('#slider1').find('div[aria-valuetext]'));
-        // console.log($('#slider2').find('div[aria-valuetext]').attr('aria-valuenow'));
-        $.post(ajaxUrl+"/save", $('#zahlung-detailsForm').serialize())
-            .done(function(){
-                // var myModal = $('#createZahlung');
+    $('#saveZahlung').on('click', function () {
+        $.post(ajaxUrl + "/save", $('#zahlung-detailsForm').serialize())
+            .done(function (data) {
                 myModal.modal('toggle');
+                $.each(data, function (k, v) {
+                    if(k==='Save'){
+                        succesNoty('Объект "'+v+'"' + " удачно сохранен");
+                    } else {
+                        succesNoty('Объект "'+v+'"' + " удачно обновлен");
+                    }
+                });
                 datatable.ajax.reload();
+            })
+            .fail(function (jqXHR, textStatus) {
+                // var errorInfo = JSON.parse(jqXHR.responseText);
+                // console.log(jqXHR);
+                // console.log(textStatus);
+                if(jqXHR.status === 422){
+                    failNoty('Ошибка ' + jqXHR.status + ':\n Цена и Время не должны повторяться');
+                }
+
             });
     });
 

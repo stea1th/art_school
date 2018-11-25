@@ -5,10 +5,13 @@ import art.school.to.ZahlungTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.temporal.ChronoField;
-import java.util.List;
+import java.util.*;
 
 import static art.school.util.TransformUtil.transformTo;
 import static art.school.util.TransformUtil.transformToFilterAktiv;
@@ -36,14 +39,28 @@ public class ZahlungRestController extends AbstractZahlungController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ResponseEntity<String> saveOrUpdate(ZahlungTo z) {
+    @SuppressWarnings("unchecked")
+    public ResponseEntity saveOrUpdate(ZahlungTo z, BindingResult result) {
+//        if(result.hasErrors()){
+//            result.getFieldErrors().forEach(System.out::println);
+//        }
+
+        MultiValueMap<String, String> response = new LinkedMultiValueMap<>();
         Zahlung zahlung = new Zahlung(z);
-        if (zahlung.isNew()) {
-            super.create(zahlung);
-        } else {
-            super.update(zahlung, zahlung.getId());
+        String message = null;
+        try {
+            if (zahlung.isNew()) {
+                super.create(zahlung);
+                message = "Save";
+            } else {
+                super.update(zahlung, zahlung.getId());
+                message = "Update";
+            }
+        }catch(Exception e){
+            return new ResponseEntity(e.getLocalizedMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        response.add(message, z.getName());
+        return new ResponseEntity(response.toSingleValueMap(), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
