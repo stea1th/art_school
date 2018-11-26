@@ -4,6 +4,7 @@ $(function(){
     // $('#test-btn').on('click', function(){
         $.get(ajaxStatistik+"/test")
             .done(function(data){
+                console.log(data);
                 createChart(data);
             });
     // });
@@ -16,17 +17,13 @@ function createChart(data) {
     var labels = Array();
     var thisData = Array();
      $.each(data, function (key, value) {
-        labels.push(key);
-        thisData.push(value);
+         // console.log(value[0].monat);
+         labels.push(value[0].monat);
+         thisData.push(value[0].sum);
     });
 
-     // console.log(labels);
-
-
-
-    // console.log(labels);
     new Chart($('#myChart'), {
-        type: 'line',
+        type: 'bar',
         data: {
             labels: labels,
             datasets: [{
@@ -34,6 +31,8 @@ function createChart(data) {
                 data: thisData
             }]
         },
-        options: {}
+        options: {
+            // onClick :
+        }
     })
 }

@@ -41,6 +41,7 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
     public ResponseEntity<String> create(RequestUnterrichtTo unterrichtTo) {
         Unterricht u = new Unterricht(LocalDateTime.of(LocalDate.parse(unterrichtTo.getDatum()),
                 LocalTime.parse(unterrichtTo.getZeit())), unterrichtTo.isBezahlt(), unterrichtTo.getNotiz());
+        System.out.println(u);
         super.create(u, unterrichtTo.getKind(), unterrichtTo.getZahlung());
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -52,6 +53,8 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
                 i.getDatum().minusMonths(1).truncatedTo(ChronoUnit.SECONDS),
                 i.getDatum().minusMonths(1).truncatedTo(ChronoUnit.SECONDS).plusMinutes(i.getZahlung().getDauer().getLong(ChronoField.MINUTE_OF_DAY)), i.getNotiz(),
                 !i.getKind().isAktiv() ? "grey" : i.isBezahlt() ? "green" : "red")));
+
+        list.forEach(System.out::println);
 
         return list;
     }
