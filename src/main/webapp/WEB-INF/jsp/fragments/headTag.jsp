@@ -12,6 +12,7 @@
     <link rel='stylesheet' href='resources/css/style.css' />
 
     <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
     <link rel='stylesheet' href='webjars/datatables/1.10.19/css/jquery.dataTables.min.css' />
     <link rel='stylesheet' href='https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css' />

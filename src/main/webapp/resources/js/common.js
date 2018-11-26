@@ -9,7 +9,7 @@ function renderEditBtn(data, type, row) {
 
 function renderDeleteBtn(data, type, row) {
     if (type === "display") {
-        return "<a onclick='deleteRow(" + row.id + ");'><i class='far fa-calendar-times red-icon'></i></a>";
+        return "<a onclick='warnNoty(" + row.id + ");'><i class='far fa-calendar-times red-icon'></i></a>";
     }
 }
 
@@ -61,12 +61,12 @@ function succesNoty(text){
         type: 'success',
         text: "<span><i class='far fa-check-circle '></i></span> &nbsp;" + text,
         theme: 'bootstrap-v4',
-        layout: 'bottomRight',
+        layout: 'topCenter',
         // timeout: 1500
-        // animation: {
-        //     open : 'animated fadeInRight',
-        //     close: 'animated fadeOutRight'
-        // }
+        animation: {
+            open : 'animated jackInTheBox',
+            close: 'animated hinge'
+        }
     }).show();
 }
 
@@ -75,11 +75,33 @@ function failNoty(text){
         type: 'error',
         text: "<span><i class='far fa-times-circle'></i></span> &nbsp;" + text,
         theme: 'bootstrap-v4',
-        layout: 'bottomRight'
+        layout: 'topCenter',
         // timeout: 1500
-        // animation: {
-        //     open : 'animated fadeInRight',
-        //     close: 'animated fadeOutRight'
-        // }
+        animation: {
+            open : 'animated jackInTheBox',
+            close: 'animated hinge'
+        }
+
+    }).show();
+}
+
+function warnNoty(text) {
+    var n = new Noty({
+        type: 'warning',
+        text: "<span><i class='fas fa-exclamation-circle'></i></span> &nbsp;"
+         + "Вы уверены, что готовы удалить данный объект?",
+        theme: 'bootstrap-v4',
+        layout: 'center',
+        // timeout: 1500
+        animation: {
+            open : 'animated jackInTheBox',
+            close: 'animated hinge'
+        },
+        buttons: [
+            Noty.button('ДА', 'btn btn-success', function () {
+                deleteRow(text);
+                n.close();
+            }, {id: 'button1', 'data-status': 'ok'})
+        ]
     }).show();
 }
