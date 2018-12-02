@@ -42,21 +42,9 @@ function onClickSelectCategory(e) {
 }
 
 function createChart(data) {
-    var labels = Array();
-    var thisData = Array();
-    // myData = data;
     myData = $.map(data, function (n, i) {
         return [[n.childrens]];
     });
-    // console.log(myData);
-
-
-
-    // $.each(data, function (key, value) {
-    //     labels.push(value.name);
-    //     thisData.push(value.value);
-    //     // console.log(value.weeks);
-    // });
 
     barChart = new Chart($('#myChart'), {
         type: 'bar',
