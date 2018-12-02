@@ -54,11 +54,11 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
                 i.getDatum().truncatedTo(ChronoUnit.SECONDS).plusMinutes(i.getZahlung().getDauer().getLong(ChronoField.MINUTE_OF_DAY)).toString(), i.getNotiz(),
                 !i.getKind().isAktiv() ? "grey" : i.isBezahlt() ? "green" : "red")));
 
-        super.getAll().forEach(System.out::println);
-
-        System.out.println("<======================================>");
-
-        list.forEach(System.out::println);
+//        super.getAll().forEach(System.out::println);
+//
+//        System.out.println("<======================================>");
+//
+//        list.forEach(System.out::println);
 
         return list;
     }

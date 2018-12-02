@@ -3,9 +3,6 @@ var ajaxKind = "kind";
 var ajaxZahlung = "zahlung";
 var calendar = null;
 
-
-
-
 $(function () {
 
     var dt = new Date($.now());
