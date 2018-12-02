@@ -6,6 +6,7 @@ var myLabel;
 $(function () {
     $.get(ajaxStatistik + "/test")
         .done(function (data) {
+            console.log(data);
             createChart(data);
             console.log(barChart.data.datasets[0]);
         });
@@ -49,19 +50,20 @@ function createChart(data) {
     });
     // console.log(myData);
 
-    $.each(data, function (key, value) {
-        labels.push(value.name);
-        thisData.push(value.value);
-        // console.log(value.weeks);
-    });
+
+
+    // $.each(data, function (key, value) {
+    //     labels.push(value.name);
+    //     thisData.push(value.value);
+    //     // console.log(value.weeks);
+    // });
 
     barChart = new Chart($('#myChart'), {
         type: 'bar',
         data: {
-            labels: labels,
             datasets: [{
                 backgroundColor: 'rgba(255, 99, 132, 0.8)',
-                data: thisData,
+
                 label: 'Test Label'
             }]
         },
@@ -89,5 +91,12 @@ function createChart(data) {
                 display: true
             }
         }
-    })
+    });
+
+    $.map(data, function (d) {
+        console.log(d.name);
+        barChart.data.labels.push(d.name);
+        barChart.data.datasets[0].data.push(d.value);
+    });
+    barChart.update();
 }

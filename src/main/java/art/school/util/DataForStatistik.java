@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class DataForStatistik {
 
-    public static Map<Integer, MonthForStatistik> getResponse(List<Unterricht> unterrichts){
+    public static List<MonthForStatistik> getResponse(List<Unterricht> unterrichts){
 
         Map<Month, Double> map = unterrichts.stream()
                 .collect(Collectors.groupingBy(i -> i.getDatum()
@@ -25,12 +25,13 @@ public class DataForStatistik {
         List<MonthForStatistik> collect = map.entrySet()
                 .stream()
                 .map((e) -> new MonthForStatistik(e.getKey(), e.getValue(), getWeeks(unterrichts, e.getKey())))
+                .sorted(Comparator.comparing(i-> i.getName().getValue()))
                 .collect(Collectors.toList());
 
-        Map<Integer, MonthForStatistik> response = new LinkedHashMap<>();
-        collect.forEach(i-> response.put(i.getName().getValue(), i));
+//        Map<Integer, MonthForStatistik> response = new LinkedHashMap<>();
+//        collect.forEach(i-> response.put(i.getName().getValue(), i));
 
-        return response;
+        return collect;
     }
 
     private static List<WeeksForStatistik> getWeeks(List<Unterricht> unterrichts, Month monat){
@@ -40,7 +41,9 @@ public class DataForStatistik {
                                 .toLocalDate()
                         .get(WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear()),
                         Collectors.summingDouble(x -> x.getZahlung().getPreis().doubleValue())))
-        .entrySet().stream().map(e-> new WeeksForStatistik(e.getKey(), e.getValue())).sorted(Comparator.comparing(WeeksForStatistik::getName)).collect(Collectors.toList());
+        .entrySet().stream().map(e-> new WeeksForStatistik(e.getKey(), e.getValue()))
+                .sorted(Comparator.comparing(WeeksForStatistik::getName))
+                .collect(Collectors.toList());
 
 
 
