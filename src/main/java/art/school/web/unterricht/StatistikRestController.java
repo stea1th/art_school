@@ -34,7 +34,7 @@ public class StatistikRestController extends AbstractUnterrichtController {
                 .stream()
                 .map((e) -> new MonthForStatistik(e.getKey(), e.getValue()))
                 .collect(Collectors.toList());
-//        collect.sort();
+
         MultiValueMap<Integer, MonthForStatistik> response = new LinkedMultiValueMap<>();
         collect.forEach(i-> response.add(i.getMonat().getValue(), i));
 

@@ -50,9 +50,13 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
     public List<UnterrichtTo> all() {
         List<UnterrichtTo> list = new ArrayList<>();
         super.getAll().forEach(i -> list.add(new UnterrichtTo(i.getId(), i.getKind().getName(),
-                i.getDatum().minusMonths(1).truncatedTo(ChronoUnit.SECONDS),
-                i.getDatum().minusMonths(1).truncatedTo(ChronoUnit.SECONDS).plusMinutes(i.getZahlung().getDauer().getLong(ChronoField.MINUTE_OF_DAY)), i.getNotiz(),
+                i.getDatum().truncatedTo(ChronoUnit.SECONDS).toString(),
+                i.getDatum().truncatedTo(ChronoUnit.SECONDS).plusMinutes(i.getZahlung().getDauer().getLong(ChronoField.MINUTE_OF_DAY)).toString(), i.getNotiz(),
                 !i.getKind().isAktiv() ? "grey" : i.isBezahlt() ? "green" : "red")));
+
+        super.getAll().forEach(System.out::println);
+
+        System.out.println("<======================================>");
 
         list.forEach(System.out::println);
 
@@ -64,6 +68,7 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
     public ResponseEntity<String> updateOnDrop(
             @PathVariable("id") int id,
             @RequestParam(value = "date") String date) {
+        System.out.println(date);
         String[] dateParts = date.replace("T", " ").split(" ");
         Unterricht u = super.get(id);
         u.setDatum(LocalDateTime.of(LocalDate.parse(dateParts[0]), LocalTime.parse(dateParts[1])));

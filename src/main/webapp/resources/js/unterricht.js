@@ -41,7 +41,12 @@ $(function () {
         },
         firstDay: 1,
         eventClick: function(event){
-            alert(event.id)
+            alert(event.id);
+            // var date = new Date();
+            // var date = moment(, "DD-MM-YYYY");
+            // console.log($(event)[0].start._i);
+            // date.val($(event)[0].start._i);
+            // console.log(date.format());
         },
         // eventClick: function (event) {
         //     // alert(event.id +" "+event.notiz);
