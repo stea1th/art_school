@@ -4,13 +4,9 @@ import art.school.entity.Unterricht;
 import art.school.statik.MonthForStatistik;
 import art.school.statik.WeeksForStatistik;
 
-import java.time.LocalDate;
 import java.time.Month;
-import java.time.temporal.*;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.time.temporal.WeekFields;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class DataForStatistik {
@@ -44,7 +40,9 @@ public class DataForStatistik {
                                 .toLocalDate()
                         .get(WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear()),
                         Collectors.summingDouble(x -> x.getZahlung().getPreis().doubleValue())))
-        .entrySet().stream().map(e-> new WeeksForStatistik(e.getKey(), e.getValue())).collect(Collectors.toList());
+        .entrySet().stream().map(e-> new WeeksForStatistik(e.getKey(), e.getValue())).sorted(Comparator.comparing(WeeksForStatistik::getName)).collect(Collectors.toList());
+
+
 
 //        for(Unterricht u : unterrichts){
 //            LocalDate date = u.getDatum().toLocalDate();
