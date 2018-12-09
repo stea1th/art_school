@@ -1,6 +1,7 @@
 package art.school.util;
 
 import art.school.entity.Unterricht;
+import art.school.statik.DaysForStatistik;
 import art.school.statik.enums.Monat;
 import art.school.statik.MonthForStatistik;
 import art.school.statik.WeeksForStatistik;
@@ -50,15 +51,24 @@ public class DataForStatistik {
         return allWeeks;
     }
 
+    private static List<DaysForStatistik> getDays(List<Unterricht> unterrichts) {
+
+        return null;
+    }
+
 
     public static void test() {
         LocalDate d = LocalDate.now();
-        LocalDate first = LocalDate.of(d.getYear(), d.getMonth(), 1);
-        LocalDate last = LocalDate.of(d.getYear(), d.getMonth(), d.lengthOfMonth());
-//        System.out.println("DaysOfMonth -> "+d.lengthOfMonth());
-        System.out.println("FirstWeek -> " + first.get(WeekFields.ISO.weekOfYear()) + " LastWeek -> " + last.get(WeekFields.ISO.weekOfYear()));
-        DayOfWeek dayOfWeek = d.getDayOfWeek();
-        System.out.println("Montag -> " + d.with(DayOfWeek.MONDAY) + " Sonntag -> " + d.with(DayOfWeek.SUNDAY));
+
+        System.out.println(d.get(WeekFields.ISO.dayOfWeek()));
+
+
+//        LocalDate first = LocalDate.of(d.getYear(), d.getMonth(), 1);
+//        LocalDate last = LocalDate.of(d.getYear(), d.getMonth(), d.lengthOfMonth());
+////        System.out.println("DaysOfMonth -> "+d.lengthOfMonth());
+//        System.out.println("FirstWeek -> " + first.get(WeekFields.ISO.weekOfYear()) + " LastWeek -> " + last.get(WeekFields.ISO.weekOfYear()));
+//        DayOfWeek dayOfWeek = d.getDayOfWeek();
+//        System.out.println("Montag -> " + d.with(DayOfWeek.MONDAY) + " Sonntag -> " + d.with(DayOfWeek.SUNDAY));
 
 //        dayOfWeek.
 //        Arrays.stream(DayOfWeek.values()).forEach(i-> System.out.println(i.getDisplayName(TextStyle.FULL, Locale.GERMAN)));

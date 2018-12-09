@@ -12,7 +12,7 @@ public class WeeksForStatistik {
     private Integer nummer;
     private String name;
     private Double value;
-    private List<DaysForStatistik> days;
+    private List<DaysForStatistik> childrens;
 
     public WeeksForStatistik(Integer nummer, String name, Double value) {
         this.nummer = nummer;
