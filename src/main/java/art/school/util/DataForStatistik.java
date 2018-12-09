@@ -77,7 +77,7 @@ public class DataForStatistik {
 
     }
 
-    public static List<WeeksForStatistik> getAllWeeksForMonth(Month month) {
+    private static List<WeeksForStatistik> getAllWeeksForMonth(Month month) {
         List<WeeksForStatistik> allWeeks = new LinkedList<>();
         LocalDate first = LocalDate.of(2018, month, 1);
         LocalDate last = LocalDate.of(2018, month, month.length(first.isLeapYear()));

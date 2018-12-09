@@ -6,7 +6,7 @@ var calendar = null;
 $(function () {
 
     var dt = new Date($.now());
-    var zt = dt.getHours()+":"+dt.getMinutes();
+    var zt = dt.getHours()+":"+(dt.getMinutes()<10? '0' : '')+dt.getMinutes();
 
 
     calendar = $('#calendar').fullCalendar({

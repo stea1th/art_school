@@ -14,10 +14,4 @@ public class MonthForStatistik {
     private Month monat;
     private Double value;
     private List<WeeksForStatistik> childrens;
-
-    public MonthForStatistik(Month monat, Double value, List<WeeksForStatistik> childrens) {
-        this.monat = monat;
-        this.value = value;
-        this.childrens = childrens;
-    }
 }
