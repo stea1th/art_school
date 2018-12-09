@@ -7,6 +7,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class WeeksForStatistik {
 
-    private Integer name;
+    private Integer nummer;
+    private String name;
     private Double value;
+
+
 }

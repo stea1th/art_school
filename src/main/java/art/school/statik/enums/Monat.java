@@ -1,4 +1,4 @@
-package art.school.statik;
+package art.school.statik.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
