@@ -15,7 +15,8 @@
 
         <form-login login-page='/login'
                     default-target-url="/unterricht"
-                    authentication-failure-url="/login?error=true" />
+                    authentication-failure-url="/login?error=true"
+                    always-use-default-target="true"/>
         <logout logout-success-url="/login" />
         <csrf disabled="true"/>
     </http>
@@ -29,11 +30,12 @@
         </authentication-provider>
     </authentication-manager>
 
-    <beans:bean id="encoder"
-                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-    </beans:bean>
+    <!--<beans:bean id="encoder"-->
+                <!--class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">-->
+    <!--</beans:bean>-->
 
     <!--<beans:bean class="org.springframework.security.crypto.factory.PasswordEncoderFactories" id="encoder" factory-method="createDelegatingPasswordEncoder"/>-->
+    <beans:bean class="org.springframework.security.crypto.password.NoOpPasswordEncoder" id="encoder"/>
 
 
 </beans:beans>

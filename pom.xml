@@ -59,6 +59,10 @@
         <!--JSON-->
         <jackson-json.version>2.9.7</jackson-json.version>
 
+        <!--Thymeleaf-->
+        <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
+        <thymeleaf-extras.version>3.0.4.RELEASE</thymeleaf-extras.version>
+
     </properties>
 
     <build>
@@ -101,6 +105,11 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring-security.version}</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring-security.version}</version>
         </dependency>
 
         <!--Logback & Slf4j-->
@@ -266,9 +275,6 @@
             <artifactId>noty</artifactId>
             <version>${noty.version}</version>
         </dependency>
-        
-
-
 
         <!--JSON-->
         <dependency>
@@ -286,8 +292,6 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson-json.version}</version>
         </dependency>
-
-
 
     </dependencies>
     <dependencyManagement>
