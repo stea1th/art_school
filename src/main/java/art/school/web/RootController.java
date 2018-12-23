@@ -2,6 +2,7 @@ package art.school.web;
 
 import art.school.web.unterricht.AbstractUnterrichtController;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -9,7 +10,7 @@ public class RootController extends AbstractUnterrichtController {
 
     @GetMapping("/")
     public String root(){
-        return "redirect:unterricht";
+        return "redirect:login";
     }
 
     @GetMapping("/unterricht")
@@ -27,6 +28,11 @@ public class RootController extends AbstractUnterrichtController {
 
     @GetMapping("/statistik")
     public String statistik() { return "statistik";}
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 
 
 

@@ -20,8 +20,6 @@
     <link rel='stylesheet' href='webjars/noty/3.1.4/lib/noty.css' />
 
 
-
-
     <script type="text/javascript" src='webjars/jquery/3.3.1/jquery.min.js' ></script>
     <script type="text/javascript" src='webjars/jquery-ui/1.12.1/jquery-ui.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>
@@ -44,9 +42,6 @@
     <script type="text/javascript" src='webjars/fullcalendar/3.9.0/fullcalendar.js' ></script>
     <script type="text/javascript" src='webjars/fullcalendar/3.9.0/locale/ru.js' ></script>
     <script type="text/javascript" src='<c:url value="/resources/js/common.js"/>' defer></script>
-
-
-
 
 </head>
 
