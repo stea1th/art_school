@@ -1,15 +1,8 @@
 var ajaxUrl;
 
 $(function () {
-    // console.log($(location).attr('pathname'));
-    // if(window.location.pathname === '/login'){
-    //     // console.log($('ul'));
-    //     $('#left-side').remove();
-    //     // $('ul').append('<li class="nav-item active"><a class="nav-link" href="zahlung">Оплата</a></li>');
-    //     // $('li').hide();
-    // }
-
-
+    $('ul.navbar-nav li.active').removeClass('active');
+    $('a[href="' + location.pathname.replace("/", "") + '"]').closest('li').addClass('active');
 });
 
 

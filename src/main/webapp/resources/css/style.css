@@ -44,5 +44,8 @@ body {
     background-color: white; !important;
 }
 
+.login-btn:hover {
+    color: black;
+}
 
 

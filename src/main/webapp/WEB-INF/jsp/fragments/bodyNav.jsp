@@ -41,7 +41,7 @@
         <ul class="navbar-nav ml-auto">
             <li>
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#myModal" data-toggle="modal"><i class="fas fa-user"></i> Login</a>
+                    <a class="btn btn-outline-light login-btn" href="#myModal" data-toggle="modal"><i class="fas fa-user"></i> Login</a>
                 </div>
             </li>
         </ul>
