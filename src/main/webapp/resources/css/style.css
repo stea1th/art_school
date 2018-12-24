@@ -48,4 +48,12 @@ body {
     color: black;
 }
 
+.fa-user-circle, .dropdown-toggle {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.fa-user-circle:hover, .dropdown-toggle:hover {
+    color: rgba(255, 255, 255, 1) !important;
+}
+
 

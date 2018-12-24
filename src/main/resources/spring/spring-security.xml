@@ -17,7 +17,8 @@
                     default-target-url="/unterricht"
                     authentication-failure-url="/login?error=true"
                     always-use-default-target="true"/>
-        <logout logout-success-url="/login" />
+        <logout logout-success-url="/login"
+                logout-url="/perform_logout"/>
         <csrf disabled="true"/>
     </http>
 

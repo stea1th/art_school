@@ -1,4 +1,5 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
@@ -39,11 +40,26 @@
             </ul>
         </sec:authorize>
         <ul class="navbar-nav ml-auto">
-            <li>
-                <div class="navbar-header">
-                    <a class="btn btn-outline-light login-btn" href="#myModal" data-toggle="modal"><i class="fas fa-user"></i> Login</a>
-                </div>
-            </li>
+            <sec:authorize access="isAnonymous()">
+                <li>
+                    <div class="navbar-header">
+                        <a class="btn btn-outline-light login-btn" href="#myModal" data-toggle="modal">
+                            <i class="fas fa-user"></i> Login</a>
+                    </div>
+                </li>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <li>
+                    <div class="nav-item dropdown">
+                        <a id="userdetails" href="https://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle navbar-icon-link">
+                            <i class="fas fa-user-circle fa-2x"></i></a>
+                        <div aria-labelledby="userdetails" class="dropdown-menu dropdown-menu-right">
+                            <a href="#" class="dropdown-item">Profile</a>
+                            <div class="dropdown-divider my-0"></div><a href="<c:url value="/perform_logout" />" class="dropdown-item">Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </sec:authorize>
         </ul>
 
     </div>
