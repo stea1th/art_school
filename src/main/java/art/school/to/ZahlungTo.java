@@ -14,7 +14,7 @@ import java.time.format.FormatStyle;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ZahlungTo implements Serializable {
+public class ZahlungTo {
 
     private Integer id;
     private String name;

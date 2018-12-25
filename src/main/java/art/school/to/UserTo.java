@@ -1,13 +1,12 @@
 package art.school.to;
 
 import art.school.entity.Role;
-import art.school.entity.User;
+import art.school.entity.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.io.Serializable;
 import java.time.temporal.ChronoUnit;
 import java.util.stream.Collectors;
 
@@ -20,16 +19,15 @@ public class UserTo {
     private Integer id;
     private String name;
     private String email;
-    private String passwort;
+//    private String passwort;
     private String roles;
     private boolean aktiv;
     private String registriert;
 
-    public UserTo(User u) {
+    public UserTo(Users u) {
         this(u.getId(),
                 u.getName(),
                 u.getEmail(),
-                u.getPasswort(),
                 u.getRoles()
                         .stream()
                         .map(Role::getName)

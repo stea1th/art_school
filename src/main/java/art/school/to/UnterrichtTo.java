@@ -9,10 +9,9 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UnterrichtTo implements Serializable {
+public class UnterrichtTo {
 
-
-    private int id;
+    private Integer id;
     private String title;
     private String start;
     private String end;

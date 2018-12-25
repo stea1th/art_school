@@ -24,7 +24,6 @@ $(function () {
             {"data": "id"},
             {"data": "name"},
             {"data": "email"},
-            {"data": "passwort"},
             {"data": "roles"},
             {"data": "aktiv",
                 "render": function (data, type, row) {

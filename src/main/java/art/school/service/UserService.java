@@ -1,11 +1,11 @@
 package art.school.service;
 
-import art.school.entity.User;
+import art.school.entity.Users;
 
 
-public interface UserService extends MainServiceInterface<User> {
+public interface UserService extends MainServiceInterface<Users> {
 
     void toggleAktiv(int id);
 
-    User getUserByEmail(String email);
+    Users getUsersByEmail(String email);
 }

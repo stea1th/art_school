@@ -1,6 +1,6 @@
 package art.school.repository.datajpa;
 
-import art.school.entity.User;
+import art.school.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,16 +11,16 @@ import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 @Transactional(readOnly = true)
-public interface CrudUserRepository extends JpaRepository<User, Integer> {
+public interface CrudUserRepository extends JpaRepository<Users, Integer> {
 
     @Transactional
     @Modifying
-    @Query("DELETE FROM User u WHERE u.id=:id")
+    @Query("DELETE FROM Users u WHERE u.id=:id")
     int delete(@Param("id") int id);
 
-    User findUserByEmail(String email);
+    Users findUsersByEmail(String email);
 
     @Override
     @NotNull
-    Optional<User> findById(Integer id);
+    Optional<Users> findById(Integer id);
 }

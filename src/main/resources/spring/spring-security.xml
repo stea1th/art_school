@@ -23,20 +23,26 @@
     </http>
 
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="1" password="1" authorities="ROLE_USER" />
-            </user-service>
-            <password-encoder ref="encoder" />
+        <authentication-provider user-service-ref="userService">
+            <password-encoder ref="encoder"/>
         </authentication-provider>
     </authentication-manager>
 
-    <!--<beans:bean id="encoder"-->
-                <!--class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">-->
-    <!--</beans:bean>-->
+    <!--<authentication-manager>-->
+        <!--<authentication-provider>-->
+            <!--<users-service>-->
+                <!--<users name="1" password="1" authorities="ROLE_USER" />-->
+            <!--</users-service>-->
+            <!--<password-encoder ref="encoder" />-->
+        <!--</authentication-provider>-->
+    <!--</authentication-manager>-->
+
+    <beans:bean id="encoder"
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+    </beans:bean>
 
     <!--<beans:bean class="org.springframework.security.crypto.factory.PasswordEncoderFactories" id="encoder" factory-method="createDelegatingPasswordEncoder"/>-->
-    <beans:bean class="org.springframework.security.crypto.password.NoOpPasswordEncoder" id="encoder"/>
+    <!--<beans:bean class="org.springframework.security.crypto.password.NoOpPasswordEncoder" id="encoder"/>-->
 
 
 </beans:beans>

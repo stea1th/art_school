@@ -1,8 +1,7 @@
 package art.school.web.user;
 
-import art.school.entity.User;
+import art.school.entity.Users;
 import art.school.service.UserService;
-import art.school.util.ValidationUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,34 +16,34 @@ public abstract class AbstractUserController  {
     @Autowired
     private UserService service;
 
-    public User get(int id) {
-        log.info("get User {}", id);
+    public Users get(int id) {
+        log.info("get Users {}", id);
         return service.get(id);
     }
 
-    public User create(User user){
-        log.info("create User {}", user);
-        checkNew(user);
-        return service.create(user);
+    public Users create(Users users){
+        log.info("create Users {}", users);
+        checkNew(users);
+        return service.create(users);
     }
 
     public void delete(int id){
-        log.info("delete User {}", id);
+        log.info("delete Users {}", id);
         service.delete(id);
     }
 
     public void toggleAktiv(int id){
-        log.info("toggle User {} Status", id);
+        log.info("toggle Users {} Status", id);
         service.toggleAktiv(id);
     }
 
-    public void update(User user, int id){
-        log.info("update {} with id={}", user, id);
-        assureIdConsistent(user, id);
-        service.update(user);
+    public void update(Users users, int id){
+        log.info("update {} with id={}", users, id);
+        assureIdConsistent(users, id);
+        service.update(users);
     }
 
-    public List<User> getAll(){
+    public List<Users> getAll(){
         log.info("getAll Users");
         return service.getAll();
     }

@@ -1,9 +1,9 @@
 package art.school.repository;
 
-import art.school.entity.User;
+import art.school.entity.Users;
 
-public interface UserRepository extends MainRepoInterface<User> {
+public interface UserRepository extends MainRepoInterface<Users> {
 
-    User getByEmail(String email);
+    Users getUsersByEmail(String email);
 
 }

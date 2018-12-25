@@ -21,7 +21,7 @@ import java.util.Set;
 @ToString
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "kind_unique_name_adresse_idx")})
-public class User extends AbstractBaseEntity {
+public class Users extends AbstractBaseEntity {
 
     @Column(name = "name", nullable = false)
     @NotBlank

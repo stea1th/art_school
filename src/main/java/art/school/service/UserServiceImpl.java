@@ -1,8 +1,13 @@
 package art.school.service;
 
-import art.school.entity.User;
+import art.school.AuthorizedUser;
+import art.school.entity.Users;
 import art.school.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -12,27 +17,30 @@ import java.util.List;
 import static art.school.util.ValidationUtil.checkNotFoundWithId;
 
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserRepository repository;
 
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
     @Override
     @Transactional
     public void toggleAktiv(int id) {
-        User user = get(id);
-        user.setAktiv(!user.getAktiv());
+        Users users = get(id);
+        users.setAktiv(!users.getAktiv());
     }
 
     @Override
-    public User getUserByEmail(String email) {
-        return repository.getByEmail(email);
+    public Users getUsersByEmail(String email) {
+        return repository.getUsersByEmail(email);
     }
 
+
     @Override
-    public User create(User user) {
-        Assert.notNull(user, "user must not be null");
-        return repository.save(user);
+    public Users create(Users users) {
+        Assert.notNull(users, "users must not be null");
+        return repository.save(users);
     }
 
     @Override
@@ -41,19 +49,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User get(int id) {
+    public Users get(int id) {
         return checkNotFoundWithId(repository.get(id), id);
     }
 
     @Override
-    public void update(User user) {
-        Assert.notNull(user, "user must not be null");
-        checkNotFoundWithId(repository.save(user), user.getId());
-
+    public void update(Users users) {
+        Assert.notNull(users, "users must not be null");
+        checkNotFoundWithId(repository.save(users), users.getId());
     }
 
     @Override
-    public List<User> getAll() {
+    public List<Users> getAll() {
         return repository.getAll();
+    }
+
+    @Override
+    public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
+        Users users = repository.getUsersByEmail(email);
+        if(users == null){
+            throw new UsernameNotFoundException("Users " + email +" is not found");
+        }
+        return new AuthorizedUser(users);
     }
 }

@@ -1,6 +1,6 @@
 package art.school.repository.datajpa;
 
-import art.school.entity.User;
+import art.school.entity.Users;
 import art.school.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,8 +16,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     @Transactional
-    public User save(User user) {
-        return repository.save(user);
+    public Users save(Users users) {
+        return repository.save(users);
     }
 
     @Override
@@ -26,17 +26,18 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User get(int id) {
+    public Users get(int id) {
         return repository.findById(id).orElse(null);
     }
 
     @Override
-    public List<User> getAll() {
+    public List<Users> getAll() {
         return repository.findAll();
     }
 
+
     @Override
-    public User getByEmail(String email) {
-        return repository.findUserByEmail(email);
+    public Users getUsersByEmail(String email) {
+        return repository.findUsersByEmail(email);
     }
 }
