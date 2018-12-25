@@ -12,6 +12,7 @@
     <http use-expressions="true">
         <intercept-url pattern="/login*" access="isAnonymous()" />
         <intercept-url pattern="/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')"/>
 
         <form-login login-page='/login'
                     default-target-url="/unterricht"
@@ -19,6 +20,7 @@
                     always-use-default-target="true"/>
         <logout logout-success-url="/login"
                 logout-url="/perform_logout"/>
+        <remember-me key="uniqueAndSecret"/>
         <csrf disabled="true"/>
     </http>
 
@@ -27,15 +29,6 @@
             <password-encoder ref="encoder"/>
         </authentication-provider>
     </authentication-manager>
-
-    <!--<authentication-manager>-->
-        <!--<authentication-provider>-->
-            <!--<users-service>-->
-                <!--<users name="1" password="1" authorities="ROLE_USER" />-->
-            <!--</users-service>-->
-            <!--<password-encoder ref="encoder" />-->
-        <!--</authentication-provider>-->
-    <!--</authentication-manager>-->
 
     <beans:bean id="encoder"
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">

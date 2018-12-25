@@ -6,6 +6,7 @@ import art.school.statik.enums.Monat;
 import art.school.statik.MonthForStatistik;
 import art.school.statik.WeeksForStatistik;
 
+import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
@@ -29,7 +30,7 @@ public class DataForStatistik {
                 .forEach((key, value) -> {
                     MonthForStatistik m = all.get(key.getValue() - 1);
                     m.setMonat(key);
-                    m.setValue(value);
+                    m.setValue(BigDecimal.valueOf(value));
                     m.setChildrens(getWeeks(unterrichts, key));
                     all.set(key.getValue() - 1, m);
                 });
@@ -47,7 +48,7 @@ public class DataForStatistik {
                                 .get(WeekFields.ISO.weekOfYear()),
                         Collectors.summingDouble(x -> x.getZahlung().getPreis().doubleValue())))
                 .forEach((key, value) -> allWeeks.stream()
-                        .filter(w -> w.getNummer().equals(key)).forEachOrdered(w -> w.setValue(value)));
+                        .filter(w -> w.getNummer().equals(key)).forEachOrdered(w -> w.setValue(BigDecimal.valueOf(value))));
         return allWeeks;
     }
 
@@ -56,33 +57,15 @@ public class DataForStatistik {
         return null;
     }
 
-
     public static void test() {
         LocalDate d = LocalDate.now();
-
         System.out.println(d.get(WeekFields.ISO.dayOfWeek()));
-
-
-//        LocalDate first = LocalDate.of(d.getYear(), d.getMonth(), 1);
-//        LocalDate last = LocalDate.of(d.getYear(), d.getMonth(), d.lengthOfMonth());
-////        System.out.println("DaysOfMonth -> "+d.lengthOfMonth());
-//        System.out.println("FirstWeek -> " + first.get(WeekFields.ISO.weekOfYear()) + " LastWeek -> " + last.get(WeekFields.ISO.weekOfYear()));
-//        DayOfWeek dayOfWeek = d.getDayOfWeek();
-//        System.out.println("Montag -> " + d.with(DayOfWeek.MONDAY) + " Sonntag -> " + d.with(DayOfWeek.SUNDAY));
-
-//        dayOfWeek.
-//        Arrays.stream(DayOfWeek.values()).forEach(i-> System.out.println(i.getDisplayName(TextStyle.FULL, Locale.GERMAN)));
-//        Arrays.stream(Monat.values())
-//                .forEach(e -> System.out.println("Ordinal -> " +
-//                        e.ordinal() + " Number -> " + e.getNumber()
-//                        + " Russian -> " + e.getName() +
-//                 " Name -> " + e.name()));
     }
 
     private static List<MonthForStatistik> getAllMonth() {
 
         return Arrays.stream(Monat.values())
-                .map(i -> new MonthForStatistik(i.getName(), Month.of(i.getNumber()), 0.0, null))
+                .map(i -> new MonthForStatistik(i.getName(), Month.of(i.getNumber()), BigDecimal.valueOf(0), null))
                 .collect(Collectors.toList());
 
     }
@@ -95,14 +78,14 @@ public class DataForStatistik {
         int lWeek = last.get(WeekFields.ISO.weekOfYear());
         String firstWeek = first.getDayOfMonth() + " - " + first.with(DayOfWeek.SUNDAY).getDayOfMonth();
         String lastWeek = last.with(DayOfWeek.MONDAY).getDayOfMonth() + " - " + last.getDayOfMonth();
-        allWeeks.add(new WeeksForStatistik(fWeek, firstWeek, 0.0));
+        allWeeks.add(new WeeksForStatistik(fWeek, firstWeek, BigDecimal.valueOf(0)));
         int d1 = first.with(DayOfWeek.SUNDAY).getDayOfMonth() + 1;
         for (int i = fWeek + 1; i < lWeek; i++) {
             int d2 = d1 + 6;
-            allWeeks.add(new WeeksForStatistik(i, d1 + " - " + d2, 0.0));
+            allWeeks.add(new WeeksForStatistik(i, d1 + " - " + d2, BigDecimal.valueOf(0)));
             d1 += 7;
         }
-        allWeeks.add(new WeeksForStatistik(lWeek, lastWeek, 0.0));
+        allWeeks.add(new WeeksForStatistik(lWeek, lastWeek, BigDecimal.valueOf(0)));
         return allWeeks;
     }
 }

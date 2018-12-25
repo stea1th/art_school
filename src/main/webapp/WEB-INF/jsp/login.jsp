@@ -27,15 +27,29 @@
                 <form action="login" method="post">
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <span class="input-group-addon"><i class="fas fa-user" content=""></i></span>
                             <input type="text" class="form-control" name="username" placeholder="Username" required="required">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <span class="input-group-addon"><i class="fas fa-lock"></i></span>
                             <input type="text" class="form-control" name="password" placeholder="Password" required="required">
                         </div>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="checkbox" id="chkbx1" name="remember-me"/>
+                            <label for="chkbx1">&nbsp;Remember me</label>
+                            <%--<div class="contact100-form-checkbox m-l-4">--%>
+                                <%--<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">--%>
+                                <%--<label class="label-checkbox100" for="ckb1">--%>
+                                    <%--Remember me--%>
+                                <%--</label>--%>
+                            <%--</div>--%>
+                        </div>
+
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block btn-lg">Sign In</button>
