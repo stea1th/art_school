@@ -5,15 +5,15 @@
 <jsp:include page="fragments/headTag.jsp"/>
 
 <body>
-<%--<script type="text/javascript" src='<c:url value="/resources/js/kind.js"/>' defer></script>--%>
+<script type="text/javascript" src='<c:url value="/resources/js/admin.js"/>' defer></script>
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>
 <div class="container">
     <div class="row">
-        <div class="col-md-10 ml-auto mr-auto">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ml-auto mr-auto">
             <div class="card border-light mb-3" id="table-card3">
                 <div class="card-body">
-                    <table id="admin" class="display responsive no-wrap" width="100%">
+                    <table id="admins" class="display responsive no-wrap" width="100%">
                         <thead>
                         <tr>
                             <th>Id</th>

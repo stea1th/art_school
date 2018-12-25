@@ -15,7 +15,7 @@
 <br/>
 <div class="container">
     <div class="row">
-        <div class="col-md-10 ml-auto mr-auto">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ml-auto mr-auto">
             <div class="card border-light mb-3" id="table-card2">
                 <div class="card-body">
                     <table id="zahlungen" class="display responsive no-wrap" width="100%">

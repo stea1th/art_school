@@ -26,6 +26,9 @@
                     <a class="nav-link" href="statistik">Статистика</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="admin">Админ</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
                 <li class="nav-item dropdown">

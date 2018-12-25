@@ -1,7 +1,7 @@
-#calendar, #kids, #zahlungen {
-    max-width: 900px;
-    margin: auto;
-}
+/*#calendar, #kids, #zahlungen {*/
+    /*max-width: 1100px;*/
+    /*margin: auto;*/
+/*}*/
 
 /*#calendar .fc-day{*/
     /*transition: all .5s;*/
@@ -11,9 +11,9 @@
     /*background: aquamarine;*/
 /*}*/
 
-#calendar-card, #table-card, #table-card2 {
+.card {
     box-shadow: 0 1px 15px 1px rgba(39,39,39,.1);
-    max-width: 80rem;
+    max-width: 100%;
     margin: auto;
     border: 0;
     border-radius: .1875rem;

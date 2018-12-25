@@ -4,6 +4,7 @@ import art.school.entity.User;
 import art.school.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository repository;
 
     @Override
+    @Transactional
     public void toggleAktiv(int id) {
         User user = get(id);
         user.setAktiv(!user.getAktiv());
