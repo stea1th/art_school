@@ -32,11 +32,17 @@ function removeData() {
 
 function onClickSelectCategory(e) {
     var activePoints = barChart.getElementsAtEvent(e);
-    console.log(activePoints);
+    // console.log(activePoints);
     if (activePoints[0]) {
         var idx = activePoints[0]['_index'];
         myLabel = activePoints[0]['_model'].label;
-        console.log(myData[idx]);
+        if(myData[idx].childrens === null){
+            return;
+        }
+        // console.log(myData[idx]);
+        // $.each(myData[idx], function(k, v){
+        //     console.log(k+" "+v);
+        // });
         addValue(myData[idx]);
     }
 }

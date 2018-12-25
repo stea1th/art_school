@@ -4,28 +4,31 @@ $(function () {
     $('ul.navbar-nav li.active').removeClass('active');
     $('a[href="' + location.pathname.replace("/", "") + '"]').closest('li').addClass('active');
 
-    $('#polygonizr').polygonizr({
-        restNodeMovements: 1,
-        duration: 3,
-        nodeMovementDistance: 100,
-        numberOfNodes: 35,
-        nodeDotSize: 2.5,
-        // Sets the ease mode of the movement: linear, easeIn, easeOut, easeInOut, accelerateDecelerate.
-        nodeEase: "easeInOut",
-        canvasWidth: $('nav').width(),
-        canvasHeight: $(this).height(),
-        canvasPosition: "absolute",
-        nodeRelations: 3,
-        specifyPolygonMeshNetworkFormation: function (i) {
-            var forEachNode = {
-                // Half a circle and randomized
-                x: this.canvasWidth - ((this.canvasWidth / 2) + (this.canvasHeight / 2) * Math.cos(i * (2 * Math.PI / this.numberOfNodes))) * Math.random(),
-                y: this.canvasHeight - (this.canvasHeight * (i / this.numberOfNodes))
-        };
-            return forEachNode;
-        },
-        randomizePolygonMeshNetworkFormation: true
-    });
+    if(window.location.pathname === "/login"){
+        $('#polygonizr').polygonizr({
+            restNodeMovements: 1,
+            duration: 3,
+            nodeMovementDistance: 100,
+            numberOfNodes: 35,
+            nodeDotSize: 2.5,
+            // Sets the ease mode of the movement: linear, easeIn, easeOut, easeInOut, accelerateDecelerate.
+            nodeEase: "easeInOut",
+            canvasWidth: $('nav').width(),
+            canvasHeight: $(this).height(),
+            canvasPosition: "absolute",
+            nodeRelations: 3,
+            specifyPolygonMeshNetworkFormation: function (i) {
+                var forEachNode = {
+                    // Half a circle and randomized
+                    x: this.canvasWidth - ((this.canvasWidth / 2) + (this.canvasHeight / 2) * Math.cos(i * (2 * Math.PI / this.numberOfNodes))) * Math.random(),
+                    y: this.canvasHeight - (this.canvasHeight * (i / this.numberOfNodes))
+                };
+                return forEachNode;
+            },
+            randomizePolygonMeshNetworkFormation: true
+        });
+    }
+
 });
 
 
