@@ -22,12 +22,12 @@ public abstract class AbstractUnterrichtController {
     @Autowired
     UnterrichtService unterrichtService;
 
-    public Unterricht get(int id){
+    public Unterricht get(int id) {
         log.info("get Unterricht {}", id);
         return unterrichtService.get(id);
     }
 
-    public Unterricht create(RequestUnterrichtTo unterrichtTo){
+    public Unterricht create(RequestUnterrichtTo unterrichtTo) {
         Unterricht u = new Unterricht(unterrichtTo.getId(), LocalDateTime.of(LocalDate.parse(unterrichtTo.getDatum()),
                 LocalTime.parse(unterrichtTo.getZeit())), unterrichtTo.isBezahlt(), unterrichtTo.getNotiz());
         log.info("create {} for Kind {} and Zahlung {}", u, unterrichtTo.getKind(), unterrichtTo.getZahlung());
@@ -35,17 +35,17 @@ public abstract class AbstractUnterrichtController {
         return unterrichtService.create(u, unterrichtTo.getKind(), unterrichtTo.getZahlung());
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         log.info("delete Unterricht {}", id);
         unterrichtService.delete(id);
     }
 
-    public void toggleBezahlt(int id){
+    public void toggleBezahlt(int id) {
         log.info("toggle Unterricht {} Status", id);
         unterrichtService.toggleBezahlt(id);
     }
 
-    public void update(RequestUnterrichtTo unterrichtTo){
+    public void update(RequestUnterrichtTo unterrichtTo) {
         Unterricht u = unterrichtService.get(unterrichtTo.getId());
         u.setDatum(LocalDateTime.of(LocalDate.parse(unterrichtTo.getDatum()),
                 LocalTime.parse(unterrichtTo.getZeit())));
@@ -53,17 +53,19 @@ public abstract class AbstractUnterrichtController {
         u.setNotiz(unterrichtTo.getNotiz());
         log.info("update {} with id={}", u, u.getId());
         assureIdConsistent(u, u.getId());
-        unterrichtService.create(u, unterrichtTo.getKind(), unterrichtTo.getZahlung());
+        unterrichtService.create(u,
+                unterrichtTo.getKind() != null ? unterrichtTo.getKind() : u.getKind().getId(),
+                unterrichtTo.getZahlung() != null ? unterrichtTo.getZahlung() : u.getZahlung().getId());
     }
 
-    public void updateOnDrop(int id, String s){
+    public void updateOnDrop(int id, String s) {
         String[] dateParts = s.replace("T", " ").split(" ");
         Unterricht u = unterrichtService.get(id);
         u.setDatum(LocalDateTime.of(LocalDate.parse(dateParts[0]), LocalTime.parse(dateParts[1])));
         unterrichtService.create(u, u.getKind().getId(), u.getZahlung().getId());
     }
 
-    public List<Unterricht> getAll(){
+    public List<Unterricht> getAll() {
         log.info("getAll Unterrichts");
         return unterrichtService.getAll();
     }

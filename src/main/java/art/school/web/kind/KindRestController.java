@@ -20,7 +20,7 @@ public class KindRestController extends AbstractKindController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<KindTo> all() {
         return transformTo(super.getAll(), KindTo.class);
-        }
+    }
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
@@ -29,20 +29,24 @@ public class KindRestController extends AbstractKindController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public KindTo getKind(@PathVariable("id") int id){
+    public KindTo getKind(@PathVariable("id") int id) {
         return new KindTo(super.get(id));
     }
 
-    @PostMapping(value="/toggle/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ResponseEntity<String> toggle(@PathVariable("id") int id){
+    @PostMapping(value = "/toggle/{id}")
+    public ResponseEntity<String> toggle(@PathVariable("id") int id) {
         super.toggleAktiv(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value="/filter/aktiv", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<KindTo> onlyAktiv(){
-        return transformTo(super.getAll(), KindTo.class)
+    @GetMapping(value = "/filter/aktiv", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<KindTo> onlyAktiv() {
+        all()
+                .stream()
+                .filter(KindTo::isAktiv)
+                .collect(Collectors.toList()).forEach(i -> System.out.println(i.getId()));
+
+        return all()
                 .stream()
                 .filter(KindTo::isAktiv)
                 .collect(Collectors.toList());
@@ -50,7 +54,7 @@ public class KindRestController extends AbstractKindController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ResponseEntity<String> saveOrUpdate(KindTo z){
+    public ResponseEntity<String> saveOrUpdate(KindTo z) {
         Kind kind = new Kind(z);
         if (kind.isNew()) {
             super.create(kind);

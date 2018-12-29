@@ -3,14 +3,21 @@ var ajaxKind = "kind";
 var ajaxZahlung = "zahlung";
 var calendar = null;
 var myModal = $('#createUnterricht');
+var kindSelect;
+var zahlungSelect;
+var btnKind;
+var btnZahlung;
+var zt;
+
 
 $(function () {
+    $.ajaxSetup({ cache: false });
 
     var dt = new Date($.now());
-    var zt = dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
+    zt = dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
 
-    var kindSelect = getKind();
-    var zahlungSelect = getZahlung();
+    kindSelect = getKind();
+    zahlungSelect = getZahlung();
 
 
     calendar = $('#calendar').fullCalendar({
@@ -40,35 +47,7 @@ $(function () {
         },
         firstDay: 1,
         eventClick: function (event) {
-            $.get(ajaxUnterricht + "/get/" + event.id).done(function (data) {
-                var btn = $('<button type="button" class="btn btn-outline-danger temp">Сделать активным</button>');
-
-                kindSelect.val(data.kind).change();
-                if (kindSelect.val() == null) {
-                    kindSelect.hide();
-                    btn.appendTo('#kind-div');
-                }
-                zahlungSelect.val(data.zahlung).change();
-                if (zahlungSelect.val() == null) {
-                    zahlungSelect.hide();
-                    btn.appendTo('#zahlung-div');
-                }
-                $('textarea').val(data.notiz);
-                $('#id').val(data.id);
-                $('#datum').val(data.datum);
-                $('#bezahlt').prop('checked', data.bezahlt);
-                $('#zeit').val(data.zeit);
-
-                showModal(myModal);
-
-                myModal.on('hidden.bs.modal', function () {
-                    $(this).find('form')[0].reset();
-                    kindSelect.show();
-                    zahlungSelect.show();
-                    $('#zeit').val(zt);
-                    $('.temp').remove();
-                });
-            });
+            updateUnterricht(event.id);
         },
         // eventClick: function (event) {
         //     // alert(event.id +" "+event.notiz);
@@ -127,16 +106,13 @@ $(function () {
             'local',
         eventLimit:
             true,
-        views:
-            {
-                month: {
-                    titleFormat: 'YYYY MMMM ',
-                    eventLimit:
-                        2
-                }
+        views: {
+            month: {
+                titleFormat: 'YYYY MMMM ',
+                eventLimit:
+                    2
             }
-        ,
-
+        },
         editable: true,
         eventDrop:
 
@@ -148,8 +124,6 @@ $(function () {
                         $(".popover").remove();
                     });
             }
-
-
     })
     ;
 
@@ -167,11 +141,68 @@ $(function () {
 })
 ;
 
+function updateUnterricht(id) {
+    $.get(ajaxUnterricht + "/get/" + id).done(function (data) {
+        // var kindId = data.kind;
+        btnKind = renderKindBtn(data.kind);
+        // console.log(btnKind.data('id'));
+        btnZahlung = $('<button type="button" class="btn btn-outline-danger temp" onclick="toggleThisZahlung(id)">Сделать активным</button>');
+
+        kindSelect.val(data.kind).change();
+        if (kindSelect.val() == null) {
+            kindSelect.hide();
+            btnKind.appendTo('#kind-div');
+        }
+        zahlungSelect.val(data.zahlung).change();
+        if (zahlungSelect.val() == null) {
+            zahlungSelect.hide();
+            btnZahlung.appendTo('#zahlung-div');
+        }
+        $('textarea').val(data.notiz);
+        $('#id').val(data.id);
+        $('#datum').val(data.datum);
+        $('#bezahlt').prop('checked', data.bezahlt);
+        $('#zeit').val(data.zeit);
+
+        showModal(myModal);
+
+        myModal.on('hidden.bs.modal', function () {
+            $(this).find('form')[0].reset();
+            kindSelect.show();
+            zahlungSelect.show();
+            $('#zeit').val(zt);
+            $('.temp').remove();
+        });
+    });
+}
+
+function toggleThisKind() {
+    var id = btnKind.data('id');
+    $.when(toggleThisWithUrl(ajaxKind, id)).done(function () {
+        doAfterToggle(id);
+    });
+}
+
+function doAfterToggle(id) {
+    kindSelect = getKind();
+    kindSelect.val(id);
+    btnKind.remove();
+    calendar.fullCalendar('refetchEvents');
+    kindSelect.show();
+}
+
+function renderKindBtn(id) {
+    var btn = $('<button type="button" class="btn btn-outline-danger temp" onclick="toggleThisKind()">Сделать активным</button>');
+    btn.data('id', id);
+    return btn;
+}
+
 function getKind() {
     var sel = $('#kind');
     sel.empty().append('<option disabled selected>Выберите ученика</option>');
     $.getJSON(ajaxKind + "/filter/aktiv", function (data) {
         $.each(data, function (key, val) {
+            console.log(val.id+" "+val.name);
             sel.append('<option value="' + val.id + '">' + val.name + '</option>')
         });
     });
@@ -197,20 +228,6 @@ function saveUnterricht() {
             $('#createUnterricht').modal('hide');
             calendar.fullCalendar('refetchEvents');
         });
-
-    // $.ajax({
-    //     url: ajaxUnterricht + '/save',
-    //     type: 'POST',
-    //     contentType: 'application/json; charset=utf-8',
-    //     dataType: 'json',
-    //     data: $('#detailsForm').serialize()
-    //
-    // }).done(function () {
-    //         $('#createUnterricht').modal('hide');
-    //         calendar.fullCalendar('refetchEvents');
-    //     });
-
-
 }
 
 
