@@ -7,6 +7,7 @@ import art.school.statik.MonthForStatistik;
 import art.school.statik.WeeksForStatistik;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
@@ -30,7 +31,7 @@ public class DataForStatistik {
                 .forEach((key, value) -> {
                     MonthForStatistik m = all.get(key.getValue() - 1);
                     m.setMonat(key);
-                    m.setValue(BigDecimal.valueOf(value));
+                    m.setValue(BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP));
                     m.setChildrens(getWeeks(unterrichts, key));
                     all.set(key.getValue() - 1, m);
                 });
@@ -48,7 +49,7 @@ public class DataForStatistik {
                                 .get(WeekFields.ISO.weekOfYear()),
                         Collectors.summingDouble(x -> x.getZahlung().getPreis().doubleValue())))
                 .forEach((key, value) -> allWeeks.stream()
-                        .filter(w -> w.getNummer().equals(key)).forEachOrdered(w -> w.setValue(BigDecimal.valueOf(value))));
+                        .filter(w -> w.getNummer().equals(key)).forEachOrdered(w -> w.setValue(BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP))));
         return allWeeks;
     }
 

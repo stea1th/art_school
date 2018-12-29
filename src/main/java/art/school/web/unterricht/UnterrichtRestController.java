@@ -38,11 +38,13 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ResponseEntity<String> create(RequestUnterrichtTo unterrichtTo) {
-        Unterricht u = new Unterricht(LocalDateTime.of(LocalDate.parse(unterrichtTo.getDatum()),
-                LocalTime.parse(unterrichtTo.getZeit())), unterrichtTo.isBezahlt(), unterrichtTo.getNotiz());
-        System.out.println(u);
-        super.create(u, unterrichtTo.getKind(), unterrichtTo.getZahlung());
+    public ResponseEntity<String> createOrUpdate(RequestUnterrichtTo unterrichtTo) {
+        System.out.println(unterrichtTo.toString());
+        if (unterrichtTo.isNew()) {
+            super.create(unterrichtTo);
+        } else {
+            super.update(unterrichtTo);
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -53,30 +55,21 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
                 i.getDatum().truncatedTo(ChronoUnit.SECONDS).toString(),
                 i.getDatum().truncatedTo(ChronoUnit.SECONDS).plusMinutes(i.getZahlung().getDauer().getLong(ChronoField.MINUTE_OF_DAY)).toString(), i.getNotiz(),
                 !i.getKind().isAktiv() ? "grey" : i.isBezahlt() ? "green" : "red")));
-
-//        super.getAll().forEach(System.out::println);
-//
-//        System.out.println("<======================================>");
-//
-//        list.forEach(System.out::println);
-
         return list;
     }
 
     @PostMapping(value = "/update/ondrop/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ResponseEntity<String> updateOnDrop(
+    public ResponseEntity<String> updateOnDragAndDrop(
             @PathVariable("id") int id,
             @RequestParam(value = "date") String date) {
-        System.out.println(date);
-        String[] dateParts = date.replace("T", " ").split(" ");
-        Unterricht u = super.get(id);
-        u.setDatum(LocalDateTime.of(LocalDate.parse(dateParts[0]), LocalTime.parse(dateParts[1])));
-        super.update(u, id);
-
+        super.updateOnDrop(id, date);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
-
+    @GetMapping(value ="/get/{id}")
+    public RequestUnterrichtTo get(@PathVariable(name = "id") Integer id){
+        Unterricht unterricht = unterrichtService.get(id);
+        return new RequestUnterrichtTo(unterricht);
+    }
 }

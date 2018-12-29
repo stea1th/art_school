@@ -25,9 +25,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="statistik">Статистика</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="admin">Админ</a>
-                </li>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin">Админ</a>
+                    </li>
+                </sec:authorize>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
@@ -54,11 +56,13 @@
             <sec:authorize access="isAuthenticated()">
                 <li>
                     <div class="nav-item dropdown">
-                        <a id="userdetails" href="https://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle navbar-icon-link">
+                        <a id="userdetails" href="https://example.com" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false" class="dropdown-toggle navbar-icon-link">
                             <i class="fas fa-user-circle fa-2x"></i></a>
                         <div aria-labelledby="userdetails" class="dropdown-menu dropdown-menu-right">
                             <a href="#" class="dropdown-item">Profile</a>
-                            <div class="dropdown-divider my-0"></div><a href="<c:url value="/perform_logout" />" class="dropdown-item">Logout</a>
+                            <div class="dropdown-divider my-0"></div>
+                            <a href="<c:url value="/perform_logout" />" class="dropdown-item">Logout</a>
                         </div>
                     </div>
                 </li>

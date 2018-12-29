@@ -8,10 +8,12 @@
     <http pattern="/resources/**" security="none"/>
     <http pattern="/webjars/**" security="none"/>
 
-
     <http use-expressions="true">
         <intercept-url pattern="/login*" access="isAnonymous()" />
-        <intercept-url pattern="/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/unterricht*" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/kind*" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/zahlung*" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/statistik*" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')"/>
 
         <form-login login-page='/login'

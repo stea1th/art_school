@@ -29,7 +29,7 @@
 
                     <div class="form-group row">
                         <label for="kind" class="col-4 col-form-label">Ученик</label>
-                        <div class="col-8">
+                        <div class="col-8" id="kind-div">
                             <select id="kind" name="kind" class="custom-select" required="required">
                                 <option value="rabbit">Rabbit</option>
                             </select>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group row">
                         <label for="zahlung" class="col-4 col-form-label">Оплата</label>
-                        <div class="col-8">
+                        <div class="col-8" id="zahlung-div">
                             <select id="zahlung" name="zahlung" class="custom-select" required="required">
                             </select>
                         </div>

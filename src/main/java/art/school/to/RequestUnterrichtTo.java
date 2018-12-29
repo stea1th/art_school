@@ -1,8 +1,11 @@
 package art.school.to;
 
+import art.school.entity.Unterricht;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.temporal.ChronoUnit;
 
 @Data
 @NoArgsConstructor
@@ -17,5 +20,17 @@ public class RequestUnterrichtTo {
     private boolean bezahlt;
     private String notiz;
 
+    public RequestUnterrichtTo(Unterricht u) {
+        this(u.getId(),
+                u.getDatum().toLocalDate().toString(),
+                u.getDatum().toLocalTime().truncatedTo(ChronoUnit.MINUTES).toString(),
+                u.getKind().getId(),
+                u.getZahlung().getId(),
+                u.isBezahlt(),
+                u.getNotiz());
+    }
 
+    public boolean isNew() {
+        return id == null;
+    }
 }

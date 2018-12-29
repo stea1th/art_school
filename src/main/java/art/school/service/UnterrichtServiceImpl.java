@@ -24,12 +24,6 @@ public class UnterrichtServiceImpl implements UnterrichtService {
     }
 
     @Override
-    public void update(Unterricht unterricht, Integer... arr) {
-        Assert.notNull(unterricht, "unterricht must not be null");
-        checkNotFoundWithId(repository.save(unterricht, arr), unterricht.getId());
-    }
-
-    @Override
     @Transactional
     public void toggleBezahlt(int id) {
         Unterricht u = get(id);
