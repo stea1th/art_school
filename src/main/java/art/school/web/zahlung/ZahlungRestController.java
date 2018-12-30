@@ -5,13 +5,12 @@ import art.school.to.ZahlungTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.temporal.ChronoField;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import static art.school.util.TransformUtil.transformTo;
 import static art.school.util.TransformUtil.transformToFilterAktiv;
@@ -39,11 +38,11 @@ public class ZahlungRestController extends AbstractZahlungController {
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     @SuppressWarnings("unchecked")
-    public ResponseEntity saveOrUpdate(ZahlungTo z, BindingResult result) {
+    public ResponseEntity saveOrUpdate(ZahlungTo z) {
 
-        HashMap<String, String> response = new LinkedHashMap<>();
+        Map<String, String> response = new LinkedHashMap<>();
         Zahlung zahlung = new Zahlung(z);
-        String message = null;
+        String message;
         try {
             if (zahlung.isNew()) {
                 super.create(zahlung);

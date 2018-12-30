@@ -4,7 +4,6 @@ package art.school.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)

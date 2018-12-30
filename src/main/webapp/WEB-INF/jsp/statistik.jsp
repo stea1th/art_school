@@ -16,6 +16,11 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ml-auto mr-auto">
             <div class="card border-light mb-3" id="calendar-card">
                 <div class="card-body">
+                    <div align="center">
+                        <select id="statistik" name="statistik" class="custom-select" required="required">
+                            <option selected>2018</option>
+                        </select>
+                    </div>
                     <canvas id="myChart"></canvas>
                 </div>
             </div>

@@ -2,10 +2,8 @@ package art.school.web.unterricht;
 
 
 import art.school.entity.Unterricht;
-import art.school.to.KindTo;
 import art.school.to.RequestUnterrichtTo;
 import art.school.to.UnterrichtTo;
-import art.school.to.ZahlungTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

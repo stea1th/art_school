@@ -3,7 +3,6 @@ package art.school.web.unterricht;
 import art.school.entity.Unterricht;
 import art.school.service.UnterrichtService;
 import art.school.to.RequestUnterrichtTo;
-import art.school.to.UnterrichtTo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -58,7 +57,7 @@ public abstract class AbstractUnterrichtController {
                 unterrichtTo.getZahlung()!=null? unterrichtTo.getZahlung() : u.getZahlung().getId());
     }
 
-    public void updateOnDrop(int id, String s){
+    void updateOnDrop(int id, String s){
         String[] dateParts = s.replace("T", " ").split(" ");
         Unterricht u = unterrichtService.get(id);
         u.setDatum(LocalDateTime.of(LocalDate.parse(dateParts[0]), LocalTime.parse(dateParts[1])));

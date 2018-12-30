@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
-    <title>FullCalendar</title>
+    <title>Art School</title>
 
     <link rel='stylesheet' href='webjars/fullcalendar/3.9.0/fullcalendar.css' />
     <%--<link rel='stylesheet' href='https://bootswatch.com/4/sketchy/bootstrap.css' />--%>
