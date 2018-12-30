@@ -9,7 +9,7 @@ var zahlungBtn = null;
 $(function () {
 
     var dt = new Date($.now());
-    var zt = dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
+    var zt = (dt.getHours() < 10 ? '0' : '') + dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
 
     calendar = $('#calendar').fullCalendar({
         header: {center: 'month,agendaWeek,list'},
@@ -48,17 +48,22 @@ $(function () {
                 zahlungBtn = renderZahlungBtn(data.zahlung);
                 kindBtn.appendTo('#kind-div');
                 zahlungBtn.appendTo('#zahlung-div');
-
-                if (!data.kindTo.aktiv) {
-                    kindBtn.text('Активировать ' + data.kindTo.name);
+                // kindBtn.text((!data.kindTo.aktiv ? 'А' : 'Деа') + 'ктивировать ' + data.kindTo.name);
+                // zahlungBtn.text((!data.zahlungTo.aktiv ? 'А' : 'Деа') + 'ктивировать ' + data.zahlungTo.name);
+                if(!data.kindTo.aktiv) {
+                    kindBtn.text('Aктивировать ' + data.kindTo.name);
+                    kindBtn.addClass(data.bezahlt? 'btn-outline-primary' : 'btn-outline-danger');
                 } else {
                     kindBtn.text('Деактивировать ' + data.kindTo.name);
+                    kindBtn.addClass('btn-outline-info');
                 }
 
-                if (!data.zahlungTo.aktiv) {
-                    zahlungBtn.text('Активировать ' + data.zahlungTo.name);
+                if(!data.zahlungTo.aktiv) {
+                    zahlungBtn.text('Aктивировать ' + data.zahlungTo.name);
+                    zahlungBtn.addClass('btn-outline-primary');
                 } else {
                     zahlungBtn.text('Деактивировать ' + data.zahlungTo.name);
+                    zahlungBtn.addClass('btn-outline-info');
                 }
                 $('textarea').val(data.notiz);
                 $('#id').val(data.id);
@@ -82,7 +87,6 @@ $(function () {
             function (event, jsEvent, ui, view) {
                 window.eventScrolling = true;
             }
-
         ,
         eventDragStop: function (event, jsEvent, ui, view) {
             window.eventScrolling = false;
@@ -119,12 +123,9 @@ $(function () {
                     eventLimit:
                         2
                 }
-            }
-        ,
-
+            },
         editable: true,
         eventDrop:
-
             function (event, dayDelta, revertFunc) {
 
                 $.post(ajaxUnterricht + "/update/ondrop/" + event.id, "date=" + event.start.format())
@@ -151,27 +152,27 @@ $(function () {
 ;
 
 function toggleThisKind() {
-    $.post(ajaxKind + "/toggle/" + kindBtn.data('id')).done(function(){
+    $.post(ajaxKind + "/toggle/" + kindBtn.data('id')).done(function () {
         myModal.modal('hide');
     });
     // location.reload();
 }
 
 function toggleThisZahlung() {
-    $.post(ajaxZahlung + "/toggle/" + zahlungBtn.data('id')).done(function(){
+    $.post(ajaxZahlung + "/toggle/" + zahlungBtn.data('id')).done(function () {
         myModal.modal('hide');
     });
     // location.reload();
 }
 
 function renderKindBtn(id) {
-    var btn = $('<button type="button" class="btn btn-outline-danger temp" style="width:100%;" onclick="toggleThisKind()"></button>');
+    var btn = $('<button type="button" class="btn temp" style="width:100%;" onclick="toggleThisKind()"></button>');
     btn.data('id', id);
     return btn;
 }
 
 function renderZahlungBtn(id) {
-    var btn = $('<button type="button" class="btn btn-outline-danger temp" style="width:100%;" onclick="toggleThisZahlung()"></button>');
+    var btn = $('<button type="button" class="btn temp" style="width:100%;" onclick="toggleThisZahlung()"></button>');
     btn.data('id', id);
     return btn;
 }
