@@ -4,6 +4,7 @@ var ajaxZahlung = "zahlung";
 var calendar = null;
 var myModal = $('#createUnterricht');
 var kindBtn = null;
+var zahlungBtn = null;
 
 $(function () {
 
@@ -24,9 +25,11 @@ $(function () {
             $(this).on("click", function () {
                 myModal.modal('toggle');
 
+
                 myModal.on('hidden.bs.modal', function () {
                     $(this).find('form')[0].reset();
                     $('#zeit').val(zt);
+                    location.reload();
                 });
 
             });
@@ -45,16 +48,22 @@ $(function () {
 
             $.get(ajaxUnterricht + "/get/" + event.id).done(function (data) {
                 kindBtn = renderKindBtn(data.kind);
-                var zahlungBtn = $('<button type="button" class="btn btn-outline-danger temp">Сделать активным</button>');
-                kindSelect.val(data.kind).change();
+                zahlungBtn = renderZahlungBtn(data.zahlung);
+
                 if (!data.kindIsAktiv) {
                     kindSelect.hide();
                     kindBtn.appendTo('#kind-div');
+                } else {
+                    kindSelect.val(data.kind).change();
+                    console.log(kindSelect.val());
                 }
-                zahlungSelect.val(data.zahlung).change();
+
                 if (!data.zahlungIsAktiv) {
                     zahlungSelect.hide();
                     zahlungBtn.appendTo('#zahlung-div');
+                } else {
+                    zahlungSelect.val(data.zahlung).change();
+                    console.log(zahlungSelect.val());
                 }
                 $('textarea').val(data.notiz);
                 $('#id').val(data.id);
@@ -143,21 +152,37 @@ $(function () {
             uiLibrary: 'bootstrap4'
         });
     });
+
+    myModal.on('hidden.bs.modal', function () {
+        $(this).find('form')[0].reset();
+        $('#zeit').val(zt);
+        location.reload();
+    });
 })
 ;
 
 function toggleThisKind() {
-    // console.log(kindBtn.data('id'));
-    // toggleThisWithUrl(ajaxKind, kindBtn.data('id'));
     $.post(ajaxKind + "/toggle/" + kindBtn.data('id')).done(function(){
         myModal.modal('hide');
     });
+    location.reload();
+}
 
-    // location.reload();
+function toggleThisZahlung() {
+    $.post(ajaxZahlung + "/toggle/" + zahlungBtn.data('id')).done(function(){
+        myModal.modal('hide');
+    });
+    location.reload();
 }
 
 function renderKindBtn(id) {
     var btn = $('<button type="button" class="btn btn-outline-danger temp" onclick="toggleThisKind()">Сделать активным</button>');
+    btn.data('id', id);
+    return btn;
+}
+
+function renderZahlungBtn(id) {
+    var btn = $('<button type="button" class="btn btn-outline-danger temp" onclick="toggleThisZahlung()">Сделать активным</button>');
     btn.data('id', id);
     return btn;
 }
