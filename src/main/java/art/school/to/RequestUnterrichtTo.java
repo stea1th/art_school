@@ -19,8 +19,8 @@ public class RequestUnterrichtTo {
     private Integer zahlung;
     private boolean bezahlt;
     private String notiz;
-    private boolean kindIsAktiv;
-    private boolean zahlungIsAktiv;
+    private KindTo kindTo;
+    private ZahlungTo zahlungTo;
 
     public RequestUnterrichtTo(Unterricht u) {
         this(u.getId(),
@@ -30,8 +30,8 @@ public class RequestUnterrichtTo {
                 u.getZahlung().getId(),
                 u.isBezahlt(),
                 u.getNotiz(),
-                u.getKind().isAktiv(),
-                u.getZahlung().isAktiv());
+                new KindTo(u.getKind()),
+                new ZahlungTo(u.getZahlung()));
     }
 
     public boolean isNew() {
