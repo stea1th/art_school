@@ -48,8 +48,7 @@ $(function () {
                 zahlungBtn = renderZahlungBtn(data.zahlung);
                 kindBtn.appendTo('#kind-div');
                 zahlungBtn.appendTo('#zahlung-div');
-                // kindBtn.text((!data.kindTo.aktiv ? 'А' : 'Деа') + 'ктивировать ' + data.kindTo.name);
-                // zahlungBtn.text((!data.zahlungTo.aktiv ? 'А' : 'Деа') + 'ктивировать ' + data.zahlungTo.name);
+
                 if(!data.kindTo.aktiv) {
                     kindBtn.text('Aктивировать ' + data.kindTo.name);
                     kindBtn.addClass(data.bezahlt? 'btn-outline-primary' : 'btn-outline-danger');
@@ -71,6 +70,7 @@ $(function () {
                 $('#bezahlt').prop('checked', data.bezahlt);
                 $('#zeit').val(data.zeit);
             });
+            $('.modal-footer').prepend(renderDeleteBtn(event.id));
             showModal(myModal);
 
             myModal.on('hidden.bs.modal', function () {
@@ -151,6 +151,12 @@ $(function () {
 })
 ;
 
+function deleteUnterricht() {
+    $.post(ajaxUnterricht + "/delete/" + $('#delete-unt').data('id')).done(function(){
+        myModal.modal('hide');
+    });
+}
+
 function toggleThisKind() {
     $.post(ajaxKind + "/toggle/" + kindBtn.data('id')).done(function () {
         myModal.modal('hide');
@@ -163,6 +169,12 @@ function toggleThisZahlung() {
         myModal.modal('hide');
     });
     // location.reload();
+}
+
+function renderDeleteBtn(id) {
+    var btn = $('<button type="button" class="btn btn-outline-danger temp" id="delete-unt" onclick="deleteUnterricht()">Удалить</button>');
+    btn.data('id', id);
+    return btn;
 }
 
 function renderKindBtn(id) {

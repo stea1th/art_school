@@ -56,4 +56,10 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
         Unterricht unterricht = unterrichtService.get(id);
         return new RequestUnterrichtTo(unterricht);
     }
+
+    @PostMapping(value = "/delete/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("id") int id) {
+        super.delete(id);
+    }
 }
