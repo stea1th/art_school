@@ -3,14 +3,14 @@ var ajaxKind = "kind";
 var ajaxZahlung = "zahlung";
 var calendar = null;
 var myModal = $('#createUnterricht');
+var kindBtn = null;
 
 $(function () {
 
     var dt = new Date($.now());
     var zt = dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
 
-    var kindSelect = getKind();
-    var zahlungSelect = getZahlung();
+
 
 
     calendar = $('#calendar').fullCalendar({
@@ -19,8 +19,8 @@ $(function () {
         dayClick: function (date, jsEvent, view) {
 
             $('#datum').val(date.format());
-            // getKind();
-            // getZahlung();
+            getKind();
+            getZahlung();
             $(this).on("click", function () {
                 myModal.modal('toggle');
 
@@ -40,58 +40,39 @@ $(function () {
         },
         firstDay: 1,
         eventClick: function (event) {
-            $.get(ajaxUnterricht + "/get/" + event.id).done(function (data) {
-                var btn = $('<button type="button" class="btn btn-outline-danger temp">Сделать активным</button>');
+            var kindSelect = getKind();
+            var zahlungSelect = getZahlung();
 
+            $.get(ajaxUnterricht + "/get/" + event.id).done(function (data) {
+                kindBtn = renderKindBtn(data.kind);
+                var zahlungBtn = $('<button type="button" class="btn btn-outline-danger temp">Сделать активным</button>');
                 kindSelect.val(data.kind).change();
-                if (kindSelect.val() == null) {
+                if (!data.kindIsAktiv) {
                     kindSelect.hide();
-                    btn.appendTo('#kind-div');
+                    kindBtn.appendTo('#kind-div');
                 }
                 zahlungSelect.val(data.zahlung).change();
-                if (zahlungSelect.val() == null) {
+                if (!data.zahlungIsAktiv) {
                     zahlungSelect.hide();
-                    btn.appendTo('#zahlung-div');
+                    zahlungBtn.appendTo('#zahlung-div');
                 }
                 $('textarea').val(data.notiz);
                 $('#id').val(data.id);
                 $('#datum').val(data.datum);
                 $('#bezahlt').prop('checked', data.bezahlt);
                 $('#zeit').val(data.zeit);
+            });
+            showModal(myModal);
 
-                showModal(myModal);
-
-                myModal.on('hidden.bs.modal', function () {
-                    $(this).find('form')[0].reset();
-                    kindSelect.show();
-                    zahlungSelect.show();
-                    $('#zeit').val(zt);
-                    $('.temp').remove();
-                });
+            myModal.on('hidden.bs.modal', function () {
+                $(this).find('form')[0].reset();
+                calendar.fullCalendar('refetchEvents');
+                kindSelect.show();
+                zahlungSelect.show();
+                $('#zeit').val(zt);
+                $('.temp').remove();
             });
         },
-        // eventClick: function (event) {
-        //     // alert(event.id +" "+event.notiz);
-        //     // $(this).popover({html:true,title:event.title,content:event.notiz,placement:'top',container:'body'}).popover('show');
-        //     $(this).popover({
-        //         html:true,
-        //         animation: true,
-        //         title:event.title,
-        //         container: 'body',
-        //         content: event.notiz,
-        //         placement:'top'}).popover('show');
-        //
-        //     return false;
-
-
-        // if(event.title!=='CLICKED!'){
-        //     event.title = "CLICKED!";
-        // }else{
-        //     event.title = "YAHOO!!!!";
-        // }
-        // event.css('color', 'red');
-        // $('#calendar').fullCalendar('updateEvent', event);
-        // },
         eventDragStart:
 
             function (event, jsEvent, ui, view) {
@@ -148,8 +129,6 @@ $(function () {
                         $(".popover").remove();
                     });
             }
-
-
     })
     ;
 
@@ -166,6 +145,22 @@ $(function () {
     });
 })
 ;
+
+function toggleThisKind() {
+    // console.log(kindBtn.data('id'));
+    // toggleThisWithUrl(ajaxKind, kindBtn.data('id'));
+    $.post(ajaxKind + "/toggle/" + kindBtn.data('id')).done(function(){
+        myModal.modal('hide');
+    });
+
+    // location.reload();
+}
+
+function renderKindBtn(id) {
+    var btn = $('<button type="button" class="btn btn-outline-danger temp" onclick="toggleThisKind()">Сделать активным</button>');
+    btn.data('id', id);
+    return btn;
+}
 
 function getKind() {
     var sel = $('#kind');
@@ -197,20 +192,6 @@ function saveUnterricht() {
             $('#createUnterricht').modal('hide');
             calendar.fullCalendar('refetchEvents');
         });
-
-    // $.ajax({
-    //     url: ajaxUnterricht + '/save',
-    //     type: 'POST',
-    //     contentType: 'application/json; charset=utf-8',
-    //     dataType: 'json',
-    //     data: $('#detailsForm').serialize()
-    //
-    // }).done(function () {
-    //         $('#createUnterricht').modal('hide');
-    //         calendar.fullCalendar('refetchEvents');
-    //     });
-
-
 }
 
 

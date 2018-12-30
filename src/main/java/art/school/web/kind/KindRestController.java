@@ -34,7 +34,6 @@ public class KindRestController extends AbstractKindController {
     }
 
     @PostMapping(value="/toggle/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity<String> toggle(@PathVariable("id") int id){
         super.toggleAktiv(id);
         return new ResponseEntity<>(HttpStatus.OK);

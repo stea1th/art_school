@@ -26,7 +26,6 @@ public class ZahlungRestController extends AbstractZahlungController {
     }
 
     @PostMapping(value = "/toggle/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity<String> toggle(@PathVariable("id") int id) {
         super.toggleAktiv(id);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -41,11 +40,8 @@ public class ZahlungRestController extends AbstractZahlungController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     @SuppressWarnings("unchecked")
     public ResponseEntity saveOrUpdate(ZahlungTo z, BindingResult result) {
-//        if(result.hasErrors()){
-//            result.getFieldErrors().forEach(System.out::println);
-//        }
 
-        MultiValueMap<String, String> response = new LinkedMultiValueMap<>();
+        HashMap<String, String> response = new LinkedHashMap<>();
         Zahlung zahlung = new Zahlung(z);
         String message = null;
         try {
@@ -59,8 +55,8 @@ public class ZahlungRestController extends AbstractZahlungController {
         }catch(Exception e){
             return new ResponseEntity(e.getLocalizedMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
         }
-        response.add(message, z.getName());
-        return new ResponseEntity(response.toSingleValueMap(), HttpStatus.OK);
+        response.put(message, z.getName());
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

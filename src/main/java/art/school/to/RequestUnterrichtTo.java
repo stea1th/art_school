@@ -19,6 +19,8 @@ public class RequestUnterrichtTo {
     private Integer zahlung;
     private boolean bezahlt;
     private String notiz;
+    private boolean kindIsAktiv;
+    private boolean zahlungIsAktiv;
 
     public RequestUnterrichtTo(Unterricht u) {
         this(u.getId(),
@@ -27,7 +29,9 @@ public class RequestUnterrichtTo {
                 u.getKind().getId(),
                 u.getZahlung().getId(),
                 u.isBezahlt(),
-                u.getNotiz());
+                u.getNotiz(),
+                u.getKind().isAktiv(),
+                u.getZahlung().isAktiv());
     }
 
     public boolean isNew() {

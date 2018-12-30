@@ -53,7 +53,9 @@ public abstract class AbstractUnterrichtController {
         u.setNotiz(unterrichtTo.getNotiz());
         log.info("update {} with id={}", u, u.getId());
         assureIdConsistent(u, u.getId());
-        unterrichtService.create(u, unterrichtTo.getKind(), unterrichtTo.getZahlung());
+        unterrichtService.create(u,
+                unterrichtTo.getKind()!=null? unterrichtTo.getKind() : u.getKind().getId(),
+                unterrichtTo.getZahlung()!=null? unterrichtTo.getZahlung() : u.getZahlung().getId());
     }
 
     public void updateOnDrop(int id, String s){

@@ -76,6 +76,10 @@ function toggleThis(id) {
     $.post(ajaxUrl + "/toggle/" + id, {"id": id});
 }
 
+// function toggleThisWithUrl(url, id) {
+//     $.post(url + "/toggle/" + id, {"id": id});
+// }
+
 function showModal(modalName) {
 
     modalName.modal('show');
