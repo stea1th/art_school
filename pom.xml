@@ -26,6 +26,8 @@
 
         <!--Spring Security-->
         <spring-security.version>5.1.2.RELEASE</spring-security.version>
+        <!--KeyCloak-->
+        <keycloak.version>4.8.1.Final</keycloak.version>
 
         <!--Hibernate-->
         <hibernate.version>5.3.6.Final</hibernate.version>
@@ -110,6 +112,12 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
             <version>${spring-security.version}</version>
+        </dependency>
+        <!--KeyCloak-->
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-spring-security-adapter</artifactId>
+            <version>${keycloak.version}</version>
         </dependency>
 
         <!--Logback & Slf4j-->
