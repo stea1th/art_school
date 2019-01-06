@@ -124,7 +124,8 @@ function deleteUnterricht() {
 }
 
 function toggleThis(btn) {
-    $.post(btn.data('url') + "/toggle/" + btn.data('id')).done(function () {
+    $.post(btn.data('url') + "/toggle/" + btn.data('id')).done(function (data) {
+        toggleOnOff(data);
         createMenuButton(btn, btn.hasClass('btn-outline-primary'));
     });
 }

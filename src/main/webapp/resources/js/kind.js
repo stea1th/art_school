@@ -3,9 +3,20 @@ var myModal = $('#createKind');
 var datatable;
 
 $(function () {
+    createKindtable();
+    saveOrUpdateKind();
+});
+
+function saveOrUpdateKind() {
+    $('#saveKind').on('click', function () {
+        saveOrUpdate($('#kind-detailsForm'), "Ученик");
+    });
+}
+
+function createKindtable() {
     datatable = $('#kids').DataTable({
         "language": {
-            "url": "http://cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json"
+            "url": languageUrl
         },
 
         "ajax": {
@@ -24,10 +35,11 @@ $(function () {
             {"data": "id"},
             {"data": "name"},
             {"data": "adresse"},
-            {"data": "aktiv",
+            {
+                "data": "aktiv",
                 "render": function (data, type, row) {
                     if (type === "display") {
-                        return "<input type='checkbox' " + (data? "checked" : "") + " onclick='toggleThis(" + row.id + ")' style=''/>";
+                        return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='toggleThis(" + row.id + ")' style=''/>";
                     }
                     return data;
                 },
@@ -50,23 +62,14 @@ $(function () {
         buttons: [
             {
                 text: 'Добавить ученика',
-                action: function ( e, dt, node, config ) {
+                action: function (e, dt, node, config) {
+                    $('.modal-title').text('Добавить ученика');
                     showModal(myModal);
                 }
             }
         ]
-
-
     });
-
-    $('#saveKind').on('click', function(){
-        $.post(ajaxUrl+"/save", $('#kind-detailsForm').serialize())
-            .done(function(){
-                myModal.modal('toggle');
-                datatable.ajax.reload();
-            });
-    });
-});
+}
 
 
 

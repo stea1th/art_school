@@ -46,8 +46,9 @@ public class ZahlungServiceImpl implements ZahlungService {
 
     @Override
     @Transactional
-    public void toggleAktiv(int id) {
+    public boolean toggleAktiv(int id) {
         Zahlung zahlung = get(id);
         zahlung.setAktiv(!zahlung.isAktiv());
+        return zahlung.isAktiv();
     }
 }

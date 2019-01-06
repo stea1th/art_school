@@ -3,9 +3,22 @@ var ajaxUrl = "admin";
 var datatable;
 
 $(function () {
+
+    createAdminTable();
+
+    // $('#saveKind').on('click', function(){
+    //     $.post(ajaxUrl+"/save", $('#kind-detailsForm').serialize())
+    //         .done(function(){
+    //             myModal.modal('toggle');
+    //             datatable.ajax.reload();
+    //         });
+    // });
+});
+
+function createAdminTable() {
     datatable = $('#admins').DataTable({
         "language": {
-            "url": "http://cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json"
+            "url": languageUrl
         },
 
         "ajax": {
@@ -57,12 +70,4 @@ $(function () {
             }
         ]
     });
-
-    // $('#saveKind').on('click', function(){
-    //     $.post(ajaxUrl+"/save", $('#kind-detailsForm').serialize())
-    //         .done(function(){
-    //             myModal.modal('toggle');
-    //             datatable.ajax.reload();
-    //         });
-    // });
-});
+}

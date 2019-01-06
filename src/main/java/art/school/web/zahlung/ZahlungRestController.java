@@ -25,9 +25,8 @@ public class ZahlungRestController extends AbstractZahlungController {
     }
 
     @PostMapping(value = "/toggle/{id}")
-    public ResponseEntity<String> toggle(@PathVariable("id") int id) {
-        super.toggleAktiv(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Boolean> toggle(@PathVariable("id") int id) {
+        return new ResponseEntity<>(super.toggleAktiv(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/filter/aktiv", produces = MediaType.APPLICATION_JSON_VALUE)

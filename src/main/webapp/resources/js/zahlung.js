@@ -10,7 +10,7 @@ $(function () {
 function createZahlungTable() {
     datatable = $('#zahlungen').DataTable({
         "language": {
-            "url": "http://cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json"
+            "url": languageUrl
         },
 
         "ajax": {
@@ -69,6 +69,7 @@ function createZahlungTable() {
                 name: 'primary',
                 text: 'Добавить способ оплаты',
                 action: function (e, dt, node, config) {
+                    $('.modal-title').text('Добавить способ оплаты');
                     showModal(myModal);
                 }
             }
@@ -78,26 +79,7 @@ function createZahlungTable() {
 
 function saveOrUpdateZahlung() {
     $('#saveZahlung').on('click', function () {
-        $.post(ajaxUrl + "/save", $('#zahlung-detailsForm').serialize())
-            .done(function (data) {
-                myModal.modal('toggle');
-                $.each(data, function (k, v) {
-                    if (k === 'Save') {
-                        succesNoty('Объект "' + v + '"' + " удачно сохранен");
-                    } else {
-                        succesNoty('Объект "' + v + '"' + " удачно обновлен");
-                    }
-                });
-                datatable.ajax.reload();
-            })
-            .fail(function (jqXHR, textStatus) {
-                // var errorInfo = JSON.parse(jqXHR.responseText);
-                // console.log(jqXHR);
-                // console.log(textStatus);
-                if (jqXHR.status === 422) {
-                    failNoty('Ошибка ' + jqXHR.status + ':\n Цена и Время не должны повторяться');
-                }
-            });
+        saveOrUpdate($('#zahlung-detailsForm'), "Объект");
     });
 }
 

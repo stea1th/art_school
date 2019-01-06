@@ -1,10 +1,41 @@
 var ajaxUrl;
+var languageUrl = "http://cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json";
 
 $(function () {
+    manageNavBar();
+
+    createAnimationOnWelcome();
+});
+
+function saveOrUpdate(form, name) {
+    var successIcon = "<span><i class='far fa-check-circle '></i></span> &nbsp;";
+    var failIcon = "<span><i class='far fa-times-circle'></i></span> &nbsp;";
+    $.post(ajaxUrl + "/save", form.serialize())
+        .done(function (data) {
+            myModal.modal('toggle');
+            $.each(data, function (k, v) {
+                if (k === 'Save') {
+                    succesNoty(successIcon, name + ' "' + v + '"' + " удачно сохранен");
+                } else {
+                    succesNoty(successIcon, name + ' "' + v + '"' + " удачно обновлен");
+                }
+            });
+            datatable.ajax.reload();
+        })
+        .fail(function (jqXHR, textStatus) {
+            if (jqXHR.status === 422) {
+                failNoty(failIcon, 'Ошибка ' + jqXHR.status + ':\n Цена и Время не должны повторяться');
+            }
+        });
+}
+
+function manageNavBar() {
     $('ul.navbar-nav li.active').removeClass('active');
     $('a[href="' + location.pathname.replace("/", "") + '"]').closest('li').addClass('active');
+}
 
-    if(window.location.pathname === "/login"){
+function createAnimationOnWelcome() {
+    if (window.location.pathname === "/login") {
         $('#polygonizr').polygonizr({
             restNodeMovements: 1,
             duration: 3,
@@ -18,18 +49,16 @@ $(function () {
             canvasPosition: "absolute",
             nodeRelations: 3,
             specifyPolygonMeshNetworkFormation: function (i) {
-                var forEachNode = {
+                return {
                     // Half a circle and randomized
                     x: this.canvasWidth - ((this.canvasWidth / 2) + (this.canvasHeight / 2) * Math.cos(i * (2 * Math.PI / this.numberOfNodes))) * Math.random(),
                     y: this.canvasHeight - (this.canvasHeight * (i / this.numberOfNodes))
                 };
-                return forEachNode;
             },
             randomizePolygonMeshNetworkFormation: true
         });
     }
-
-});
+}
 
 
 function renderEditBtn(data, type, row) {
@@ -58,12 +87,15 @@ function updateRow(id) {
         .done(function (data) {
             $.each(data, function (k, v) {
                 if ($('#slider1').length) {
+                    $('.modal-title').text('Обновить способ оплаты');
                     if (k === 'preis') {
                         setPreis(v);
                     }
-                    if(k === 'dauer'){
+                    if (k === 'dauer') {
                         setZeit(v);
                     }
+                } else {
+                    $('.modal-title').text('Обновить ученика');
                 }
                 $('form').find('input[name=' + k + ']').val(v);
                 showModal(myModal);
@@ -73,12 +105,19 @@ function updateRow(id) {
 }
 
 function toggleThis(id) {
-    $.post(ajaxUrl + "/toggle/" + id, {"id": id});
+    $.post(ajaxUrl + "/toggle/" + id, {"id": id})
+        .done(function(data){
+            toggleOnOff(data);
+        });
 }
 
-// function toggleThisWithUrl(url, id) {
-//     $.post(url + "/toggle/" + id, {"id": id});
-// }
+function toggleOnOff(data) {
+    if(data){
+        succesNoty("<i class=\"far fa-eye \"></i>", " Включили");
+    } else {
+        failNoty("<i class=\"far fa-eye-slash \"></i>", " Выключили");
+    }
+}
 
 function showModal(modalName) {
 
@@ -91,30 +130,30 @@ function showModal(modalName) {
 
 }
 
-function succesNoty(text){
+function succesNoty(icon, text) {
     new Noty({
         type: 'success',
-        text: "<span><i class='far fa-check-circle '></i></span> &nbsp;" + text,
+        text: icon + text,
         theme: 'bootstrap-v4',
-        layout: 'topCenter',
-        // timeout: 1500
+        layout: 'bottomRight',
+        timeout: 1500,
         animation: {
-            open : 'animated jackInTheBox',
-            close: 'animated hinge'
+            open: 'animated bounceInLeft',
+            close: 'animated bounceOutRight'
         }
     }).show();
 }
 
-function failNoty(text){
+function failNoty(icon, text) {
     new Noty({
         type: 'error',
-        text: "<span><i class='far fa-times-circle'></i></span> &nbsp;" + text,
+        text: icon + text,
         theme: 'bootstrap-v4',
-        layout: 'topCenter',
-        // timeout: 1500
+        layout: 'bottomRight',
+        timeout: 1500,
         animation: {
-            open : 'animated jackInTheBox',
-            close: 'animated hinge'
+            open: 'animated bounceInLeft',
+            close: 'animated bounceOutRight'
         }
 
     }).show();
@@ -124,19 +163,23 @@ function warnNoty(text) {
     var n = new Noty({
         type: 'warning',
         text: "<span><i class='fas fa-exclamation-circle'></i></span> &nbsp;"
-         + "Вы уверены, что готовы удалить данный объект?",
-        theme: 'bootstrap-v4',
+        + "Вы уверены, что готовы удалить данный объект?",
+        theme: 'semanticui',
         layout: 'center',
         // timeout: 1500
         animation: {
-            open : 'animated jackInTheBox',
+            open: 'animated jackInTheBox',
             close: 'animated hinge'
         },
         buttons: [
-            Noty.button('ДА', 'btn btn-success', function () {
+            Noty.button('ДА', 'btn btn-danger btn-sm', function () {
                 deleteRow(text);
                 n.close();
-            }, {id: 'button1', 'data-status': 'ok'})
+            }, {id: 'button1', 'data-status': 'ok'}),
+
+            Noty.button('НЕТ', 'btn btn-success btn-sm', function () {
+                n.close();
+            })
         ]
     }).show();
 }

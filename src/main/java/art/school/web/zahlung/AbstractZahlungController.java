@@ -44,9 +44,9 @@ public abstract class AbstractZahlungController {
         return zahlungService.getAll();
     }
 
-    public void toggleAktiv(int id){
+    public boolean toggleAktiv(int id){
         log.info("toggle Zahlung {} Status", id);
-        zahlungService.toggleAktiv(id);
+        return zahlungService.toggleAktiv(id);
     }
 
 }
