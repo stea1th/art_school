@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static art.school.util.ValidationUtil.assureIdConsistent;
 import static art.school.util.ValidationUtil.checkNew;
@@ -67,5 +69,16 @@ public abstract class AbstractUnterrichtController {
     public List<Unterricht> getAll(){
         log.info("getAll Unterrichts");
         return unterrichtService.getAll();
+    }
+
+    public Set<Integer> getYears(){
+       return getAll().stream().map(i-> i.getDatum().getYear()).collect(Collectors.toSet());
+    }
+
+    public List<Unterricht> getAllByYear(int year){
+        return unterrichtService.getAll()
+                .stream()
+                .filter(i-> i.getDatum().getYear() == year)
+                .collect(Collectors.toList());
     }
 }

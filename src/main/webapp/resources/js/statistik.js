@@ -4,15 +4,42 @@ var myData;
 var myLabel;
 
 $(function () {
-    $.get(ajaxStatistik + "/test")
-        .done(function (data) {
-            console.log(data);
-            createChart(data);
-            console.log(barChart.data.datasets[0]);
-        });
+    getYearsForSelect();
+    getStatisticOnYearChange();
 });
 
+function getYearsForSelect() {
+    var sel = $('#statistik');
+    $.get(ajaxStatistik + "/years").done(function (data) {
+        $.each(data, function (k, v) {
+            sel.append('<option value="' + v + '" selected>' + v + '</option>');
+        });
+        getStatistic(sel.val());
+    });
+}
+
+function getStatisticOnYearChange() {
+    var sel = $('#statistik');
+    sel.on('change', function () {
+        getStatistic(sel.val());
+    })
+}
+
+function getStatistic(year) {
+    $.get(ajaxStatistik + "/chart/" + year)
+        .done(function (data) {
+            console.log(data);
+            if(barChart === undefined){
+                createChart(data);
+            } else {
+                fillChartWithData(data);
+            }
+
+        });
+}
+
 function addValue(data) {
+    console.log(data);
     myData = data[0];
     removeData();
     $.map(myData, function (d) {
@@ -36,10 +63,11 @@ function onClickSelectCategory(e) {
     if (activePoints[0]) {
         var idx = activePoints[0]['_index'];
         myLabel = activePoints[0]['_model'].label;
-        if(myData[idx].childrens === null){
+        console.log(myData[idx]);
+        if (myData[idx].childrens === null) {
             return;
         }
-        // console.log(myData[idx]);
+        console.log(myData[idx]);
         // $.each(myData[idx], function(k, v){
         //     console.log(k+" "+v);
         // });
@@ -48,9 +76,6 @@ function onClickSelectCategory(e) {
 }
 
 function createChart(data) {
-    myData = $.map(data, function (n, i) {
-        return [[n.childrens]];
-    });
 
     barChart = new Chart($('#myChart'), {
         type: 'bar',
@@ -86,9 +111,17 @@ function createChart(data) {
             }
         }
     });
+    fillChartWithData(data);
+}
+
+function fillChartWithData(data) {
+    removeData();
+    myData = $.map(data, function (n, i) {
+        return [[n.childrens]];
+    });
 
     $.map(data, function (d) {
-        console.log(d.name);
+        // console.log(d.name+" "+d.value);
         barChart.data.labels.push(d.name);
         barChart.data.datasets[0].data.push(d.value);
     });

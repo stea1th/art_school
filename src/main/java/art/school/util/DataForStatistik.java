@@ -20,8 +20,12 @@ import java.util.stream.Collectors;
 public class DataForStatistik {
 
     public static List<MonthForStatistik> getResponse(List<Unterricht> unterrichts) {
+        if(unterrichts.isEmpty()){
+            return null;
+        }
         List<MonthForStatistik> all = getAllMonth();
 
+        int year = unterrichts.get(0).getDatum().getYear();
 
         unterrichts.stream()
                 .collect(Collectors.groupingBy(i -> i.getDatum()
@@ -32,16 +36,16 @@ public class DataForStatistik {
                     MonthForStatistik m = all.get(key.getValue() - 1);
                     m.setMonat(key);
                     m.setValue(BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP));
-                    m.setChildrens(getWeeks(unterrichts, key));
+                    m.setChildrens(getWeeks(unterrichts, key, year));
                     all.set(key.getValue() - 1, m);
                 });
 
         return all;
     }
 
-    private static List<WeeksForStatistik> getWeeks(List<Unterricht> unterrichts, Month monat) {
+    private static List<WeeksForStatistik> getWeeks(List<Unterricht> unterrichts, Month monat, int year) {
 
-        List<WeeksForStatistik> allWeeks = getAllWeeksForMonth(monat);
+        List<WeeksForStatistik> allWeeks = getAllWeeksForMonth(monat, year);
 
         unterrichts.stream().filter(i -> i.getDatum().getMonth().equals(monat))
                 .collect(Collectors.groupingBy(i -> i.getDatum()
@@ -49,7 +53,8 @@ public class DataForStatistik {
                                 .get(WeekFields.ISO.weekOfYear()),
                         Collectors.summingDouble(x -> x.getZahlung().getPreis().doubleValue())))
                 .forEach((key, value) -> allWeeks.stream()
-                        .filter(w -> w.getNummer().equals(key)).forEachOrdered(w -> w.setValue(BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP))));
+                        .filter(w -> w.getNummer().equals(key))
+                        .forEachOrdered(w -> w.setValue(BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP))));
         return allWeeks;
     }
 
@@ -71,10 +76,10 @@ public class DataForStatistik {
 
     }
 
-    private static List<WeeksForStatistik> getAllWeeksForMonth(Month month) {
+    private static List<WeeksForStatistik> getAllWeeksForMonth(Month month, int year) {
         List<WeeksForStatistik> allWeeks = new LinkedList<>();
-        LocalDate first = LocalDate.of(2018, month, 1);
-        LocalDate last = LocalDate.of(2018, month, month.length(first.isLeapYear()));
+        LocalDate first = LocalDate.of(year, month, 1);
+        LocalDate last = LocalDate.of(year, month, month.length(first.isLeapYear()));
         int fWeek = first.get(WeekFields.ISO.weekOfYear());
         int lWeek = last.get(WeekFields.ISO.weekOfYear());
         String firstWeek = first.getDayOfMonth() + " - " + first.with(DayOfWeek.SUNDAY).getDayOfMonth();
