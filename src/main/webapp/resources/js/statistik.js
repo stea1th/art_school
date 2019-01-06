@@ -34,7 +34,6 @@ function getStatistic(year) {
             } else {
                 fillChartWithData(data);
             }
-
         });
 }
 
@@ -53,7 +52,7 @@ function addValue(data) {
 function removeData() {
     barChart.data.labels.splice(0, barChart.data.labels.length);
     barChart.data.datasets[0].data.splice(0, barChart.data.datasets[0].data.length);
-    // barChart.data.datasets[0].label.splice(0, barChart.data.datasets[0].label.length);
+    barChart.data.datasets[0].label = "";
     barChart.update();
 }
 
@@ -63,11 +62,11 @@ function onClickSelectCategory(e) {
     if (activePoints[0]) {
         var idx = activePoints[0]['_index'];
         myLabel = activePoints[0]['_model'].label;
-        console.log(myData[idx]);
+        // console.log(myData[idx]);
         if (myData[idx].childrens === null) {
             return;
         }
-        console.log(myData[idx]);
+        // console.log(myData[idx]);
         // $.each(myData[idx], function(k, v){
         //     console.log(k+" "+v);
         // });
@@ -83,7 +82,7 @@ function createChart(data) {
             datasets: [{
                 backgroundColor: 'rgba(255, 99, 132, 0.8)',
 
-                label: 'Test Label'
+                 label: $('#statistik').val()
             }]
         },
         options: {
@@ -122,6 +121,8 @@ function fillChartWithData(data) {
 
     $.map(data, function (d) {
         // console.log(d.name+" "+d.value);
+        // console.log(barChart.data.datasets[0].label);
+        barChart.data.datasets[0].label = $('#statistik').val();
         barChart.data.labels.push(d.name);
         barChart.data.datasets[0].data.push(d.value);
     });
