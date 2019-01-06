@@ -3,6 +3,11 @@ var myModal = $('#createZahlung');
 var datatable;
 
 $(function () {
+    createZahlungTable();
+    saveOrUpdateZahlung();
+});
+
+function createZahlungTable() {
     datatable = $('#zahlungen').DataTable({
         "language": {
             "url": "http://cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json"
@@ -69,16 +74,18 @@ $(function () {
             }
         ]
     });
+}
 
+function saveOrUpdateZahlung() {
     $('#saveZahlung').on('click', function () {
         $.post(ajaxUrl + "/save", $('#zahlung-detailsForm').serialize())
             .done(function (data) {
                 myModal.modal('toggle');
                 $.each(data, function (k, v) {
-                    if(k==='Save'){
-                        succesNoty('Объект "'+v+'"' + " удачно сохранен");
+                    if (k === 'Save') {
+                        succesNoty('Объект "' + v + '"' + " удачно сохранен");
                     } else {
-                        succesNoty('Объект "'+v+'"' + " удачно обновлен");
+                        succesNoty('Объект "' + v + '"' + " удачно обновлен");
                     }
                 });
                 datatable.ajax.reload();
@@ -87,14 +94,12 @@ $(function () {
                 // var errorInfo = JSON.parse(jqXHR.responseText);
                 // console.log(jqXHR);
                 // console.log(textStatus);
-                if(jqXHR.status === 422){
+                if (jqXHR.status === 422) {
                     failNoty('Ошибка ' + jqXHR.status + ':\n Цена и Время не должны повторяться');
                 }
-
             });
     });
-
-});
+}
 
 
 

@@ -1,4 +1,5 @@
 var ajaxStatistik = "statistik";
+var sel = $('#statistik');
 var barChart;
 var myData;
 var myLabel;
@@ -9,7 +10,6 @@ $(function () {
 });
 
 function getYearsForSelect() {
-    var sel = $('#statistik');
     $.get(ajaxStatistik + "/years").done(function (data) {
         $.each(data, function (k, v) {
             sel.append('<option value="' + v + '" selected>' + v + '</option>');
@@ -19,7 +19,6 @@ function getYearsForSelect() {
 }
 
 function getStatisticOnYearChange() {
-    var sel = $('#statistik');
     sel.on('change', function () {
         getStatistic(sel.val());
     })
@@ -58,18 +57,12 @@ function removeData() {
 
 function onClickSelectCategory(e) {
     var activePoints = barChart.getElementsAtEvent(e);
-    // console.log(activePoints);
     if (activePoints[0]) {
         var idx = activePoints[0]['_index'];
         myLabel = activePoints[0]['_model'].label;
-        // console.log(myData[idx]);
         if (myData[idx].childrens === null) {
             return;
         }
-        // console.log(myData[idx]);
-        // $.each(myData[idx], function(k, v){
-        //     console.log(k+" "+v);
-        // });
         addValue(myData[idx]);
     }
 }
@@ -82,7 +75,7 @@ function createChart(data) {
             datasets: [{
                 backgroundColor: 'rgba(255, 99, 132, 0.8)',
 
-                 label: $('#statistik').val()
+                 label: sel.val()
             }]
         },
         options: {
@@ -120,9 +113,7 @@ function fillChartWithData(data) {
     });
 
     $.map(data, function (d) {
-        // console.log(d.name+" "+d.value);
-        // console.log(barChart.data.datasets[0].label);
-        barChart.data.datasets[0].label = $('#statistik').val();
+        barChart.data.datasets[0].label = sel.val();
         barChart.data.labels.push(d.name);
         barChart.data.datasets[0].data.push(d.value);
     });
