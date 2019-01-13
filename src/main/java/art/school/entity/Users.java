@@ -33,6 +33,9 @@ public class Users extends AbstractBaseEntity {
     @Size(max = 100)
     private String email;
 
+    @Column(name = "admin_passwort", nullable = false)
+    private String adminPasswort;
+
     @Column(name = "passwort", nullable = false)
     @NotBlank
     private String passwort;

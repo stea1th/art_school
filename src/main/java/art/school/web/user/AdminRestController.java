@@ -24,7 +24,6 @@ public class AdminRestController extends AbstractUserController {
     @PostMapping("/toggle/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity<String> toggle(@PathVariable("id") Integer id) {
-//        System.out.println(id +" должно работать");
         super.toggleAktiv(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

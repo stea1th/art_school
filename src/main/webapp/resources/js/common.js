@@ -159,12 +159,12 @@ function failNoty(icon, text) {
     }).show();
 }
 
-function warnNoty(text) {
+function warnNoty(id) {
     var n = new Noty({
         type: 'warning',
-        text: "<span><i class='fas fa-exclamation-circle'></i></span> &nbsp;"
+        text: "<span><i class='fas fa-exclamation-circle fa-2x'></i></span> &nbsp;"
         + "Вы уверены, что готовы удалить данный объект?",
-        theme: 'semanticui',
+        theme: 'bootstrap-v4',
         layout: 'center',
         // timeout: 1500
         animation: {
@@ -172,12 +172,12 @@ function warnNoty(text) {
             close: 'animated hinge'
         },
         buttons: [
-            Noty.button('ДА', 'btn btn-danger btn-sm', function () {
-                deleteRow(text);
+            Noty.button('Да', 'btn btn-danger btn-sm', function () {
+                deleteRow(id);
                 n.close();
             }, {id: 'button1', 'data-status': 'ok'}),
 
-            Noty.button('НЕТ', 'btn btn-success btn-sm', function () {
+            Noty.button('Нет', 'btn btn-success btn-sm', function () {
                 n.close();
             })
         ]

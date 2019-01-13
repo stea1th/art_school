@@ -14,9 +14,9 @@ insert into zahlung (name, preis, dauer, aktiv) values
   ('Сорок пять минут', 24.69, '00:45', true),
   ('Полтора часа', 48.34, '01:30', true);
 
-insert into users (name, email, passwort) values
-  ('Светлана', 'svet@ok.ru', '$2a$10$dc2vjd2c7rQYLPHCaKdml.N3XPY2rTmccrTo/F8r9ifJdQEQB1Hkq'),
-  ('Вадим', '1@1.de', '$2a$10$h3Kx2bbcXcNDK2ZabTGqUuO1k8iZ1T1YPOZQ7cq5rptIpGHf30prO');
+insert into users (name, email, admin_passwort, passwort) values
+  ('Светлана', 'svet@ok.ru', '123', '$2a$10$dc2vjd2c7rQYLPHCaKdml.N3XPY2rTmccrTo/F8r9ifJdQEQB1Hkq'),
+  ('Вадим', '1@1.de', '1', '$2a$10$h3Kx2bbcXcNDK2ZabTGqUuO1k8iZ1T1YPOZQ7cq5rptIpGHf30prO');
 
 insert into user_roles (role, user_id) values
   ('ROLE_USER', 1005),

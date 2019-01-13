@@ -19,7 +19,7 @@ public class UserTo {
     private Integer id;
     private String name;
     private String email;
-//    private String passwort;
+    private String adminPasswort;
     private String roles;
     private boolean aktiv;
     private String registriert;
@@ -28,6 +28,7 @@ public class UserTo {
         this(u.getId(),
                 u.getName(),
                 u.getEmail(),
+                u.getAdminPasswort(),
                 u.getRoles()
                         .stream()
                         .map(Role::getName)

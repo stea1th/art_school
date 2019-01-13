@@ -47,6 +47,7 @@ create table users
   id integer primary key default nextval('global_seq'),
   name              VARCHAR                 NOT NULL,
   email             VARCHAR                 NOT NULL,
+  admin_passwort    VARCHAR                 NOT NULL,
   passwort          VARCHAR                 NOT NULL,
   registriert       TIMESTAMP DEFAULT now() NOT NULL,
   aktiv             BOOL DEFAULT TRUE       NOT NULL

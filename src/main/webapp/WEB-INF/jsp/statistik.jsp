@@ -9,18 +9,18 @@
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>
 <%--<div align="center">--%>
-    <%--<input type="button" value="Test" id="test-btn"/>--%>
+<%--<input type="button" value="Test" id="test-btn"/>--%>
 <%--</div>--%>
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ml-auto mr-auto">
             <div class="card border-light mb-3" id="calendar-card">
                 <div class="card-body">
-                    <div align="center">
-                        <select id="statistik" name="statistik" class="custom-select" required="required">
+                    <div class="form-group">
+                        <select id="statistik" name="statistik" class="custom-select form-control" required="required">
                         </select>
+                        <canvas id="myChart"></canvas>
                     </div>
-                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
