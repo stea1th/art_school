@@ -119,6 +119,20 @@ function toggleOnOff(data) {
     }
 }
 
+function getSelect(url, sel, name) {
+    sel.empty().append('<option disabled selected>' + name + '</option>');
+    $.getJSON(url, function (data) {
+        $.each(data, function (key, val) {
+            if(val.id === undefined){
+                sel.append('<option value="' + key + '">' + val + '</option>')
+            } else {
+                sel.append('<option value="' + val.id + '">' + val.name + '</option>')
+            }
+        });
+    });
+    return sel;
+}
+
 function showModal(modalName) {
 
     modalName.modal('show');

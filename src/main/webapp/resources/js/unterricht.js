@@ -145,16 +145,6 @@ function renderMenuBtn(id, name, url, aktiv) {
     return btn;
 }
 
-function getSelect(url, sel, name) {
-    sel.empty().append('<option disabled selected>' + name + '</option>');
-    $.getJSON(url + "/filter/aktiv", function (data) {
-        $.each(data, function (key, val) {
-            sel.append('<option value="' + val.id + '">' + val.name + '</option>')
-        });
-    });
-    return sel;
-}
-
 function saveUnterricht() {
 
     $.post(ajaxUnterricht + '/save', $('#detailsForm').serialize())
@@ -207,8 +197,8 @@ function updateUnterricht(event, zt) {
 function createUnterricht(date, zt) {
     $('#create').text('Создать урок');
     $('#datum').val(date.format());
-    getSelect(ajaxKind, $('#kind'), 'Выберите ученика');
-    getSelect(ajaxZahlung, $('#zahlung'), 'Выберите оплату');
+    getSelect(ajaxKind + "/filter/aktiv", $('#kind'), 'Выберите ученика');
+    getSelect(ajaxZahlung + "/filter/aktiv", $('#zahlung'), 'Выберите оплату');
     $(this).on('click', function () {
         myModal.modal('show');
     });

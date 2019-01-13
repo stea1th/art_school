@@ -1,11 +1,11 @@
 var ajaxUrl = "admin";
-// var myModal = $('#createUser');
+var myModal = $('#createOrUpdateUser');
 var datatable;
 
 $(function () {
 
     createAdminTable();
-    hideToggleByAdmin();
+
 
     // $('#saveKind').on('click', function(){
     //     $.post(ajaxUrl+"/save", $('#kind-detailsForm').serialize())
@@ -15,10 +15,6 @@ $(function () {
     //         });
     // });
 });
-
-function hideToggleByAdmin() {
-    // console.log($('tbody'));
-}
 
 function createAdminTable() {
     datatable = $('#admins').DataTable({
@@ -43,14 +39,7 @@ function createAdminTable() {
             {"data": "name"},
             {"data": "email"},
             {"data": "adminPasswort"},
-            {"data": "roles"
-                // "render": function(data, type, row){
-                //     console.log(data + " "+"1");
-                //     console.log(type + " "+"2");
-                //     console.log(row + " "+"3");
-                //     return data;
-                // }
-            },
+            {"data": "roles"},
             {"data": "aktiv",
                 "render": function (data, type, row) {
                     if (type === "display") {
@@ -82,9 +71,11 @@ function createAdminTable() {
             {
                 text: 'Добавить пользователя',
                 action: function ( e, dt, node, config ) {
-                    // showModal(myModal);
+                    getSelect(ajaxUrl + "/roles", $('#roles'), "Выбери роль");
+                    showModal(myModal);
                 }
             }
         ]
     });
 }
+

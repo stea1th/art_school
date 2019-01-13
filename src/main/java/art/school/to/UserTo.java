@@ -21,6 +21,7 @@ public class UserTo {
     private String email;
     private String adminPasswort;
     private String roles;
+//    private Role roles;
     private boolean aktiv;
     private String registriert;
 
@@ -31,8 +32,9 @@ public class UserTo {
                 u.getAdminPasswort(),
                 u.getRoles()
                         .stream()
+                        .sorted((x1, x2) -> x2.ordinal()-x1.ordinal())
                         .map(Role::getName)
-                        .collect(Collectors.joining("," + System.lineSeparator())),
+                        .findFirst().orElse(null),
                 u.getAktiv(),
                 u.getRegistriert().truncatedTo(ChronoUnit.SECONDS)
                         .toString().replace("T", " "));
