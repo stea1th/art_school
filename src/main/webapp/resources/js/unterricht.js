@@ -23,6 +23,8 @@ function createFullCalendar(zt) {
         header: {center: 'month, agendaWeek, list'},
 
         dayClick: function (date, jsEvent, view) {
+            console.log(jsEvent);
+            console.log(view);
             createUnterricht(date, zt);
         },
         themeSystem: 'bootstrap4',
@@ -199,9 +201,7 @@ function createUnterricht(date, zt) {
     $('#datum').val(date.format());
     getSelect(ajaxKind + "/filter/aktiv", $('#kind'), 'Выберите ученика');
     getSelect(ajaxZahlung + "/filter/aktiv", $('#zahlung'), 'Выберите оплату');
-    $(this).on('click', function () {
-        myModal.modal('show');
-    });
+    showModal(myModal);
     myModal.on('hidden.bs.modal', function () {
         $(this).find('form')[0].reset();
         $('#zeit').val(zt);
