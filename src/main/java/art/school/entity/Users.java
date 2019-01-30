@@ -13,6 +13,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
@@ -54,5 +56,11 @@ public class Users extends AbstractBaseEntity {
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
+    private List<Unterricht> themes;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
+    private List<Unterricht> nachrichts;
 
 }

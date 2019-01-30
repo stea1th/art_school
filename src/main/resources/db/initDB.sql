@@ -1,4 +1,6 @@
 drop table if exists user_roles;
+drop table if exists nachricht;
+drop table if exists thema;
 drop table if exists unterricht;
 drop table if exists zahlung;
 drop table if exists kind;
@@ -53,6 +55,27 @@ create table users
   aktiv             BOOL DEFAULT TRUE       NOT NULL
 );
 create unique index user_unique_email_index on users(email);
+
+create table thema
+(
+  id integer primary key default nextval('global_seq'),
+  titel varchar not null,
+  views integer not null,
+  aktiv bool default true not null,
+  u_id integer not null,
+  foreign key (u_id) references users(id) on delete cascade
+);
+
+create table nachricht
+(
+  id integer primary key default nextval('global_seq'),
+  text varchar not null,
+  datum timestamp default now() not null,
+  u_id integer not null,
+  t_id integer not null,
+  foreign key (u_id) references users(id) on delete cascade,
+  foreign key (t_id) references thema(id) on delete cascade
+);
 
 create table user_roles
 (
