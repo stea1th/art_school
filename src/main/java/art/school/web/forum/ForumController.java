@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping(value = "/forum")
 public class ForumController extends AbstractForumController {
 
-    @GetMapping
+    @GetMapping(value = "/test")
     public List<Thema> all(){
         return super.getAll();
     }
