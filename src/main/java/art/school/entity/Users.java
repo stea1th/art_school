@@ -57,8 +57,8 @@ public class Users extends AbstractBaseEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    private List<Thema> themes;
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+//    private List<Thema> themes;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Nachricht> nachrichts;

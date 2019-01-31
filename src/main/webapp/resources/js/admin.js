@@ -45,7 +45,7 @@ function createAdminTable() {
                     if (type === "display") {
                         var checkbox = "<input type='checkbox' " + (data? "checked" : "") + " onclick='toggleThis(" + row.id + ")' style=''/>";
                         if(row.roles.indexOf('Администратор')!== -1){
-                            checkbox = "<input type='checkbox' " + (data? "checked" : "") + " onclick='toggleThis(" + row.id + ")' style='' disabled='disabled'/>";
+                            $(checkbox).attr("disabled", "disabled");
                         }
                         return checkbox;
                     }

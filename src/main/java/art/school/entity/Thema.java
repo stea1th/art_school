@@ -4,12 +4,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -23,19 +22,16 @@ public class Thema extends AbstractBaseEntity{
     @NotBlank
     private String titel;
 
-    @Column(name = "views", nullable = false)
+    @Column(name = "views", nullable = false, columnDefinition = "integer default 0")
     @NotNull
     private int views;
 
-    @Column(name = "aktiv")
+    @Column(name = "aktiv", columnDefinition = "bool default true")
     @NotBlank
     private Boolean aktiv;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "u_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
-    private Users user;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "thema")
+    private List<Nachricht> nachrichts;
 
     public Thema(Integer id, @NotBlank String titel, @NotNull int views, @NotNull boolean aktiv) {
         super(id);

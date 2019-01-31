@@ -12,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 
 @EqualsAndHashCode(callSuper = true)
@@ -29,7 +30,7 @@ public class Nachricht extends AbstractBaseEntity{
     @Column(name = "datum", nullable = false, columnDefinition = "timestamp default now()")
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime datum;
+    private LocalDateTime datum = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "u_id")

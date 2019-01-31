@@ -60,10 +60,10 @@ create table thema
 (
   id integer primary key default nextval('global_seq'),
   titel varchar not null,
-  views integer not null,
-  aktiv bool default true not null,
-  u_id integer not null,
-  foreign key (u_id) references users(id) on delete cascade
+  views integer default 0 not null,
+  aktiv bool default true not null
+--   u_id integer not null,
+--   foreign key (u_id) references users(id) on delete cascade
 );
 
 create table nachricht
