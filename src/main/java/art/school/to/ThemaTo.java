@@ -20,6 +20,7 @@ public class ThemaTo {
     private int views;
     private int replies;
     private String last;
+    private boolean pinned;
 
     public ThemaTo(Thema thema){
         this(thema.getId(), thema.getTitel(),
@@ -27,7 +28,8 @@ public class ThemaTo {
                 thema.getViews(),
                 thema.getNachrichts().size()-1,
                 DateUtil.transformDateForForum(thema.getNachrichts().get(thema.getNachrichts().size()-1)
-                        .getDatum())
+                        .getDatum()),
+                thema.isGepinnt()
                 );
     }
 }

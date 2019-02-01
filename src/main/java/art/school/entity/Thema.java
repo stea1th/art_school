@@ -28,12 +28,16 @@ public class Thema extends AbstractBaseEntity{
 
     @Column(name = "aktiv", columnDefinition = "bool default true")
     @NotBlank
-    private Boolean aktiv;
+    private boolean aktiv;
+
+    @Column(name = "gepinnt", columnDefinition = "bool default false")
+    @NotBlank
+    private boolean gepinnt;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "thema")
     private List<Nachricht> nachrichts;
 
-    public Thema(Integer id, @NotBlank String titel, @NotNull int views, @NotNull boolean aktiv) {
+    public Thema(Integer id, @NotBlank String titel, @NotNull int views, @NotNull boolean aktiv, @NotNull boolean gepinnt) {
         super(id);
         this.titel = titel;
         this.views = views;
@@ -41,6 +45,6 @@ public class Thema extends AbstractBaseEntity{
     }
 
     public Thema(@NotBlank String titel) {
-        this(null, titel, 0, true);
+        this(null, titel, 0, true, false);
     }
 }

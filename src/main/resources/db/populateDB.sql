@@ -33,10 +33,10 @@ insert into unterricht (k_id, z_id, datum, bezahlt, notiz) values
   (1001, 1003, '26.10.2018', false, 'Привет пукешка!!'),
   (1001, 1003, '28.10.2018', false, 'Привет пукешка!!');
 
-insert into thema (titel) values
-  ('В мире животных'),
-  ('Как молоды мы были'),
-  ('Облака, белокрылые лошадки');
+insert into thema (titel, gepinnt) values
+  ('В мире животных', false),
+  ('Как молоды мы были', true),
+  ('Облака, белокрылые лошадки', false );
 
 insert into nachricht(u_id, t_id, text) values
   (1005, 1015, 'Какие прекрасные звери, как вам кажется? Есть ли в них достаточная грациозность?'),

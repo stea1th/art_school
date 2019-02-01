@@ -21,28 +21,39 @@ function createThemeTable() {
         "language": {
             "url": languageUrl
         },
-        "order": [[ 5, "desc" ]],
+        "order": [[6, "desc"], [5, "desc" ]],
         "ajax": {
             "url": ajaxUrl,
             "dataSrc": ""
         },
-
+        "createdRow": function( row, data, dataIndex ) {
+            if (data.pinned === true) {
+                $(row).children().each(function(){
+                    $(this).css('background-color', '#eeded9');
+                    $(this).css('color', 'red');
+                });
+            } else {
+                $(row).children().each(function(){
+                    $(this).css('color', 'blue');
+                });
+            }
+        },
         "columnDefs": [
             {
-                "targets": [0],
+                "targets": [0, 6],
                 "visible": false,
                 "searchable": false
             }
         ],
         "columns": [
             {"data": "id"},
-            {"data": "titel",
-                "orderable": false},
+            {"data": "titel"},
             {"data": "creator"},
             {"data": "views"},
             {"data": "replies"},
-            {"data": "last"
-            }
+            {"data": "last"},
+            {"data": "pinned"}
+
             // {"data": "aktiv",
             //     "render": function (data, type, row) {
             //         if (type === "display") {

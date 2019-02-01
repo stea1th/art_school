@@ -26,6 +26,7 @@
                             <th class="w-10">Просмотров</th>
                             <th class="w-10">Ответов</th>
                             <th class="w-15">Последнее</th>
+                            <th>Pinned</th>
                             <%--<sec:authorize access="hasRole('ROLE_ADMIN')">--%>
                                 <%--<th></th>--%>
                                 <%--<th></th>--%>
@@ -40,6 +41,7 @@
                             <th class="w-10">Просмотров</th>
                             <th class="w-10">Ответов</th>
                             <th class="w-15">Последнее</th>
+                            <th>Pinned</th>
                             <%--<sec:authorize access="hasRole('ROLE_ADMIN')">--%>
                                 <%--<th></th>--%>
                                 <%--<th></th>--%>
