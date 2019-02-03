@@ -17,38 +17,44 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ml-auto mr-auto">
             <div class="card border-light mb-3" id="table-card3">
                 <div class="card-body">
-                    <table id="forum" class="display responsive no-wrap" width="100%">
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th class="w-50">Заголовок</th>
-                            <th class="w-15">Отправитель</th>
-                            <th class="w-10">Просмотров</th>
-                            <th class="w-10">Ответов</th>
-                            <th class="w-15">Последнее</th>
-                            <th>Pinned</th>
-                            <%--<sec:authorize access="hasRole('ROLE_ADMIN')">--%>
+                    <div id="forum-themes">
+                        <table id="forum" class="display responsive no-wrap" width="100%">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th class="w-50">Заголовок</th>
+                                <th class="w-15">Отправитель</th>
+                                <th class="w-10">Просмотров</th>
+                                <th class="w-10">Ответов</th>
+                                <th class="w-15">Последнее</th>
+                                <th>Pinned</th>
+                                <%--<sec:authorize access="hasRole('ROLE_ADMIN')">--%>
                                 <%--<th></th>--%>
                                 <%--<th></th>--%>
-                            <%--</sec:authorize>--%>
-                        </tr>
-                        </thead>
-                        <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th class="w-50">Заголовок</th>
-                            <th class="w-15">Отправитель</th>
-                            <th class="w-10">Просмотров</th>
-                            <th class="w-10">Ответов</th>
-                            <th class="w-15">Последнее</th>
-                            <th>Pinned</th>
-                            <%--<sec:authorize access="hasRole('ROLE_ADMIN')">--%>
+                                <%--</sec:authorize>--%>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th class="w-50">Заголовок</th>
+                                <th class="w-15">Отправитель</th>
+                                <th class="w-10">Просмотров</th>
+                                <th class="w-10">Ответов</th>
+                                <th class="w-15">Последнее</th>
+                                <th>Pinned</th>
+                                <%--<sec:authorize access="hasRole('ROLE_ADMIN')">--%>
                                 <%--<th></th>--%>
                                 <%--<th></th>--%>
-                            <%--</sec:authorize>--%>
-                        </tr>
-                        </tfoot>
-                    </table>
+                                <%--</sec:authorize>--%>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div id="forum-messages" style="display: none">
+                        <jsp:include page="fragments/messageCard.jsp"/>
+                        <button onclick="toggleForum()">Some messages</button>
+                    </div>
                 </div>
             </div>
         </div>

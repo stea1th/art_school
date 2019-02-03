@@ -15,4 +15,8 @@ public abstract class AbstractForumController {
         return themaService.getAll();
     }
 
+    public Thema get(int id) {
+        return themaService.get(id);
+    }
+
 }

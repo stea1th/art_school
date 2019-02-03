@@ -1,9 +1,11 @@
 package art.school.web.forum;
 
+import art.school.entity.Nachricht;
 import art.school.entity.Thema;
 import art.school.to.ThemaTo;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,16 +19,15 @@ public class ForumController extends AbstractForumController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ThemaTo> all(){
-        super.getAll()
-                .stream()
-                .sorted(Comparator.comparing( (Thema i) -> i.getNachrichts().get(i.getNachrichts().size() - 1).getDatum()).reversed())
-                .map(ThemaTo::new)
-                .forEach(System.out::println);
         return super.getAll()
                 .stream()
-                .sorted(Comparator.comparing( (Thema i) -> i.getNachrichts().get(i.getNachrichts().size() - 1).getDatum()).reversed())
                 .map(ThemaTo::new)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/theme/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Nachricht> getAllNachrichts(@PathVariable(name = "id") Integer id){
+        return super.get(id).getNachrichts();
     }
 
 

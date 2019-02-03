@@ -11,7 +11,7 @@
     /*background: aquamarine;*/
 /*}*/
 
-.card {
+.card.border-light {
     box-shadow: 0 1px 15px 1px rgba(39,39,39,.1);
     max-width: 100%;
     margin: auto;
@@ -54,10 +54,6 @@ body {
 
 .fa-user-circle:hover, .dropdown-toggle:hover {
     color: rgba(255, 255, 255, 1) !important;
-}
-
-.orange {
-    background-color: #ffa275
 }
 
 

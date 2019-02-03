@@ -2,10 +2,10 @@ var ajaxUrl = "forum";
 // var myModal = $('#createOrUpdateUser');
 var datatable;
 
+
 $(function () {
 
     createThemeTable();
-
 
     // $('#saveKind').on('click', function(){
     //     $.post(ajaxUrl+"/save", $('#kind-detailsForm').serialize())
@@ -15,6 +15,19 @@ $(function () {
     //         });
     // });
 });
+
+function test(id){
+    $('#forum-themes').hide();
+    $('#forum-messages').css('display', 'block');
+    // setTimeout(function(){
+    //     $('#forum-themes').show();
+    // }, 3000);
+}
+
+function toggleForum(){
+    $('#forum-themes').show();
+    $('#forum-messages').css('display', 'none');
+}
 
 function createThemeTable() {
     datatable = $('#forum').DataTable({
@@ -37,6 +50,7 @@ function createThemeTable() {
                     $(this).css('color', 'blue');
                 });
             }
+            $(row).children().first().attr('onclick', 'test(' + data.id + ')');
         },
         "columnDefs": [
             {
