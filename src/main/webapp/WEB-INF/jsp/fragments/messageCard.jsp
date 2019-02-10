@@ -1,8 +1,11 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <div class="card-group messages">
     <div class="card col-md-3">
-        <div class="card-header">TestName</div>
+        <div class="card-header">
+            <c:out value="${param.userName}"/>
+        </div>
         <div class="card-body">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-astronaut" role="img"
                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
@@ -25,13 +28,15 @@
                         </g>
                     </mask>
                 </defs>
-                <rect fill="currentColor" clip-path="url(#clip-GKyi2S8Ru5X4)" mask="url(#mask-pRKbGXp3ynw3)" x="0" y="0"
+                <rect fill="currentColor" clip-path="url(#clip-GKyi2S8Ru5X4)" mask="url(#mask-pRKbGXp3ynw3)" x="0"
+                      y="0"
                       width="100%" height="100%" class=""></rect>
             </svg>
         </div>
     </div>
     <div class="card col-md-9">
-        <div class="card-header">TestName</div>
-        <div class="card-body">TestText</div>
+        <div class="card-header"><c:out value="${param.datum}"/></div>
+        <div class="card-body"><c:out value="${param.nachricht}"/></div>
     </div>
 </div>
+

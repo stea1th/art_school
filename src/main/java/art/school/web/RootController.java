@@ -41,4 +41,7 @@ public class RootController {
     public String admin() {
         return "admin";
     }
+
+//    @GetMapping("/nachricht")
+//    public String nachricht() { return "nachricht";}
 }

@@ -51,10 +51,10 @@
                             </tfoot>
                         </table>
                     </div>
-                    <div id="forum-messages" style="display: none">
-                        <jsp:include page="fragments/messageCard.jsp"/>
-                        <button onclick="toggleForum()">Some messages</button>
-                    </div>
+                    <%--<div id="forum-messages" style="display: none">--%>
+                        <%--<jsp:include page="fragments/messageCard.jsp"/>--%>
+                        <%--<button onclick="toggleForum()">Some messages</button>--%>
+                    <%--</div>--%>
                 </div>
             </div>
         </div>

@@ -17,8 +17,12 @@ $(function () {
 });
 
 function test(id){
-    $('#forum-themes').hide();
-    $('#forum-messages').css('display', 'block');
+    document.location.href = "/nachricht?id="+id;
+    // $.get("/forum/nachricht",{id: id}).done(function(data){
+    //    console.log(data);
+    // });
+    // $('#forum-themes').hide();
+    // $('#forum-messages').css('display', 'block');
     // setTimeout(function(){
     //     $('#forum-themes').show();
     // }, 3000);
@@ -50,7 +54,7 @@ function createThemeTable() {
                     $(this).css('color', 'blue');
                 });
             }
-            $(row).children().first().attr('onclick', 'test(' + data.id + ')');
+            $(row).children().first().attr('onclick','test(' + data.id + ')');
         },
         "columnDefs": [
             {
