@@ -32,6 +32,9 @@ function saveOrUpdate(form, name) {
 function manageNavBar() {
     $('ul.navbar-nav li.active').removeClass('active');
     $('a[href="' + location.pathname.replace("/", "") + '"]').closest('li').addClass('active');
+    if(location.pathname === "/nachricht"){
+        $('a[href="'+"/forum".replace("/", "")+'"]').closest('li').addClass('active');
+    }
 }
 
 function createAnimationOnWelcome() {
