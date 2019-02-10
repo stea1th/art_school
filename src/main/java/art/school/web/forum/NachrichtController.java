@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 
 @Controller
@@ -21,7 +22,7 @@ public class NachrichtController extends AbstractForumController {
         model.addAttribute("list", thema.getNachrichts()
                 .stream()
                 .map(NachrichtTo::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
         return "nachricht";
     }
 }
