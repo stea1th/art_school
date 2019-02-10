@@ -5,6 +5,7 @@
     <div class="card col-md-3">
         <div class="card-header">
             <c:out value="${param.userName}"/>
+            <input type="hidden" id="message-id" value="${param.id}"/>
         </div>
         <div class="card-body">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-astronaut" role="img"
@@ -39,4 +40,5 @@
         <div class="card-body"><c:out value="${param.nachricht}"/></div>
     </div>
 </div>
+<button value="${param.id}" onclick="console.log($(this).val())">Alert Id</button>
 

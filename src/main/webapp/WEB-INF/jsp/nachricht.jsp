@@ -17,13 +17,17 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ml-auto mr-auto">
             <div class="card border-light mb-3" id="table-card3">
                 <div class="card-body">
-                        <c:forEach var="message" items="${list}">
-                                <jsp:include page="fragments/messageCard.jsp">
-                                    <jsp:param name="userName" value="${message.user.name}"/>
-                                    <jsp:param name="datum" value="${message.datum}"/>
-                                    <jsp:param name="nachricht" value="${message.text}"/>
-                                </jsp:include>
-                        </c:forEach>
+                    <h3>
+                        <c:out value="${title}"/>
+                    </h3>
+                    <c:forEach var="message" items="${list}">
+                        <jsp:include page="fragments/messageCard.jsp">
+                            <jsp:param name="id" value="${message.id}"/>
+                            <jsp:param name="userName" value="${message.name}"/>
+                            <jsp:param name="datum" value="${message.datum}"/>
+                            <jsp:param name="nachricht" value="${message.text}"/>
+                        </jsp:include>
+                    </c:forEach>
                 </div>
             </div>
         </div>
