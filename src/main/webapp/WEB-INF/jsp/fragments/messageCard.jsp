@@ -36,7 +36,16 @@
         </div>
     </div>
     <div class="card col-md-9">
-        <div class="card-header"><c:out value="${param.datum}"/></div>
+        <div class="card-header">
+            <div class="row">
+                <div class="col">
+                    <c:out value="${param.datum}"/>
+                </div>
+                <div class="col">
+                    <button type="button" class="answer-btn" value="${param.id}" style="float:right" onclick="answerIt(${param.id})">Ответить</button>
+                </div>
+            </div>
+        </div>
         <div class="card-body"><c:out value="${param.nachricht}"/></div>
     </div>
 </div>

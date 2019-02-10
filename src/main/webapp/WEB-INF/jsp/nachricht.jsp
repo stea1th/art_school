@@ -6,7 +6,7 @@
 <jsp:include page="fragments/headTag.jsp"/>
 
 <body>
-<script type="text/javascript" src='<c:url value="/resources/js/forum.js"/>' defer></script>
+<script type="text/javascript" src='<c:url value="/resources/js/nachricht.js"/>' defer></script>
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>
 <div align="center">
@@ -20,14 +20,30 @@
                     <h3>
                         <c:out value="${title}"/>
                     </h3>
-                    <c:forEach var="message" items="${list}">
-                        <jsp:include page="fragments/messageCard.jsp">
-                            <jsp:param name="id" value="${message.id}"/>
-                            <jsp:param name="userName" value="${message.name}"/>
-                            <jsp:param name="datum" value="${message.datum}"/>
-                            <jsp:param name="nachricht" value="${message.text}"/>
-                        </jsp:include>
-                    </c:forEach>
+                    <div>
+                        <c:forEach var="message" items="${list}">
+                            <jsp:include page="fragments/messageCard.jsp">
+                                <jsp:param name="id" value="${message.id}"/>
+                                <jsp:param name="userName" value="${message.name}"/>
+                                <jsp:param name="datum" value="${message.datum}"/>
+                                <jsp:param name="nachricht" value="${message.text}"/>
+                            </jsp:include>
+                        </c:forEach>
+                    </div>
+                    <br><hr>
+                    <div id="add-message" style="display: none;">
+                        <form id="message-form">
+                            <div class="form-group">
+                                <label for="text-message">Написать сообщение:</label>
+                                <div>
+                                    <textarea class="form-control" id="text-message" name="text" rows="3"
+                                  placeholder="Заметка"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                        <button type="button" class="btn btn-success" onclick="saveMessage()">Сохранить</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideMessageArea()">Отмена</button>
+                    </div>
                 </div>
             </div>
         </div>
