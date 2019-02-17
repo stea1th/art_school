@@ -27,4 +27,8 @@ public class NachrichtTo {
                 n.getUser().getName(), n.getUser().getId(), n.getThema().getId());
     }
 
+    public boolean isNew() {
+        return id == null;
+    }
+
 }

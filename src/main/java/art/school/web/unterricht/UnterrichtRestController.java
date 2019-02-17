@@ -21,7 +21,6 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity<String> createOrUpdate(RequestUnterrichtTo unterrichtTo) {
-        System.out.println(unterrichtTo.toString());
         if (unterrichtTo.isNew()) {
             super.create(unterrichtTo);
         } else {
