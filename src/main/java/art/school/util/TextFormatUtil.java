@@ -9,7 +9,7 @@ public class TextFormatUtil {
     }
 
     private static String replaceTag(String text, String tag){
-        text = text.replace("[" + tag + "]", "<blockquote>");
+        text = text.replace("[" + tag + "]", "<blockquote>  ");
         return text.replace("[/" + tag + "]", "</blockquote>");
     }
 }

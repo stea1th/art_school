@@ -2,12 +2,8 @@ package art.school.web.nachricht;
 
 import art.school.entity.Nachricht;
 import art.school.service.NachrichtService;
-import art.school.service.ThemaService;
-import art.school.to.NachrichtTo;
-import art.school.web.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class AbstractNachrichtController {

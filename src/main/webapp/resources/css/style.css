@@ -61,6 +61,7 @@ textarea {outline: none; text-align: justify; }
 blockquote {
     border-left: 6px solid red;
     background-color: lightgrey;
+    padding: 4px 4px 4px 10px;
 
 }
 

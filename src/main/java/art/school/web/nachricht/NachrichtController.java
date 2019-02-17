@@ -7,7 +7,6 @@ import art.school.service.UserService;
 import art.school.to.NachrichtTo;
 import art.school.util.TextFormatUtil;
 import art.school.web.SecurityUtil;
-import art.school.web.forum.AbstractForumController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -43,8 +42,8 @@ public class NachrichtController extends AbstractNachrichtController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseBody
-    public void createOrUpdate(NachrichtTo nachrichtTo){
-        Nachricht nachricht = nachrichtTo.isNew()? new Nachricht() : get(nachrichtTo.getId());
+    public void createOrUpdate(NachrichtTo nachrichtTo) {
+        Nachricht nachricht = nachrichtTo.isNew() ? new Nachricht() : get(nachrichtTo.getId());
         nachricht.setThema(themaService.get(nachrichtTo.getThemaId()));
         nachricht.setUser(userService.get(SecurityUtil.getAuthId()));
         nachricht.setText(TextFormatUtil.formatText(nachrichtTo.getText()));
