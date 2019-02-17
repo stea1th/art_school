@@ -14,7 +14,7 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ml-auto mr-auto">
+        <div class="col-md-12 ml-auto mr-auto">
             <div class="card border-light mb-3" id="table-card3">
                 <div class="card-body">
                     <h3>
@@ -27,23 +27,15 @@
                                 <jsp:param name="userName" value="${message.name}"/>
                                 <jsp:param name="datum" value="${message.datum}"/>
                                 <jsp:param name="nachricht" value="${message.text}"/>
+                                <jsp:param name="current" value="${current}"/>
+                                <jsp:param name="thema_id" value="${thema_id}" />
                             </jsp:include>
                         </c:forEach>
                     </div>
                     <br><hr>
-                    <div id="add-message" style="display: none;">
-                        <form id="message-form">
-                            <div class="form-group">
-                                <label for="text-message">Написать сообщение:</label>
-                                <div>
-                                    <textarea class="form-control" id="text-message" name="text" rows="3"
-                                  placeholder="Заметка"></textarea>
-                                </div>
-                            </div>
-                        </form>
-                        <button type="button" class="btn btn-success" onclick="saveMessage()">Сохранить</button>
-                        <button type="button" class="btn btn-secondary" onclick="hideMessageArea()">Отмена</button>
-                    </div>
+                        <jsp:include page="fragments/nachricht_form.jsp">
+                            <jsp:param name="thema_id" value="${thema_id}" />
+                        </jsp:include>
                 </div>
             </div>
         </div>

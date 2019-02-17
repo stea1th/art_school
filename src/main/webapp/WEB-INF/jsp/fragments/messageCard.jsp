@@ -2,7 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <div class="card-group messages">
-    <div class="card col-md-3">
+    <div class="card col-md-3" id="left-card_${param.id}">
         <div class="card-header">
             <c:out value="${param.userName}"/>
             <input type="hidden" id="message-id" value="${param.id}"/>
@@ -35,7 +35,7 @@
             </svg>
         </div>
     </div>
-    <div class="card col-md-9">
+    <div class="card col-md-9" id="right-card_${param.id}">
         <div class="card-header">
             <div class="row">
                 <div class="col">
@@ -46,8 +46,17 @@
                 </div>
             </div>
         </div>
-        <div class="card-body"><c:out value="${param.nachricht}"/></div>
+        <div class="card-body">
+            <c:out value="${param.nachricht}"/>
+            <jsp:include page="nachricht_form.jsp">
+                <jsp:param name="thema_id" value="${param.thema_id}" />
+                <jsp:param name="id" value="${param.id}"/>
+            </jsp:include>
+        </div>
+        <div class="card-footer">
+            <button onclick="updateMessage(${param.id})">Edit</button>
+        </div>
     </div>
 </div>
-<button value="${param.id}" onclick="console.log($(this).val())">Alert Id</button>
+
 
