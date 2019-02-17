@@ -5,6 +5,7 @@ import art.school.entity.Thema;
 import art.school.service.ThemaService;
 import art.school.service.UserService;
 import art.school.to.NachrichtTo;
+import art.school.util.TextFormatUtil;
 import art.school.web.SecurityUtil;
 import art.school.web.forum.AbstractForumController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class NachrichtController extends AbstractNachrichtController {
         Nachricht nachricht = nachrichtTo.isNew()? new Nachricht() : get(nachrichtTo.getId());
         nachricht.setThema(themaService.get(nachrichtTo.getThemaId()));
         nachricht.setUser(userService.get(SecurityUtil.getAuthId()));
-        nachricht.setText(nachrichtTo.getText());
+        nachricht.setText(TextFormatUtil.formatText(nachrichtTo.getText()));
         nachricht.setDatum(LocalDateTime.now());
         super.create(nachricht);
     }

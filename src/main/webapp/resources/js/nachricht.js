@@ -52,7 +52,6 @@ function saveMessage() {
         var form = $(this).parent().find('form');
         $.post("/nachricht/save", form.serialize())
             .done(function () {
-                // console.log(data);
                 location.reload();
             });
     });

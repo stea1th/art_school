@@ -58,6 +58,12 @@ body {
 
 textarea {outline: none; text-align: justify; }
 
+blockquote {
+    border-left: 6px solid red;
+    background-color: lightgrey;
+
+}
+
 
 
 

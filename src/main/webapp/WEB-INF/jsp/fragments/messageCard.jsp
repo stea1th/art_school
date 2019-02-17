@@ -47,7 +47,7 @@
         </div>
         <div class="card-body">
             <div id="user-message_${param.id}">
-                <c:out value="${param.nachricht}"/>
+                <c:out value="${param.nachricht}" escapeXml="false"/>
                 <c:set var="this-message" value="${param.nachricht}" />
             </div>
             <jsp:include page="nachricht_form.jsp">
