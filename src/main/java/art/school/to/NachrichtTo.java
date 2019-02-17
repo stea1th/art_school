@@ -18,11 +18,13 @@ public class NachrichtTo {
     private String text;
     private String datum;
     private String name;
+    private Integer userId;
+    private Integer themaId;
 
     public NachrichtTo(Nachricht n){
         this(n.getId(), n.getText(),
                 DateUtil.transformDateForForum(n.getDatum()),
-                n.getUser().getName());
+                n.getUser().getName(), n.getUser().getId(), n.getThema().getId());
     }
 
 }

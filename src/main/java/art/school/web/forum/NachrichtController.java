@@ -21,7 +21,7 @@ public class NachrichtController extends AbstractForumController {
     public String getAllNachrichts(Model model, @RequestParam(name = "id") Integer id) {
         Thema thema = super.get(id);
         model.addAttribute("title", thema.getTitel());
-        model.addAttribute("thema_id", thema.getId());
+        model.addAttribute("themaId", thema.getId());
         model.addAttribute("list", thema.getNachrichts()
                 .stream()
                 .map(NachrichtTo::new)

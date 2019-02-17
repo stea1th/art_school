@@ -42,6 +42,7 @@
     <script src="webjars/datatables-buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     <script src="webjars/noty/3.1.4/lib/noty.min.js"></script>
 

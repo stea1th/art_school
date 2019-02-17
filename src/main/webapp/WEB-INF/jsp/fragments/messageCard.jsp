@@ -42,21 +42,33 @@
                     <c:out value="${param.datum}"/>
                 </div>
                 <div class="col">
-                    <button type="button" class="answer-btn" value="${param.id}" style="float:right" onclick="answerIt(${param.id})">Ответить</button>
                 </div>
             </div>
         </div>
         <div class="card-body">
-            <c:out value="${param.nachricht}"/>
+            <div id="user-message_${param.id}">
+                <c:out value="${param.nachricht}"/>
+                <c:set var="this-message" value="${param.nachricht}" />
+            </div>
             <jsp:include page="nachricht_form.jsp">
-                <jsp:param name="thema_id" value="${param.thema_id}" />
+                <jsp:param name="themaId" value="${param.themaId}" />
                 <jsp:param name="id" value="${param.id}"/>
             </jsp:include>
         </div>
         <div class="card-footer">
-            <button onclick="updateMessage(${param.id})">Edit</button>
+            <div class="row">
+                <c:if test="${param.current == param.userId}">
+                    <div>
+                        <button type="button" style="float:right" onclick="updateMessage(${param.id})">Изменить</button>
+                    </div>
+                </c:if>
+                <div>
+                    <button type="button" class="answer-btn" value="${param.id}" style="float:right" onclick="answerIt(${param.id})">Ответить</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<br>
 
 

@@ -25,16 +25,17 @@
                             <jsp:include page="fragments/messageCard.jsp">
                                 <jsp:param name="id" value="${message.id}"/>
                                 <jsp:param name="userName" value="${message.name}"/>
+                                <jsp:param name="userId" value="${message.userId}"/>
                                 <jsp:param name="datum" value="${message.datum}"/>
                                 <jsp:param name="nachricht" value="${message.text}"/>
                                 <jsp:param name="current" value="${current}"/>
-                                <jsp:param name="thema_id" value="${thema_id}" />
+                                <jsp:param name="themaId" value="${themaId}" />
                             </jsp:include>
                         </c:forEach>
                     </div>
                     <br><hr>
                         <jsp:include page="fragments/nachricht_form.jsp">
-                            <jsp:param name="thema_id" value="${thema_id}" />
+                            <jsp:param name="themaId" value="${themaId}" />
                         </jsp:include>
                 </div>
             </div>
