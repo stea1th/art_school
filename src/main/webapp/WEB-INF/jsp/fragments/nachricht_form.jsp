@@ -8,7 +8,7 @@
     <div id="add-message" style="display: none;">
 </c:if>
 <form method="post" id="message-form" action="#">
-    <input type="hidden" class="form-control" id="id" name="id"/>
+    <input type="hidden" class="form-control" id="id" name="id" value="${param.id}"/>
     <input type="hidden" class="form-control" id="themaId" name="themaId" value="${param.themaId}"/>
     <div class="form-group">
         <label for="text-message">Написать сообщение:</label>

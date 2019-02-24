@@ -28,7 +28,11 @@ public class NachrichtTo {
     }
 
     public boolean isNew() {
-        return id == null;
+        return (id == null || id.equals(themaId));
     }
+
+//    public Nachricht createNachricht(){
+//
+//    }
 
 }

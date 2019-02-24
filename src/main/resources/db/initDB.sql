@@ -1,3 +1,4 @@
+drop table if exists nachricht_updater;
 drop table if exists user_roles;
 drop table if exists nachricht;
 drop table if exists thema;
@@ -84,7 +85,17 @@ create table user_roles
   role    VARCHAR,
   CONSTRAINT user_roles_idx UNIQUE (user_id, role),
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
-)
+);
+
+create table nachricht_updater
+(
+  user_id integer not null,
+  nachricht_id integer not null,
+  datum timestamp default now() not null,
+  action varchar not null,
+  primary key(user_id, nachricht_id)
+);
+-- create unique index user_nachricht_unique_index on nachricht_updater(u_id, n_id);
 
 
 

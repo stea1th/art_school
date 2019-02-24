@@ -43,6 +43,8 @@ public class NachrichtController extends AbstractNachrichtController {
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseBody
     public void createOrUpdate(NachrichtTo nachrichtTo) {
+        System.out.println(nachrichtTo.getId());
+        System.out.println(nachrichtTo.isNew());
         Nachricht nachricht = nachrichtTo.isNew() ? new Nachricht() : get(nachrichtTo.getId());
         nachricht.setThema(themaService.get(nachrichtTo.getThemaId()));
         nachricht.setUser(userService.get(SecurityUtil.getAuthId()));
