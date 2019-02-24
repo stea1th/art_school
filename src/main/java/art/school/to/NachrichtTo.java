@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -35,6 +34,10 @@ public class NachrichtTo {
                 n.getUser().getName(), n.getUser().getId(),
                 n.getThema().getId(), n.getUpdaters().isEmpty()? null :
         TextFormatUtil.createUpdaterInfo(n.getUpdaters().get(n.getUpdaters().size()-1)));
+    }
+
+    public NachrichtTo(Integer id) {
+        this.id = id;
     }
 
     public boolean isNew() {

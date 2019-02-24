@@ -63,16 +63,23 @@
         </div>
         <div class="card-footer">
             <div class="row">
-                <c:if test="${param.current == param.userId}">
+                <c:if test="${!param.nachricht.equals('<-- Deleted -->')}">
                     <div>
-                        <button type="button" style="float:right" onclick="updateMessage(${param.id})">Изменить</button>
+                        <button type="button" class="answer-btn" value="${param.id}" style="float:right"
+                                onclick="answerIt(${param.id})">Ответить
+                        </button>
                     </div>
+                    <c:if test="${param.current == param.userId}">
+                        <div>
+                            <button type="button" style="float:right" onclick="updateMessage(${param.id})">Изменить
+                            </button>
+                        </div>
+                        <div>
+                            <button type="button" style="float:right" onclick="deleteMessage(${param.id})">Удалить
+                            </button>
+                        </div>
+                    </c:if>
                 </c:if>
-                <div>
-                    <button type="button" class="answer-btn" value="${param.id}" style="float:right"
-                            onclick="answerIt(${param.id})">Ответить
-                    </button>
-                </div>
             </div>
         </div>
     </div>

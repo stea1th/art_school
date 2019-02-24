@@ -55,7 +55,15 @@ function saveMessage() {
                 location.reload();
             });
     });
+}
 
+function deleteMessage(id){
+    $(this).on('click', function(){
+        $.get("/nachricht/delete", {id: id})
+            .done(function(){
+                location.reload();
+            });
+    });
 
 }
 

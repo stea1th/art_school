@@ -58,14 +58,29 @@ public class NachrichtController extends AbstractNachrichtController {
             nachricht = new Nachricht();
             nachricht.setDatum(LocalDateTime.now());
         } else {
-            nachricht = get(nachrichtTo.getId());
-            List<NachrichtUpdater> updaters = nachricht.getUpdaters();
-            updaters.add(nachrichtUpdaterService.save(nachrichtTo.createUpdater("Изменил")));
-            nachricht.setUpdaters(updaters);
+            nachricht = createNachrichtWithUpdaters(nachrichtTo.getId(), "Изменил");
         }
         nachricht.setThema(themaService.get(nachrichtTo.getThemaId()));
         nachricht.setUser(userService.get(SecurityUtil.getAuthId()));
         nachricht.setText(TextFormatUtil.formatText(nachrichtTo.getText()));
         super.create(nachricht);
+    }
+
+    @GetMapping(value="/delete")
+    @ResponseBody
+    public String delete(@RequestParam(name = "id") Integer id){
+        Nachricht nachricht = createNachrichtWithUpdaters(id, "Удалил");
+        String deleted = "<-- Удалено -->";
+        nachricht.setText("<-- Deleted -->");
+        super.create(nachricht);
+        return deleted;
+    }
+
+    private Nachricht createNachrichtWithUpdaters(Integer id, String action){
+        Nachricht nachricht = get(id);
+        List<NachrichtUpdater> updaters = nachricht.getUpdaters();
+        updaters.add(nachrichtUpdaterService.save(new NachrichtTo(id).createUpdater(action)));
+        nachricht.setUpdaters(updaters);
+        return nachricht;
     }
 }
