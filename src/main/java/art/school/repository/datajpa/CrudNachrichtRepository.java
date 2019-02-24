@@ -1,6 +1,7 @@
 package art.school.repository.datajpa;
 
 import art.school.entity.Nachricht;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 

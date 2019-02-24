@@ -41,17 +41,23 @@
                 <div class="col">
                     <c:out value="${param.datum}"/>
                 </div>
+                <div>
+                    <c:if test="${param.updaterInfo != null}">
+                        <c:out value="${param.updaterInfo}"/>
+                    </c:if>
+                </div>
                 <div class="col">
+
                 </div>
             </div>
         </div>
         <div class="card-body">
             <div id="user-message_${param.id}">
                 <c:out value="${param.nachricht}" escapeXml="false"/>
-                <c:set var="this-message" value="${param.nachricht}" />
+                <c:set var="this-message" value="${param.nachricht}"/>
             </div>
             <jsp:include page="nachricht_form.jsp">
-                <jsp:param name="themaId" value="${param.themaId}" />
+                <jsp:param name="themaId" value="${param.themaId}"/>
                 <jsp:param name="id" value="${param.id}"/>
             </jsp:include>
         </div>
@@ -63,7 +69,9 @@
                     </div>
                 </c:if>
                 <div>
-                    <button type="button" class="answer-btn" value="${param.id}" style="float:right" onclick="answerIt(${param.id})">Ответить</button>
+                    <button type="button" class="answer-btn" value="${param.id}" style="float:right"
+                            onclick="answerIt(${param.id})">Ответить
+                    </button>
                 </div>
             </div>
         </div>

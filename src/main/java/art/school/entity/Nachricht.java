@@ -13,6 +13,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @EqualsAndHashCode(callSuper = true)
@@ -43,6 +45,9 @@ public class Nachricht extends AbstractBaseEntity{
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Thema thema;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "nachricht")
+    protected List<NachrichtUpdater> updaters = new ArrayList<>();
 
     public Nachricht(Integer id, @NotBlank String text, @NotNull LocalDateTime datum) {
         super(id);

@@ -30,6 +30,7 @@
                                 <jsp:param name="nachricht" value="${message.text}"/>
                                 <jsp:param name="current" value="${current}"/>
                                 <jsp:param name="themaId" value="${themaId}" />
+                                <jsp:param name="updaterInfo" value="${message.updaterInfo}" />
                             </jsp:include>
                         </c:forEach>
                     </div>

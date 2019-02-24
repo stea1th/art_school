@@ -3,6 +3,7 @@ package art.school.repository.datajpa;
 import art.school.entity.Nachricht;
 import art.school.repository.NachrichtRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Repository
 public class NachrichtRepositoryImpl implements NachrichtRepository {
+
 
     @Autowired
     private CrudNachrichtRepository repository;
