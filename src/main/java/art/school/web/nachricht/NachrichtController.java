@@ -46,11 +46,7 @@ public class NachrichtController extends AbstractNachrichtController {
         Thema thema = themaService.get(id);
         model.addAttribute("title", thema.getTitel());
         model.addAttribute("themaId", id);
-//        model.addAttribute("list", thema.getNachrichts()
-//                .stream()
-//                .sorted(Comparator.comparing(Nachricht::getDatum).thenComparing(Nachricht::getId))
-//                .map(NachrichtTo::new)
-//                .collect(Collectors.toCollection(LinkedHashSet::new)));
+
         model.addAttribute("current", SecurityUtil.getAuthId());
 
         Pageable pageable = PageRequest.of(pageNumber, sizing);
@@ -71,11 +67,9 @@ public class NachrichtController extends AbstractNachrichtController {
                 .map(NachrichtTo::new)
                 .collect(Collectors.toList()));
 
-
-        model.addAttribute("this", pageNumber);
         model.addAttribute("previous", pageNumber-1);
         model.addAttribute("next", pageNumber+1);
-        return "nachricht";
+        return select? "nachricht/fragment" : "nachricht/nachricht";
     }
 
     private String getItems(int maxElements, int pageNumber, int sizing) {

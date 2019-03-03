@@ -14,13 +14,16 @@ $(function () {
 function selectSizeOnChange(){
     $('.page-size').on('change', function(){
         $.get($(this).attr('link'), {
+            id: $(this).attr('themaId'),
             size: $(this).val(),
             sort: $(this).attr('sorting'),
             direction: $(this).attr('direction'),
             select: true
         }).done(function(data){
-            $('.wrapper').empty();
-            $('.wrapper').append(data);
+            console.log(data);
+            $('.wrapper').empty().append(data);
+            pageNumberInput();
+            selectSizeOnChange();
         });
     });
 }
