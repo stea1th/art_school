@@ -5,7 +5,25 @@ $(function () {
     manageNavBar();
 
     createAnimationOnWelcome();
+
+    pageNumberInput();
 });
+
+function pageNumberInput(){
+    var input = $('.page-input');
+    input.on('keypress', function(e){
+        if(e.which === 13){
+            var number = input.val();
+            if(number>=1 && number < parseInt(input.attr('last')) + 2){
+                location.href = input.attr('link') + "?id="+ input.attr('themaId') + "&pageNumber=" + (number-1)
+                    + "&sort=" + input.attr('sort') + "&direction="
+                    + input.attr('direction') +"&step=true&size=" + input.attr('size');
+            } else {
+                input.val(input.attr('this'));
+            }
+        }
+    });
+}
 
 function saveOrUpdate(form, name) {
     var successIcon = "<span><i class='far fa-check-circle '></i></span> &nbsp;";

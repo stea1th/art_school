@@ -34,7 +34,7 @@
                             </jsp:include>
                         </c:forEach>
                     </div>
-                    <br><hr>
+                    <hr>
                     <div>
                         <jsp:include page="fragments/pagination.jsp">
                             <jsp:param name="themaId" value="${themaId}"/>
@@ -50,7 +50,7 @@
                             <jsp:param name="last" value="${last}"/>
                         </jsp:include>
                     </div>
-                    <br><hr>
+                    <hr>
                         <jsp:include page="fragments/nachricht_form.jsp">
                             <jsp:param name="themaId" value="${themaId}" />
                         </jsp:include>
