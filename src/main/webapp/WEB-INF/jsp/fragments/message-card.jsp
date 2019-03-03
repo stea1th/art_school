@@ -56,7 +56,7 @@
                 <c:out value="${param.nachricht}" escapeXml="false"/>
                 <c:set var="this-message" value="${param.nachricht}"/>
             </div>
-            <jsp:include page="nachricht_form.jsp">
+            <jsp:include page="nachricht-form.jsp">
                 <jsp:param name="themaId" value="${param.themaId}"/>
                 <jsp:param name="id" value="${param.id}"/>
             </jsp:include>

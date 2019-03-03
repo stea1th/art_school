@@ -20,9 +20,19 @@
                     <h3>
                         <c:out value="${title}"/>
                     </h3>
+                    <div class="d-flex">
+                        <div class="ml-auto p-2">
+                            <jsp:include page="fragments/table-size-selector.jsp">
+                                <jsp:param name="themaId" value="${themaId}"/>
+                                <jsp:param name="sorting" value="${sorting}"/>
+                                <jsp:param name="direction" value="${direction}"/>
+                                <jsp:param name="link" value="${link}"/>
+                            </jsp:include>
+                        </div>
+                    </div>
                     <div>
                         <c:forEach var="message" items="${list}">
-                            <jsp:include page="fragments/messageCard.jsp">
+                            <jsp:include page="fragments/message-card.jsp">
                                 <jsp:param name="id" value="${message.id}"/>
                                 <jsp:param name="userName" value="${message.name}"/>
                                 <jsp:param name="userId" value="${message.userId}"/>
@@ -51,7 +61,7 @@
                         </jsp:include>
                     </div>
                     <hr>
-                        <jsp:include page="fragments/nachricht_form.jsp">
+                        <jsp:include page="fragments/nachricht-form.jsp">
                             <jsp:param name="themaId" value="${themaId}" />
                         </jsp:include>
                 </div>

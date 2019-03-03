@@ -52,7 +52,7 @@
                         </table>
                     </div>
                     <%--<div id="forum-messages" style="display: none">--%>
-                        <%--<jsp:include page="fragments/messageCard.jsp"/>--%>
+                        <%--<jsp:include page="fragments/message-card.jsp"/>--%>
                         <%--<button onclick="toggleForum()">Some messages</button>--%>
                     <%--</div>--%>
                 </div>

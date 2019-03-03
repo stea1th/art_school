@@ -7,7 +7,23 @@ $(function () {
     createAnimationOnWelcome();
 
     pageNumberInput();
+
+    selectSizeOnChange();
 });
+
+function selectSizeOnChange(){
+    $('.page-size').on('change', function(){
+        $.get($(this).attr('link'), {
+            size: $(this).val(),
+            sort: $(this).attr('sorting'),
+            direction: $(this).attr('direction'),
+            select: true
+        }).done(function(data){
+            $('.wrapper').empty();
+            $('.wrapper').append(data);
+        });
+    });
+}
 
 function pageNumberInput(){
     var input = $('.page-input');
