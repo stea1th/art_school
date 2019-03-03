@@ -19,8 +19,6 @@ function answerIt(id) {
     message.css('display', 'block');
     addMessageToTextArea(id, message);
     message.scrollTo();
-
-
 }
 
 function addMessageToTextArea(id, message) {
@@ -49,10 +47,21 @@ function updateMessage(id) {
 
 function saveMessage() {
     $('.btn-ok').on('click', function () {
-        var form = $(this).parent().find('form');
-        $.post("/nachricht/save", form.serialize())
-            .done(function () {
-                location.reload();
+
+        $.post("/nachricht/save", {
+            id: $(this).parent().find('#id').val(),
+            themaId: $('#themaId').val(),
+            sizing: $('.page-size').val(),
+            text: $(this).parent().find('textarea').val()
+        }).done(function (data) {
+                if(data !== ''){
+                    location.href = "/nachricht?id="+ $('#themaId').val() + "&pageNumber=" + data
+                        +"&step=true&size=" + $('.page-size').val();
+                    $('.wrapper').children().last().scrollTo();
+                } else {
+                    location.reload();
+                }
+
             });
     });
 }

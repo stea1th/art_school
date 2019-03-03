@@ -37,6 +37,7 @@
                     <hr>
                     <jsp:include page="../fragments/nachricht-form.jsp">
                         <jsp:param name="themaId" value="${themaId}"/>
+                        <jsp:param name="sizing" value="${sizing}"/>
                     </jsp:include>
                 </div>
             </div>

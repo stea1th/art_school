@@ -27,13 +27,14 @@ public class NachrichtTo {
     private Integer userId;
     private Integer themaId;
     private String updaterInfo;
+    private Integer sizing;
 
     public NachrichtTo(Nachricht n){
         this(n.getId(), n.getText(),
                 DateUtil.transformDateForForum(n.getDatum()),
                 n.getUser().getName(), n.getUser().getId(),
                 n.getThema().getId(), n.getUpdaters().isEmpty()? null :
-        TextFormatUtil.createUpdaterInfo(n.getUpdaters().get(n.getUpdaters().size()-1)));
+        TextFormatUtil.createUpdaterInfo(n.getUpdaters().get(n.getUpdaters().size()-1)), null);
     }
 
     public NachrichtTo(Integer id) {

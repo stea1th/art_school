@@ -7,12 +7,14 @@ import art.school.service.NachrichtUpdaterService;
 import art.school.service.ThemaService;
 import art.school.service.UserService;
 import art.school.to.NachrichtTo;
+import art.school.util.PaginationHelper;
 import art.school.util.TextFormatUtil;
 import art.school.web.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/nachricht")
@@ -44,50 +45,25 @@ public class NachrichtController extends AbstractNachrichtController {
                                    @RequestParam(name = "size", required = false, defaultValue = "2") Integer sizing,
                                    @RequestParam(name = "select", required = false, defaultValue = "false") boolean select) {
         Thema thema = themaService.get(id);
+        PaginationHelper helper = new PaginationHelper(pageNumber, sorting, direction, step, sizing, select, "nachricht");
+
         model.addAttribute("title", thema.getTitel());
         model.addAttribute("themaId", id);
 
         model.addAttribute("current", SecurityUtil.getAuthId());
 
-        Pageable pageable = PageRequest.of(pageNumber, sizing);
+        Pageable pageable = PageRequest.of(pageNumber, sizing, Sort.by("datum"));
         Page<Nachricht> page = super.getPageByThemaId(id, pageable);
+        helper.createTablePage(model, page, super.getAllByThemaId(id).size());
 
-
-        model.addAttribute("direction", direction);
-        model.addAttribute("sorting", sorting);
-        model.addAttribute("sizing", sizing);
-        model.addAttribute("link", "/nachricht");
-        model.addAttribute("items", getItems(super.getAllByThemaId(id).size(), pageNumber, sizing));
-
-        model.addAttribute("hasPrevious", page.hasPrevious());
-        model.addAttribute("hasNext", page.hasNext());
-        model.addAttribute("last", page.getTotalPages() - 1);
-
-        model.addAttribute("list", page.stream()
-                .map(NachrichtTo::new)
-                .collect(Collectors.toList()));
-
-        model.addAttribute("previous", pageNumber-1);
-        model.addAttribute("next", pageNumber+1);
-        return select? "nachricht/fragment" : "nachricht/nachricht";
-    }
-
-    private String getItems(int maxElements, int pageNumber, int sizing) {
-
-        int max, min;
-        if ((pageNumber + 1) * sizing > maxElements) {
-            max = maxElements;
-            min = max - (sizing + (max - (pageNumber + 1) * sizing)) + 1;
-        } else {
-            max = (pageNumber + 1) * sizing;
-            min = max - sizing + 1;
-        }
-        return String.format("(%d-%d/%d)", min, max, maxElements);
+        return select ? "nachricht/fragment" : "nachricht/nachricht";
     }
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseBody
-    public void createOrUpdate(NachrichtTo nachrichtTo) {
+    public Integer createOrUpdate(NachrichtTo nachrichtTo) {
+
+        System.out.println(nachrichtTo.getId());
         System.out.println(nachrichtTo.isNew());
         Nachricht nachricht;
         if (nachrichtTo.isNew()) {
@@ -100,6 +76,11 @@ public class NachrichtController extends AbstractNachrichtController {
         nachricht.setUser(userService.get(SecurityUtil.getAuthId()));
         nachricht.setText(TextFormatUtil.formatText(nachrichtTo.getText()));
         super.create(nachricht);
+
+        Pageable pageable = PageRequest.of(0, nachrichtTo.getSizing());
+        Page<Nachricht> page = super.getPageByThemaId(nachrichtTo.getThemaId(), pageable);
+
+        return nachrichtTo.isNew()? page.getTotalPages() - 1 : null;
     }
 
     @GetMapping(value = "/delete")

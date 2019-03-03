@@ -10,10 +10,11 @@
 <form method="post" id="message-form" action="#">
     <input type="hidden" class="form-control" id="id" name="id" value="${param.id}"/>
     <input type="hidden" class="form-control" id="themaId" name="themaId" value="${param.themaId}"/>
+
     <div class="form-group">
         <label for="text-message">Написать сообщение:</label>
         <div>
-            <textarea class="form-control" id="text-message" name="text" rows="3"
+            <textarea class="form-control text-message" id="text-message" name="text" rows="3"
                       placeholder="Заметка"></textarea>
         </div>
     </div>
