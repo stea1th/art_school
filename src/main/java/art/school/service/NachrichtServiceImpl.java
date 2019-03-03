@@ -3,6 +3,8 @@ package art.school.service;
 import art.school.entity.Nachricht;
 import art.school.repository.NachrichtRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,11 @@ public class NachrichtServiceImpl implements NachrichtService {
     @Override
     public List<Nachricht> getAllByThemaId(int id) {
         return repository.getAllByThemaId(id);
+    }
+
+    @Override
+    public Page<Nachricht> getPageByThemaId(int id, Pageable pageable) {
+        return repository.getPageByThemaId(id, pageable);
     }
 
     @Override

@@ -35,6 +35,22 @@
                         </c:forEach>
                     </div>
                     <br><hr>
+                    <div>
+                        <jsp:include page="fragments/pagination.jsp">
+                            <jsp:param name="themaId" value="${themaId}"/>
+                            <jsp:param name="link" value="${link}"/>
+                            <jsp:param name="hasPrevious" value="${hasPrevious}"/>
+                            <jsp:param name="hasNext" value="${hasNext}"/>
+                            <jsp:param name="items" value="${items}"/>
+                            <jsp:param name="sorting" value="${sorting}"/>
+                            <jsp:param name="direction" value="${direction}"/>
+                            <jsp:param name="sizing" value="${sizing}"/>
+                            <jsp:param name="previous" value="${previous}"/>
+                            <jsp:param name="next" value="${next}"/>
+                            <jsp:param name="last" value="${last}"/>
+                        </jsp:include>
+                    </div>
+                    <br><hr>
                         <jsp:include page="fragments/nachricht_form.jsp">
                             <jsp:param name="themaId" value="${themaId}" />
                         </jsp:include>
@@ -42,6 +58,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 </body>

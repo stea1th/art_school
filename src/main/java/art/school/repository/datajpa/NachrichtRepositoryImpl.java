@@ -2,7 +2,10 @@ package art.school.repository.datajpa;
 
 import art.school.entity.Nachricht;
 import art.school.repository.NachrichtRepository;
+import org.hibernate.annotations.OnDelete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +22,10 @@ public class NachrichtRepositoryImpl implements NachrichtRepository {
     @Override
     public List<Nachricht> getAllByThemaId(int id) {
         return repository.findAllByThemaId(id);
+    }
+
+    public Page<Nachricht> getPageByThemaId(int id, Pageable pageable) {
+        return repository.findAllByThemaId(id, pageable);
     }
 
     @Override
