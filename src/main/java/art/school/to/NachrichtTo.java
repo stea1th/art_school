@@ -27,7 +27,7 @@ public class NachrichtTo {
     private Integer userId;
     private Integer themaId;
     private String updaterInfo;
-    private Integer sizing;
+    private Integer size;
 
     public NachrichtTo(Nachricht n){
         this(n.getId(), n.getText(),
@@ -52,9 +52,4 @@ public class NachrichtTo {
         updater.setAction(action);
         return updater;
     }
-
-//    public Nachricht createNachricht(){
-//
-//    }
-
 }

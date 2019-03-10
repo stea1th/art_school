@@ -47,21 +47,26 @@ function updateMessage(id) {
 
 function saveMessage() {
     $('.btn-ok').on('click', function () {
-
+        var size = $('.page-size').val();
         $.post("/nachricht/save", {
             id: $(this).parent().find('#id').val(),
             themaId: $('#themaId').val(),
-            sizing: $('.page-size').val(),
-            text: $(this).parent().find('textarea').val()
+            size: size,
+            text: $(this).parent().find('textarea').val(),
+            page: $('.page-input').attr('this')
         }).done(function (data) {
-                if(data !== ''){
-                    location.href = "/nachricht?id="+ $('#themaId').val() + "&pageNumber=" + data
-                        +"&step=true&size=" + $('.page-size').val();
-                    $('.wrapper').children().last().scrollTo();
-                } else {
-                    location.reload();
-                }
-
+            location.href = "/nachricht?id="+ $('#themaId').val() + "&page=" + data
+                +"&size=" + size;
+                // if(data !== ''){
+                //
+                //     // $('.wrapper').children().last().scrollTo();
+                //     $(window).on('beforeunload', function() {
+                //         window.scrollTo(0, document.body.scrollHeight);
+                //     });
+                //
+                // } else {
+                //     location.reload();
+                // }
             });
     });
 }

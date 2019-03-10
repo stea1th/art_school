@@ -16,14 +16,15 @@ function selectSizeOnChange(){
         $.get($(this).attr('link'), {
             id: $(this).attr('themaId'),
             size: $(this).val(),
-            sort: $(this).attr('sorting'),
-            direction: $(this).attr('direction'),
+            sort: $(this).attr('sort'),
+            // direction: $(this).attr('direction'),
             select: true
         }).done(function(data){
-            console.log(data);
             $('.wrapper').empty().append(data);
             pageNumberInput();
             selectSizeOnChange();
+            resizeTextArea();
+            saveMessage();
         });
     });
 }
@@ -34,9 +35,9 @@ function pageNumberInput(){
         if(e.which === 13){
             var number = input.val();
             if(number>=1 && number < parseInt(input.attr('last')) + 2){
-                location.href = input.attr('link') + "?id="+ input.attr('themaId') + "&pageNumber=" + (number-1)
-                    + "&sort=" + input.attr('sort') + "&direction="
-                    + input.attr('direction') +"&step=true&size=" + input.attr('size');
+                location.href = input.attr('link') + "?id="+ input.attr('themaId') + "&page=" + (number-1)
+                    + "&sort=" + input.attr('sort')
+                    + "&size=" + input.attr('size');
             } else {
                 input.val(input.attr('this'));
             }

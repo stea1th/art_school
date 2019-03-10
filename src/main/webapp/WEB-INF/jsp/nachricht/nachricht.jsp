@@ -24,10 +24,9 @@
                         <div class="ml-auto p-2">
                             <jsp:include page="../fragments/table-size-selector.jsp">
                                 <jsp:param name="themaId" value="${themaId}"/>
-                                <jsp:param name="sorting" value="${sorting}"/>
-                                <jsp:param name="direction" value="${direction}"/>
+                                <jsp:param name="sort" value="${sort}"/>
                                 <jsp:param name="link" value="${link}"/>
-                                <jsp:param name="sizing" value="${sizing}"/>
+                                <jsp:param name="size" value="${size}"/>
                             </jsp:include>
                         </div>
                     </div>
@@ -37,7 +36,6 @@
                     <hr>
                     <jsp:include page="../fragments/nachricht-form.jsp">
                         <jsp:param name="themaId" value="${themaId}"/>
-                        <jsp:param name="sizing" value="${sizing}"/>
                     </jsp:include>
                 </div>
             </div>

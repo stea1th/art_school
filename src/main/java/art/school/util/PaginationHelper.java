@@ -1,85 +1,38 @@
 package art.school.util;
 
-import art.school.entity.Nachricht;
-import art.school.to.NachrichtTo;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
 import org.springframework.ui.Model;
 
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.stream.Collectors;
-
+@Data
+@NoArgsConstructor
 public class PaginationHelper {
 
-    private int pageNumber;
-    private String sorting;
-    private boolean direction;
-    private boolean step;
-    private int sizing;
-    private boolean select;
-    private String link;
+    private static String getItems(Page<?> page) {
 
-
-    public PaginationHelper(int pageNumber, String sorting, boolean direction, boolean step, int sizing, boolean select, String link) {
-        this.pageNumber = pageNumber;
-        this.sorting = sorting;
-        this.direction = direction;
-        this.step = step;
-        this.sizing = sizing;
-        this.select = select;
-        this.link = link;
-    }
-
-    public int getPageNumber() {
-        return pageNumber;
-    }
-
-    public int getSizing() {
-        return sizing;
-    }
-
-    public Sort.Order getOrder() {
-        Sort.Order order;
-        if(!step && !select) {
-            order = direction? Sort.Order.asc(sorting) : Sort.Order.desc(sorting);
-            direction = !direction;
+        long max, min;
+        if ((page.getNumber() + 1) * page.getSize() > page.getTotalElements()) {
+            max = (int) page.getTotalElements();
+            min =  max - (page.getSize() + (max - (page.getNumber() + 1) * page.getSize())) + 1;
         } else {
-            order = direction? Sort.Order.desc(sorting) : Sort.Order.asc(sorting);
+            max = (page.getNumber() + 1) * page.getSize();
+            min = max - page.getSize() + 1;
         }
-        return order;
+        return String.format("(%d-%d/%d)", min, max, page.getTotalElements());
     }
 
-    private String getItems(int maxElements, int pageNumber, int sizing) {
+    public static void createTablePage(Model model, Page<?> page) {
 
-        int max, min;
-        if ((pageNumber + 1) * sizing > maxElements) {
-            max = maxElements;
-            min = max - (sizing + (max - (pageNumber + 1) * sizing)) + 1;
-        } else {
-            max = (pageNumber + 1) * sizing;
-            min = max - sizing + 1;
-        }
-        return String.format("(%d-%d/%d)", min, max, maxElements);
-    }
+        model.addAttribute("size", page.getSize());
 
-    public void createTablePage(Model model, Page<Nachricht> page, int maxElements) {
-        model.addAttribute("direction", direction);
-        model.addAttribute("sorting", sorting);
-        model.addAttribute("sizing", sizing);
-        model.addAttribute("link", link);
-        model.addAttribute("items", getItems(maxElements, pageNumber, sizing));
+        model.addAttribute("items", getItems(page));
 
         model.addAttribute("hasPrevious", page.hasPrevious());
         model.addAttribute("hasNext", page.hasNext());
         model.addAttribute("last", page.getTotalPages() - 1);
 
-        model.addAttribute("list", page.stream()
-                .sorted(Comparator.comparing(Nachricht::getDatum).thenComparing(Nachricht::getId))
-                .map(NachrichtTo::new)
-                .collect(Collectors.toCollection(LinkedList::new)));
-
-        model.addAttribute("previous", pageNumber-1);
-        model.addAttribute("next", pageNumber+1);
+        model.addAttribute("previous", page.getNumber()-1);
+        model.addAttribute("next", page.getNumber()+1);
     }
 }
