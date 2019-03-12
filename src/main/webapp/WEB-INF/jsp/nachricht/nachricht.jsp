@@ -34,7 +34,7 @@
                         <%@ include file="fragment.jsp"%>
                     </div>
                     <hr>
-                    <div id="add-message" style="display: none;">
+                    <div id="add-message" >
                         <%@ include file="nachricht-form.jsp"%>
                     </div>
                 </div>

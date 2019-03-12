@@ -56,7 +56,7 @@
                 <c:out value="${message.text}" escapeXml="false"/>
                 <c:set var="this-message" value="${message.text}"/>
             </div>
-            <div id="add-message_${message.id}" style="display: none;">
+            <div id="add-message_${message.id}" >
                 <%@ include file="nachricht-form.jsp"%>
             </div>
         </div>

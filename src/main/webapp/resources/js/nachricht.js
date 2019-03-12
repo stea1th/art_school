@@ -5,7 +5,7 @@ $(function () {
 
     resizeTextArea();
 
-    // saveMessage();
+    saveMessage();
 
 });
 
@@ -57,7 +57,7 @@ function saveMessage(id) {
             id: $(this).parent().find('#id').val(),
             themaId: $('#themaId').val(),
             size: size,
-            text: $(this).parent().find('textarea').val(),
+            text: $(this).parent().find('.text-message')[0].innerText,
             page: $('.page-input').attr('this'),
             parentId: id
         }).done(function (data) {
