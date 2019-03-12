@@ -57,7 +57,7 @@
                 <c:set var="this-message" value="${message.text}"/>
             </div>
             <div id="add-message_${message.id}" >
-                <%@ include file="nachricht-form.jsp"%>
+                <%--<%@ include file="nachricht-form.jsp"%>--%>
             </div>
         </div>
         <div class="card-footer">

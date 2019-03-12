@@ -70,9 +70,11 @@ public class NachrichtController extends AbstractNachrichtController {
                                   @RequestParam(name="page") int pageNumber,
                                   @RequestParam(name="parentId", required = false) Integer parentId) {
 
+        System.out.println(parentId);
         Nachricht nachricht;
         if (nachrichtTo.isNew()) {
-            nachricht = createNachrichtWithUpdaters(null, "В ответ на");
+//            nachricht = createNachrichtWithUpdaters(null, "В ответ на");
+            nachricht = new Nachricht();
             nachricht.setDatum(LocalDateTime.now());
             if(parentId != null){
                 nachricht.setParent(super.get(parentId));
@@ -102,7 +104,18 @@ public class NachrichtController extends AbstractNachrichtController {
     }
 
     @GetMapping(value = "/text")
-    @ResponseBody
+    public String getTextArea(Model model, @RequestParam(name="id")int id,
+                              @RequestParam(name="answer", required = false, defaultValue = "false") boolean answer){
+        System.out.println(answer);
+        if(answer){
+            Nachricht nachricht = get(id);
+            model.addAttribute("parentText", nachricht.getText().trim());
+            model.addAttribute("id", null);
+            model.addAttribute("themaId", nachricht.getThema().getId());
+            return "nachricht/nachricht-form";
+        }
+        return null;
+    }
 
     private Nachricht createNachrichtWithUpdaters(Integer id, String action) {
         Nachricht nachricht = id == null? new Nachricht() :  get(id);

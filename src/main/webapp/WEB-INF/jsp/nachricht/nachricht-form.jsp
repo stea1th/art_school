@@ -8,11 +8,14 @@
 
         <div class="form-group">
             <label for="text-message">Написать сообщение:</label>
-            <div contenteditable="true" class="text-message" style="min-height:150px; width:100%; border:inset; outline: none;"
+            <c:if test="${parentText != null}">
+                   <textarea type="text" class="message-quote" name="message-quote" rows="10" readonly>
+                       <c:out value="${parentText}" />
+                   </textarea>
+                <%--<p class="to-wright"></p>--%>
+            </c:if>
+            <div contenteditable="true" class="text-message" style="min-height:150px; width:100%; border:inset; border-top:none; outline: none;"
                  id="text-message">
-               <%--<c:if test="${parentText != null}">--%>
-                   <input type="text" class="message-quote" name="message-quote" value="Я сошла с ума!!!!!" style="border:none; outline: none;" readonly/>
-               <%--</c:if>--%>
             </div>
 
         </div>
