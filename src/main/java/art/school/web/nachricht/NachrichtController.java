@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,12 +67,16 @@ public class NachrichtController extends AbstractNachrichtController {
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseBody
     public Integer createOrUpdate(NachrichtTo nachrichtTo,
-                                  @RequestParam(name="page") int pageNumber) {
+                                  @RequestParam(name="page") int pageNumber,
+                                  @RequestParam(name="parentId", required = false) Integer parentId) {
 
         Nachricht nachricht;
         if (nachrichtTo.isNew()) {
-            nachricht = new Nachricht();
+            nachricht = createNachrichtWithUpdaters(null, "В ответ на");
             nachricht.setDatum(LocalDateTime.now());
+            if(parentId != null){
+                nachricht.setParent(super.get(parentId));
+            }
         } else {
             nachricht = createNachrichtWithUpdaters(nachrichtTo.getId(), "Изменил");
         }
@@ -96,9 +101,12 @@ public class NachrichtController extends AbstractNachrichtController {
         return deleted;
     }
 
+    @GetMapping(value = "/text")
+    @ResponseBody
+
     private Nachricht createNachrichtWithUpdaters(Integer id, String action) {
-        Nachricht nachricht = get(id);
-        List<NachrichtUpdater> updaters = nachricht.getUpdaters();
+        Nachricht nachricht = id == null? new Nachricht() :  get(id);
+        List<NachrichtUpdater> updaters = nachricht.isNew()? new ArrayList<>() : nachricht.getUpdaters();
         updaters.add(nachrichtUpdaterService.save(new NachrichtTo(id).createUpdater(action)));
         nachricht.setUpdaters(updaters);
         return nachricht;

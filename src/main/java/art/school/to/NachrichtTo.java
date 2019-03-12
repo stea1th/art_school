@@ -32,7 +32,7 @@ public class NachrichtTo {
 
     public NachrichtTo(Nachricht n){
         this(n.getId(), n.getText(),
-                n.getParent().getText(),
+                n.getParent() == null? null : n.getParent().getText(),
                 DateUtil.transformDateForForum(n.getDatum()),
                 n.getUser().getName(), n.getUser().getId(),
                 n.getThema().getId(), n.getUpdaters().isEmpty()? null :

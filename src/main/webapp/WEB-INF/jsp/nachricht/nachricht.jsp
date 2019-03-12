@@ -34,9 +34,9 @@
                         <%@ include file="fragment.jsp"%>
                     </div>
                     <hr>
-                    <jsp:include page="../fragments/nachricht-form.jsp">
-                        <jsp:param name="themaId" value="${themaId}"/>
-                    </jsp:include>
+                    <div id="add-message" style="display: none;">
+                        <%@ include file="nachricht-form.jsp"%>
+                    </div>
                 </div>
             </div>
         </div>

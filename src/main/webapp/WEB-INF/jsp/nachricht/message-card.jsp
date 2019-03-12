@@ -1,11 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page pageEncoding="UTF-8" %>
 
 <div class="card-group messages">
-    <div class="card col-md-3" id="left-card_${param.id}">
+    <div class="card col-md-3" id="left-card_${message.id}">
         <div class="card-header">
-            <c:out value="${param.userName}"/>
-            <input type="hidden" id="message-id" value="${param.id}"/>
+            <c:out value="${message.name}"/>
+            <input type="hidden" id="message-id" value="${message.id}"/>
         </div>
         <div class="card-body">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-astronaut" role="img"
@@ -35,15 +35,15 @@
             </svg>
         </div>
     </div>
-    <div class="card col-md-9" id="right-card_${param.id}">
+    <div class="card col-md-9" id="right-card_${message.id}">
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <c:out value="${param.datum}"/>
+                    <c:out value="${message.datum}"/>
                 </div>
                 <div>
-                    <c:if test="${param.updaterInfo != null}">
-                        <c:out value="${param.updaterInfo}"/>
+                    <c:if test="${message.updaterInfo != null}">
+                        <c:out value="${message.updaterInfo}"/>
                     </c:if>
                 </div>
                 <div class="col">
@@ -52,30 +52,29 @@
             </div>
         </div>
         <div class="card-body">
-            <div id="user-message_${param.id}">
-                <c:out value="${param.nachricht}" escapeXml="false"/>
-                <c:set var="this-message" value="${param.nachricht}"/>
+            <div id="user-message_${message.id}">
+                <c:out value="${message.text}" escapeXml="false"/>
+                <c:set var="this-message" value="${message.text}"/>
             </div>
-            <jsp:include page="nachricht-form.jsp">
-                <jsp:param name="themaId" value="${param.themaId}"/>
-                <jsp:param name="id" value="${param.id}"/>
-            </jsp:include>
+            <div id="add-message_${message.id}" style="display: none;">
+                <%@ include file="nachricht-form.jsp"%>
+            </div>
         </div>
         <div class="card-footer">
             <div class="row">
-                <c:if test="${!param.nachricht.equals('<-- Deleted -->')}">
+                <c:if test="${!message.text.equals('<-- Deleted -->')}">
                     <div>
-                        <button type="button" class="answer-btn" value="${param.id}" style="float:right"
-                                onclick="answerIt(${param.id})">Ответить
+                        <button type="button" class="answer-btn" value="${message.id}" style="float:right"
+                                onclick="answerIt(${message.id})">Ответить
                         </button>
                     </div>
-                    <c:if test="${param.current == param.userId}">
+                    <c:if test="${current == message.userId}">
                         <div>
-                            <button type="button" style="float:right" onclick="updateMessage(${param.id})">Изменить
+                            <button type="button" style="float:right" onclick="updateMessage(${message.id})">Изменить
                             </button>
                         </div>
                         <div>
-                            <button type="button" style="float:right" onclick="deleteMessage(${param.id})">Удалить
+                            <button type="button" style="float:right" onclick="deleteMessage(${message.id})">Удалить
                             </button>
                         </div>
                     </c:if>

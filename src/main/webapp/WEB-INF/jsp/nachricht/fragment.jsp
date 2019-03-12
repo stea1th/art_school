@@ -3,16 +3,10 @@
 
 <div>
     <c:forEach var="message" items="${list}">
-        <jsp:include page="../fragments/message-card.jsp">
-            <jsp:param name="id" value="${message.id}"/>
-            <jsp:param name="userName" value="${message.name}"/>
-            <jsp:param name="userId" value="${message.userId}"/>
-            <jsp:param name="datum" value="${message.datum}"/>
-            <jsp:param name="nachricht" value="${message.text}"/>
-            <jsp:param name="current" value="${current}"/>
-            <jsp:param name="themaId" value="${themaId}"/>
-            <jsp:param name="updaterInfo" value="${message.updaterInfo}"/>
-        </jsp:include>
+        <c:set var="message" value="${message}" />
+        <c:set var="current" value="${current}" />
+        <c:set var="themaId" value="${themaId}" />
+        <%@ include file="message-card.jsp"%>
     </c:forEach>
 </div>
 <hr>

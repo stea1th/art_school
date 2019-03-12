@@ -5,30 +5,35 @@ $(function () {
 
     resizeTextArea();
 
-    saveMessage();
+    // saveMessage();
 
 });
 
 function answerIt(id) {
-    messageId = id;
-    if (answer !== undefined) {
-        hideMessageArea();
-    }
-    var message = $('#add-message');
-    answer = true;
-    message.css('display', 'block');
-    addMessageToTextArea(id, message);
-    message.scrollTo();
+    console.log(id);
+    // messageId = id;
+    // if (answer !== undefined) {
+    //     hideMessageArea();
+    // }
+    // var message = $('#add-message');
+    // answer = true;
+    // message.css('display', 'block');
+    // addMessageToTextArea(id, message);
+    // message.scrollTo();
+    saveMessage(id);
 }
 
 function addMessageToTextArea(id, message) {
+    $.get()
+}
+
+/*function addMessageToTextArea(id, message) {
     var text = $('#user-message_' + id)[0].textContent.trim();
     if (answer) {
         text = "[quote]" + text + "[/quote]";
     }
     message.find('#text-message').val(text + "\n");
-
-}
+}*/
 
 function updateMessage(id) {
     messageId = id;
@@ -45,7 +50,7 @@ function updateMessage(id) {
 }
 
 
-function saveMessage() {
+function saveMessage(id) {
     $('.btn-ok').on('click', function () {
         var size = $('.page-size').val();
         $.post("/nachricht/save", {
@@ -53,20 +58,11 @@ function saveMessage() {
             themaId: $('#themaId').val(),
             size: size,
             text: $(this).parent().find('textarea').val(),
-            page: $('.page-input').attr('this')
+            page: $('.page-input').attr('this'),
+            parentId: id
         }).done(function (data) {
             location.href = "/nachricht?id="+ $('#themaId').val() + "&page=" + data
                 +"&size=" + size;
-                // if(data !== ''){
-                //
-                //     // $('.wrapper').children().last().scrollTo();
-                //     $(window).on('beforeunload', function() {
-                //         window.scrollTo(0, document.body.scrollHeight);
-                //     });
-                //
-                // } else {
-                //     location.reload();
-                // }
             });
     });
 }
