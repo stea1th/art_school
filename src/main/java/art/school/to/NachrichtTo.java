@@ -22,6 +22,7 @@ public class NachrichtTo {
 
     private Integer id;
     private String text;
+    private String parentMessage;
     private String datum;
     private String name;
     private Integer userId;
@@ -31,6 +32,7 @@ public class NachrichtTo {
 
     public NachrichtTo(Nachricht n){
         this(n.getId(), n.getText(),
+                n.getParent().getText(),
                 DateUtil.transformDateForForum(n.getDatum()),
                 n.getUser().getName(), n.getUser().getId(),
                 n.getThema().getId(), n.getUpdaters().isEmpty()? null :

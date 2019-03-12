@@ -41,6 +41,11 @@ public class Nachricht extends AbstractBaseEntity{
     private Users user;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "n_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Nachricht parent;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "t_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
@@ -48,6 +53,11 @@ public class Nachricht extends AbstractBaseEntity{
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "nachricht")
     protected List<NachrichtUpdater> updaters = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parent")
+    protected List<Nachricht> children = new ArrayList<>();
+
+
 
     public Nachricht(Integer id, @NotBlank String text, @NotNull LocalDateTime datum) {
         super(id);

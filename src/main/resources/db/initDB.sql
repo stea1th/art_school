@@ -75,8 +75,10 @@ create table nachricht
   datum timestamp default now() not null,
   u_id integer not null,
   t_id integer not null,
+  n_id integer,
   foreign key (u_id) references users(id) on delete cascade,
-  foreign key (t_id) references thema(id) on delete cascade
+  foreign key (t_id) references thema(id) on delete cascade,
+  foreign key (n_id) references nachricht(id) on delete cascade
 );
 
 create table user_roles
