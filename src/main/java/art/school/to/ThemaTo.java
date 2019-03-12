@@ -1,12 +1,16 @@
 package art.school.to;
 
 
+import art.school.entity.Nachricht;
 import art.school.entity.Thema;
 import art.school.util.DateUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -23,8 +27,13 @@ public class ThemaTo {
     private boolean pinned;
 
     public ThemaTo(Thema thema){
-        this(thema.getId(), thema.getTitel(),
-                thema.getNachrichts().get(0).getUser().getName(),
+        this(thema.getId(), thema.getTitel(), thema.getNachrichts()
+                        .stream()
+                        .sorted(Comparator.comparing(Nachricht::getId))
+                        .collect(Collectors.toList())
+                        .get(0)
+                        .getUser()
+                        .getName(),
                 thema.getViews(),
                 thema.getNachrichts().size()-1,
                 DateUtil.transformDateForForum(thema.getNachrichts().get(thema.getNachrichts().size()-1)
