@@ -21,7 +21,7 @@ public class KindRestController extends AbstractUserController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<KindTo> all() {
-        return transformTo(super.getAll(), KindTo.class);
+        return transformTo(super.getAllKinds(), KindTo.class);
         }
 
     @DeleteMapping(value = "/{id}")

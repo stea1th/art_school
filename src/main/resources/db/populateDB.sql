@@ -6,9 +6,9 @@ delete from users;
 alter sequence global_seq restart with 1000;
 
 insert into users (name, email, adresse, admin_passwort, passwort) values
-  ('Осипов', 'a@a.de', 'Schobertweg 5', 'a', '$2y$12$XTRZxQIpuCqmohLAEfWR1egfVA6zV.XYSCpmX7PZ2xWi0wjQb5d5O'),
-  ('Власов', 'b@b.de', 'Hauptstrasse', 'b', '$2y$12$cxBk.GQ6EMCMEhtP6phMeOv3JIPI50D5MihCG.DHzm0f2pUWjrB3'),
-  ('Тупулявичус','c@c.de', 'Sedulinos al', 'c', '$2y$12$hi808bq2qvKa/MAYkopSme/El6rqnM7C7Mz1iIStoPlkBm56.Q0Vq');
+  ('Осипов', 'a@a.de', 'Schobertweg 5', '1', '$2a$10$h3Kx2bbcXcNDK2ZabTGqUuO1k8iZ1T1YPOZQ7cq5rptIpGHf30prO'),
+  ('Власов', 'b@b.de', 'Hauptstrasse', '1', '$2a$10$h3Kx2bbcXcNDK2ZabTGqUuO1k8iZ1T1YPOZQ7cq5rptIpGHf30prO'),
+  ('Тупулявичус','c@c.de', 'Sedulinos al', '1', '$2a$10$h3Kx2bbcXcNDK2ZabTGqUuO1k8iZ1T1YPOZQ7cq5rptIpGHf30prO');
 
 insert into zahlung (name, preis, dauer, aktiv) values
   ('Сорок пять минут', 24.69, '00:45', true),
@@ -20,6 +20,10 @@ insert into users (name, email, adresse,  admin_passwort, passwort) values
 
 insert into user_roles (role, user_id) values
   ('ROLE_USER', 1005),
+  ('ROLE_USER', 1000),
+  ('ROLE_USER', 1001),
+  ('ROLE_USER', 1002),
+  ('ROLE_ADMIN', 1005),
   ('ROLE_ADMIN', 1006),
   ('ROLE_USER', 1006);
 
