@@ -53,11 +53,15 @@
         </div>
         <div class="card-body">
             <div id="user-message_${message.id}">
+                <c:if test="${message.parentMessage != null}">
+                    <blockquote>
+                        <c:out value="${message.parentMessage}" />
+                    </blockquote>
+                </c:if>
                 <c:out value="${message.text}" escapeXml="false"/>
                 <c:set var="this-message" value="${message.text}"/>
             </div>
             <div id="add-message_${message.id}" >
-                <%--<%@ include file="nachricht-form.jsp"%>--%>
             </div>
         </div>
         <div class="card-footer">

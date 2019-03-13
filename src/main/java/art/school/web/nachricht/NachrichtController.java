@@ -70,10 +70,8 @@ public class NachrichtController extends AbstractNachrichtController {
                                   @RequestParam(name="page") int pageNumber,
                                   @RequestParam(name="parentId", required = false) Integer parentId) {
 
-        System.out.println(parentId);
         Nachricht nachricht;
         if (nachrichtTo.isNew()) {
-//            nachricht = createNachrichtWithUpdaters(null, "В ответ на");
             nachricht = new Nachricht();
             nachricht.setDatum(LocalDateTime.now());
             if(parentId != null){
@@ -84,7 +82,7 @@ public class NachrichtController extends AbstractNachrichtController {
         }
         nachricht.setThema(themaService.get(nachrichtTo.getThemaId()));
         nachricht.setUser(userService.get(SecurityUtil.getAuthId()));
-        nachricht.setText(TextFormatUtil.formatText(nachrichtTo.getText()));
+        nachricht.setText(nachrichtTo.getText());
         super.create(nachricht);
 
         Pageable pageable = PageRequest.of(pageNumber, nachrichtTo.getSize());
