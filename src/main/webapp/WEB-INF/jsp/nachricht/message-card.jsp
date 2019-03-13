@@ -56,13 +56,18 @@
         </div>
         <div class="card-body">
             <div id="user-message_${message.id}">
-                <c:if test="${message.parentMessage != null}">
+                <c:if test="${message.parentMessages != null}">
                     <blockquote>
-                        <c:out value="${message.parentMessage}" />
+                        <c:forEach var="para" items="${message.parentMessages}">
+                            <c:out value="${para}" escapeXml="false"/><br/>
+                        </c:forEach>
                     </blockquote>
                 </c:if>
-                <c:out value="${message.text}" escapeXml="false"/>
-                <c:set var="this-message" value="${message.text}"/>
+                <c:forEach var="paragraph" items="${message.lines}">
+                        <c:out value="${paragraph}" escapeXml="false"/><br/>
+                </c:forEach>
+                <%--<c:out value="${message.text}" escapeXml="false"/>--%>
+                <%--<c:set var="this-message" value="${message.text}"/>--%>
             </div>
             <div id="add-message_${message.id}" >
             </div>

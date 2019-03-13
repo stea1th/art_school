@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static art.school.util.PaginationHelper.createTablePage;
+import static art.school.util.TextFormatUtil.splitMessageByLineSeparator;
 
 @Controller
 @RequestMapping(value = "/nachricht")
@@ -105,7 +106,8 @@ public class NachrichtController extends AbstractNachrichtController {
     public String getTextArea(Model model, @RequestParam(name="id")int id,
                               @RequestParam(name="answer", required = false, defaultValue = "false") boolean answer){
         Nachricht nachricht = get(id);
-        model.addAttribute("parentText",answer? nachricht.getText() : nachricht.getParent() != null? nachricht.getParent().getText() : null);
+        model.addAttribute("parentText",answer? nachricht.getText() :
+                nachricht.getParent() != null? nachricht.getParent().getText() : null);
         model.addAttribute("id",answer? null : id);
         model.addAttribute("themaId", nachricht.getThema().getId());
         model.addAttribute("updateText", answer? null : nachricht.getText());
