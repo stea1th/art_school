@@ -7,10 +7,10 @@
             <c:out value="${message.name}"/>
             <input type="hidden" id="message-id" value="${message.id}"/>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="display: flex; align-items: center;">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-astronaut" role="img"
                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
-                 class="svg-inline--fa fa-user-astronaut fa-w-14 fa-9x">
+                 class="svg-inline--fa fa-user-astronaut fa-w-14 fa-8x" style="margin: 0 auto;">
                 <defs class="">
                     <clipPath id="clip-GKyi2S8Ru5X4" class="">
                         <path fill="currentColor"
@@ -34,7 +34,10 @@
                       width="100%" height="100%" class=""></rect>
             </svg>
         </div>
+        <div class="card-footer">
+        </div>
     </div>
+
     <div class="card col-md-9" id="right-card_${message.id}">
         <div class="card-header">
             <div class="row">
