@@ -36,7 +36,7 @@ public class ThemaTo {
                         .getName(),
                 thema.getViews(),
                 thema.getNachrichts().size()-1,
-                DateUtil.transformDateForForum(thema.getNachrichts().get(thema.getNachrichts().size()-1)
+                DateUtil.transformDateForForum(thema.getNachrichts().get(0)
                         .getDatum()),
                 thema.isGepinnt()
                 );
