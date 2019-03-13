@@ -33,6 +33,7 @@ function answerIt(id) {
 function addTextArea(id, message) {
     $.get("/nachricht/text", {id: id, answer: answer})
         .done(function (data) {
+            console.log(data);
             message.html(data);
             message.find('#text-message').focus();
             saveMessage(id)
@@ -48,17 +49,18 @@ function addTextArea(id, message) {
 }*/
 
 function updateMessage(id) {
+    // console.log(id);
     messageId = id;
     if (answer !== undefined) {
         hideMessageArea();
     }
     var message = $('#add-message_' + id);
-    message.id = id;
+    // message.id = id;
     answer = false;
     $('#user-message_' + id).hide();
     addTextArea(id, message);
-    message.css('display', 'block');
-    messageId = id;
+    // message.css('display', 'block');
+    // messageId = id;
 }
 
 

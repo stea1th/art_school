@@ -12,10 +12,12 @@
                    <textarea type="text" class="message-quote" name="message-quote" rows="10" readonly>
                        <c:out value="${parentText}" />
                    </textarea>
-                <%--<p class="to-wright"></p>--%>
             </c:if>
             <div contenteditable="true" class="text-message" style="min-height:150px; width:100%; border:inset; border-top:none; outline: none;"
                  id="text-message">
+                <c:if test="${updateText != null}">
+                    <c:out value="${updateText}" />
+                </c:if>
             </div>
 
         </div>

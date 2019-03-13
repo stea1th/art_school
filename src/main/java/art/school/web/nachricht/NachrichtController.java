@@ -106,15 +106,12 @@ public class NachrichtController extends AbstractNachrichtController {
     @GetMapping(value = "/text")
     public String getTextArea(Model model, @RequestParam(name="id")int id,
                               @RequestParam(name="answer", required = false, defaultValue = "false") boolean answer){
-        System.out.println(answer);
-        if(answer){
-            Nachricht nachricht = get(id);
-            model.addAttribute("parentText", nachricht.getText().trim());
-            model.addAttribute("id", null);
-            model.addAttribute("themaId", nachricht.getThema().getId());
-            return "nachricht/nachricht-form";
-        }
-        return null;
+        Nachricht nachricht = get(id);
+        model.addAttribute("parentText",answer? nachricht.getText() : nachricht.getParent() != null? nachricht.getParent().getText() : null);
+        model.addAttribute("id",answer? null : id);
+        model.addAttribute("themaId", nachricht.getThema().getId());
+        model.addAttribute("updateText", answer? null : nachricht.getText());
+        return "nachricht/nachricht-form";
     }
 
     private Nachricht createNachrichtWithUpdaters(Integer id, String action) {
