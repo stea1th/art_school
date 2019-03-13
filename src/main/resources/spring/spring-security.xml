@@ -10,16 +10,16 @@
 
     <http use-expressions="true">
         <intercept-url pattern="/login*" access="isAnonymous()" />
-        <intercept-url pattern="/unterricht*" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/kind*" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/zahlung*" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/statistik*" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/unterricht*" access="hasRole('ROLE_MODERATOR')"/>
+        <intercept-url pattern="/kind*" access="hasRole('ROLE_MODERATOR')"/>
+        <intercept-url pattern="/zahlung*" access="hasRole('ROLE_MODERATOR')"/>
+        <intercept-url pattern="/statistik*" access="hasRole('ROLE_MODERATOR')"/>
         <intercept-url pattern="/forum*" access="hasRole('ROLE_USER')"/>
         <!--<intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>-->
         <intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')"/>
 
         <form-login login-page='/login'
-                    default-target-url="/unterricht"
+                    default-target-url="/forum"
                     authentication-failure-url="/login?error=true"
                     always-use-default-target="true"/>
         <logout logout-success-url="/login"

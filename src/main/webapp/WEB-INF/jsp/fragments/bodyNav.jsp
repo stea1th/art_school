@@ -4,7 +4,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark justify-content-end">
-    <a class="navbar-brand" href="unterricht">Art School</a>
+    <a class="navbar-brand" href="forum">Art School</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars1" aria-controls="navbars1"
             aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -13,6 +13,7 @@
     <div class="collapse navbar-collapse" id="navbars1">
         <sec:authorize access="isAuthenticated()">
             <ul class="navbar-nav mr-auto" id="left-side">
+                <sec:authorize access="hasRole('ROLE_MODERATOR')">
                 <li class="nav-item active">
                     <a class="nav-link" href="unterricht">Уроки<span class="sr-only">(current)</span></a>
                 </li>
@@ -25,6 +26,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="statistik">Статистика</a>
                 </li>
+                </sec:authorize>
                 <li class="nav-item">
                     <a class="nav-link" href="forum">Форум</a>
                 </li>

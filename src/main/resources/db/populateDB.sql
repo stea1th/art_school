@@ -23,7 +23,8 @@ insert into user_roles (role, user_id) values
   ('ROLE_USER', 1000),
   ('ROLE_USER', 1001),
   ('ROLE_USER', 1002),
-  ('ROLE_ADMIN', 1005),
+  ('ROLE_MODERATOR', 1005),
+  ('ROLE_MODERATOR', 1006),
   ('ROLE_ADMIN', 1006),
   ('ROLE_USER', 1006);
 

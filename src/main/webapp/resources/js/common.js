@@ -23,7 +23,6 @@ function selectSizeOnChange(){
             $('.wrapper').empty().append(data);
             pageNumberInput();
             selectSizeOnChange();
-            resizeTextArea();
             saveMessage();
         });
     });
