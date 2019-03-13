@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Optional;
 
 @Transactional(readOnly = true)
@@ -23,4 +24,12 @@ public interface CrudUserRepository extends JpaRepository<Users, Integer> {
     @Override
     @NotNull
     Optional<Users> findById(Integer id);
+
+    @Query(value = "select * from users u\n" +
+            "where u.id not in (\n" +
+            "select u.id from users u\n" +
+            "left join user_roles role2 on u.id = role2.user_id\n" +
+            "where role2.role = 'ROLE_ADMIN')\n" +
+            "order by u.name asc", nativeQuery = true)
+    List<Users> findKinds();
 }

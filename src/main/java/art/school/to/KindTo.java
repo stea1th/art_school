@@ -1,6 +1,6 @@
 package art.school.to;
 
-import art.school.entity.Kind;
+import art.school.entity.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,9 +18,9 @@ public class KindTo {
     private boolean aktiv;
     private String registriert;
 
-    public KindTo(Kind i){
+    public KindTo(Users i){
         this(i.getId(),
-                i.getName(), i.getAdresse(), i.isAktiv(),
+                i.getName(), i.getAdresse(), i.getAktiv(),
                 i.getRegistriert().truncatedTo(ChronoUnit.SECONDS)
                         .toString().replace("T", " "));
     }

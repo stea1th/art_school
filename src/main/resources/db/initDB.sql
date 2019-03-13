@@ -4,23 +4,24 @@ drop table if exists nachricht;
 drop table if exists thema;
 drop table if exists unterricht;
 drop table if exists zahlung;
-drop table if exists kind;
 drop table if exists users;
+-- drop table if exists kind;
+
 
 
 drop sequence if exists global_seq;
 
 create sequence global_seq start 1000;
 
-create table kind
-(
-  id integer primary key default nextval('global_seq'),
-  name varchar not null,
-  adresse varchar not null,
-  aktiv bool default true not null,
-  registriert timestamp default now() not null,
-  constraint kind_unique_name_adresse_idx unique(name, adresse)
-);
+-- create table kind
+-- (
+--   id integer primary key default nextval('global_seq'),
+--   name varchar not null,
+--   adresse varchar not null,
+--   aktiv bool default true not null,
+--   registriert timestamp default now() not null,
+--   constraint kind_unique_name_adresse_idx unique(name, adresse)
+-- );
 
 
 create table zahlung
@@ -33,22 +34,11 @@ create table zahlung
   constraint zahlung_unique_preis_dauer_idx unique(preis, dauer)
 );
 
-create table unterricht
-(
-  id integer primary key default nextval('global_seq'),
-  datum timestamp default now() not null,
-  bezahlt bool default false not null,
-  notiz text,
-  k_id integer not null,
-  z_id integer not null,
-  foreign key (k_id) references kind(id) on delete cascade,
-  foreign key (z_id) references zahlung(id) on delete cascade
-);
-
 create table users
 (
   id integer primary key default nextval('global_seq'),
   name              VARCHAR                 NOT NULL,
+  adresse           varchar                 not null,
   email             VARCHAR                 NOT NULL,
   admin_passwort    VARCHAR                 NOT NULL,
   passwort          VARCHAR                 NOT NULL,
@@ -56,6 +46,19 @@ create table users
   aktiv             BOOL DEFAULT TRUE       NOT NULL
 );
 create unique index user_unique_email_index on users(email);
+
+create table unterricht
+(
+  id integer primary key default nextval('global_seq'),
+  datum timestamp default now() not null,
+  bezahlt bool default false not null,
+  notiz text,
+  u_id integer not null,
+  z_id integer not null,
+  foreign key (u_id) references users(id) on delete cascade,
+  foreign key (z_id) references zahlung(id) on delete cascade
+);
+
 
 create table thema
 (

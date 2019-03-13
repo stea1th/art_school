@@ -1,10 +1,10 @@
 package art.school.repository.datajpa;
 
-import art.school.entity.Kind;
 import art.school.entity.Unterricht;
+import art.school.entity.Users;
 import art.school.entity.Zahlung;
-import art.school.repository.KindRepository;
 import art.school.repository.UnterrichtRepository;
+import art.school.repository.UserRepository;
 import art.school.repository.ZahlungRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -19,7 +19,7 @@ public class UnterrichtRepositoryImpl implements UnterrichtRepository {
 
 
     @Autowired
-    private KindRepository kindRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private ZahlungRepository zahlungRepository;
@@ -30,12 +30,12 @@ public class UnterrichtRepositoryImpl implements UnterrichtRepository {
     @Override
     @Transactional
     public Unterricht save(Unterricht unterricht, Integer... ids) {
-        Kind kind = kindRepository.get(ids[0]);
+        Users kind = userRepository.get(ids[0]);
         Zahlung zahlung = zahlungRepository.get(ids[1]);
         if( kind == null || zahlung == null){
             return null;
         }
-        unterricht.setKind(kind);
+        unterricht.setUser(kind);
         unterricht.setZahlung(zahlung);
         return repository.save(unterricht);
     }

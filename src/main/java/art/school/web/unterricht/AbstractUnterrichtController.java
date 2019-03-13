@@ -31,7 +31,7 @@ public abstract class AbstractUnterrichtController {
     public Unterricht create(RequestUnterrichtTo unterrichtTo){
         Unterricht u = new Unterricht(unterrichtTo.getId(), LocalDateTime.of(LocalDate.parse(unterrichtTo.getDatum()),
                 LocalTime.parse(unterrichtTo.getZeit())), unterrichtTo.isBezahlt(), unterrichtTo.getNotiz());
-        log.info("create {} for Kind {} and Zahlung {}", u, unterrichtTo.getKind(), unterrichtTo.getZahlung());
+        log.info("create {} for Users {} and Zahlung {}", u, unterrichtTo.getKind(), unterrichtTo.getZahlung());
         checkNew(u);
         return unterrichtService.create(u, unterrichtTo.getKind(), unterrichtTo.getZahlung());
     }
@@ -55,7 +55,7 @@ public abstract class AbstractUnterrichtController {
         log.info("update {} with id={}", u, u.getId());
         assureIdConsistent(u, u.getId());
         unterrichtService.create(u,
-                unterrichtTo.getKind()!=null? unterrichtTo.getKind() : u.getKind().getId(),
+                unterrichtTo.getKind()!=null? unterrichtTo.getKind() : u.getUser().getId(),
                 unterrichtTo.getZahlung()!=null? unterrichtTo.getZahlung() : u.getZahlung().getId());
     }
 
@@ -63,7 +63,7 @@ public abstract class AbstractUnterrichtController {
         String[] dateParts = s.replace("T", " ").split(" ");
         Unterricht u = unterrichtService.get(id);
         u.setDatum(LocalDateTime.of(LocalDate.parse(dateParts[0]), LocalTime.parse(dateParts[1])));
-        unterrichtService.create(u, u.getKind().getId(), u.getZahlung().getId());
+        unterrichtService.create(u, u.getUser().getId(), u.getZahlung().getId());
     }
 
     public List<Unterricht> getAll(){

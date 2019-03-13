@@ -3,6 +3,7 @@ package art.school.repository.datajpa;
 import art.school.entity.Users;
 import art.school.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +11,8 @@ import java.util.List;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
+
+    private static final Sort SORT_BY_NAME = new Sort(Sort.Direction.ASC, "name");
 
     @Autowired
     private CrudUserRepository repository;
@@ -35,9 +38,13 @@ public class UserRepositoryImpl implements UserRepository {
         return repository.findAll();
     }
 
+    public List<Users> getAllKinds(){
+        return repository.findKinds();
+    }
 
     @Override
     public Users getUsersByEmail(String email) {
         return repository.findUsersByEmail(email);
     }
+
 }

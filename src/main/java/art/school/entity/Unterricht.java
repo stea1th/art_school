@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@ToString(exclude = {"kind", "zahlung"})
+@ToString(exclude = {"user", "zahlung"})
 @Entity
 @Table(name = "unterricht")
 public class Unterricht extends AbstractBaseEntity {
@@ -32,10 +32,10 @@ public class Unterricht extends AbstractBaseEntity {
     private String notiz;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "k_id")
+    @JoinColumn(name = "u_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
-    private Kind kind;
+    private Users user;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "z_id")

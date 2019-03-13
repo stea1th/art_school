@@ -26,11 +26,11 @@ public class RequestUnterrichtTo {
         this(u.getId(),
                 u.getDatum().toLocalDate().toString(),
                 u.getDatum().toLocalTime().truncatedTo(ChronoUnit.MINUTES).toString(),
-                u.getKind().getId(),
+                u.getUser().getId(),
                 u.getZahlung().getId(),
                 u.isBezahlt(),
                 u.getNotiz(),
-                new KindTo(u.getKind()),
+                new KindTo(u.getUser()),
                 new ZahlungTo(u.getZahlung()));
     }
 

@@ -64,6 +64,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public List<Users> getAllKinds() {
+        return repository.getAllKinds();
+    }
+
+    @Override
     public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
         Users users = repository.getUsersByEmail(email);
         if(users == null){

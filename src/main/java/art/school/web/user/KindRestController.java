@@ -1,6 +1,6 @@
-package art.school.web.kind;
+package art.school.web.user;
 
-import art.school.entity.Kind;
+import art.school.entity.Users;
 import art.school.to.KindTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,7 +16,7 @@ import static art.school.util.TransformUtil.transformTo;
 
 @RestController
 @RequestMapping(value = "/kind")
-public class KindRestController extends AbstractKindController {
+public class KindRestController extends AbstractUserController {
 
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -54,14 +54,12 @@ public class KindRestController extends AbstractKindController {
     @SuppressWarnings("unchecked")
     public ResponseEntity saveOrUpdate(KindTo z){
         Map<String, String> response = new LinkedHashMap<>();
-        Kind kind = new Kind(z);
-        String message;
+        Users kind = new Users(z);
+        String message = kind.isNew()? "Save" : "Update";
         if (kind.isNew()) {
             super.create(kind);
-            message = "Save";
         } else {
             super.update(kind, kind.getId());
-            message = "Update";
         }
         response.put(message, z.getName());
         return new ResponseEntity(response, HttpStatus.OK);

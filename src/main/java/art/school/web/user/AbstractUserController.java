@@ -47,4 +47,9 @@ public abstract class AbstractUserController  {
         log.info("getAll Users");
         return service.getAll();
     }
+
+    public List<Users> getAllKinds(){
+        log.info("getAll Kinds");
+        return service.getAllKinds();
+    }
 }
