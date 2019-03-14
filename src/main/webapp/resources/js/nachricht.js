@@ -7,8 +7,8 @@ $(function () {
 
 function answerIt(id) {
     if (answer !== undefined) {
-            hideMessageArea();
-        }
+        hideMessageArea();
+    }
     messageId = id;
     answer = true;
     var message = $('#add-message');
@@ -48,16 +48,22 @@ function saveMessage(id) {
             page: $('.page-input').attr('this'),
             parentId: id
         }).done(function (data) {
-            location.href = "/nachricht?id="+ $('#themaId').val() + "&page=" + data
-                +"&size=" + size;
-            });
+            console.log(data.id);
+            var id = $('#themaId').val();
+            // console.log(data.reload);
+            location.reload();
+            if(data.reload){
+                location.href = "/nachricht?id=" + id + "&page=" + data.page
+                    + "&size=" + size + "#" + data.id;
+            }
+        });
     });
 }
 
-function deleteMessage(id){
-    $(this).on('click', function(){
+function deleteMessage(id) {
+    $(this).on('click', function () {
         $.get("/nachricht/delete", {id: id})
-            .done(function(){
+            .done(function () {
                 location.reload();
             });
     });

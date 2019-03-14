@@ -3,7 +3,7 @@
 
 <div>
     <ul class="pagination">
-        <li class="page-item p-1">
+        <li class="page-item p-1 active">
             <div class="page-link" style="cursor: pointer"><c:out value="${param.items}"/></div>
         </li>
         <li class="${param.hasPrevious? 'page-item p-1' : 'page-item p-1 disabled'}" >
@@ -12,7 +12,7 @@
                 <c:param name="size" value="${param.size}"/>
             </c:url>
             <a class="page-link"
-               href="${linkFirst}">First</a></li>
+               href="${linkFirst}"><i class="fas fa-angle-double-left fa-2x" style="vertical-align:middle;padding-bottom: 4px;"></i></a></li>
         <li class="${param.hasPrevious? 'page-item p-1' : 'page-item p-1 disabled'}">
             <c:url var="linkPrevious" value="${param.link}">
                 <c:param name="id" value="${param.themaId}"/>
@@ -20,9 +20,9 @@
                 <c:param name="size" value="${param.size}"/>
             </c:url>
             <a class="page-link"
-               href="${linkPrevious}">Previous</a></li>
+               href="${linkPrevious}"><i class="fas fa-angle-left fa-2x" style="vertical-align:middle;padding-bottom: 4px;"></i></a></li>
 
-        <li class="page-item p-1">
+        <li class="page-item p-1 active">
             <div class="page-link">
                 <jsp:element name="input">
                     <jsp:attribute name="type">text</jsp:attribute>
@@ -46,13 +46,15 @@
                 <c:param name="page" value="${param.next}"/>
                 <c:param name="size" value="${param.size}"/>
             </c:url>
-            <a class="page-link" href="${linkNext}">Next</a></li>
+            <a class="page-link" href="${linkNext}"><i class="fas fa-angle-right fa-2x" style="vertical-align:middle;padding-bottom: 4px;"></i></a></li>
         <li class="${param.hasNext? 'page-item p-1' : 'page-item p-1 disabled'}">
             <c:url var="linkLast" value="${param.link}">
                 <c:param name="id" value="${param.themaId}"/>
                 <c:param name="page" value="${param.last}"/>
                 <c:param name="size" value="${param.size}"/>
             </c:url>
-            <a class="page-link" href="${linkLast}">Last</a></li>
+            <a class="page-link" href="${linkLast}" >
+                <i class="fas fa-angle-double-right fa-2x" style="vertical-align:middle;padding-bottom: 4px;"></i>
+            </a></li>
     </ul>
 </div>

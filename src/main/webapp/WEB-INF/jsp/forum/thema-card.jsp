@@ -4,7 +4,11 @@
 <tr>
     <td>
         <div class="thema-title">
-            <span style="color: red !important;"><i class="fas fa-map-pin"></i>&nbsp;</span>
+            <span style="color: red !important;">
+                <%--<i class="fas fa-map-pin"></i>--%>
+                <i class="fas fa-thumbtack"></i>
+                &nbsp;
+            </span>
             <c:url value="/nachricht" var="themaUrl">
                 <c:param name="id" value="${item.id}"/>
             </c:url>

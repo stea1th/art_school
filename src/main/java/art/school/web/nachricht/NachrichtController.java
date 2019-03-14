@@ -65,7 +65,7 @@ public class NachrichtController extends AbstractNachrichtController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseBody
-    public Integer createOrUpdate(NachrichtTo nachrichtTo,
+    public NachrichtTo createOrUpdate(NachrichtTo nachrichtTo,
                                   @RequestParam(name="page") int pageNumber,
                                   @RequestParam(name="parentId", required = false) Integer parentId) {
 
@@ -87,7 +87,7 @@ public class NachrichtController extends AbstractNachrichtController {
         Pageable pageable = PageRequest.of(pageNumber, nachrichtTo.getSize());
         Page<Nachricht> page = super.getPageByThemaId(nachrichtTo.getThemaId(), pageable);
 
-        return nachrichtTo.isNew()? page.getTotalPages() - 1 : pageNumber - 1;
+        return new NachrichtTo(nachricht.getId(), nachrichtTo.isNew()? page.getTotalPages() - 1 : pageNumber - 1, nachrichtTo.isNew());
     }
 
     @GetMapping(value = "/delete")

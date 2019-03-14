@@ -33,6 +33,8 @@ public class NachrichtTo {
     private Integer size;
     private List<String> lines;
     private List<String> parentMessages;
+    private Integer page;
+    private Boolean reload;
 
     public NachrichtTo(Nachricht n) {
         this(n.getId(), n.getText(),
@@ -41,11 +43,17 @@ public class NachrichtTo {
                 n.getThema().getId(), n.getUpdaters().isEmpty() ? null :
                         createUpdaterInfo(n.getUpdaters().get(n.getUpdaters().size() - 1)), null,
                 splitMessageByLineSeparator(n.getText()),
-                n.getParent() == null ? null : splitMessageByLineSeparator(n.getParent().getText()));
+                n.getParent() == null ? null : splitMessageByLineSeparator(n.getParent().getText()), null, null);
     }
 
     public NachrichtTo(Integer id) {
         this.id = id;
+    }
+
+    public NachrichtTo(int id, int page, boolean reload){
+        this.id = id;
+        this.page = page;
+        this.reload = reload;
     }
 
     public boolean isNew() {
