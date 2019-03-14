@@ -1,7 +1,6 @@
 delete from user_roles;
 delete from unterricht;
 delete from zahlung;
--- delete from kind;
 delete from users;
 alter sequence global_seq restart with 1000;
 

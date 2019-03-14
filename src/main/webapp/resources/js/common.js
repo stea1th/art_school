@@ -23,9 +23,17 @@ function selectSizeOnChange(){
             $('.wrapper').empty().append(data);
             pageNumberInput();
             selectSizeOnChange();
-            saveMessage();
+            if(isFunctionDefined('saveMessage')){
+                saveMessage();
+            }
         });
     });
+}
+
+function isFunctionDefined(functionName) {
+    if(eval("typeof(" + functionName + ") == typeof(Function)")) {
+        return true;
+    }
 }
 
 function pageNumberInput(){

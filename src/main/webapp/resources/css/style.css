@@ -11,7 +11,7 @@
     /*background: aquamarine;*/
 /*}*/
 
-.card.border-light {
+.card.border-light, #forum tbody tr:hover {
     box-shadow: 0 1px 15px 1px rgba(39,39,39,.1);
     max-width: 100%;
     margin: auto;
@@ -95,7 +95,7 @@ blockquote {
     border:inset; border-bottom:none;}
 
 .container {
-        max-width: 1300px;
+        max-width: 1400px;
 }
 
 #forum-themes h1 {
@@ -113,6 +113,18 @@ blockquote {
     /*max-height: 20px;*/
     font: normal 100% verdana, arial, helvetica, sans-serif;
 }
+
+#forum thead {
+    color: #1474C3;
+}
+
+
+#forum td {
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
 
 
 

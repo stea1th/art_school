@@ -3,6 +3,8 @@ package art.school.repository.datajpa;
 import art.school.entity.Thema;
 import art.school.repository.ThemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -32,5 +34,9 @@ public class ThemaRepositoryImpl implements ThemaRepository {
     @Override
     public List<Thema> getAll() {
         return repository.findAll();
+    }
+
+    public Page<Thema> getAll(Pageable pageable) {
+        return repository.findAllThis(pageable);
     }
 }

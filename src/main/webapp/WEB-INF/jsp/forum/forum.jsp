@@ -6,39 +6,35 @@
 <jsp:include page="../fragments/headTag.jsp"/>
 
 <body>
-<script type="text/javascript" src='<c:url value="/resources/js/nachricht.js"/>' defer></script>
+<script type="text/javascript" src='<c:url value="/resources/js/forum.js"/>' defer></script>
 <jsp:include page="../fragments/bodyNav.jsp"/>
 <br/>
 <div class="container">
     <div class="row">
-        <div class="col-md-12 ml-auto mr-auto">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ml-auto mr-auto">
             <div class="card border-light mb-3" id="table-card3">
                 <div class="card-body">
-                    <h3>
-                        <c:out value="${title}"/>
-                    </h3>
                     <div class="d-flex">
                         <div class="ml-auto p-2">
                             <jsp:include page="../fragments/table-size-selector.jsp">
-                                <jsp:param name="themaId" value="${themaId}"/>
                                 <jsp:param name="sort" value="${sort}"/>
                                 <jsp:param name="link" value="${link}"/>
                                 <jsp:param name="size" value="${size}"/>
                             </jsp:include>
                         </div>
                     </div>
-                    <div class="wrapper">
-                        <%@ include file="fragment.jsp"%>
-                    </div>
-                    <hr>
-                    <div id="add-message" >
-                        <%--<%@ include file="nachricht-form.jsp"%>--%>
+                    <div id="forum-themes">
+                        <h1>
+                            <span>Art School Форум</span>
+                        </h1>
+                        <div class="wrapper">
+                            <%@ include file="fragment.jsp" %>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
 </body>
