@@ -16,7 +16,7 @@ function selectSizeOnChange(){
         $.get($(this).attr('link'), {
             id: $(this).attr('themaId'),
             size: $(this).val(),
-            sort: $(this).attr('sort'),
+            // sort: $(this).attr('sort'),
             // direction: $(this).attr('direction'),
             select: true
         }).done(function(data){

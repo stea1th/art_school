@@ -45,7 +45,7 @@ public class NachrichtController extends AbstractNachrichtController {
     public String getAllNachrichts(Model model, @RequestParam(name = "id") Integer id,
                                    @RequestParam(name = "select", required = false, defaultValue = "false") boolean select,
                                    @RequestParam(name = "page", required = false, defaultValue = "0") int pageNumber,
-                                   @RequestParam(name = "size", required = false, defaultValue = "2") int size) {
+                                   @RequestParam(name = "size", required = false, defaultValue = "10") int size) {
         Thema thema = themaService.get(id);
 
         model.addAttribute("title", thema.getTitel());

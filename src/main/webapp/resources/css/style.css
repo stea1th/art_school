@@ -126,10 +126,13 @@ blockquote {
 }
 
 #forum a {
+    color: #1474C3;
+}
+
+.thema-title a {
     font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
     font-size: 1.1em;
     font-weight: bold;
-    color: #1474C3;
 }
 
 #forum tbody:before {line-height:1em; content:"\200C"; display:block;}

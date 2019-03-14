@@ -91,6 +91,9 @@
                         </div>
                     </c:if>
                 </c:if>
+                <div style="position:absolute; right: 15px;">
+                    <a id="${message.id}">#<c:out value="${message.id}"/></a>
+                </div>
             </div>
         </div>
     </div>

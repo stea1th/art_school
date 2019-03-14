@@ -1,17 +1,15 @@
 package art.school.web.forum;
 
-import art.school.entity.Nachricht;
 import art.school.entity.Thema;
-import art.school.to.NachrichtTo;
 import art.school.to.ThemaTo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 import static art.school.util.PaginationHelper.createTablePage;
@@ -24,7 +22,7 @@ public class ForumController extends AbstractForumController {
     public String all(Model model,
                       @RequestParam(name = "select", required = false, defaultValue = "false") boolean select,
                       @RequestParam(name = "page", required = false, defaultValue = "0") int pageNumber,
-                      @RequestParam(name = "size", required = false, defaultValue = "2") int size){
+                      @RequestParam(name = "size", required = false, defaultValue = "10") int size){
 
 
         Page<Thema> page = super.getAll(PageRequest.of(pageNumber, size));

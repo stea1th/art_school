@@ -19,6 +19,9 @@
         <strong><c:out value="${item.replies}"/></strong>
     </td>
     <td class="text-center">
-        <strong><a href="/nachricht" <c:out value="${item.last}"/></strong>
+
+        <div><a href='<c:url value="/nachricht?id=${item.id}&page=${item.page}#${item.anker}"/>' ><c:out value="${item.last}"/>
+        <span><i class="fas fa-angle-double-right"></i></span>
+        </a></div>
     </td>
 </tr>

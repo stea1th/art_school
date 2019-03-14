@@ -25,6 +25,9 @@ public class ThemaTo {
     private int replies;
     private String last;
     private boolean pinned;
+    private int page;
+    private int anker;
+    private String lastName;
 
     public ThemaTo(Thema thema){
         this(thema.getId(), thema.getTitel(), thema.getNachrichts()
@@ -38,7 +41,9 @@ public class ThemaTo {
                 thema.getNachrichts().size()-1,
                 DateUtil.transformDateForForum(thema.getNachrichts().get(0)
                         .getDatum()),
-                thema.isGepinnt()
-                );
+                thema.isGepinnt(),
+                thema.getNachrichts().size()/10,
+                thema.getNachrichts().get(0).getId(),
+                thema.getNachrichts().get(0).getUser().getName());
     }
 }
