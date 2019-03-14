@@ -5,7 +5,6 @@
     <jsp:element name="select">
         <jsp:attribute name="class">page-size</jsp:attribute>
         <jsp:attribute name="themaId">${param.themaId}</jsp:attribute>
-        <jsp:attribute name="sort">${param.sort}</jsp:attribute>
         <jsp:attribute name="link">${param.link}</jsp:attribute>
         <jsp:body>
             <option value=2 ${param.size == 2? 'selected' : ''}>2</option>

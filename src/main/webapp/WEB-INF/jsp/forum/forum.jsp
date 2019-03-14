@@ -17,7 +17,6 @@
                     <div class="d-flex">
                         <div class="ml-auto p-2">
                             <jsp:include page="../fragments/table-size-selector.jsp">
-                                <jsp:param name="sort" value="${sort}"/>
                                 <jsp:param name="link" value="${link}"/>
                                 <jsp:param name="size" value="${size}"/>
                             </jsp:include>

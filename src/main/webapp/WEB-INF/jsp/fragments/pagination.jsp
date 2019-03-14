@@ -9,7 +9,6 @@
         <li class="${param.hasPrevious? 'page-item p-1' : 'page-item p-1 disabled'}" >
             <c:url var="linkFirst" value="${param.link}">
                 <c:param name="id" value="${param.themaId}"/>
-                <c:param name="sort" value="${param.sort}"/>
                 <c:param name="size" value="${param.size}"/>
             </c:url>
             <a class="page-link"
@@ -18,7 +17,6 @@
             <c:url var="linkPrevious" value="${param.link}">
                 <c:param name="id" value="${param.themaId}"/>
                 <c:param name="page" value="${param.previous}"/>
-                <c:param name="sort" value="${param.sort}"/>
                 <c:param name="size" value="${param.size}"/>
             </c:url>
             <a class="page-link"
@@ -31,7 +29,6 @@
                     <jsp:attribute name="class">page-input</jsp:attribute>
                     <jsp:attribute name="style">width: 30px; text-align: center</jsp:attribute>
                     <jsp:attribute name="themaId">${param.themaId}</jsp:attribute>
-                    <jsp:attribute name="sort">${param.sort}</jsp:attribute>
                     <jsp:attribute name="size">${param.size}</jsp:attribute>
                     <jsp:attribute name="last">${param.last}</jsp:attribute>
                     <jsp:attribute name="link">${param.link}</jsp:attribute>
@@ -47,7 +44,6 @@
             <c:url var="linkNext" value="${param.link}">
                 <c:param name="id" value="${param.themaId}"/>
                 <c:param name="page" value="${param.next}"/>
-                <c:param name="sort" value="${param.sort}"/>
                 <c:param name="size" value="${param.size}"/>
             </c:url>
             <a class="page-link" href="${linkNext}">Next</a></li>
@@ -55,7 +51,6 @@
             <c:url var="linkLast" value="${param.link}">
                 <c:param name="id" value="${param.themaId}"/>
                 <c:param name="page" value="${param.last}"/>
-                <c:param name="sort" value="${param.sort}"/>
                 <c:param name="size" value="${param.size}"/>
             </c:url>
             <a class="page-link" href="${linkLast}">Last</a></li>

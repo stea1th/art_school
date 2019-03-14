@@ -69,10 +69,6 @@ blockquote {
     height:42px;
 }
 
-.page-item{
-
-}
-
 .message-quote {
     resize: none;
     width: 100%;
@@ -127,6 +123,19 @@ blockquote {
     padding-left: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
+}
+
+#forum a {
+    font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #1474C3;
+}
+
+#forum tbody:before {line-height:1em; content:"\200C"; display:block;}
+
+#forum a:hover {
+    color: red;
 }
 
 

@@ -45,7 +45,6 @@ public class NachrichtController extends AbstractNachrichtController {
     public String getAllNachrichts(Model model, @RequestParam(name = "id") Integer id,
                                    @RequestParam(name = "select", required = false, defaultValue = "false") boolean select,
                                    @RequestParam(name = "page", required = false, defaultValue = "0") int pageNumber,
-                                   @RequestParam(name = "sort", required = false, defaultValue = "datum") String sort,
                                    @RequestParam(name = "size", required = false, defaultValue = "2") int size) {
         Thema thema = themaService.get(id);
 
@@ -53,7 +52,6 @@ public class NachrichtController extends AbstractNachrichtController {
         model.addAttribute("themaId", id);
 
         model.addAttribute("current", SecurityUtil.getAuthId());
-        model.addAttribute("sort", sort);
 
         Page<Nachricht> page = super.getPageByThemaId(id, PageRequest.of(pageNumber, size, Sort.by("datum", "id")));
         model.addAttribute("list", page.stream()

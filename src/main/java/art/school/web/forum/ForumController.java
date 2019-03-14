@@ -24,10 +24,7 @@ public class ForumController extends AbstractForumController {
     public String all(Model model,
                       @RequestParam(name = "select", required = false, defaultValue = "false") boolean select,
                       @RequestParam(name = "page", required = false, defaultValue = "0") int pageNumber,
-                      @RequestParam(name = "sort", required = false, defaultValue = "gepinnt") String sort,
                       @RequestParam(name = "size", required = false, defaultValue = "2") int size){
-
-        model.addAttribute("sort", sort);
 
 
         Page<Thema> page = super.getAll(PageRequest.of(pageNumber, size));

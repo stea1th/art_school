@@ -28,9 +28,8 @@
         <jsp:param name="hasPrevious" value="${hasPrevious}"/>
         <jsp:param name="hasNext" value="${hasNext}"/>
         <jsp:param name="items" value="${items}"/>
-        <jsp:param name="sorting" value="${sorting}"/>
         <jsp:param name="direction" value="${direction}"/>
-        <jsp:param name="sizing" value="${sizing}"/>
+        <jsp:param name="size" value="${size}"/>
         <jsp:param name="previous" value="${previous}"/>
         <jsp:param name="next" value="${next}"/>
         <jsp:param name="last" value="${last}"/>

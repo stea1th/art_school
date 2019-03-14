@@ -4,6 +4,7 @@
 <tr>
     <td>
         <div class="thema-title">
+            <span style="color: red !important;"><i class="fas fa-map-pin"></i>&nbsp;</span>
             <c:url value="/nachricht" var="themaUrl">
                 <c:param name="id" value="${item.id}"/>
             </c:url>
@@ -18,6 +19,6 @@
         <strong><c:out value="${item.replies}"/></strong>
     </td>
     <td class="text-center">
-        <strong><c:out value="${item.last}"/></strong>
+        <strong><a href="/nachricht" <c:out value="${item.last}"/></strong>
     </td>
 </tr>
