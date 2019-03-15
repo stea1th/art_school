@@ -9,15 +9,27 @@ $(function () {
     pageNumberInput();
 
     selectSizeOnChange();
+
+    pageInputField();
 });
+
+function pageInputField(){
+    var pageInputDiv = $('.page-input-div');
+    pageInputDiv.on('click', function(){
+        $(this).removeClass('disabled');
+        $(this).find('input').removeClass('disabled').focus();
+    });
+
+    pageInputDiv.on('focusout', function(){
+        $(this).addClass('disabled');
+    })
+}
 
 function selectSizeOnChange(){
     $('.page-size').on('change', function(){
         $.get($(this).attr('link'), {
             id: $(this).attr('themaId'),
             size: $(this).val(),
-            // sort: $(this).attr('sort'),
-            // direction: $(this).attr('direction'),
             select: true
         }).done(function(data){
             $('.wrapper').empty().append(data);

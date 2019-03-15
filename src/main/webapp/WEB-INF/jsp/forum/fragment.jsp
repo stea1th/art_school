@@ -24,18 +24,7 @@
 <hr>
 <div class="d-flex">
     <div class="ml-auto">
-        <jsp:include page="../fragments/pagination.jsp">
-            <jsp:param name="themaId" value="${themaId}"/>
-            <jsp:param name="link" value="${link}"/>
-            <jsp:param name="hasPrevious" value="${hasPrevious}"/>
-            <jsp:param name="hasNext" value="${hasNext}"/>
-            <jsp:param name="items" value="${items}"/>
-            <jsp:param name="direction" value="${direction}"/>
-            <jsp:param name="size" value="${size}"/>
-            <jsp:param name="previous" value="${previous}"/>
-            <jsp:param name="next" value="${next}"/>
-            <jsp:param name="last" value="${last}"/>
-        </jsp:include>
+        <%@ include file="../fragments/pagination.jsp" %>
     </div>
 </div>
 <hr>
