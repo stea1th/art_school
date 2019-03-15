@@ -7,7 +7,6 @@ import art.school.service.NachrichtUpdaterService;
 import art.school.service.ThemaService;
 import art.school.service.UserService;
 import art.school.to.NachrichtTo;
-import art.school.util.TextFormatUtil;
 import art.school.web.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,7 +25,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static art.school.util.PaginationHelper.createTablePage;
-import static art.school.util.TextFormatUtil.splitMessageByLineSeparator;
 
 @Controller
 @RequestMapping(value = "/nachricht")
@@ -101,14 +99,16 @@ public class NachrichtController extends AbstractNachrichtController {
     }
 
     @GetMapping(value = "/text")
-    public String getTextArea(Model model, @RequestParam(name="id")int id,
+    public String getTextArea(Model model, @RequestParam(name="id", required = false)Integer id,
                               @RequestParam(name="answer", required = false, defaultValue = "false") boolean answer){
-        Nachricht nachricht = get(id);
-        model.addAttribute("parentText",answer? nachricht.getText() :
-                nachricht.getParent() != null? nachricht.getParent().getText() : null);
-        model.addAttribute("id",answer? null : id);
-        model.addAttribute("themaId", nachricht.getThema().getId());
-        model.addAttribute("updateText", answer? null : nachricht.getText());
+        if(id != null) {
+            Nachricht nachricht = get(id);
+            model.addAttribute("parentText", answer ? nachricht.getText() :
+                    nachricht.getParent() != null ? nachricht.getParent().getText() : null);
+            model.addAttribute("id", answer ? null : id);
+            model.addAttribute("themaId", nachricht.getThema().getId());
+            model.addAttribute("updateText", answer ? null : nachricht.getText());
+        }
         return "nachricht/nachricht-form";
     }
 

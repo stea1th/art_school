@@ -3,7 +3,7 @@
 
 <div>
     <ul class="pagination">
-        <li class="page-item p-1 active">
+        <li class="page-item p-1">
             <div class="page-link" style="cursor: pointer"><c:out value="${param.items}"/></div>
         </li>
         <li class="${param.hasPrevious? 'page-item p-1' : 'page-item p-1 disabled'}" >

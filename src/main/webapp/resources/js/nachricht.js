@@ -1,6 +1,5 @@
 var messageId;
 var answer;
-var ajaxUrl = "nachricht";
 $(function () {
 
 });
@@ -21,7 +20,15 @@ function addTextArea(id, message) {
         .done(function (data) {
             message.html(data);
             message.find('#text-message').focus();
-            saveMessage(id)
+            if (id === undefined) {
+                $('#thema-title-invisible').css('display', 'block');
+                message.find('#thema-title-text').focus();
+                saveThema();
+            } else {
+                message.find('#text-message').focus();
+                saveMessage(id);
+            }
+
         });
 }
 
@@ -36,6 +43,16 @@ function updateMessage(id) {
     addTextArea(id, message);
 }
 
+function saveThema() {
+    $('.btn-ok').on('click', function () {
+        $.post("/forum/save", {thema: $('#thema-title-text').val(),
+            message: $('#text-message')[0].innerText})
+            .done(function (id) {
+                location.href = "/nachricht?id=" + id;
+            });
+    });
+}
+
 
 function saveMessage(id) {
     $('.btn-ok').on('click', function () {
@@ -48,11 +65,9 @@ function saveMessage(id) {
             page: $('.page-input').attr('this'),
             parentId: id
         }).done(function (data) {
-            console.log(data.id);
             var id = $('#themaId').val();
-            // console.log(data.reload);
             location.reload();
-            if(data.reload){
+            if (data.reload) {
                 location.href = "/nachricht?id=" + id + "&page=" + data.page
                     + "&size=" + size + "#" + data.id;
             }
@@ -82,7 +97,7 @@ function hideMessageArea() {
 
 $.fn.scrollTo = function () {
     $('html, body').animate({
-        scrollTop: $(this).offset().top
+        scrollTop: $(this).length === 0? 0 : $(this).offset().top
     }, 1000);
 };
 

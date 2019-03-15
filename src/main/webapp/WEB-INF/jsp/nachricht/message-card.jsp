@@ -34,8 +34,6 @@
                       width="100%" height="100%" class=""></rect>
             </svg>
         </div>
-        <div class="card-footer">
-        </div>
     </div>
 
     <div class="card col-md-9" id="right-card_${message.id}">
@@ -66,8 +64,6 @@
                 <c:forEach var="paragraph" items="${message.lines}">
                         <c:out value="${paragraph}" escapeXml="false"/><br/>
                 </c:forEach>
-                <%--<c:out value="${message.text}" escapeXml="false"/>--%>
-                <%--<c:set var="this-message" value="${message.text}"/>--%>
             </div>
             <div id="add-message_${message.id}" >
             </div>

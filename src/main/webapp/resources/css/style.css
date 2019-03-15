@@ -141,9 +141,27 @@ blockquote {
     color: red;
 }
 
-/*li i {*/
-    /*vertical-align:middle;*/
-/*}*/
+.card{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.page-item {
+    padding: 0 !important;
+}
+
+.text-message  {
+    min-height:150px; width:100%; border:inset; border-top:none; outline: none;
+}
+
+.thema-title-text {
+    border:inset;
+    border-top:none;
+    outline: none;
+}
+
+
+
 
 
 

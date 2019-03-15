@@ -6,9 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
 
@@ -33,5 +31,13 @@ public class ForumController extends AbstractForumController {
         createTablePage(model, page);
 
         return select ? "forum/fragment" : "forum/forum";
+    }
+
+    @PostMapping(value = "/save")
+    @ResponseBody
+    public Integer saveThema(@RequestParam(name="thema")String thema,
+                             @RequestParam(name="message") String message) {
+
+        return super.save(thema, message).getId();
     }
 }

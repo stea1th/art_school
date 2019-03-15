@@ -7,6 +7,7 @@
 
 <body>
 <script type="text/javascript" src='<c:url value="/resources/js/forum.js"/>' defer></script>
+<script type="text/javascript" src='<c:url value="/resources/js/nachricht.js"/>' defer></script>
 <jsp:include page="../fragments/bodyNav.jsp"/>
 <br/>
 <div class="container">
@@ -15,6 +16,10 @@
             <div class="card border-light mb-3" id="table-card3">
                 <div class="card-body">
                     <div class="d-flex">
+                        <div class="mr-auto p-2">
+                            <button type="button" style="float:right" onclick="answerIt()">Создать тему
+                            </button>
+                        </div>
                         <div class="ml-auto p-2">
                             <jsp:include page="../fragments/table-size-selector.jsp">
                                 <jsp:param name="link" value="${link}"/>
@@ -28,6 +33,9 @@
                         </h1>
                         <div class="wrapper">
                             <%@ include file="fragment.jsp" %>
+                        </div>
+                        <div id="add-message">
+
                         </div>
                     </div>
                 </div>

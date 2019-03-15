@@ -27,11 +27,9 @@ public class Thema extends AbstractBaseEntity{
     private int views;
 
     @Column(name = "aktiv", columnDefinition = "bool default true")
-    @NotBlank
     private boolean aktiv;
 
     @Column(name = "gepinnt", columnDefinition = "bool default false")
-    @NotBlank
     private boolean gepinnt;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "thema")

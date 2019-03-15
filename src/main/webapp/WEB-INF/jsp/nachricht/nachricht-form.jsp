@@ -5,7 +5,10 @@
     <form method="post" id="message-form" action="#">
         <input type="hidden" class="form-control" id="id" name="id" value="${id}"/>
         <input type="hidden" class="form-control" id="themaId" name="themaId" value="${themaId}"/>
-
+        <div id="thema-title-invisible" class="form-group" style="display: none;">
+            <label for="thema-title-text">Тема сообщения:</label>
+            <input class="thema-title-text form-control" type="text" id="thema-title-text">
+        </div>
         <div class="form-group">
             <label for="text-message">Написать сообщение:</label>
             <c:if test="${parentText != null}">
@@ -13,8 +16,8 @@
                        <c:out value="${parentText}" />
                    </textarea>
             </c:if>
-            <div contenteditable="true" class="text-message" style="min-height:150px; width:100%; border:inset; border-top:none; outline: none;"
-                 id="text-message">
+            <div contenteditable="true" class="text-message form-control"
+                 id="text-message" >
                 <c:if test="${updateText != null}">
                     <c:out value="${updateText}" />
                 </c:if>
