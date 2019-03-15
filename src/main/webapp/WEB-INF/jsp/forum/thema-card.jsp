@@ -4,16 +4,21 @@
 <tr>
     <td>
         <div class="thema-title">
-            <span style="color: red !important;">
-                <%--<i class="fas fa-map-pin"></i>--%>
-                <i class="fas fa-thumbtack"></i>
+            <span style="color: green !important;">
+                <i class="far fa-check-square"></i>
                 &nbsp;
             </span>
             <c:url value="/nachricht" var="themaUrl">
                 <c:param name="id" value="${item.id}"/>
             </c:url>
-            <a href="${themaUrl}"><c:out value="${item.titel}"/></a>
+            <a href="${themaUrl}" onclick="" ><c:out value="${item.titel}"/></a>
             <span>&nbsp;<c:out value="${item.creator}"/></span>
+            <c:if test="${item.pinned}">
+                <span style="color: red !important;">
+                    &nbsp;
+                    <i class="fas fa-thumbtack"></i>
+                </span>
+            </c:if>
         </div>
     </td>
     <td class="text-center">
@@ -24,8 +29,9 @@
     </td>
     <td class="text-center">
 
-        <div><a href='<c:url value="/nachricht?id=${item.id}&page=${item.page}#${item.anker}"/>' ><c:out value="${item.last}"/>
-        <span><i class="fas fa-angle-double-right"></i></span>
+        <div><a href='<c:url value="/nachricht?id=${item.id}&page=${item.page}#${item.anker}"/>'><c:out
+                value="${item.last}"/>
+            <span><i class="fas fa-angle-double-right"></i></span>
         </a></div>
     </td>
 </tr>

@@ -8,7 +8,6 @@
 
 <body>
 <script type="text/javascript" src='<c:url value="/resources/js/forum.js"/>' defer></script>
-<script type="text/javascript" src='<c:url value="/resources/js/nachricht.js"/>' defer></script>
 <jsp:include page="../fragments/bodyNav.jsp"/>
 <br/>
 <div class="container">

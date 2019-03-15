@@ -1,106 +1,102 @@
-var ajaxUrl = "forum";
-// var myModal = $('#createOrUpdateUser');
-var datatable;
-
-
+var messageId;
+var answer;
 $(function () {
 
-    // createThemeTable();
-
-    // $('#saveKind').on('click', function(){
-    //     $.post(ajaxUrl+"/save", $('#kind-detailsForm').serialize())
-    //         .done(function(){
-    //             myModal.modal('toggle');
-    //             datatable.ajax.reload();
-    //         });
-    // });
 });
 
-// function test(id){
-//     document.location.href = "/nachricht?id="+id;
-// }
-//
-// function toggleForum(){
-//     // alert($('#id'));
-//     $('button').click(function(){
-//        console.log($(this).val());
-//     });
-// }
-//
-// function createThemeTable() {
-//     datatable = $('#forum').DataTable({
-//         "language": {
-//             "url": languageUrl
-//         },
-//         "order": [[6, "desc"], [5, "desc" ]],
-//         "ajax": {
-//             "url": ajaxUrl,
-//             "dataSrc": ""
-//         },
-//         "createdRow": function( row, data, dataIndex ) {
-//             if (data.pinned === true) {
-//                 $(row).children().each(function(){
-//                     $(this).css('background-color', '#eeded9');
-//                     $(this).css('color', 'red');
-//                 });
-//             } else {
-//                 $(row).children().each(function(){
-//                     $(this).css('color', 'blue');
-//                 });
-//             }
-//             $(row).children().first().attr('onclick','test(' + data.id + ')');
-//         },
-//         "columnDefs": [
-//             {
-//                 "targets": [0, 6],
-//                 "visible": false,
-//                 "searchable": false
-//             }
-//         ],
-//         "columns": [
-//             {"data": "id"},
-//             {"data": "titel"},
-//             {"data": "creator"},
-//             {"data": "views"},
-//             {"data": "replies"},
-//             {"data": "last"},
-//             {"data": "pinned"}
-//
-//             // {"data": "aktiv",
-//             //     "render": function (data, type, row) {
-//             //         if (type === "display") {
-//             //             var checkbox = "<input type='checkbox' " + (data? "checked" : "") + " onclick='toggleThis(" + row.id + ")' style=''/>";
-//             //             if(row.roles.indexOf('Администратор')!== -1){
-//             //                 checkbox = "<input type='checkbox' " + (data? "checked" : "") + " onclick='toggleThis(" + row.id + ")' style='' disabled='disabled'/>";
-//             //             }
-//             //             return checkbox;
-//             //         }
-//             //         return data;
-//             //     },
-//             //     "className": "dt-body-center active-toggler"
-//             // },
-//             // {"data": "registriert"},
-//             // {
-//             //     "orderable": false,
-//             //     "defaultContent": "",
-//             //     "render": renderEditBtn
-//             // },
-//             // {
-//             //     "orderable": false,
-//             //     "defaultContent": "",
-//             //     "render": renderDeleteBtn
-//             // }
-//         ],
-//         responsive: true
-//         // dom: 'Bfrtip'
-//         // buttons: [
-//         //     {
-//         //         text: 'Добавить пользователя',
-//         //         action: function ( e, dt, node, config ) {
-//         //             getSelect(ajaxUrl + "/roles", $('#roles'), "Выбери роль");
-//         //             showModal(myModal);
-//         //         }
-//         //     }
-//         // ]
-//     });
-// }
+function answerIt(id, isThema) {
+    if (answer !== undefined) {
+        hideMessageArea();
+    }
+    messageId = id;
+    answer = true;
+    var message = $('#add-message');
+    message.scrollTo();
+    addTextArea(id, message, isThema);
+}
+
+function addTextArea(id, message, isThema) {
+    $.get("/nachricht/text", {id: id, answer: answer})
+        .done(function (data) {
+            message.html(data);
+            message.find('#text-message').focus();
+            if (id === null && isThema) {
+                $('#thema-title-invisible').css('display', 'block');
+                message.find('#thema-title-text').focus();
+                saveThema();
+            } else {
+                message.find('#text-message').focus();
+                saveMessage(id);
+            }
+
+        });
+}
+
+function updateMessage(id) {
+    messageId = id;
+    if (answer !== undefined) {
+        hideMessageArea();
+    }
+    var message = $('#add-message_' + id);
+    answer = false;
+    $('#user-message_' + id).hide();
+    addTextArea(id, message);
+}
+
+function saveThema() {
+    $('.btn-ok').on('click', function () {
+        $.post("/forum/save", {thema: $('#thema-title-text').val(),
+            message: $('#text-message')[0].innerText})
+            .done(function (id) {
+                location.href = "/nachricht?id=" + id;
+            });
+    });
+}
+
+
+function saveMessage(id) {
+    $('.btn-ok').on('click', function () {
+        var size = $('.page-size').val();
+        $.post("/nachricht/save", {
+            id: $(this).parent().find('#id').val(),
+            themaId: $('#themaId').val(),
+            size: size,
+            text: $(this).parent().find('.text-message')[0].innerText,
+            page: $('.page-input').attr('this'),
+            parentId: id
+        }).done(function (data) {
+            var id = $('#themaId').val();
+            location.reload();
+            if (data.reload) {
+                location.href = "/nachricht?id=" + id + "&page=" + data.page
+                    + "&size=" + size + "#" + data.id;
+            }
+        });
+    });
+}
+
+function deleteMessage(id) {
+    $(this).on('click', function () {
+        $.get("/nachricht/delete", {id: id})
+            .done(function () {
+                location.reload();
+            });
+    });
+
+}
+
+function hideMessageArea() {
+    if (answer) {
+        $(`#add-message`).empty();
+        $('#left-card_' + messageId).scrollTo();
+    } else {
+        $(`#add-message_${messageId}`).empty();
+        $('#user-message_' + messageId).show();
+    }
+}
+
+$.fn.scrollTo = function () {
+    $('html, body').animate({
+        scrollTop: $(this).length === 0? 0 : $(this).offset().top
+    }, 1000);
+};

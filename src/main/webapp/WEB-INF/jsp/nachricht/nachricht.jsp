@@ -6,7 +6,7 @@
 <jsp:include page="../fragments/headTag.jsp"/>
 
 <body>
-<script type="text/javascript" src='<c:url value="/resources/js/nachricht.js"/>' defer></script>
+<script type="text/javascript" src='<c:url value="/resources/js/forum.js"/>' defer></script>
 <jsp:include page="../fragments/bodyNav.jsp"/>
 <br/>
 <div class="container">
@@ -32,10 +32,10 @@
                         </div>
                     </div>
                     <div class="wrapper">
-                        <%@ include file="fragment.jsp"%>
+                        <%@ include file="fragment.jsp" %>
                     </div>
                     <hr>
-                    <div id="add-message" >
+                    <div id="add-message">
                     </div>
                 </div>
             </div>
