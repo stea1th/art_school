@@ -76,7 +76,8 @@
                                 onclick="answerIt(${message.id})">Ответить
                         </button>
                     </div>
-                    <c:if test="${current == message.userId}">
+                    <c:set var="isOwner" value="${current == message.userId}"/>
+                    <sec:authorize access="hasRole('ROLE_MODERATOR') or ${isOwner}">
                         <div>
                             <button type="button" style="float:right" onclick="updateMessage(${message.id})">Изменить
                             </button>
@@ -85,7 +86,7 @@
                             <button type="button" style="float:right" onclick="deleteMessage(${message.id})">Удалить
                             </button>
                         </div>
-                    </c:if>
+                    </sec:authorize>
                 </c:if>
                 <div style="position:absolute; right: 15px;">
                     <a id="${message.id}">#<c:out value="${message.id}"/></a>

@@ -8,7 +8,7 @@
     <%--<link rel='stylesheet' href='https://bootswatch.com/4/sketchy/bootstrap.css' />--%>
     <%--<link rel='stylesheet' href='https://bootswatch.com/4/materia/bootstrap.css' />--%>
     <%--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">--%>
-    <link rel='stylesheet' href='https://bootswatch.com/4/spacelab/bootstrap.css' />
+    <link rel='stylesheet' href='https://bootswatch.com/4/solar/bootstrap.css' />
 
     <link rel='stylesheet' href='webjars/fullcalendar/3.9.0/fullcalendar.print.css' media="print"/>
     <link rel='stylesheet' href='resources/css/style.css' />

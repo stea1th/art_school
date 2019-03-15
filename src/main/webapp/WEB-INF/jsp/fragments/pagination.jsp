@@ -3,7 +3,7 @@
 
 <div>
     <ul class="pagination">
-        <li class="page-item p-1">
+        <li class="page-item p-1 disabled">
             <div class="page-link" style="cursor: pointer"><c:out value="${param.items}"/></div>
         </li>
         <li class="${param.hasPrevious? 'page-item p-1' : 'page-item p-1 disabled'}" >
@@ -22,7 +22,7 @@
             <a class="page-link"
                href="${linkPrevious}"><i class="fas fa-angle-left fa-2x" style="vertical-align:middle;padding-bottom: 4px;"></i></a></li>
 
-        <li class="page-item p-1 active">
+        <li class="page-item p-1 disabled">
             <div class="page-link">
                 <jsp:element name="input">
                     <jsp:attribute name="type">text</jsp:attribute>
