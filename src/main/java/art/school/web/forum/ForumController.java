@@ -40,4 +40,10 @@ public class ForumController extends AbstractForumController {
 
         return super.save(thema, message).getId();
     }
+
+    @PostMapping(value="/views")
+    @ResponseBody
+    public void countClicks(@RequestParam(name="id")Integer id){
+        super.countClicks(id);
+    }
 }

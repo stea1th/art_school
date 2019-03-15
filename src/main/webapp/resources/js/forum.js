@@ -4,6 +4,10 @@ $(function () {
 
 });
 
+function countClicks(id){
+    $.post("/forum/views", {id: id});
+}
+
 function answerIt(id, isThema) {
     if (answer !== undefined) {
         hideMessageArea();

@@ -44,4 +44,9 @@ public abstract class AbstractForumController {
         return thema;
     }
 
+    void countClicks(int id){
+        Thema t =  get(id);
+        t.setViews(t.getViews()+1);
+        themaService.create(t);
+    }
 }

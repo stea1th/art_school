@@ -7,11 +7,9 @@
     <thead>
     <tr>
         <th class="w-50  text-center">Заголовок</th>
-        <%--<th class="w-15 text-center">Отправитель</th>--%>
         <th class="w-10 text-center">Просмотров</th>
         <th class="w-10 text-center">Ответов</th>
         <th class="w-30 text-center">Последнее</th>
-        <%--<th>Pinned</th>--%>
     </tr>
     </thead>
     <tbody>

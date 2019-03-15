@@ -11,7 +11,7 @@
             <c:url value="/nachricht" var="themaUrl">
                 <c:param name="id" value="${item.id}"/>
             </c:url>
-            <a href="${themaUrl}" onclick="" ><c:out value="${item.titel}"/></a>
+            <a href="${themaUrl}" onclick="countClicks(${item.id})" ><c:out value="${item.titel}"/></a>
             <span>&nbsp;<c:out value="${item.creator}"/></span>
             <c:if test="${item.pinned}">
                 <span style="color: red !important;">
