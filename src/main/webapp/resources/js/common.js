@@ -15,12 +15,20 @@ $(function () {
 
 function pageInputField(){
     var pageInputDiv = $('.page-input-div');
+    var n;
     pageInputDiv.on('click', function(){
+        var input = $(this).find('input');
         $(this).removeClass('disabled');
+        n = input.val();
+        input.val('');
         $(this).find('input').removeClass('disabled').focus();
     });
 
     pageInputDiv.on('focusout', function(){
+        var input = $(this).find('input');
+        if(input.val() !== n){
+            input.val(n);
+        }
         $(this).addClass('disabled');
     })
 }
