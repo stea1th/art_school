@@ -35,6 +35,7 @@ public class NachrichtTo {
     private List<String> parentMessages;
     private Integer page;
     private Boolean reload;
+    private Integer roleSize;
 
     public NachrichtTo(Nachricht n) {
         this(n.getId(), n.getText(),
@@ -43,7 +44,8 @@ public class NachrichtTo {
                 n.getThema().getId(), n.getUpdaters().isEmpty() ? null :
                         createUpdaterInfo(n.getUpdaters().get(n.getUpdaters().size() - 1)), null,
                 splitMessageByLineSeparator(n.getText()),
-                n.getParent() == null ? null : splitMessageByLineSeparator(n.getParent().getText()), null, null);
+                n.getParent() == null ? null : splitMessageByLineSeparator(n.getParent().getText()), null, null,
+                n.getUser().getRoles().size());
     }
 
     public NachrichtTo(Integer id) {

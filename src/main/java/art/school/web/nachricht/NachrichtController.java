@@ -49,8 +49,6 @@ public class NachrichtController extends AbstractNachrichtController {
         model.addAttribute("title", thema.getTitel());
         model.addAttribute("themaId", id);
 
-        model.addAttribute("current", SecurityUtil.getAuthId());
-
         Page<Nachricht> page = super.getPageByThemaId(id, PageRequest.of(pageNumber, size, Sort.by("datum", "id")));
         model.addAttribute("list", page.stream()
                 .map(NachrichtTo::new)
@@ -71,6 +69,7 @@ public class NachrichtController extends AbstractNachrichtController {
         if (nachrichtTo.isNew()) {
             nachricht = new Nachricht();
             nachricht.setDatum(LocalDateTime.now());
+            nachricht.setUser(userService.get(SecurityUtil.getAuthId()));
             if(parentId != null){
                 nachricht.setParent(super.get(parentId));
             }
@@ -78,7 +77,6 @@ public class NachrichtController extends AbstractNachrichtController {
             nachricht = createNachrichtWithUpdaters(nachrichtTo.getId(), "Изменил");
         }
         nachricht.setThema(themaService.get(nachrichtTo.getThemaId()));
-        nachricht.setUser(userService.get(SecurityUtil.getAuthId()));
         nachricht.setText(nachrichtTo.getText());
         super.create(nachricht);
 

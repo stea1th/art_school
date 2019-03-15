@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page pageEncoding="UTF-8" %>
 
 <div class="card-group messages">
@@ -76,8 +77,11 @@
                                 onclick="answerIt(${message.id})">Ответить
                         </button>
                     </div>
-                    <c:set var="isOwner" value="${current == message.userId}"/>
-                    <sec:authorize access="hasRole('ROLE_MODERATOR') or ${isOwner}">
+                    <sec:authentication property="principal.authorities" var="authorities"/>
+                    <sec:authentication property="principal.id" var="id"/>
+                    <c:set value="${fn:length(authorities)>= message.roleSize}" var="enoughRights"/>
+                    <c:set var="isOwner" value="${id == message.userId}"/>
+                    <sec:authorize access="(hasRole('ROLE_MODERATOR') and ${enoughRights}) or ${isOwner}">
                         <div>
                             <button type="button" style="float:right" onclick="updateMessage(${message.id})">Изменить
                             </button>

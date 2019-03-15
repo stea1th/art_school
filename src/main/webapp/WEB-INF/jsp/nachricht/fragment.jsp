@@ -4,7 +4,6 @@
 <div>
     <c:forEach var="message" items="${list}">
         <c:set var="message" value="${message}"/>
-        <c:set var="current" value="${current}"/>
         <c:set var="themaId" value="${themaId}"/>
         <%@ include file="message-card.jsp" %>
     </c:forEach>
