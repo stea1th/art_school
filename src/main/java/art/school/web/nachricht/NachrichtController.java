@@ -65,6 +65,7 @@ public class NachrichtController extends AbstractNachrichtController {
                                   @RequestParam(name="page") int pageNumber,
                                   @RequestParam(name="parentId", required = false) Integer parentId) {
 
+        System.out.println(nachrichtTo.getThemaId());
         Nachricht nachricht;
         if (nachrichtTo.isNew()) {
             nachricht = new Nachricht();

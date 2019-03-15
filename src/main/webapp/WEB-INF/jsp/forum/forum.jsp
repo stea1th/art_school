@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="mr-auto p-2">
-                            <button type="button" style="float:right" onclick="answerIt()">Создать тему
+                            <button type="button" style="float:right" onclick="answerIt(null, true)">Создать тему
                             </button>
                         </div>
                         <div class="ml-auto p-2">

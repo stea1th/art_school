@@ -4,7 +4,6 @@
 <div>
     <form method="post" id="message-form" action="#">
         <input type="hidden" class="form-control" id="id" name="id" value="${id}"/>
-        <input type="hidden" class="form-control" id="themaId" name="themaId" value="${themaId}"/>
         <div id="thema-title-invisible" class="form-group" style="display: none;">
             <label for="thema-title-text">Тема сообщения:</label>
             <input class="thema-title-text form-control" type="text" id="thema-title-text">

@@ -17,7 +17,12 @@
                     <h3>
                         <c:out value="${title}"/>
                     </h3>
+                    <input type="hidden" class="form-control" id="themaId" name="themaId" value="${themaId}"/>
                     <div class="d-flex">
+                        <div class="mr-auto p-2">
+                            <button type="button" style="float:right" onclick="answerIt()">Создать сообщение
+                            </button>
+                        </div>
                         <div class="ml-auto p-2">
                             <jsp:include page="../fragments/table-size-selector.jsp">
                                 <jsp:param name="themaId" value="${themaId}"/>

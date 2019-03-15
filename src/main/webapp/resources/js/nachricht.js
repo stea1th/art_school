@@ -4,7 +4,7 @@ $(function () {
 
 });
 
-function answerIt(id) {
+function answerIt(id, isThema) {
     if (answer !== undefined) {
         hideMessageArea();
     }
@@ -12,15 +12,15 @@ function answerIt(id) {
     answer = true;
     var message = $('#add-message');
     message.scrollTo();
-    addTextArea(id, message);
+    addTextArea(id, message, isThema);
 }
 
-function addTextArea(id, message) {
+function addTextArea(id, message, isThema) {
     $.get("/nachricht/text", {id: id, answer: answer})
         .done(function (data) {
             message.html(data);
             message.find('#text-message').focus();
-            if (id === undefined) {
+            if (id === null && isThema) {
                 $('#thema-title-invisible').css('display', 'block');
                 message.find('#thema-title-text').focus();
                 saveThema();
