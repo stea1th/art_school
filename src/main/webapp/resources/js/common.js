@@ -18,7 +18,7 @@ function pageInputField(){
     var n;
     pageInputDiv.on('click', function(){
         var input = $(this).find('input');
-        $(this).removeClass('disabled');
+        // $(this).removeClass('disabled');
         n = input.val();
         input.val('');
         $(this).find('input').removeClass('disabled').focus();
@@ -29,7 +29,7 @@ function pageInputField(){
         if(input.val() !== n){
             input.val(n);
         }
-        $(this).addClass('disabled');
+        // $(this).addClass('disabled');
     })
 }
 
