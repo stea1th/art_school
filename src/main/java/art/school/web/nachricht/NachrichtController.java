@@ -48,6 +48,10 @@ public class NachrichtController extends AbstractNachrichtController {
 
         model.addAttribute("title", thema.getTitel());
         model.addAttribute("themaId", id);
+        if(!thema.isAktiv()){
+            model.addAttribute("active", thema.isAktiv());
+            model.addAttribute("closedBy", thema.getUser().getName());
+        }
 
         Page<Nachricht> page = super.getPageByThemaId(id, PageRequest.of(pageNumber, size, Sort.by("datum", "id")));
         model.addAttribute("list", page.stream()
@@ -65,7 +69,6 @@ public class NachrichtController extends AbstractNachrichtController {
                                   @RequestParam(name="page") int pageNumber,
                                   @RequestParam(name="parentId", required = false) Integer parentId) {
 
-        System.out.println(nachrichtTo.getThemaId());
         Nachricht nachricht;
         if (nachrichtTo.isNew()) {
             nachricht = new Nachricht();

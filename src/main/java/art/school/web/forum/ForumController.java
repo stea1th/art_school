@@ -46,4 +46,10 @@ public class ForumController extends AbstractForumController {
     public void countClicks(@RequestParam(name="id")Integer id){
         super.countClicks(id);
     }
+
+    @PostMapping(value="/toggle")
+    @ResponseBody
+    public int toggleThema (@RequestParam(name="id") Integer id){
+        return super.toggle(id);
+    }
 }

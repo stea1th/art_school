@@ -55,9 +55,9 @@ create table thema
   titel varchar not null,
   views integer default 0 not null,
   aktiv bool default true not null,
-  gepinnt bool default false not null
---   u_id integer not null,
---   foreign key (u_id) references users(id) on delete cascade
+  gepinnt bool default false not null,
+  u_id integer,
+  foreign key (u_id) references users(id) on delete cascade
 );
 
 create table nachricht

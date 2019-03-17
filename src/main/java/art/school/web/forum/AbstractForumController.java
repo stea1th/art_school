@@ -49,4 +49,20 @@ public abstract class AbstractForumController {
         t.setViews(t.getViews()+1);
         themaService.create(t);
     }
+
+    public int toggle(int id){
+        Thema t = get(id);
+        t.setAktiv(!t.isAktiv());
+        t.setUser(t.getUser() == null? userService.get(SecurityUtil.getAuthId()) : null);
+        t = themaService.create(t);
+        List<Thema> list = themaService.getAll();
+        System.out.println(t.getId());
+        System.out.println("===================================================" + list.size());
+        list.forEach(i-> System.out.println(i.getId()));
+        System.out.println("=====================================================" + list.contains(t));
+        System.out.println("=====================================================" + list.indexOf(t));
+
+        System.out.println("==========================================================" + list.indexOf(t) / 10);
+        return list.indexOf(t) / 10;
+    }
 }

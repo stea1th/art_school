@@ -16,11 +16,18 @@
                 <div class="card-body">
                     <h3>
                         <c:out value="${title}"/>
+                        <c:if test="${!active}">
+                            <span>&nbsp;(Закрыл <c:out value="${closedBy}"/>)</span>
+                        </c:if>
                     </h3>
                     <input type="hidden" class="form-control" id="themaId" name="themaId" value="${themaId}"/>
                     <div class="d-flex">
                         <div class="mr-auto p-2">
+                            <button type="button" style="float:right" onclick="toggleThema(${themaId})">Закрыть тему
+                            </button>
                             <button type="button" style="float:right" onclick="answerIt()">Создать сообщение
+                            </button>
+                            <button type="button" style="float:right" onclick="answerIt(null, true)">Создать тему
                             </button>
                         </div>
                         <div class="ml-auto p-2">

@@ -40,7 +40,7 @@ insert into unterricht (u_id, z_id, datum, bezahlt, notiz) values
 insert into thema (titel, gepinnt) values
   ('В мире животных', false),
   ('Как молоды мы были', true),
-  ('Облака, белокрылые лошадки', false );
+  ('Облака, белокрылые лошадки', false);
 
 insert into nachricht(u_id, t_id, text) values
   (1005, 1015, 'Какие прекрасные звери, как вам кажется? Есть ли в них достаточная грациозность?'),

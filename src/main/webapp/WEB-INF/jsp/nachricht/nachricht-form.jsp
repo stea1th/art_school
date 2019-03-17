@@ -6,7 +6,7 @@
         <input type="hidden" class="form-control" id="id" name="id" value="${id}"/>
         <div id="thema-title-invisible" class="form-group" style="display: none;">
             <label for="thema-title-text">Тема сообщения:</label>
-            <input class="thema-title-text form-control" type="text" id="thema-title-text">
+            <input class="thema-title-text form-control" type="text" id="thema-title-text" required>
         </div>
         <div class="form-group">
             <label for="text-message">Написать сообщение:</label>
@@ -16,7 +16,7 @@
                    </textarea>
             </c:if>
             <div contenteditable="true" class="text-message form-control"
-                 id="text-message" >
+                 id="text-message" aria-required="true">
                 <c:if test="${updateText != null}">
                     <c:out value="${updateText}" />
                 </c:if>

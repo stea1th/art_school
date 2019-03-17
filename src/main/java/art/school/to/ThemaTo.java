@@ -28,6 +28,7 @@ public class ThemaTo {
     private int page;
     private int anker;
     private String lastName;
+    private boolean aktiv;
 
     public ThemaTo(Thema thema){
         this(thema.getId(), thema.getTitel(), thema.getNachrichts()
@@ -41,6 +42,7 @@ public class ThemaTo {
                 thema.isGepinnt(),
                 thema.getNachrichts().size()/10,
                 thema.getNachrichts().get(thema.getNachrichts().size()-1).getId(),
-                thema.getNachrichts().get(thema.getNachrichts().size()-1).getUser().getName());
+                thema.getNachrichts().get(thema.getNachrichts().size()-1).getUser().getName(),
+                thema.isAktiv());
     }
 }

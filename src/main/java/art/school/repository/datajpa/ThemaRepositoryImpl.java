@@ -33,7 +33,7 @@ public class ThemaRepositoryImpl implements ThemaRepository {
 
     @Override
     public List<Thema> getAll() {
-        return repository.findAll();
+        return repository.findAllAsList();
     }
 
     public Page<Thema> getAll(Pageable pageable) {

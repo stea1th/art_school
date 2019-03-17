@@ -4,6 +4,13 @@ $(function () {
 
 });
 
+function toggleThema(id){
+    $.post("/forum/toggle", {id : id})
+        .done(function(data){
+            location.href = "/forum?page=" + data;
+        })
+}
+
 function countClicks(id){
     $.post("/forum/views", {id: id});
 }

@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Optional;
 
 @Transactional(readOnly = true)
@@ -34,4 +35,10 @@ public interface CrudThemaRepository extends JpaRepository<Thema, Integer> {
                     "group by t.id \n" +
                     "order by t.gepinnt desc , max(n.datum) desc ")
     Page<Thema> findAllThis(Pageable pageable);
+
+    @Query(value = "select t from Thema t \n" +
+            "left join t.nachrichts n \n" +
+            "group by t.id \n" +
+            "order by t.gepinnt desc , max(n.datum) desc ")
+    List<Thema> findAllAsList();
 }

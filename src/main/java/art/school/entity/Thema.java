@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -35,6 +37,11 @@ public class Thema extends AbstractBaseEntity{
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "thema")
     @OrderBy(value = "datum")
     private List<Nachricht> nachrichts;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "u_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Users user;
 
     public Thema(Integer id, @NotBlank String titel, @NotNull int views, @NotNull boolean aktiv, @NotNull boolean gepinnt) {
         super(id);
