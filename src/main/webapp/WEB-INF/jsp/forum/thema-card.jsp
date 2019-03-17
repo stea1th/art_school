@@ -29,7 +29,7 @@
     </td>
     <td class="text-center">
 
-        <div><a href='<c:url value="/nachricht?id=${item.id}&page=${item.page}#${item.anker}"/>'><c:out
+        <div><a href='<c:url value="/nachricht?id=${item.id}&page=${item.page}#${item.anker}"/>' onclick="countClicks(${item.id})"><c:out
                 value="${item.last}"/>
             <span><i class="fas fa-angle-double-right"></i></span>
         </a></div>

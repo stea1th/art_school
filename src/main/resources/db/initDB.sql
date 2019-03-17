@@ -13,17 +13,6 @@ drop sequence if exists global_seq;
 
 create sequence global_seq start 1000;
 
--- create table kind
--- (
---   id integer primary key default nextval('global_seq'),
---   name varchar not null,
---   adresse varchar not null,
---   aktiv bool default true not null,
---   registriert timestamp default now() not null,
---   constraint kind_unique_name_adresse_idx unique(name, adresse)
--- );
-
-
 create table zahlung
 (
   id integer primary key default nextval('global_seq'),
