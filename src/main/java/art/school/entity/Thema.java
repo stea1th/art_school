@@ -33,6 +33,7 @@ public class Thema extends AbstractBaseEntity{
     private boolean gepinnt;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "thema")
+    @OrderBy(value = "datum")
     private List<Nachricht> nachrichts;
 
     public Thema(Integer id, @NotBlank String titel, @NotNull int views, @NotNull boolean aktiv, @NotNull boolean gepinnt) {

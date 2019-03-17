@@ -31,19 +31,16 @@ public class ThemaTo {
 
     public ThemaTo(Thema thema){
         this(thema.getId(), thema.getTitel(), thema.getNachrichts()
-                        .stream()
-                        .sorted(Comparator.comparing(Nachricht::getId))
-                        .collect(Collectors.toList())
                         .get(0)
                         .getUser()
                         .getName(),
                 thema.getViews(),
                 thema.getNachrichts().size()-1,
-                DateUtil.transformDateForForum(thema.getNachrichts().get(0)
+                DateUtil.transformDateForForum(thema.getNachrichts().get(thema.getNachrichts().size()-1)
                         .getDatum()),
                 thema.isGepinnt(),
                 thema.getNachrichts().size()/10,
-                thema.getNachrichts().get(0).getId(),
-                thema.getNachrichts().get(0).getUser().getName());
+                thema.getNachrichts().get(thema.getNachrichts().size()-1).getId(),
+                thema.getNachrichts().get(thema.getNachrichts().size()-1).getUser().getName());
     }
 }
