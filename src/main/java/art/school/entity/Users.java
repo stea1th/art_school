@@ -1,13 +1,11 @@
 package art.school.entity;
 
 
-import art.school.to.KindTo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.BatchSize;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -16,7 +14,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -69,7 +66,7 @@ public class Users extends AbstractBaseEntity {
     private List<Nachricht> nachrichts;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    protected List<Unterricht> unterrichts;
+    protected List<Unterricht> unterrichts ;
 
     public Users(Integer id, @NotBlank @Size(max = 50) String name, @NotBlank @Size(min = 3, max = 50) String adresse, boolean aktiv, @NotNull LocalDateTime registriert) {
         super(id);
@@ -83,8 +80,16 @@ public class Users extends AbstractBaseEntity {
         this(null, name, adresse, true, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
     }
 
-    public Users(KindTo k){
-        this(k.getId(), k.getName(), k.getAdresse(), k.isAktiv(), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+    public Users(Integer id, @NotBlank String name, @Email @NotBlank @Size(max = 100) String email,
+                 @NotBlank @Size(min = 3, max = 50) String adresse, String adminPasswort,
+                 @NotNull LocalDateTime registriert, @NotNull Boolean aktiv, Set<Role> roles) {
+        super(id);
+        this.name = name;
+        this.email = email;
+        this.adresse = adresse;
+        this.adminPasswort = adminPasswort;
+        this.registriert = registriert;
+        this.aktiv = aktiv;
+        this.roles = roles;
     }
-
 }

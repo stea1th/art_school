@@ -58,48 +58,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="user-detailsForm">
-                    <div>
-                        <input type="hidden" class="form-control" id="id" name="id">
-                    </div>
-                    <div class="form-group row">
-                        <label for="name" class="col-4 col-form-label">Имя</label>
-                        <div class="col-8">
-                            <input type="text" id="name" name="name" class="form-control" required="required"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="email" class="col-4 col-form-label">E-Mail</label>
-                        <div class="col-8">
-                            <input type="email" id="email" name="adresse" class="form-control" required="required"/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="passwort" class="col-4 col-form-label">Пароль</label>
-                        <div class="col-8">
-                            <input type="email" id="passwort" name="adresse" class="form-control"/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="roles" class="col-4 col-form-label">Роли</label>
-                        <div class="col-8">
-                            <select id="roles" name="roles" class="custom-select" required="required">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row" id="aktiv-checkbox">
-                        <label class="col-4">Активный?</label>
-                        <div class="col-8">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="aktiv" name="aktiv"
-                                       checked="checked" required>
-                                <label class="custom-control-label" for="aktiv">Да</label>
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
+                <%@include file="forms/user-form.jsp"%>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="saveUser">Сохранить</button>

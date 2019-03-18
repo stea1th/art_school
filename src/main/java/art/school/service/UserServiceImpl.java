@@ -35,10 +35,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return repository.getUsersByEmail(email);
     }
 
-
     @Override
     public Users create(Users users) {
         Assert.notNull(users, "users must not be null");
+        users.setPasswort(encoder.encode(users.getAdminPasswort()));
         return repository.save(users);
     }
 
@@ -54,8 +54,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void update(Users users) {
-        Assert.notNull(users, "users must not be null");
-        checkNotFoundWithId(repository.save(users), users.getId());
+
     }
 
     @Override

@@ -19,7 +19,7 @@ public class RequestUnterrichtTo {
     private Integer zahlung;
     private boolean bezahlt;
     private String notiz;
-    private KindTo kindTo;
+    private UserTo kindTo;
     private ZahlungTo zahlungTo;
 
     public RequestUnterrichtTo(Unterricht u) {
@@ -30,7 +30,7 @@ public class RequestUnterrichtTo {
                 u.getZahlung().getId(),
                 u.isBezahlt(),
                 u.getNotiz(),
-                new KindTo(u.getUser()),
+                new UserTo(u.getUser()),
                 new ZahlungTo(u.getZahlung()));
     }
 

@@ -12,8 +12,6 @@ import java.util.List;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
-    private static final Sort SORT_BY_NAME = new Sort(Sort.Direction.ASC, "name");
-
     @Autowired
     private CrudUserRepository repository;
 

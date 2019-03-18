@@ -1,7 +1,7 @@
 package art.school.web.user;
 
 import art.school.entity.Users;
-import art.school.to.KindTo;
+import art.school.to.UserTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +20,8 @@ public class KindRestController extends AbstractUserController {
 
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<KindTo> all() {
-        return transformTo(super.getAllKinds(), KindTo.class);
+    public List<UserTo> all() {
+        return transformTo(super.getAllKinds(), UserTo.class);
         }
 
     @DeleteMapping(value = "/{id}")
@@ -31,8 +31,8 @@ public class KindRestController extends AbstractUserController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public KindTo getKind(@PathVariable("id") int id){
-        return new KindTo(super.get(id));
+    public UserTo getKind(@PathVariable("id") int id){
+        return new UserTo(super.get(id));
     }
 
     @PostMapping(value="/toggle/{id}")
@@ -42,25 +42,21 @@ public class KindRestController extends AbstractUserController {
     }
 
     @GetMapping(value="/filter/aktiv", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<KindTo> onlyAktiv(){
-        return transformTo(super.getAllKinds(), KindTo.class)
+    public List<UserTo> onlyAktiv(){
+        return transformTo(super.getAllKinds(), UserTo.class)
                 .stream()
-                .filter(KindTo::isAktiv)
+                .filter(UserTo::getAktiv)
                 .collect(Collectors.toList());
     }
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     @SuppressWarnings("unchecked")
-    public ResponseEntity saveOrUpdate(KindTo z){
+    public ResponseEntity saveOrUpdate(UserTo z){
         Map<String, String> response = new LinkedHashMap<>();
-        Users kind = new Users(z);
-        String message = kind.isNew()? "Save" : "Update";
-        if (kind.isNew()) {
-            super.create(kind);
-        } else {
-            super.update(kind, kind.getId());
-        }
+        Users kind = z.isNew()? z.createUser() : z.updateUser(super.get(z.getId()));
+        String message = z.isNew()? "Save" : "Update";
+        super.create(kind);
         response.put(message, z.getName());
         return new ResponseEntity(response, HttpStatus.OK);
     }

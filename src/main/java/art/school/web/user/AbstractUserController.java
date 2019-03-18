@@ -23,7 +23,6 @@ public abstract class AbstractUserController  {
 
     public Users create(Users users){
         log.info("create Users {}", users);
-        checkNew(users);
         return service.create(users);
     }
 
@@ -37,11 +36,11 @@ public abstract class AbstractUserController  {
         service.toggleAktiv(id);
     }
 
-    public void update(Users users, int id){
-        log.info("update {} with id={}", users, id);
-        assureIdConsistent(users, id);
-        service.update(users);
-    }
+//    public void update(Users users, int id){
+//        log.info("update {} with id={}", users, id);
+//        assureIdConsistent(users, id);
+//        service.update(users);
+//    }
 
     public List<Users> getAll(){
         log.info("getAll Users");

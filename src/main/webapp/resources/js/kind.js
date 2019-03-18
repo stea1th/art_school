@@ -9,7 +9,7 @@ $(function () {
 
 function saveOrUpdateKind() {
     $('#saveKind').on('click', function () {
-        saveOrUpdate($('#kind-detailsForm'), "Ученик");
+        saveOrUpdate($('#user-detailsForm'), "Ученик");
     });
 }
 
@@ -64,6 +64,7 @@ function createKindtable() {
                 text: 'Добавить ученика',
                 action: function (e, dt, node, config) {
                     $('.modal-title').text('Добавить ученика');
+                    getSelect("/admin/roles", $('#roles'), "Выбери роль");
                     showModal(myModal);
                 }
             }
