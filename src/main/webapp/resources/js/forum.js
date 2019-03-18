@@ -104,6 +104,7 @@ function hideMessageArea() {
         $(`#add-message_${messageId}`).empty();
         $('#user-message_' + messageId).show();
     }
+    answer = '';
 }
 
 $.fn.scrollTo = function () {
