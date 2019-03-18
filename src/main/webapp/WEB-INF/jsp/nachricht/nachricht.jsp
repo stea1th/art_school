@@ -14,12 +14,20 @@
         <div class="col-md-12 ml-auto mr-auto">
             <div class="card border-light mb-3" id="table-card3">
                 <div class="card-body">
-                    <h3>
-                        <c:out value="${title}"/>
-                        <c:if test="${active == false}">
-                            <span style="color:red;">&nbsp;(Закрыл <c:out value="${closedBy}"/>)</span>
-                        </c:if>
-                    </h3>
+                    <div class="row">
+                        <h3>
+                            <c:out value="${title}"/>
+                            <c:if test="${active == false}">
+                                <span style="color:red;">&nbsp;(Закрыл <c:out value="${closedBy}"/>)</span>
+                            </c:if>
+                        </h3>
+                        <c:url var="back" value="/forum">
+                            <c:param name="id" value="${themaId}"/>
+                            <c:param name="page" value="${themaPage}"/>
+                            <c:param name="size" value="${themaSize}"/>
+                        </c:url>
+                        <span>&nbsp;<a type="button" href="${back}" style="float:right">Назад</a></span>
+                    </div>
                     <input type="hidden" class="form-control" id="themaId" name="themaId" value="${themaId}"/>
                     <div class="d-flex">
                         <div class="mr-auto p-2">

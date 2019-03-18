@@ -22,7 +22,6 @@ public class ForumController extends AbstractForumController {
                       @RequestParam(name = "page", required = false, defaultValue = "0") int pageNumber,
                       @RequestParam(name = "size", required = false, defaultValue = "10") int size){
 
-
         Page<Thema> page = super.getAll(PageRequest.of(pageNumber, size));
         model.addAttribute("list", page.stream()
                 .map(ThemaTo::new)

@@ -15,6 +15,7 @@
     <tbody>
     <c:forEach items="${list}" var="item">
         <c:set value="${item}" var="item"/>
+        <c:set value="${previous + 1}" var="pageNumber"/>
         <%@ include file="thema-card.jsp" %>
     </c:forEach>
     </tbody>

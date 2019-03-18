@@ -27,9 +27,10 @@
 
                 </c:otherwise>
             </c:choose>
-
             <c:url value="/nachricht" var="themaUrl">
                 <c:param name="id" value="${item.id}"/>
+                <c:param name="themaPage" value="${pageNumber}"/>
+                <c:param name="themaSize" value="${size}"/>
             </c:url>
             <a href="${themaUrl}" onclick="countClicks(${item.id})"><c:out value="${item.titel}"/></a>
             <span>&nbsp;<c:out value="${item.creator}"/></span>
@@ -49,7 +50,7 @@
     </td>
     <td class="text-center">
 
-        <div><a href='<c:url value="/nachricht?id=${item.id}&page=${item.page}#${item.anker}"/>'
+        <div><a href='<c:url value="/nachricht?id=${item.id}&themaPage=${pageNumber}&themaSize=${size}&page=${item.page}#${item.anker}"/>'
                 onclick="countClicks(${item.id})"><c:out
                 value="${item.last}"/>
             <span><i class="fas fa-angle-double-right"></i></span>
