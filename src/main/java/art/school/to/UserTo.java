@@ -45,7 +45,7 @@ public class UserTo {
 
     public Users createUser(){
         return new Users(
-                id, name, email, adresse, adminPasswort == null? "1" : adminPasswort, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), aktiv,
+                id, name, email, adresse, (adminPasswort == null || "".equals(adminPasswort))? "1" : adminPasswort, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), aktiv,
                 RolesUtil.createRoles(Integer.parseInt(roles == null? "0" : roles))
         );
     }
@@ -54,7 +54,7 @@ public class UserTo {
         u.setName(name);
         u.setEmail(email);
         u.setAdresse(adresse);
-        u.setAdminPasswort(adminPasswort == null? "1" : adminPasswort);
+        u.setAdminPasswort((adminPasswort == null || "".equals(adminPasswort))? "1" : adminPasswort);
         u.setAktiv(aktiv);
         u.setRoles(RolesUtil.createRoles(Integer.parseInt(roles == null? "0" : roles)));
         return u;
