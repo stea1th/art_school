@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static art.school.util.TextFormatUtil.createUpdaterInfo;
@@ -36,6 +37,8 @@ public class NachrichtTo {
     private Integer page;
     private Boolean reload;
     private Integer roleSize;
+    private String registriert;
+    private Integer messages;
 
     public NachrichtTo(Nachricht n) {
         this(n.getId(), n.getText(),
@@ -45,7 +48,9 @@ public class NachrichtTo {
                         createUpdaterInfo(n.getUpdaters().get(n.getUpdaters().size() - 1)), null,
                 splitMessageByLineSeparator(n.getText()),
                 n.getParent() == null ? null : splitMessageByLineSeparator(n.getParent().getText()), null, null,
-                n.getUser().getRoles().size());
+                n.getUser().getRoles().size(),
+                n.getUser().getRegistriert().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+                n.getUser().getNachrichts().size());
     }
 
     public NachrichtTo(Integer id) {

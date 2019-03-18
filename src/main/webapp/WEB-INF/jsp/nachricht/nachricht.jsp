@@ -15,7 +15,7 @@
             <div class="card border-light mb-3" id="table-card3">
                 <div class="card-body">
                     <div class="row">
-                        <h3>
+                        <h3 style="color: #1474C3;">
                             <c:out value="${title}"/>
                             <c:if test="${active == false}">
                                 <span style="color:red;">&nbsp;(Закрыл <c:out value="${closedBy}"/>)</span>
@@ -58,11 +58,13 @@
                             </jsp:include>
                         </div>
                     </div>
-                    <div class="wrapper">
-                        <%@ include file="fragment.jsp" %>
-                    </div>
-                    <hr>
-                    <div id="add-message">
+                    <div id="nachricht-block">
+                        <div class="wrapper">
+                            <%@ include file="fragment.jsp" %>
+                        </div>
+                        <hr>
+                        <div id="add-message">
+                        </div>
                     </div>
                 </div>
             </div>

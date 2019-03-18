@@ -160,7 +160,13 @@ blockquote {
     outline: none;
 }
 
+.card-body li {
+    list-style-type: none;
+}
 
+#forum-themes div, #nachricht-block div{
+    color:black;
+}
 
 
 
