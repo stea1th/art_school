@@ -5,15 +5,6 @@ var datatable;
 $(function () {
 
     createAdminTable();
-
-
-    // $('#saveKind').on('click', function(){
-    //     $.post(ajaxUrl+"/save", $('#kind-detailsForm').serialize())
-    //         .done(function(){
-    //             myModal.modal('toggle');
-    //             datatable.ajax.reload();
-    //         });
-    // });
 });
 
 function createAdminTable() {
@@ -23,7 +14,7 @@ function createAdminTable() {
         },
 
         "ajax": {
-            "url": ajaxUrl,
+            "url": "admin",
             "dataSrc": ""
         },
 
@@ -68,7 +59,7 @@ function createAdminTable() {
             {
                 text: 'Добавить пользователя',
                 action: function ( e, dt, node, config ) {
-                    getSelect(ajaxUrl + "/roles", $('#roles'), "Выбери роль");
+                    getSelect("/admin/roles", $('#roles'), "Выбери роль");
                     showModal(myModal);
                 }
             }

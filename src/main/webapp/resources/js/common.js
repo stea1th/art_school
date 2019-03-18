@@ -11,7 +11,15 @@ $(function () {
     selectSizeOnChange();
 
     pageInputField();
+
+    saveOrUpdateUser();
 });
+
+function saveOrUpdateUser() {
+    $('#saveUser').on('click', function () {
+        saveOrUpdate($('#user-detailsForm'));
+    });
+}
 
 function pageInputField(){
     var pageInputDiv = $('.page-input-div');
@@ -72,7 +80,7 @@ function pageNumberInput(){
     });
 }
 
-function saveOrUpdate(form, name) {
+function saveOrUpdate(form) {
     var successIcon = "<span><i class='far fa-check-circle '></i></span> &nbsp;";
     var failIcon = "<span><i class='far fa-times-circle'></i></span> &nbsp;";
     $.post(ajaxUrl + "/save", form.serialize())
@@ -80,9 +88,9 @@ function saveOrUpdate(form, name) {
             myModal.modal('toggle');
             $.each(data, function (k, v) {
                 if (k === 'Save') {
-                    succesNoty(successIcon, name + ' "' + v + '"' + " удачно сохранен");
+                    succesNoty(successIcon, 'Пользователь "' + v + '"' + " удачно сохранен");
                 } else {
-                    succesNoty(successIcon, name + ' "' + v + '"' + " удачно обновлен");
+                    succesNoty(successIcon, 'Пользователь "' + v + '"' + " удачно обновлен");
                 }
             });
             datatable.ajax.reload();

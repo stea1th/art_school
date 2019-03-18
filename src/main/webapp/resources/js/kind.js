@@ -1,17 +1,10 @@
-var ajaxUrl = "kind";
+var ajaxUrl = "admin";
 var myModal = $('#createKind');
 var datatable;
 
 $(function () {
     createKindtable();
-    saveOrUpdateKind();
 });
-
-function saveOrUpdateKind() {
-    $('#saveKind').on('click', function () {
-        saveOrUpdate($('#user-detailsForm'), "Ученик");
-    });
-}
 
 function createKindtable() {
     datatable = $('#kids').DataTable({
@@ -20,7 +13,7 @@ function createKindtable() {
         },
 
         "ajax": {
-            "url": ajaxUrl,
+            "url": "kind",
             "dataSrc": ""
         },
 
