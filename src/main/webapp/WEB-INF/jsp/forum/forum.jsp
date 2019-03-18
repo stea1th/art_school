@@ -36,6 +36,7 @@
                         </div>
                         <div id="add-message">
                         </div>
+                        <%--<button onclick="goToTop()" id="stickyButton" title="Go to top">Top</button>--%>
                     </div>
                 </div>
             </div>
