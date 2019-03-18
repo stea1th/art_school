@@ -5,6 +5,7 @@
     <c:forEach var="message" items="${list}">
         <c:set var="message" value="${message}"/>
         <c:set var="themaId" value="${themaId}"/>
+        <c:set var="active" value="${active}"/>
         <%@ include file="message-card.jsp" %>
     </c:forEach>
 </div>

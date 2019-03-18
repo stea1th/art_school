@@ -63,34 +63,38 @@
                     </blockquote>
                 </c:if>
                 <c:forEach var="paragraph" items="${message.lines}">
-                        <c:out value="${paragraph}" escapeXml="false"/><br/>
+                    <c:out value="${paragraph}" escapeXml="false"/><br/>
                 </c:forEach>
             </div>
-            <div id="add-message_${message.id}" >
+            <div id="add-message_${message.id}">
             </div>
         </div>
         <div class="card-footer">
             <div class="row">
-                <c:if test="${!message.text.equals('<-- Deleted -->')}">
-                    <div>
-                        <button type="button" class="answer-btn" value="${message.id}" style="float:right"
-                                onclick="answerIt(${message.id})">Ответить
-                        </button>
-                    </div>
-                    <sec:authentication property="principal.authorities" var="authorities"/>
-                    <sec:authentication property="principal.id" var="id"/>
-                    <c:set value="${fn:length(authorities)>= message.roleSize}" var="enoughRights"/>
-                    <c:set var="isOwner" value="${id == message.userId}"/>
-                    <sec:authorize access="(hasRole('ROLE_MODERATOR') and ${enoughRights}) or ${isOwner}">
+                <c:if test="${active != false}">
+                    <c:if test="${!message.text.equals('<-- Deleted -->')}">
                         <div>
-                            <button type="button" style="float:right" onclick="updateMessage(${message.id})">Изменить
+                            <button type="button" class="answer-btn" value="${message.id}" style="float:right"
+                                    onclick="answerIt(${message.id})">Ответить
                             </button>
                         </div>
-                        <div>
-                            <button type="button" style="float:right" onclick="deleteMessage(${message.id})">Удалить
-                            </button>
-                        </div>
-                    </sec:authorize>
+                        <sec:authentication property="principal.authorities" var="authorities"/>
+                        <sec:authentication property="principal.id" var="id"/>
+                        <c:set value="${fn:length(authorities)>= message.roleSize}" var="enoughRights"/>
+                        <c:set var="isOwner" value="${id == message.userId}"/>
+
+                        <sec:authorize access="(hasRole('ROLE_MODERATOR') and ${enoughRights}) or ${isOwner}">
+                            <div>
+                                <button type="button" style="float:right" onclick="updateMessage(${message.id})">
+                                    Изменить
+                                </button>
+                            </div>
+                            <div>
+                                <button type="button" style="float:right" onclick="deleteMessage(${message.id})">Удалить
+                                </button>
+                            </div>
+                        </sec:authorize>
+                    </c:if>
                 </c:if>
                 <div style="position:absolute; right: 15px;">
                     <a id="${message.id}">#<c:out value="${message.id}"/></a>

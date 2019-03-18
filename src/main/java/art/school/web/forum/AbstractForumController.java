@@ -56,13 +56,11 @@ public abstract class AbstractForumController {
         t.setUser(t.getUser() == null? userService.get(SecurityUtil.getAuthId()) : null);
         t = themaService.create(t);
         List<Thema> list = themaService.getAll();
-        System.out.println(t.getId());
-        System.out.println("===================================================" + list.size());
-        list.forEach(i-> System.out.println(i.getId()));
-        System.out.println("=====================================================" + list.contains(t));
-        System.out.println("=====================================================" + list.indexOf(t));
-
-        System.out.println("==========================================================" + list.indexOf(t) / 10);
-        return list.indexOf(t) / 10;
+        for (int i = 0; i < list.size() ; i++) {
+            if(list.get(i).getId().equals(t.getId())){
+                return i / 10;
+            }
+        }
+        return 0;
     }
 }

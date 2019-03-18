@@ -16,19 +16,31 @@
                 <div class="card-body">
                     <h3>
                         <c:out value="${title}"/>
-                        <c:if test="${!active}">
-                            <span>&nbsp;(Закрыл <c:out value="${closedBy}"/>)</span>
+                        <c:if test="${active == false}">
+                            <span style="color:red;">&nbsp;(Закрыл <c:out value="${closedBy}"/>)</span>
                         </c:if>
                     </h3>
                     <input type="hidden" class="form-control" id="themaId" name="themaId" value="${themaId}"/>
                     <div class="d-flex">
                         <div class="mr-auto p-2">
-                            <button type="button" style="float:right" onclick="toggleThema(${themaId})">Закрыть тему
-                            </button>
-                            <button type="button" style="float:right" onclick="answerIt()">Создать сообщение
-                            </button>
-                            <button type="button" style="float:right" onclick="answerIt(null, true)">Создать тему
-                            </button>
+                            <c:if test="${active != false}">
+                                <sec:authorize access="hasRole('ROLE_MODERATOR')">
+                                    <button type="button" style="float:right" onclick="toggleThema(${themaId})">Закрыть
+                                        тему
+                                    </button>
+                                </sec:authorize>
+                                <button type="button" style="float:right" onclick="answerIt()">Создать сообщение
+                                </button>
+                                <button type="button" style="float:right" onclick="answerIt(null, true)">Создать тему
+                                </button>
+                            </c:if>
+                            <c:if test="${active == false}">
+                                <sec:authorize access="hasRole('ROLE_MODERATOR')">
+                                    <button type="button" style="float:right" onclick="toggleThema(${themaId})">Открыть
+                                        тему
+                                    </button>
+                                </sec:authorize>
+                            </c:if>
                         </div>
                         <div class="ml-auto p-2">
                             <jsp:include page="../fragments/table-size-selector.jsp">
