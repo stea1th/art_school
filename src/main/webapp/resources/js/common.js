@@ -161,6 +161,7 @@ function deleteRow(id) {
 function updateRow(id) {
     $.get(ajaxUrl + "/" + id)
         .done(function (data) {
+            console.log(data);
             $.each(data, function (k, v) {
                 if ($('#slider1').length) {
                     $('.modal-title').text('Обновить способ оплаты');
@@ -171,12 +172,15 @@ function updateRow(id) {
                         setZeit(v);
                     }
                 } else {
-                    $('.modal-title').text('Обновить ученика');
+                    $('.modal-title').text('Обновить ползователя');
+
                 }
                 $('form').find('input[name=' + k + ']').val(v);
                 showModal(myModal);
                 $('#aktiv-checkbox').hide();
-            })
+            });
+            getSelect("/api/admin/roles", $('#roles'), "Выбери роль", data.roles);
+
         })
 }
 
@@ -195,14 +199,23 @@ function toggleOnOff(data) {
     }
 }
 
-function getSelect(url, sel, name) {
+function getSelect(url, sel, name, selected) {
     sel.empty().append('<option disabled selected>' + name + '</option>');
     $.getJSON(url, function (data) {
         $.each(data, function (key, val) {
             if(val.id === undefined){
-                sel.append('<option value="' + key + '">' + val + '</option>')
+                if(selected === val){
+                    sel.append('<option selected value="' + key + '">' + val + '</option>');
+                } else {
+                    sel.append('<option value="' + key + '">' + val + '</option>');
+                }
             } else {
-                sel.append('<option value="' + val.id + '">' + val.name + '</option>')
+                if(selected === val.name){
+                    sel.append('<option selected value="' + val.id + '">' + val.name + '</option>');
+                } else {
+                    sel.append('<option value="' + val.id + '">' + val.name + '</option>');
+                }
+
             }
         });
     });

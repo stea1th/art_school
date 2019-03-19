@@ -1,4 +1,4 @@
-var ajaxUrl = "admin";
+var ajaxUrl = "api/admin";
 var myModal = $('#createKind');
 var datatable;
 

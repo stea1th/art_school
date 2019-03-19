@@ -32,16 +32,9 @@ public class RootController {
         return "login";
     }
 
-//    @GetMapping("/forum")
-//    public String forum() {
-//        return "forum";
-//    }
-
     @GetMapping("/admin")
     public String admin() {
         return "admin";
     }
 
-//    @GetMapping("/nachricht")
-//    public String nachricht() { return "nachricht";}
 }

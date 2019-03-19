@@ -1,4 +1,4 @@
-var ajaxUrl = "admin";
+var ajaxUrl = "api/admin";
 var myModal = $('#createOrUpdateUser');
 var datatable;
 
@@ -14,7 +14,7 @@ function createAdminTable() {
         },
 
         "ajax": {
-            "url": "admin",
+            "url": "api/admin",
             "dataSrc": ""
         },
 
@@ -59,7 +59,7 @@ function createAdminTable() {
             {
                 text: 'Добавить пользователя',
                 action: function ( e, dt, node, config ) {
-                    getSelect("/admin/roles", $('#roles'), "Выбери роль");
+                    getSelect("/api/admin/roles", $('#roles'), "Выбери роль");
                     showModal(myModal);
                 }
             }
