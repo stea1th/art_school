@@ -1,5 +1,5 @@
 var ajaxUnterricht = "unterricht";
-var ajaxKind = "kind";
+var ajaxKind = "/api/kind";
 var ajaxZahlung = "zahlung";
 var calendar = null;
 var myModal = $('#createUnterricht');

@@ -13,7 +13,7 @@ function createKindtable() {
         },
 
         "ajax": {
-            "url": "kind",
+            "url": "api/kind",
             "dataSrc": ""
         },
 

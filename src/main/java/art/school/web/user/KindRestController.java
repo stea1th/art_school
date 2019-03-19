@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import static art.school.util.TransformUtil.transformTo;
 
 @RestController
-@RequestMapping(value = "/kind")
+@RequestMapping(value = "/api/kind")
 public class KindRestController extends AbstractUserController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
