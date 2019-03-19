@@ -23,9 +23,7 @@ public class ForumController extends AbstractForumController {
                       @RequestParam(name = "size", required = false, defaultValue = "10") int size){
 
         Page<Thema> page = super.getAll(PageRequest.of(pageNumber, size));
-        model.addAttribute("list", page.stream()
-                .map(ThemaTo::new)
-                .collect(Collectors.toList()));
+        model.addAttribute("list", super.getAllTos(PageRequest.of(pageNumber, size)));
         model.addAttribute("link", "forum");
         createTablePage(model, page);
 

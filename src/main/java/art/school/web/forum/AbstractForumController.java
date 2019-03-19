@@ -5,6 +5,7 @@ import art.school.entity.Thema;
 import art.school.service.NachrichtService;
 import art.school.service.ThemaService;
 import art.school.service.UserService;
+import art.school.to.ThemaTo;
 import art.school.web.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -62,5 +63,9 @@ public abstract class AbstractForumController {
             }
         }
         return 0;
+    }
+
+    public List<ThemaTo> getAllTos(Pageable pageable){
+        return themaService.getAllTos(pageable);
     }
 }

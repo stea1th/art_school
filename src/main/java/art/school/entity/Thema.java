@@ -34,11 +34,11 @@ public class Thema extends AbstractBaseEntity{
     @Column(name = "gepinnt", columnDefinition = "bool default false")
     private boolean gepinnt;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "thema")
+    @OneToMany( mappedBy = "thema")
     @OrderBy(value = "datum")
     private List<Nachricht> nachrichts;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "u_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Users user;
