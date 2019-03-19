@@ -1,9 +1,7 @@
 package art.school.web.nachricht;
 
 import art.school.entity.Nachricht;
-import art.school.entity.NachrichtUpdater;
 import art.school.entity.Thema;
-import art.school.service.NachrichtUpdaterService;
 import art.school.service.ThemaService;
 import art.school.service.UserService;
 import art.school.to.NachrichtTo;
@@ -20,10 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static art.school.util.PaginationHelper.createTablePage;
 
