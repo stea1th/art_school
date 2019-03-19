@@ -17,12 +17,12 @@ public class KindRestController extends AbstractUserController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserTo> all() {
-        return transformTo(super.getAllKinds(), UserTo.class);
+        return getAllKinds();
         }
 
     @GetMapping(value="/filter/aktiv", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserTo> onlyAktiv(){
-        return transformTo(super.getAllKinds(), UserTo.class)
+        return getAllKinds()
                 .stream()
                 .filter(UserTo::getAktiv)
                 .collect(Collectors.toList());

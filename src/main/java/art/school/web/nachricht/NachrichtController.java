@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,9 +36,6 @@ public class NachrichtController extends AbstractNachrichtController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private NachrichtUpdaterService nachrichtUpdaterService;
 
     @GetMapping
     public String getAllNachrichts(Model model, @RequestParam(name = "id") Integer id,
@@ -68,6 +66,7 @@ public class NachrichtController extends AbstractNachrichtController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseBody
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public NachrichtTo createOrUpdate(NachrichtTo nachrichtTo,
                                   @RequestParam(name="page") int pageNumber,
                                   @RequestParam(name="parentId", required = false) Integer parentId) {

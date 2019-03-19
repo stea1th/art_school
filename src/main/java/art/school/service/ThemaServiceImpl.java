@@ -52,7 +52,7 @@ public class ThemaServiceImpl implements ThemaService {
 
     @Transactional
     public List<ThemaTo> getAllTos(Pageable pageable){
-        return repository.getAll(pageable).stream()
+        return getAll(pageable).stream()
                 .map(ThemaTo::new)
                 .collect(Collectors.toList());
     }

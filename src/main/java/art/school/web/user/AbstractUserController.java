@@ -2,13 +2,11 @@ package art.school.web.user;
 
 import art.school.entity.Users;
 import art.school.service.UserService;
+import art.school.to.UserTo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-
-import static art.school.util.ValidationUtil.assureIdConsistent;
-import static art.school.util.ValidationUtil.checkNew;
 
 @Slf4j
 public abstract class AbstractUserController  {
@@ -31,24 +29,29 @@ public abstract class AbstractUserController  {
         service.delete(id);
     }
 
-    public void toggleAktiv(int id){
+    void toggleAktiv(int id){
         log.info("toggle Users {} Status", id);
         service.toggleAktiv(id);
     }
 
-//    public void update(Users users, int id){
-//        log.info("update {} with id={}", users, id);
-//        assureIdConsistent(users, id);
-//        service.update(users);
-//    }
 
     public List<Users> getAll(){
         log.info("getAll Users");
         return service.getAll();
     }
 
-    public List<Users> getAllKinds(){
+    List<UserTo> getAllKinds(){
         log.info("getAll Kinds");
         return service.getAllKinds();
     }
+
+    public List<UserTo> getAllTos(){
+        return service.getAllTos();
+    }
+
+    public UserTo getUserTo(int id){
+        return service.getUserTo(id);
+    }
+
+
 }

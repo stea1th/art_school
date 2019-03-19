@@ -3,6 +3,7 @@ package art.school.service;
 import art.school.AuthorizedUser;
 import art.school.entity.Users;
 import art.school.repository.UserRepository;
+import art.school.to.UserTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,6 +14,7 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
+import static art.school.util.TransformUtil.transformTo;
 import static art.school.util.ValidationUtil.checkNotFoundWithId;
 
 @Service("userService")
@@ -48,6 +50,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    @Transactional
     public Users get(int id) {
         return checkNotFoundWithId(repository.get(id), id);
     }
@@ -57,17 +60,30 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     }
 
-    @Override
-    public List<Users> getAll() {
+    @Transactional
+    public UserTo getUserTo(int id){
+        return new UserTo(get(id));
+    }
+
+    @Transactional
+    public List<Users> getAll(){
         return repository.getAll();
     }
 
     @Override
-    public List<Users> getAllKinds() {
-        return repository.getAllKinds();
+    @Transactional
+    public List<UserTo> getAllTos() {
+        return transformTo(getAll(), UserTo.class);
     }
 
     @Override
+    @Transactional
+    public List<UserTo> getAllKinds() {
+        return transformTo(repository.getAllKinds(), UserTo.class);
+    }
+
+    @Override
+    @Transactional
     public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
         Users users = repository.getUsersByEmail(email);
         if(users == null){

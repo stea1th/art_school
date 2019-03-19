@@ -59,7 +59,7 @@ public class Users extends AbstractBaseEntity {
     @BatchSize(size = 200)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection
     private Set<Role> roles;
 
     @OneToMany(mappedBy = "user")

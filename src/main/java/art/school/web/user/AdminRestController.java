@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static art.school.util.TransformUtil.transformTo;
-
 @RestController
 @RequestMapping("/admin")
 public class AdminRestController extends AbstractUserController {
@@ -24,7 +22,7 @@ public class AdminRestController extends AbstractUserController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Secured("ROLE_ADMIN")
     public List<UserTo> all() {
-        return transformTo(super.getAll(), UserTo.class);
+        return getAllTos();
     }
 
     @PostMapping("/toggle/{id}")
@@ -55,7 +53,7 @@ public class AdminRestController extends AbstractUserController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public UserTo getUser(@PathVariable("id") int id){
-        return new UserTo(super.get(id));
+        return getUserTo(id);
     }
 
     @DeleteMapping(value = "/{id}")

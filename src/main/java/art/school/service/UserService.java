@@ -1,6 +1,7 @@
 package art.school.service;
 
 import art.school.entity.Users;
+import art.school.to.UserTo;
 
 import java.util.List;
 
@@ -11,5 +12,9 @@ public interface UserService extends MainServiceInterface<Users> {
 
     Users getUsersByEmail(String email);
 
-    List<Users> getAllKinds();
+    List<UserTo> getAllKinds();
+
+    List<UserTo> getAllTos();
+
+    UserTo getUserTo(int id);
 }
