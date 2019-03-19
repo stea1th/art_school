@@ -2,6 +2,7 @@ package art.school.web.nachricht;
 
 import art.school.entity.Nachricht;
 import art.school.service.NachrichtService;
+import art.school.to.NachrichtTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,5 +28,13 @@ public class AbstractNachrichtController {
 
     public Nachricht create(Nachricht nachricht){
         return nachrichtService.create(nachricht);
+    }
+
+    public Nachricht createNachrichtWithUpdaters(Integer id, String action){
+        return nachrichtService.createNachrichtWithUpdaters(id, action);
+    }
+
+    public List<NachrichtTo> getAllTos(int id, Pageable pageable){
+        return nachrichtService.getAllTos(id, pageable);
     }
 }

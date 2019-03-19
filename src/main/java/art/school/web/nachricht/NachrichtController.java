@@ -57,10 +57,9 @@ public class NachrichtController extends AbstractNachrichtController {
             model.addAttribute("closedBy", thema.getUser().getName());
         }
 
-        Page<Nachricht> page = super.getPageByThemaId(id, PageRequest.of(pageNumber, size, Sort.by("datum", "id")));
-        model.addAttribute("list", page.stream()
-                .map(NachrichtTo::new)
-                .collect(Collectors.toCollection(LinkedList::new)));
+        Pageable pageable = PageRequest.of(pageNumber, size, Sort.by("datum", "id"));
+        Page<Nachricht> page = super.getPageByThemaId(id, pageable);
+        model.addAttribute("list", getAllTos(id, pageable));
         model.addAttribute("link", "nachricht");
         createTablePage(model, page);
 
@@ -116,13 +115,5 @@ public class NachrichtController extends AbstractNachrichtController {
             model.addAttribute("updateText", answer ? null : nachricht.getText());
         }
         return "nachricht/nachricht-form";
-    }
-
-    private Nachricht createNachrichtWithUpdaters(Integer id, String action) {
-        Nachricht nachricht = id == null? new Nachricht() :  get(id);
-        List<NachrichtUpdater> updaters = nachricht.isNew()? new ArrayList<>() : nachricht.getUpdaters();
-        updaters.add(nachrichtUpdaterService.save(new NachrichtTo(id).createUpdater(action)));
-        nachricht.setUpdaters(updaters);
-        return nachricht;
     }
 }

@@ -1,19 +1,29 @@
 package art.school.service;
 
 import art.school.entity.Nachricht;
+import art.school.entity.NachrichtUpdater;
 import art.school.repository.NachrichtRepository;
+import art.school.repository.NachrichtUpdaterRepository;
+import art.school.to.NachrichtTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class NachrichtServiceImpl implements NachrichtService {
 
     @Autowired
     private NachrichtRepository repository;
+
+    @Autowired
+    private NachrichtUpdaterRepository nachrichtUpdaterRepository;
 
 
     @Override
@@ -49,5 +59,22 @@ public class NachrichtServiceImpl implements NachrichtService {
     @Override
     public List<Nachricht> getAll() {
         return null;
+    }
+
+    @Transactional
+    public Nachricht createNachrichtWithUpdaters(Integer id, String action) {
+        Nachricht nachricht = id == null? new Nachricht() :  get(id);
+        List<NachrichtUpdater> updaters = nachricht.isNew()? new ArrayList<>() : nachricht.getUpdaters();
+        updaters.add(nachrichtUpdaterRepository.save(new NachrichtTo(id).createUpdater(action)));
+        nachricht.setUpdaters(updaters);
+        return nachricht;
+    }
+
+    @Transactional
+    public List<NachrichtTo> getAllTos(int id, Pageable pageable){
+        return getPageByThemaId(id, pageable)
+                .stream()
+                .map(NachrichtTo::new)
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 }

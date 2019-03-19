@@ -4,6 +4,7 @@ import art.school.entity.Thema;
 import art.school.to.ThemaTo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +23,9 @@ public class ForumController extends AbstractForumController {
                       @RequestParam(name = "page", required = false, defaultValue = "0") int pageNumber,
                       @RequestParam(name = "size", required = false, defaultValue = "10") int size){
 
-        Page<Thema> page = super.getAll(PageRequest.of(pageNumber, size));
-        model.addAttribute("list", super.getAllTos(PageRequest.of(pageNumber, size)));
+        Pageable pageable = PageRequest.of(pageNumber, size);
+        Page<Thema> page = super.getAll(pageable);
+        model.addAttribute("list", super.getAllTos(pageable));
         model.addAttribute("link", "forum");
         createTablePage(model, page);
 

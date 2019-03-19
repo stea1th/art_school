@@ -34,27 +34,27 @@ public class Nachricht extends AbstractBaseEntity{
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime datum = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "u_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Users user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "n_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Nachricht parent;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "t_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Thema thema;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "nachricht")
+    @OneToMany(mappedBy = "nachricht")
     protected List<NachrichtUpdater> updaters = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parent")
+    @OneToMany(mappedBy = "parent")
     protected List<Nachricht> children = new ArrayList<>();
 
 

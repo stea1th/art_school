@@ -34,7 +34,7 @@ public class Thema extends AbstractBaseEntity{
     @Column(name = "gepinnt", columnDefinition = "bool default false")
     private boolean gepinnt;
 
-    @OneToMany( mappedBy = "thema")
+    @OneToMany(mappedBy = "thema")
     @OrderBy(value = "datum")
     private List<Nachricht> nachrichts;
 
