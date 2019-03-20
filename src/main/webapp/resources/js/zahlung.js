@@ -1,4 +1,4 @@
-var ajaxUrl = "zahlung";
+var ajaxUrl = "api/zahlung";
 var myModal = $('#createZahlung');
 var datatable;
 

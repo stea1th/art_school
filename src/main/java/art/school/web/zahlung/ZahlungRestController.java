@@ -16,7 +16,7 @@ import static art.school.util.TransformUtil.transformTo;
 import static art.school.util.TransformUtil.transformToFilterAktiv;
 
 @RestController
-@RequestMapping("/zahlung")
+@RequestMapping("/api/zahlung")
 public class ZahlungRestController extends AbstractZahlungController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

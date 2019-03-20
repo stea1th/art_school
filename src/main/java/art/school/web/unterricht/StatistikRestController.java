@@ -13,7 +13,7 @@ import java.util.Set;
 
 
 @RestController
-@RequestMapping(value = "/statistik")
+@RequestMapping(value = "/api/statistik")
 public class StatistikRestController extends AbstractUnterrichtController {
 
     @GetMapping(value = "/chart/{year}", produces = MediaType.APPLICATION_JSON_VALUE)

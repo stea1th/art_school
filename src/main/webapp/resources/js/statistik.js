@@ -1,4 +1,4 @@
-var ajaxStatistik = "statistik";
+var ajaxStatistik = "/api/statistik";
 var sel = $('#statistik');
 var barChart;
 var myData;
