@@ -1,6 +1,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -17,7 +18,7 @@
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="mr-auto p-2">
-                            <button type="button" style="float:right" onclick="answerIt(null, true)">Создать тему
+                            <button type="button" style="float:right" onclick="answerIt(null, true)"><spring:message code="button.create.theme"/>
                             </button>
                         </div>
                         <div class="ml-auto p-2">
