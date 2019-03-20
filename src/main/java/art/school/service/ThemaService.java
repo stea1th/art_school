@@ -12,4 +12,8 @@ public interface ThemaService extends MainServiceInterface<Thema> {
     Page<Thema> getAll(Pageable pageable);
 
     List<ThemaTo> getAllTos(Pageable pageable);
+
+    List<ThemaTo> getAllTos();
+
+    ThemaTo getTo(int id);
 }

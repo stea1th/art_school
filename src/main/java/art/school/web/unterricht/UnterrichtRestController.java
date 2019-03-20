@@ -30,7 +30,7 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UnterrichtTo> all() {
+        public List<UnterrichtTo> all() {
         List<UnterrichtTo> list = new ArrayList<>();
         super.getAll().forEach(i -> list.add(new UnterrichtTo(i.getId(), i.getUser().getName(),
                 i.getDatum().truncatedTo(ChronoUnit.SECONDS).toString(),

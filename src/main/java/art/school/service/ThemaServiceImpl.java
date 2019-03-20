@@ -56,4 +56,17 @@ public class ThemaServiceImpl implements ThemaService {
                 .map(ThemaTo::new)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    @Transactional
+    public List<ThemaTo> getAllTos() {
+        return getAll().stream()
+                .map(ThemaTo::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public ThemaTo getTo(int  id){
+        return new ThemaTo(get(id));
+    }
 }

@@ -10,8 +10,11 @@ import art.school.web.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static art.school.util.ValidationUtil.assureIdConsistent;
 
 public abstract class AbstractForumController {
 
@@ -30,6 +33,10 @@ public abstract class AbstractForumController {
 
     public Thema get(int id) {
         return themaService.get(id);
+    }
+
+    public ThemaTo getTo(int id) {
+        return themaService.getTo(id);
     }
 
     public Page<Thema> getAll(Pageable pageable){
@@ -67,5 +74,22 @@ public abstract class AbstractForumController {
 
     public List<ThemaTo> getAllTos(Pageable pageable){
         return themaService.getAllTos(pageable);
+    }
+
+    public List<ThemaTo> getAllTos(){
+        return themaService.getAllTos();
+    }
+
+    public void delete(int id){
+        themaService.delete(id);
+    }
+
+    public Thema create(Thema t){
+        return themaService.create(t);
+    }
+
+    public void update(Thema t, int id){
+        assureIdConsistent(t, id);
+        themaService.update(t);
     }
 }
