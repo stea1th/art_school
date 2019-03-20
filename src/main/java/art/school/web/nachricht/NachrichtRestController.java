@@ -4,12 +4,14 @@ import art.school.entity.Nachricht;
 import art.school.to.NachrichtTo;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/nachricht")
+@Secured("ROLE_MODERATOR")
 public class NachrichtRestController extends AbstractNachrichtController{
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

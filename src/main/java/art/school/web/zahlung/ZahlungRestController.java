@@ -5,19 +5,16 @@ import art.school.to.ZahlungTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.temporal.ChronoField;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static art.school.util.TransformUtil.transformTo;
-import static art.school.util.TransformUtil.transformToFilterAktiv;
-
 @RestController
 @RequestMapping("/api/zahlung")
-
+@Secured("ROLE_MODERATOR")
 public class ZahlungRestController extends AbstractZahlungController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

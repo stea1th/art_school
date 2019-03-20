@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ import static art.school.util.PaginationHelper.createTablePage;
 
 @Controller
 @RequestMapping(value = "/nachricht")
+@Secured("ROLE_USER")
 public class NachrichtController extends AbstractNachrichtController {
 
     @Autowired

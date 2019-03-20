@@ -4,6 +4,7 @@ import art.school.entity.Thema;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import static art.school.util.PaginationHelper.createTablePage;
 
 @Controller
 @RequestMapping(value = "/forum")
+@Secured("ROLE_USER")
 public class ForumController extends AbstractForumController {
 
     @GetMapping

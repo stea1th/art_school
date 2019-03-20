@@ -7,6 +7,7 @@ import art.school.to.UnterrichtTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.temporal.ChronoField;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/unterricht")
+@Secured("ROLE_MODERATOR")
 public class UnterrichtRestController extends AbstractUnterrichtController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)

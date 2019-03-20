@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/admin")
+@Secured("ROLE_MODERATOR")
 public class AdminRestController extends AbstractUserController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -33,6 +34,7 @@ public class AdminRestController extends AbstractUserController {
     }
 
     @GetMapping("/roles")
+    @Secured("ROLE_ADMIN")
     public Map<Integer, String> getRoles(){
         return Arrays.stream(Role.values())
                 .collect(Collectors.toMap(Enum::ordinal, Role::getName));

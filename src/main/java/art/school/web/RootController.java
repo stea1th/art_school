@@ -8,7 +8,7 @@ public class RootController {
 
     @GetMapping("/")
     public String root(){
-        return "redirect:unterricht";
+        return "redirect:forum";
     }
 
     @GetMapping("/unterricht")

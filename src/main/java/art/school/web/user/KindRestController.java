@@ -2,6 +2,7 @@ package art.school.web.user;
 
 import art.school.to.UserTo;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,10 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static art.school.util.TransformUtil.transformTo;
-
 @RestController
 @RequestMapping(value = "/api/kind")
+@Secured("ROLE_MODERATOR")
 public class KindRestController extends AbstractUserController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

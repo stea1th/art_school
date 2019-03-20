@@ -4,12 +4,14 @@ import art.school.entity.Thema;
 import art.school.to.ThemaTo;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/forum")
+@Secured("ROLE_MODERATOR")
 public class ForumRestController extends AbstractForumController{
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
