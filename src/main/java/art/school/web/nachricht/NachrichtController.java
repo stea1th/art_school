@@ -51,7 +51,7 @@ public class NachrichtController extends AbstractNachrichtController {
 
         Pageable pageable = PageRequest.of(pageNumber, size, Sort.by("datum", "id"));
         Page<Nachricht> page = super.getPageByThemaId(id, pageable);
-        model.addAttribute("list", getAllTos(id, pageable));
+        model.addAttribute("list", getAllTosByThema(id, pageable));
         model.addAttribute("link", "nachricht");
         createTablePage(model, page);
 

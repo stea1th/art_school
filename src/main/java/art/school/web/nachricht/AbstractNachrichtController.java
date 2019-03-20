@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
+import static art.school.util.ValidationUtil.assureIdConsistent;
+
 public class AbstractNachrichtController {
 
     @Autowired
@@ -34,7 +36,33 @@ public class AbstractNachrichtController {
         return nachrichtService.createNachrichtWithUpdaters(id, action);
     }
 
-    public List<NachrichtTo> getAllTos(int id, Pageable pageable){
-        return nachrichtService.getAllTos(id, pageable);
+    public List<NachrichtTo> getAllTosByThema(int id, Pageable pageable){
+        return nachrichtService.getAllTosByThema(id, pageable);
+    }
+
+
+    public List<NachrichtTo> getAllTosByThema(int id){
+        return nachrichtService.getAllTosByThema(id);
+    }
+
+    public List<NachrichtTo> getAllTos(){
+        return nachrichtService.getAllTos();
+    }
+
+    public Long count(){
+       return nachrichtService.count();
+    }
+
+    public void delete(int id){
+        nachrichtService.delete(id);
+    }
+
+    public void update(Nachricht n, int id){
+        assureIdConsistent(n, id);
+        nachrichtService.update(n);
+    }
+
+    public NachrichtTo getTo(int id){
+       return nachrichtService.getTo(id);
     }
 }

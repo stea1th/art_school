@@ -11,4 +11,6 @@ public interface NachrichtRepository extends MainRepoInterface<Nachricht>{
     List<Nachricht> getAllByThemaId(int id);
 
     Page<Nachricht> getPageByThemaId(int id, Pageable pageable);
+
+    Long count();
 }

@@ -5,6 +5,7 @@ import art.school.entity.NachrichtUpdater;
 import art.school.repository.NachrichtRepository;
 import art.school.repository.NachrichtUpdaterRepository;
 import art.school.to.NachrichtTo;
+import art.school.util.TransformUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,7 +44,7 @@ public class NachrichtServiceImpl implements NachrichtService {
 
     @Override
     public void delete(int id) {
-
+        repository.delete(id);
     }
 
     @Override
@@ -53,12 +54,12 @@ public class NachrichtServiceImpl implements NachrichtService {
 
     @Override
     public void update(Nachricht nachricht) {
-
+        repository.save(nachricht);
     }
 
     @Override
     public List<Nachricht> getAll() {
-        return null;
+        return repository.getAll();
     }
 
     @Transactional
@@ -71,10 +72,30 @@ public class NachrichtServiceImpl implements NachrichtService {
     }
 
     @Transactional
-    public List<NachrichtTo> getAllTos(int id, Pageable pageable){
+    public List<NachrichtTo> getAllTosByThema(int id, Pageable pageable){
         return getPageByThemaId(id, pageable)
                 .stream()
                 .map(NachrichtTo::new)
                 .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Transactional
+    public List<NachrichtTo> getAllTosByThema(int id){
+        return TransformUtil.transformTo(getAllByThemaId(id), NachrichtTo.class);
+    }
+
+    @Transactional
+    public List<NachrichtTo> getAllTos(){
+        return TransformUtil.transformTo(getAll(), NachrichtTo.class);
+    }
+
+    public Long count(){
+        return repository.count();
+    }
+
+    @Override
+    @Transactional
+    public NachrichtTo getTo(int id) {
+        return new NachrichtTo(get(id));
     }
 }

@@ -15,5 +15,13 @@ public interface NachrichtService extends MainServiceInterface<Nachricht> {
 
     Nachricht createNachrichtWithUpdaters(Integer id, String action);
 
-    List<NachrichtTo> getAllTos(int id, Pageable pageable);
+    List<NachrichtTo> getAllTosByThema(int id, Pageable pageable);
+
+    List<NachrichtTo> getAllTosByThema(int id);
+
+    List<NachrichtTo> getAllTos();
+
+    Long count();
+
+    NachrichtTo getTo(int id);
 }

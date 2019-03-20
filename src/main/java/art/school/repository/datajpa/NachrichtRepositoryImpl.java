@@ -46,6 +46,10 @@ public class NachrichtRepositoryImpl implements NachrichtRepository {
 
     @Override
     public List<Nachricht> getAll() {
-        return null;
+        return repository.findAll();
+    }
+
+    public Long count(){
+        return repository.count();
     }
 }
