@@ -2,6 +2,7 @@ package art.school.web.zahlung;
 
 import art.school.entity.Zahlung;
 import art.school.service.ZahlungService;
+import art.school.to.ZahlungTo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -47,6 +48,10 @@ public abstract class AbstractZahlungController {
     public boolean toggleAktiv(int id){
         log.info("toggle Zahlung {} Status", id);
         return zahlungService.toggleAktiv(id);
+    }
+
+    public List<ZahlungTo> getAllTos(){
+        return zahlungService.getAllTos();
     }
 
 }

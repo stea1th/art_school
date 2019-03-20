@@ -21,7 +21,7 @@ public class ZahlungRestController extends AbstractZahlungController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ZahlungTo> all() {
-        return transformTo(super.getAll(), ZahlungTo.class);
+        return super.getAllTos();
     }
 
     @PostMapping(value = "/toggle/{id}")

@@ -38,7 +38,7 @@ public class Zahlung extends AbstractBaseEntity{
     @Column(name = "aktiv", nullable = false, columnDefinition = "bool default true")
     private boolean aktiv = true;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "zahlung")
+    @OneToMany(mappedBy = "zahlung")
     private List<Unterricht> unterrichts;
 
     public Zahlung(Integer id,@NotBlank String name, @NotNull BigDecimal preis, @NotNull LocalTime dauer, boolean aktiv) {

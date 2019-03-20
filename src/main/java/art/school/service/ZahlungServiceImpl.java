@@ -2,6 +2,7 @@ package art.school.service;
 
 import art.school.entity.Zahlung;
 import art.school.repository.ZahlungRepository;
+import art.school.to.ZahlungTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +10,7 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
+import static art.school.util.TransformUtil.transformTo;
 import static art.school.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
@@ -42,6 +44,11 @@ public class ZahlungServiceImpl implements ZahlungService {
     @Override
     public List<Zahlung> getAll() {
         return repository.getAll();
+    }
+
+    @Transactional
+    public List<ZahlungTo> getAllTos(){
+        return transformTo(getAll(), ZahlungTo.class);
     }
 
     @Override
