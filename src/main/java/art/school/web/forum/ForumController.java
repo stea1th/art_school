@@ -47,8 +47,8 @@ public class ForumController extends AbstractForumController {
 
     @PostMapping(value="/toggle")
     @ResponseBody
+    @Secured("ROLE_MODERATOR")
     public int toggleThema (@RequestParam(name="id") Integer id){
-        System.out.println(id);
         return super.toggle(id);
     }
 }
