@@ -16,17 +16,17 @@ public class ForumRestController extends AbstractForumController{
         return super.getAllTos();
     }
 
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable(name = "id") Integer id) {
         super.delete(id);
     }
 
-    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public Thema create(Thema t){
         return super.create(t);
     }
 
-    @PutMapping(value="/update/{id}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PutMapping(value="/{id}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public void update(@PathVariable(name = "id") Integer id, Thema t){
         super.update(t, id);
     }

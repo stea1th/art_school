@@ -23,6 +23,10 @@ public abstract class AbstractZahlungController {
         return zahlungService.get(id);
     }
 
+    public ZahlungTo getTo(int id){
+        return zahlungService.getTo(id);
+    }
+
     public Zahlung create(Zahlung zahlung){
         log.info("create Zahlung {}", zahlung);
         checkNew(zahlung);
@@ -52,6 +56,10 @@ public abstract class AbstractZahlungController {
 
     public List<ZahlungTo> getAllTos(){
         return zahlungService.getAllTos();
+    }
+
+    public List<ZahlungTo> onlyAktiv(){
+        return zahlungService.onlyAktiv();
     }
 
 }

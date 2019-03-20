@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 import java.util.List;
 
 import static art.school.util.TransformUtil.transformTo;
+import static art.school.util.TransformUtil.transformToFilterAktiv;
 import static art.school.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
@@ -35,6 +36,10 @@ public class ZahlungServiceImpl implements ZahlungService {
         return checkNotFoundWithId(repository.get(id), id);
     }
 
+    public ZahlungTo getTo(int id){
+        return new ZahlungTo(get(id));
+    }
+
     @Override
     public void update(Zahlung zahlung) {
         Assert.notNull(zahlung, "zahlung must not be null");
@@ -57,5 +62,10 @@ public class ZahlungServiceImpl implements ZahlungService {
         Zahlung zahlung = get(id);
         zahlung.setAktiv(!zahlung.isAktiv());
         return zahlung.isAktiv();
+    }
+
+    @Transactional
+    public List<ZahlungTo> onlyAktiv(){
+        return transformToFilterAktiv(getAll(), ZahlungTo.class);
     }
 }

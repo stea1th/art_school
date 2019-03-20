@@ -9,4 +9,8 @@ public interface ZahlungService extends MainServiceInterface<Zahlung>{
     boolean toggleAktiv(int id);
 
     List<ZahlungTo> getAllTos();
+
+    ZahlungTo getTo(int id);
+
+    List<ZahlungTo> onlyAktiv();
 }

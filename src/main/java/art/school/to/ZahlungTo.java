@@ -5,11 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import java.time.temporal.ChronoField;
 
 @Data
 @AllArgsConstructor
@@ -23,7 +20,7 @@ public class ZahlungTo {
     private boolean aktiv;
 
     public ZahlungTo(Zahlung z) {
-        this(z.getId(), z.getName(), z.getPreis(), z.getDauer().toString(), z.isAktiv());
+        this(z.getId(), z.getName(), z.getPreis(), String.valueOf(z.getDauer().get(ChronoField.MINUTE_OF_DAY)), z.isAktiv());
     }
 
     public ZahlungTo(String name, BigDecimal preis, String dauer, boolean aktiv) {
