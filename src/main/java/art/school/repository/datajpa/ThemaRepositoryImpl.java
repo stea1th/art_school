@@ -39,4 +39,8 @@ public class ThemaRepositoryImpl implements ThemaRepository {
     public Page<Thema> getAll(Pageable pageable) {
         return repository.findAllThis(pageable);
     }
+
+    public long count(){
+        return repository.count();
+    }
 }

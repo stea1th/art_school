@@ -86,4 +86,8 @@ public abstract class AbstractForumController {
         assureIdConsistent(t, id);
         themaService.update(t);
     }
+
+    public long count(){
+        return themaService.count();
+    }
 }

@@ -16,4 +16,6 @@ public interface ThemaService extends MainServiceInterface<Thema> {
     List<ThemaTo> getAllTos();
 
     ThemaTo getTo(int id);
+
+    long count();
 }

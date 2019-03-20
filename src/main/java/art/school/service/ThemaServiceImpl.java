@@ -36,7 +36,6 @@ public class ThemaServiceImpl implements ThemaService {
     @Override
     public void update(Thema thema) {
         repository.save(thema);
-
     }
 
     @Override
@@ -69,4 +68,11 @@ public class ThemaServiceImpl implements ThemaService {
     public ThemaTo getTo(int  id){
         return new ThemaTo(get(id));
     }
+
+    @Override
+    public long count() {
+        return repository.count();
+    }
+
+
 }
