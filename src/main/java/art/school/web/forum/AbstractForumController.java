@@ -59,17 +59,11 @@ public abstract class AbstractForumController {
     }
 
     public int toggle(int id){
+
         Thema t = get(id);
         t.setAktiv(!t.isAktiv());
         t.setUser(t.getUser() == null? userService.get(SecurityUtil.getAuthId()) : null);
-        t = themaService.create(t);
-        List<Thema> list = themaService.getAll();
-        for (int i = 0; i < list.size() ; i++) {
-            if(list.get(i).getId().equals(t.getId())){
-                return i / 10;
-            }
-        }
-        return 0;
+        return themaService.getAll().indexOf(themaService.create(t)) / 10;
     }
 
     public List<ThemaTo> getAllTos(Pageable pageable){

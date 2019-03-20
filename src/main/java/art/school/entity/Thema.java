@@ -12,10 +12,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = {"nachrichts", "user"})
 @Data
 @NoArgsConstructor
-@ToString
+@ToString(exclude = {"nachrichts", "user"})
 @Entity
 @Table(name = "thema")
 public class Thema extends AbstractBaseEntity{
