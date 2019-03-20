@@ -1,5 +1,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -26,7 +27,7 @@
                             <c:param name="page" value="${themaPage}"/>
                             <c:param name="size" value="${themaSize}"/>
                         </c:url>
-                        <span>&nbsp;<a type="button" href="${back}" style="float:right">Назад</a></span>
+                        <span>&nbsp;<a type="button" href="${back}" style="float:right"><spring:message code="app.back"/> </a></span>
                     </div>
                     <input type="hidden" class="form-control" id="themaId" name="themaId" value="${themaId}"/>
                     <div class="d-flex">

@@ -1,5 +1,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
@@ -37,11 +38,11 @@
                 </sec:authorize>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                       aria-haspopup="true" aria-expanded="false"><spring:message code="app.lang"/></a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item lang" href="?locale=en"><spring:message code="app.lang.en"/></a>
+                        <a class="dropdown-item lang" href="?locale=ru"><spring:message code="app.lang.ru"/></a>
+                        <a class="dropdown-item lang" href="?locale=de"><spring:message code="app.lang.de"/></a>
                     </div>
                 </li>
             </ul>
