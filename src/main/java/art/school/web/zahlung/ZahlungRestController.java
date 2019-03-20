@@ -31,7 +31,7 @@ public class ZahlungRestController extends AbstractZahlungController {
 
     @GetMapping(value = "/filter/aktiv", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ZahlungTo> onlyAktiv() {
-        return transformToFilterAktiv(super.getAll(), ZahlungTo.class);
+        return super.onlyAktiv();
     }
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -64,10 +64,8 @@ public class ZahlungRestController extends AbstractZahlungController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ZahlungTo getZahlung(@PathVariable("id") int id) {
-        Zahlung z = super.get(id);
-        return new ZahlungTo(z.getId(), z.getName(), z.getPreis(),
-                String.valueOf(z.getDauer().get(ChronoField.MINUTE_OF_DAY)), z.isAktiv());
+    public ZahlungTo getTo(@PathVariable("id") int id) {
+        return super.getTo(id);
 
     }
 }
