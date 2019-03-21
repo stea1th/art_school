@@ -1,16 +1,12 @@
 package art.school.to;
 
 
-import art.school.entity.Nachricht;
 import art.school.entity.Thema;
 import art.school.util.DateUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import java.util.Comparator;
-import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor

@@ -39,6 +39,7 @@ public class ThemaServiceImpl implements ThemaService {
     }
 
     @Override
+    @Transactional
     public List<Thema> getAll() {
         return repository.getAll();
     }

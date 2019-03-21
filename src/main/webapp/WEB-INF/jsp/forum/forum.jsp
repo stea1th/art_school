@@ -30,14 +30,13 @@
                     </div>
                     <div id="forum-themes">
                         <h1>
-                            <span>Art School Форум</span>
+                            <span>Art School <spring:message code="forum.name"/></span>
                         </h1>
                         <div class="wrapper">
                             <%@ include file="fragment.jsp" %>
                         </div>
                         <div id="add-message">
                         </div>
-                        <%--<button onclick="goToTop()" id="stickyButton" title="Go to top">Top</button>--%>
                     </div>
                 </div>
             </div>

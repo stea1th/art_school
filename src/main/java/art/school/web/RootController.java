@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class RootController {
 
     @Autowired
-    MessageSource messageSource;
+    private MessageSource messageSource;
 
     @GetMapping("/")
     public String root(){

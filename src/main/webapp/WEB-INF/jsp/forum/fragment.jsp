@@ -6,10 +6,10 @@
 <table id="forum" class="display responsive no-wrap" width="100%">
     <thead>
     <tr>
-        <th class="w-50  text-center">Заголовок</th>
-        <th class="w-10 text-center">Просмотров</th>
-        <th class="w-10 text-center">Ответов</th>
-        <th class="w-30 text-center">Последнее</th>
+        <th class="w-50  text-center"><spring:message code="forum.title"/></th>
+        <th class="w-10 text-center"><spring:message code="forum.views"/></th>
+        <th class="w-10 text-center"><spring:message code="forum.answers"/></th>
+        <th class="w-30 text-center"><spring:message code="forum.last"/></th>
     </tr>
     </thead>
     <tbody>
