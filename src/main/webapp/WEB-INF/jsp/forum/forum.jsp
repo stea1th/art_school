@@ -18,7 +18,8 @@
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="mr-auto p-2">
-                            <button type="button" style="float:right" onclick="answerIt(null, true)"><spring:message code="app.create.theme"/>
+                            <button type="button" style="float:right" onclick="answerIt(null, true)"><spring:message
+                                    code="app.create.theme"/>
                             </button>
                         </div>
                         <div class="ml-auto p-2">
@@ -32,9 +33,26 @@
                         <h1>
                             <span>Art School <spring:message code="forum.name"/></span>
                         </h1>
-                        <div class="wrapper">
-                            <%@ include file="fragment.jsp" %>
+                        <table id="forum" class="display responsive no-wrap" width="100%">
+                            <thead>
+                            <tr>
+                                <th class="w-50  text-center"><spring:message code="forum.title"/></th>
+                                <th class="w-10 text-center"><spring:message code="forum.views"/></th>
+                                <th class="w-10 text-center"><spring:message code="forum.answers"/></th>
+                                <th class="w-30 text-center"><spring:message code="forum.last"/></th>
+                            </tr>
+                            </thead>
+                            <tbody class="wrapper">
+                                <%@ include file="fragment.jsp" %>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <div class="d-flex">
+                            <div class="ml-auto">
+                                <%@ include file="../fragments/pagination.jsp" %>
+                            </div>
                         </div>
+                        <hr>
                         <div id="add-message">
                         </div>
                     </div>
