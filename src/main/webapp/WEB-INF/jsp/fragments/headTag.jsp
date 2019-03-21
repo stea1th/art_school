@@ -48,7 +48,7 @@
 
     <script type="text/javascript" src='webjars/moment/2.22.2/min/moment.min.js' ></script>
     <script type="text/javascript" src='webjars/fullcalendar/3.9.0/fullcalendar.js' ></script>
-    <script type="text/javascript" src='webjars/fullcalendar/3.9.0/locale/ru.js' ></script>
+    <script type="text/javascript" src='webjars/fullcalendar/3.9.0/locale-all.js' ></script>
     <script type="text/javascript" src='<c:url value="/resources/js/common.js"/>' defer></script>
 
     <%--MultiSelect--%>

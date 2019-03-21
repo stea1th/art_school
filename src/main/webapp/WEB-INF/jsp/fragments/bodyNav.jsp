@@ -40,9 +40,9 @@
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false"><spring:message code="app.lang"/></a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item lang" href="?locale=en"><spring:message code="app.lang.en"/></a>
-                        <a class="dropdown-item lang" href="?locale=ru"><spring:message code="app.lang.ru"/></a>
-                        <a class="dropdown-item lang" href="?locale=de"><spring:message code="app.lang.de"/></a>
+                        <div class="dropdown-item" style="cursor: pointer" onclick="changeLanguage('en')"><spring:message code="app.lang.en"/></div>
+                        <div class="dropdown-item" style="cursor: pointer" onclick="changeLanguage('ru')"><spring:message code="app.lang.ru"/></div>
+                        <div class="dropdown-item" style="cursor: pointer" onclick="changeLanguage('de')"><spring:message code="app.lang.de"/></div>
                     </div>
                 </li>
             </ul>

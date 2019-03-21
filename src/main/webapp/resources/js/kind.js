@@ -3,13 +3,13 @@ var myModal = $('#createKind');
 var datatable;
 
 $(function () {
-    createKindtable();
+
 });
 
-function createKindtable() {
+function createTable(data) {
     datatable = $('#kids').DataTable({
         "language": {
-            "url": languageUrl
+            "url": data
         },
 
         "ajax": {

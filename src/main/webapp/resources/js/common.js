@@ -1,7 +1,8 @@
+
 var ajaxUrl;
-var languageUrl = "http://cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json";
 
 $(function () {
+
     manageNavBar();
 
     createAnimationOnWelcome();
@@ -13,7 +14,31 @@ $(function () {
     pageInputField();
 
     saveOrUpdateUser();
+
+    getLocalesForTables();
+
 });
+
+function getLocalesForTables(){
+    $.get("/api/locale/tables").done(function (data) {
+        if(typeof(createTable) !== 'undefined'){
+            createTable(data);
+        }
+    });
+}
+
+function changeLanguage(lang){
+    var locale = "locale=";
+    var url;
+    if(location.href.includes("?" + locale)){
+        url = location.href.split("?" + locale)[0];
+    } else if(location.href.includes("&" + locale)){
+        url = location.href.split("&" + locale)[0];
+    } else {
+        url = location.href;
+    }
+    location.href = url + (url.includes('?')? "&" : "?") + locale + lang;
+}
 
 function saveOrUpdateUser() {
     $('#saveUser').on('click', function () {

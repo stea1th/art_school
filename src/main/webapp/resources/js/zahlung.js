@@ -3,14 +3,14 @@ var myModal = $('#createZahlung');
 var datatable;
 
 $(function () {
-    createZahlungTable();
     saveOrUpdateZahlung();
 });
 
-function createZahlungTable() {
+function createTable(data) {
+
     datatable = $('#zahlungen').DataTable({
         "language": {
-            "url": languageUrl
+            "url": data
         },
 
         "ajax": {

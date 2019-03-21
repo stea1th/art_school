@@ -4,13 +4,12 @@ var datatable;
 
 $(function () {
 
-    createAdminTable();
 });
 
-function createAdminTable() {
+function createTable(data) {
     datatable = $('#admins').DataTable({
         "language": {
-            "url": languageUrl
+            "url": data
         },
 
         "ajax": {

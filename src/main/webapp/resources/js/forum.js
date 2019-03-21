@@ -1,5 +1,6 @@
 var messageId;
 var answer;
+
 $(function () {
 
 });

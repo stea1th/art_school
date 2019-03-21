@@ -5,6 +5,8 @@ var calendar = null;
 var myModal = $('#createUnterricht');
 var kindBtn = null;
 var zahlungBtn = null;
+var language;
+
 
 $(function () {
     var zt = getNow();
@@ -19,69 +21,73 @@ function getNow() {
 }
 
 function createFullCalendar(zt) {
-    calendar = $('#calendar').fullCalendar({
-        header: {center: 'month, agendaWeek, list'},
 
-        dayClick: function (date, jsEvent, view) {
-            console.log(jsEvent);
-            console.log(view);
-            createUnterricht(date, zt);
-        },
-        themeSystem: 'bootstrap4',
-        height: 650,
-        bootstrapFontAwesome: {
-            prev: 'fas fa-angle-left',
-            next: 'fas fa-angle-right'
-        },
-        firstDay: 1,
-        eventClick: function (event) {
-            updateUnterricht(event, zt);
-        },
-        eventDragStart: function (event, jsEvent, ui, view) {
-            window.eventScrolling = true;
-        }
-        ,
-        eventDragStop: function (event, jsEvent, ui, view) {
-            window.eventScrolling = false;
-        }
-        ,
-        eventRender: function (eventObj, el) {
-            if (window.eventScrolling) return;
-            el.popover({
-                title: eventObj.title,
-                content: eventObj.notiz,
-                trigger: 'hover',
-                placement: 'top',
-                container: 'body'
-            });
-        }
-        ,
-        eventResize: function (event, delta, revertFunc) {
-            $(".popover").remove();
-        }
-        ,
-        eventSources: [{
-            url: ajaxUnterricht
-        }],
-        timeFormat:
-            'HH:mm',
-        timezone:
-            'local',
-        eventLimit:
-            true,
-        views:
-            {
-                month: {
-                    titleFormat: 'YYYY MMMM ',
-                    eventLimit:
-                        2
-                }
+    $.get("/api/locale").done(function (data) {
+        calendar = $('#calendar').fullCalendar({
+            locale: data,
+            header: {center: 'month, agendaWeek, list'},
+
+            dayClick: function (date, jsEvent, view) {
+                console.log(jsEvent);
+                console.log(view);
+                createUnterricht(date, zt);
             },
-        editable: true,
-        eventDrop:
-            function (event, dayDelta, revertFunc) {
-                onDrop(event);
+            themeSystem: 'bootstrap4',
+            height: 650,
+            bootstrapFontAwesome: {
+                prev: 'fas fa-angle-left',
+                next: 'fas fa-angle-right'
+            },
+            firstDay: 1,
+            eventClick: function (event) {
+                updateUnterricht(event, zt);
+            },
+            eventDragStart: function (event, jsEvent, ui, view) {
+                window.eventScrolling = true;
             }
+            ,
+            eventDragStop: function (event, jsEvent, ui, view) {
+                window.eventScrolling = false;
+            }
+            ,
+            eventRender: function (eventObj, el) {
+                if (window.eventScrolling) return;
+                el.popover({
+                    title: eventObj.title,
+                    content: eventObj.notiz,
+                    trigger: 'hover',
+                    placement: 'top',
+                    container: 'body'
+                });
+            }
+            ,
+            eventResize: function (event, delta, revertFunc) {
+                $(".popover").remove();
+            }
+            ,
+            eventSources: [{
+                url: ajaxUnterricht
+            }],
+            timeFormat:
+                'HH:mm',
+            timezone:
+                'local',
+            eventLimit:
+                true,
+            views:
+                {
+                    month: {
+                        titleFormat: 'YYYY MMMM ',
+                        eventLimit:
+                            2
+                    }
+                },
+            editable: true,
+            eventDrop:
+                function (event, dayDelta, revertFunc) {
+                    onDrop(event);
+                }
+        });
     });
 }
 

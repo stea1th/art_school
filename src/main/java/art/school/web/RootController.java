@@ -1,10 +1,18 @@
 package art.school.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceResolvable;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class RootController {
+
+    @Autowired
+    MessageSource messageSource;
 
     @GetMapping("/")
     public String root(){
@@ -35,6 +43,18 @@ public class RootController {
     @GetMapping("/admin")
     public String admin() {
         return "admin";
+    }
+
+    @GetMapping(value = "/api/locale")
+    @ResponseBody
+    public String getLocale(){
+        return LocaleContextHolder.getLocale().toString();
+    }
+
+    @GetMapping(value = "/api/locale/tables")
+    @ResponseBody
+    public String getLocaleForTables(){
+        return messageSource.getMessage("datatables.lang", null, LocaleContextHolder.getLocale());
     }
 
 }
