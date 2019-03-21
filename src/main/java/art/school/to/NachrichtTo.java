@@ -42,7 +42,7 @@ public class NachrichtTo {
 
     public NachrichtTo(Nachricht n) {
         this(n.getId(), n.getText(),
-                DateUtil.transformDateForForum(n.getDatum()),
+                new DateUtil().transformDateForForum(n.getDatum()),
                 n.getUser().getName(), n.getUser().getId(),
                 n.getThema().getId(), n.getUpdaters().isEmpty() ? null :
                         createUpdaterInfo(n.getUpdaters().get(n.getUpdaters().size() - 1)), null,

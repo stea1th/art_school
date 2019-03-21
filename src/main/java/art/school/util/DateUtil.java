@@ -17,9 +17,9 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class DateUtil {
 
 //    @Autowired
-//    private static MessageSource messageSource;
+//    private MessageSource messageSource;
 
-    public static String transformDateForForum(LocalDateTime dateTime) {
+    public String transformDateForForum(LocalDateTime dateTime) {
         String time = dateTime.toLocalTime().truncatedTo(ChronoUnit.MINUTES).toString();
         int days = (int) DAYS.between(dateTime.toLocalDate(), LocalDate.now());
 //        Locale locale = LocaleContextHolder.getLocale();

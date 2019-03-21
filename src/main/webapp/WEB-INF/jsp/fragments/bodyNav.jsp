@@ -16,28 +16,28 @@
             <ul class="navbar-nav mr-auto" id="left-side">
                 <sec:authorize access="hasRole('ROLE_MODERATOR')">
                 <li class="nav-item active">
-                    <a class="nav-link" href="unterricht">Уроки<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="unterricht"><spring:message code="app.lesson"/><span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="kind">Ученики</a>
+                    <a class="nav-link" href="kind"><spring:message code="app.users"/></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="zahlung">Оплата</a>
+                    <a class="nav-link" href="zahlung"><spring:message code="app.payment"/></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="statistik">Статистика</a>
+                    <a class="nav-link" href="statistik"><spring:message code="app.statistic"/></a>
                 </li>
                 </sec:authorize>
                 <li class="nav-item">
-                    <a class="nav-link" href="forum">Форум</a>
+                    <a class="nav-link" href="forum"><spring:message code="forum.name"/></a>
                 </li>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <li class="nav-item">
-                        <a class="nav-link" href="admin">Админ</a>
+                        <a class="nav-link" href="admin"><spring:message code="app.admin"/></a>
                     </li>
                 </sec:authorize>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle testIt" href="#" id="dropdown04" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false"><spring:message code="app.lang"/></a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <div class="dropdown-item" style="cursor: pointer" onclick="changeLanguage('en')"><spring:message code="app.lang.en"/></div>
