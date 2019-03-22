@@ -1,7 +1,9 @@
 package art.school.service;
 
+import art.school.entity.Block;
 import art.school.entity.Nachricht;
 import art.school.entity.NachrichtUpdater;
+import art.school.repository.BlockRepository;
 import art.school.repository.NachrichtRepository;
 import art.school.repository.NachrichtUpdaterRepository;
 import art.school.to.NachrichtTo;
@@ -25,6 +27,9 @@ public class NachrichtServiceImpl implements NachrichtService {
 
     @Autowired
     private NachrichtUpdaterRepository nachrichtUpdaterRepository;
+
+    @Autowired
+    private BlockRepository blockRepository;
 
 
     @Override
@@ -75,7 +80,16 @@ public class NachrichtServiceImpl implements NachrichtService {
     public List<NachrichtTo> getAllTosByThema(int id, Pageable pageable){
         return getPageByThemaId(id, pageable)
                 .stream()
-                .map(NachrichtTo::new)
+//                .map(NachrichtTo::new)
+                .map(i-> {
+                    NachrichtTo n = new NachrichtTo(i);
+                    Block b = blockRepository.getLatestByUserId(i.getUser().getId());
+                    if(b != null){
+                        System.out.println(b.getDatum() + " " + b.getReason() + " ===============================================================================");
+                    }
+
+                    return n;
+                })
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 

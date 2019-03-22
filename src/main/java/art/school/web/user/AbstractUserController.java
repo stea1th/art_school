@@ -34,7 +34,6 @@ public abstract class AbstractUserController  {
         service.toggleAktiv(id);
     }
 
-
     public List<Users> getAll(){
         log.info("getAll Users");
         return service.getAll();
@@ -52,6 +51,8 @@ public abstract class AbstractUserController  {
     public UserTo getUserTo(int id){
         return service.getUserTo(id);
     }
+
+
 
 
 }

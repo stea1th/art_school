@@ -39,6 +39,7 @@ public class NachrichtTo {
     private Integer roleSize;
     private String registriert;
     private Integer messages;
+    private String banned;
 
     public NachrichtTo(Nachricht n) {
         this(n.getId(), n.getText(),
@@ -57,10 +58,34 @@ public class NachrichtTo {
         this.id = id;
     }
 
-    public NachrichtTo(int id, int page, boolean reload){
+    public NachrichtTo(int id, int page, boolean reload) {
         this.id = id;
         this.page = page;
         this.reload = reload;
+    }
+
+    public NachrichtTo(Integer id, String text,
+                       String datum, String name,
+                       Integer userId, Integer themaId,
+                       String updaterInfo, Integer size,
+                       List<String> lines, List<String> parentMessages,
+                       Integer page, Boolean reload, Integer roleSize,
+                       String registriert, Integer messages) {
+        this.id = id;
+        this.text = text;
+        this.datum = datum;
+        this.name = name;
+        this.userId = userId;
+        this.themaId = themaId;
+        this.updaterInfo = updaterInfo;
+        this.size = size;
+        this.lines = lines;
+        this.parentMessages = parentMessages;
+        this.page = page;
+        this.reload = reload;
+        this.roleSize = roleSize;
+        this.registriert = registriert;
+        this.messages = messages;
     }
 
     public boolean isNew() {
