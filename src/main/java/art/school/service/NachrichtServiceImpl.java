@@ -14,10 +14,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static art.school.util.DateUtil.formatDateToString;
 
 @Service
 public class NachrichtServiceImpl implements NachrichtService {
@@ -85,9 +88,8 @@ public class NachrichtServiceImpl implements NachrichtService {
                     NachrichtTo n = new NachrichtTo(i);
                     Block b = blockRepository.getLatestByUserId(i.getUser().getId());
                     if(b != null){
-                        System.out.println(b.getDatum() + " " + b.getReason() + " ===============================================================================");
+                        n.setBanned(formatDateToString(b.getDatum()));
                     }
-
                     return n;
                 })
                 .collect(Collectors.toCollection(LinkedList::new));

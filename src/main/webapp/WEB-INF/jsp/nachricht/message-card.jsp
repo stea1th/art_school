@@ -62,6 +62,26 @@
                         Сообщений:&nbsp;<c:out value="${message.messages}"/>
                     </div>
                 </li>
+                <li>
+                    <div>
+                        Статус:&nbsp;
+                        <c:if test="${message.banned == null}">
+                            <span>Полный</span>
+                        </c:if>
+                        <c:if test="${message.banned != null}">
+                            <span style="color:red;">
+                                Только чтение
+                            </span>
+                        </c:if>
+                    </div>
+                </li>
+                <li>
+                    <c:if test="${message.banned != null}">
+                        <div style="color:red;">
+                            <c:out value="${message.banned}"/>
+                        </div>
+                    </c:if>
+                </li>
 
             </ul>
         </div>

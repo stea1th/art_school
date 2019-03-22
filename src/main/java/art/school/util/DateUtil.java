@@ -1,5 +1,6 @@
 package art.school.util;
 
+import art.school.entity.Block;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -38,6 +39,10 @@ public class DateUtil {
             case 7:
                 return days + " дней назад, " + time;
         }
+        return formatDateToString(dateTime);
+    }
+
+    public static String formatDateToString(LocalDateTime dateTime){
         return dateTime.truncatedTo(ChronoUnit.MINUTES).format(DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
     }
 }
