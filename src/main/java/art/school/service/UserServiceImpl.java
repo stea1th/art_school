@@ -2,6 +2,7 @@ package art.school.service;
 
 import art.school.AuthorizedUser;
 import art.school.entity.Users;
+import art.school.repository.BlockRepository;
 import art.school.repository.UserRepository;
 import art.school.to.UserTo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private BlockRepository blockRepository;
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -63,6 +67,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     public UserTo getUserTo(int id){
         return new UserTo(get(id));
+    }
+
+    @Override
+    public boolean isUserBanned(int id) {
+        return blockRepository.getLatestByUserId(id) != null;
     }
 
     @Transactional

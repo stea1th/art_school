@@ -55,6 +55,7 @@ public class NachrichtController extends AbstractNachrichtController {
         Page<Nachricht> page = super.getPageByThemaId(id, pageable);
         model.addAttribute("list", getAllTosByThema(id, pageable));
         model.addAttribute("link", "nachricht");
+        model.addAttribute("isBanned", userService.isUserBanned(SecurityUtil.getAuthId()));
         createTablePage(model, page);
 
         return select ? "nachricht/fragment" : "nachricht/nachricht";

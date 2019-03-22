@@ -52,7 +52,4 @@ public abstract class AbstractUserController  {
         return service.getUserTo(id);
     }
 
-
-
-
 }

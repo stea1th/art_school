@@ -17,4 +17,6 @@ public interface UserService extends MainServiceInterface<Users> {
     List<UserTo> getAllTos();
 
     UserTo getUserTo(int id);
+
+    boolean isUserBanned(int id);
 }
