@@ -68,6 +68,10 @@ public class Users extends AbstractBaseEntity {
     @OneToMany(mappedBy = "user")
     protected List<Unterricht> unterrichts ;
 
+    @OneToMany(mappedBy = "user")
+    protected List<Block> blocks ;
+
+
     public Users(Integer id, @NotBlank @Size(max = 50) String name, @NotBlank @Size(min = 3, max = 50) String adresse, boolean aktiv, @NotNull LocalDateTime registriert) {
         super(id);
         this.name = name;
