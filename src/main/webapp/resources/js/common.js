@@ -30,14 +30,19 @@ function getLocalesForTables(){
 function changeLanguage(lang){
     var locale = "locale=";
     var url;
-    if(location.href.includes("?" + locale)){
-        url = location.href.split("?" + locale)[0];
-    } else if(location.href.includes("&" + locale)){
-        url = location.href.split("&" + locale)[0];
+    if(location.pathname.includes('/forum') || location.pathname.includes('/nachricht')){
+        changeForumLanguage(lang);
     } else {
-        url = location.href;
+        if(location.href.includes("?" + locale)){
+            url = location.href.split("?" + locale)[0];
+        } else if(location.href.includes("&" + locale)){
+            url = location.href.split("&" + locale)[0];
+        } else {
+            url = location.href;
+        }
+        location.href = url + (url.includes('?')? "&" : "?") + locale + lang;
     }
-    location.href = url + (url.includes('?')? "&" : "?") + locale + lang;
+
 }
 
 function saveOrUpdateUser() {

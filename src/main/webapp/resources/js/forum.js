@@ -5,6 +5,12 @@ $(function () {
 
 });
 
+function changeForumLanguage(lang){
+    var locale = "&locale=";
+    var url = location.href + (location.href.includes('?')? "&" : "?") + "page=" + ($('.page-input').attr('this') - 1) + "&size=" + $('.page-size').val();
+    location.href = (url.includes(locale)? url.split(locale)[0] : url) + locale + lang;
+}
+
 function toggleThema(id){
     $.post("/forum/toggle", {id : id})
         .done(function(data){
