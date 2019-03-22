@@ -1,5 +1,6 @@
 drop table if exists nachricht_updater;
 drop table if exists user_roles;
+drop table if exists block;
 drop table if exists nachricht;
 drop table if exists thema;
 drop table if exists unterricht;
@@ -71,6 +72,16 @@ create table nachricht
   foreign key (u_id) references users(id) on delete cascade,
   foreign key (t_id) references thema(id) on delete cascade,
   foreign key (n_id) references nachricht(id) on delete cascade
+);
+
+create table block
+(
+  id integer primary key default nextval('global_seq'),
+  reason varchar not null,
+  datum timestamp default now() + interval '1 hour' not null,
+  accepted bool default false not null,
+  u_id integer not null,
+  foreign key (u_id) references users(id) on delete cascade
 );
 
 create table user_roles
