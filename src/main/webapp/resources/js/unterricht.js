@@ -1,5 +1,6 @@
 var ajaxUnterricht = "/api/unterricht";
 var ajaxKind = "/api/kind";
+var ajaxAdmin = "/api/admin";
 var ajaxZahlung = "/api/zahlung";
 var calendar = null;
 var myModal = $('#createUnterricht');
@@ -169,7 +170,7 @@ function updateUnterricht(event, zt) {
     kindSelect.hide();
     zahlungSelect.hide();
     $.get(ajaxUnterricht + "/get/" + event.id).done(function (data) {
-        kindBtn = renderMenuBtn(data.kind, data.kindTo.name, ajaxKind, data.kindTo.aktiv);
+        kindBtn = renderMenuBtn(data.kind, data.kindTo.name, ajaxAdmin, data.kindTo.aktiv);
         zahlungBtn = renderMenuBtn(data.zahlung, data.zahlungTo.name, ajaxZahlung, data.zahlungTo.aktiv);
         kindBtn.appendTo('#kind-div');
         zahlungBtn.appendTo('#zahlung-div');
