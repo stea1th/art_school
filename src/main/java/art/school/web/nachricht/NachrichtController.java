@@ -11,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -63,7 +62,6 @@ public class NachrichtController extends AbstractNachrichtController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseBody
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public NachrichtTo createOrUpdate(NachrichtTo nachrichtTo,
                                   @RequestParam(name="page") int pageNumber,
                                   @RequestParam(name="parentId", required = false) Integer parentId) {

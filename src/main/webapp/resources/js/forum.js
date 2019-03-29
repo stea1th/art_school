@@ -8,8 +8,9 @@ $(function () {
 function changeForumLanguage(lang){
     console.log(location.href);
     var locale = "&locale=";
-    var url = location.href + (location.href.includes('?')? "&" : "?") + "page=" + ($('.page-input').attr('this') - 1) + "&size=" + $('.page-size').val();
-    location.href = (url.includes(locale)? url.split(locale)[0] : url) + locale + lang;
+    var link = location.pathname.includes('/forum')? location.href.split("?")[0] : location.href;
+    var url = link + (link.includes('?')? "&" : "?") + "page=" + ($('.page-input').attr('this') - 1) + "&size=" + $('.page-size').val();
+    location.href = (url.includes(locale)? url.split(locale)[0] : url.includes('#')? url.split('#')[0] : url) + locale + lang;
 }
 
 function toggleThema(id){
