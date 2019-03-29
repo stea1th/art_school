@@ -13,9 +13,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static art.school.util.ValidationUtil.assureIdConsistent;
-import static art.school.util.ValidationUtil.checkNew;
-
 
 @Slf4j
 public abstract class AbstractUnterrichtController {

@@ -57,7 +57,7 @@ function createTable(data) {
                 text: 'Добавить ученика',
                 action: function (e, dt, node, config) {
                     $('.modal-title').text('Добавить ученика');
-                    getSelect("/admin/roles", $('#roles'), "Выбери роль");
+                    getSelect("/api/admin/roles", $('#roles'), "Выбери роль");
                     showModal(myModal);
                 }
             }

@@ -43,27 +43,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="createKind" tabindex="-1" role="dialog" aria-labelledby="createKind"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Добавить ученика</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <%@include file="forms/user-form.jsp"%>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="saveUser">Сохранить</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+<jsp:include page="fragments/modal.jsp">
+    <jsp:param name="url" value="../forms/user-form.jsp"/>
+    <jsp:param name="modalId" value="createKind"/>
+    <jsp:param name="modalTitel" value="Добавить ученика"/>
+</jsp:include>
 
 </body>
 </html>
