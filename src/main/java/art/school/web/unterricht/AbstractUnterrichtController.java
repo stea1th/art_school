@@ -29,11 +29,8 @@ public abstract class AbstractUnterrichtController {
     }
 
     public Unterricht create(RequestUnterrichtTo unterrichtTo){
-        Unterricht u = new Unterricht(unterrichtTo.getId(), LocalDateTime.of(LocalDate.parse(unterrichtTo.getDatum()),
-                LocalTime.parse(unterrichtTo.getZeit())), unterrichtTo.isBezahlt(), unterrichtTo.getNotiz());
-        log.info("create {} for Users {} and Zahlung {}", u, unterrichtTo.getKind(), unterrichtTo.getZahlung());
-        checkNew(u);
-        return unterrichtService.create(u, unterrichtTo.getKind(), unterrichtTo.getZahlung());
+        log.info("create {} for Users {} and Zahlung {}", unterrichtTo, unterrichtTo.getKind(), unterrichtTo.getZahlung());
+        return unterrichtService.createFromTo(unterrichtTo);
     }
 
     public void delete(int id){
@@ -47,16 +44,8 @@ public abstract class AbstractUnterrichtController {
     }
 
     public void update(RequestUnterrichtTo unterrichtTo){
-        Unterricht u = unterrichtService.get(unterrichtTo.getId());
-        u.setDatum(LocalDateTime.of(LocalDate.parse(unterrichtTo.getDatum()),
-                LocalTime.parse(unterrichtTo.getZeit())));
-        u.setBezahlt(unterrichtTo.isBezahlt());
-        u.setNotiz(unterrichtTo.getNotiz());
-        log.info("update {} with id={}", u, u.getId());
-        assureIdConsistent(u, u.getId());
-        unterrichtService.create(u,
-                unterrichtTo.getKind()!=null? unterrichtTo.getKind() : u.getUser().getId(),
-                unterrichtTo.getZahlung()!=null? unterrichtTo.getZahlung() : u.getZahlung().getId());
+        log.info("update {} with id={}", unterrichtTo, unterrichtTo.getId());
+        unterrichtService.updateFromTo(unterrichtTo);
     }
 
     void updateOnDrop(int id, String s){
@@ -80,5 +69,9 @@ public abstract class AbstractUnterrichtController {
                 .stream()
                 .filter(i-> i.getDatum().getYear() == year)
                 .collect(Collectors.toList());
+    }
+
+    public RequestUnterrichtTo createRequestUnterrichtTo(int id){
+        return unterrichtService.createRequestUnterrichtTo(id);
     }
 }

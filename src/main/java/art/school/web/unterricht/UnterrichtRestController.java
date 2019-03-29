@@ -53,8 +53,7 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
 
     @GetMapping(value ="/get/{id}")
     public RequestUnterrichtTo get(@PathVariable(name = "id") Integer id){
-        Unterricht unterricht = unterrichtService.get(id);
-        return new RequestUnterrichtTo(unterricht);
+        return super.createRequestUnterrichtTo(id);
     }
 
     @PostMapping(value = "/delete/{id}")
