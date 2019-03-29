@@ -13,7 +13,7 @@
 
     <div class="collapse navbar-collapse" id="navbars1">
         <sec:authorize access="isAuthenticated()">
-            <ul class="navbar-nav mr-auto" id="left-side">
+            <ul class="navbar-nav mr-auto flex-row" id="left-side">
                 <sec:authorize access="hasRole('ROLE_MODERATOR')">
                 <li class="nav-item active">
                     <a class="nav-link" href="unterricht"><spring:message code="app.lesson"/><span class="sr-only">(current)</span></a>

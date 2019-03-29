@@ -27,9 +27,9 @@
                             <c:param name="page" value="${themaPage}"/>
                             <c:param name="size" value="${themaSize}"/>
                         </c:url>
-                        <span style="padding-left:10px;padding-top:20px;">&nbsp;<a type="button"
-                                                                                   href="${back}"><spring:message
-                                code="app.back"/> </a></span>
+                        <span style="padding-left:10px;padding-top:20px;">&nbsp;
+                            <a type="button" href="${back}"><spring:message code="app.back"/></a>
+                        </span>
                     </div>
                     <input type="hidden" class="form-control" id="themaId" name="themaId" value="${themaId}"/>
                     <div class="d-flex">
