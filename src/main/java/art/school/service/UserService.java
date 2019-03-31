@@ -22,5 +22,7 @@ public interface UserService extends MainServiceInterface<Users> {
 
     boolean isUserBanned(int id);
 
-    Block createBlockForUserWithTo(BlockTo block, int id);
+    void createBlockForUserWithTo(BlockTo block, int id);
+
+    BlockTo checkIfBlocked();
 }

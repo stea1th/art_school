@@ -83,7 +83,6 @@ public class NachrichtServiceImpl implements NachrichtService {
     public List<NachrichtTo> getAllTosByThema(int id, Pageable pageable){
         return getPageByThemaId(id, pageable)
                 .stream()
-//                .map(NachrichtTo::new)
                 .map(i-> {
                     NachrichtTo n = new NachrichtTo(i);
                     Block b = blockRepository.getLatestByUserId(i.getUser().getId());

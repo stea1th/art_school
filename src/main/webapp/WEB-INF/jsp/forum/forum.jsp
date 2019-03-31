@@ -33,26 +33,9 @@
                         <h1>
                             <span>Art School <spring:message code="forum.name"/></span>
                         </h1>
-                        <%--<table id="forum" class="display responsive no-wrap" width="100%">--%>
-                            <%--<thead>--%>
-                            <%--<tr>--%>
-                                <%--<th class="w-50  text-center"><spring:message code="forum.title"/></th>--%>
-                                <%--<th class="w-10 text-center"><spring:message code="forum.views"/></th>--%>
-                                <%--<th class="w-10 text-center"><spring:message code="forum.answers"/></th>--%>
-                                <%--<th class="w-30 text-center"><spring:message code="forum.last"/></th>--%>
-                            <%--</tr>--%>
-                            <%--</thead>--%>
                             <div class="wrapper">
                                 <%@ include file="fragment.jsp" %>
                             </div>
-                        <%--</table>--%>
-                        <%--<hr>--%>
-                        <%--<div class="d-flex">--%>
-                            <%--<div class="ml-auto">--%>
-                                <%--<%@ include file="../fragments/pagination.jsp" %>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                        <%--<hr>--%>
                         <div id="add-message">
                         </div>
                     </div>
@@ -61,6 +44,19 @@
         </div>
     </div>
 </div>
+<spring:message code="forum.attention" var="attention"/>
+<spring:message code="button.itsclear" var="buttonItsClear"/>
+<jsp:include page="../fragments/modal.jsp">
+    <jsp:param name="modalId" value="isBlocked"/>
+    <jsp:param name="modalTitel" value="${attention}"/>
+    <jsp:param name="buttons" value="../buttons/save-and-close.jsp"/>
+    <jsp:param name="saveId" value="accepted" />
+    <jsp:param name="buttonName" value="${buttonItsClear}"/>
+</jsp:include>
 
 </body>
+
+<jsp:include page="../forum/i18n-forum.jsp">
+    <jsp:param name="forum" value="forum"/>
+</jsp:include>
 </html>

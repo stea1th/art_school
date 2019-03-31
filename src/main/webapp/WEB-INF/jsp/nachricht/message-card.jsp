@@ -148,7 +148,7 @@
                                 </button>
                             </div>
                         </sec:authorize>
-                        <sec:authorize access="(hasRole('ROLE_MODERATOR') and ${enoughRights})">
+                        <sec:authorize access="(hasRole('ROLE_MODERATOR') and ${enoughRights} and not ${isOwner})">
                             <c:choose>
                                 <c:when test="${message.banned == null}">
                                     <div>

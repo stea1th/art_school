@@ -7,6 +7,7 @@ import art.school.repository.BlockRepository;
 import art.school.repository.UserRepository;
 import art.school.to.BlockTo;
 import art.school.to.UserTo;
+import art.school.web.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -32,9 +33,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Override
-    public Block createBlockForUserWithTo(BlockTo block, int id) {
+    public void createBlockForUserWithTo(BlockTo block, int id) {
 
-        return blockRepository.save(block.createBlock(get(id)));
+         blockRepository.save(block.createBlock(get(id), get(SecurityUtil.getAuthId())));
+    }
+
+    @Override
+    public BlockTo checkIfBlocked() {
+        Block block = blockRepository.getLatestByUserId(SecurityUtil.getAuthId());
+        if(block == null){
+            return null;
+        }
+        return new BlockTo(block);
     }
 
     @Override

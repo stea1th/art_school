@@ -37,9 +37,22 @@ public class Block extends AbstractBaseEntity{
     @NotNull
     private Users user;
 
+    @ManyToOne
+    @JoinColumn(name = "adm_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
+    private Users blockedBy;
+
     public Block(String reason, LocalDateTime datum, @NotNull Users user) {
         this.reason = reason;
         this.datum = datum;
         this.user = user;
+    }
+
+    public Block(String reason, LocalDateTime datum, @NotNull Users user, @NotNull Users blockedBy) {
+        this.reason = reason;
+        this.datum = datum;
+        this.user = user;
+        this.blockedBy = blockedBy;
     }
 }

@@ -58,4 +58,8 @@ public abstract class AbstractUserController  {
         return service.getUserTo(id);
     }
 
+    BlockTo checkIfBlocked() {
+        return service.checkIfBlocked();
+    }
+
 }

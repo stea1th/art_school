@@ -81,7 +81,10 @@ create table block
   datum timestamp default now() + interval '1 hour' not null,
   accepted bool default false not null,
   u_id integer not null,
-  foreign key (u_id) references users(id) on delete cascade
+  adm_id integer not null,
+  foreign key (u_id) references users(id) on delete cascade,
+  foreign key (adm_id) references users(id) on delete cascade
+
 );
 
 create table user_roles
