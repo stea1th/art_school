@@ -54,9 +54,9 @@ function createTable(data) {
         dom: 'Bfrtip',
         buttons: [
             {
-                text: 'Добавить ученика',
+                text: $('#hidden-param').attr('addTitle'),
                 action: function (e, dt, node, config) {
-                    $('.modal-title').text('Добавить ученика');
+                    $('.modal-title').html($('#hidden-param').attr('addTitle'));
                     getSelect("/api/admin/roles", $('#roles'), "Выбери роль");
                     showModal(myModal);
                 }

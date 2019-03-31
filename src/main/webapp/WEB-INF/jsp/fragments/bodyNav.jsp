@@ -49,10 +49,19 @@
         </sec:authorize>
         <ul class="navbar-nav ml-auto">
             <sec:authorize access="isAnonymous()">
-                <li>
-                    <div class="navbar-header">
-                        <a class="btn btn-outline-light login-btn" href="#myModal" data-toggle="modal">
-                            <i class="fas fa-user"></i> Login</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle testIt" href="#" id="dropdown05" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false"><spring:message code="app.lang"/></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <div class="dropdown-item" style="cursor: pointer" onclick="changeLanguage('en')"><spring:message code="app.lang.en"/></div>
+                        <div class="dropdown-item" style="cursor: pointer" onclick="changeLanguage('ru')"><spring:message code="app.lang.ru"/></div>
+                        <div class="dropdown-item" style="cursor: pointer" onclick="changeLanguage('de')"><spring:message code="app.lang.de"/></div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div style="padding-top: 10px;padding-bottom: 10px;">
+                        <a class="btn btn-outline-light login-btn" href="#login-modal" data-toggle="modal">
+                            <i class="fas fa-user"></i> <spring:message code="app.login"/></a>
                     </div>
                 </li>
             </sec:authorize>

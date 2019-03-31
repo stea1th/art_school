@@ -200,7 +200,7 @@ function updateRow(id) {
                         setZeit(v);
                     }
                 } else {
-                    $('.modal-title').text('Обновить ползователя');
+                    $('.modal-title').html($('#hidden-param').attr('updateTitle'));
 
                 }
                 $('form').find('input[name=' + k + ']').val(v);

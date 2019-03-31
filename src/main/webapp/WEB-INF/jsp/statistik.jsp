@@ -8,9 +8,7 @@
 <script type="text/javascript" src='<c:url value="/resources/js/statistik.js"/>' defer></script>
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>
-<%--<div align="center">--%>
-<%--<input type="button" value="Test" id="test-btn"/>--%>
-<%--</div>--%>
+
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ml-auto mr-auto">

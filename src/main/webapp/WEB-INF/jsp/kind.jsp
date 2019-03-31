@@ -46,8 +46,11 @@
 <jsp:include page="fragments/modal.jsp">
     <jsp:param name="url" value="../forms/user-form.jsp"/>
     <jsp:param name="modalId" value="createKind"/>
-    <jsp:param name="modalTitel" value="Добавить ученика"/>
+    <jsp:param name="buttons" value="../buttons/save-and-close.jsp"/>
+    <jsp:param name="saveId" value="saveUser" />
 </jsp:include>
-
 </body>
+<jsp:include page="fragments/i18n.jsp">
+    <jsp:param name="page" value="user"/>
+</jsp:include>
 </html>

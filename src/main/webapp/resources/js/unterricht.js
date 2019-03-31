@@ -29,8 +29,8 @@ function createFullCalendar(zt) {
             header: {center: 'month, agendaWeek, list'},
 
             dayClick: function (date, jsEvent, view) {
-                console.log(jsEvent);
-                console.log(view);
+                // console.log(jsEvent);
+                // console.log(view);
                 createUnterricht(date, zt);
             },
             themeSystem: 'bootstrap4',
