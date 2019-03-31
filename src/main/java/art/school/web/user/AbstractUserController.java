@@ -1,8 +1,6 @@
 package art.school.web.user;
 
-import art.school.entity.Block;
 import art.school.entity.Users;
-import art.school.service.BlockService;
 import art.school.service.UserService;
 import art.school.to.BlockTo;
 import art.school.to.UserTo;
@@ -17,12 +15,9 @@ public abstract class AbstractUserController  {
     @Autowired
     private UserService service;
 
-    @Autowired
-    private BlockService blockService;
 
-
-    public Block blockUser(BlockTo block, int id){
-        return blockService.createWithTo(block, id);
+    void blockUser(BlockTo block, int id){
+        service.createBlockForUserWithTo(block, id);
     }
 
     public Users get(int id) {
@@ -59,7 +54,7 @@ public abstract class AbstractUserController  {
         return service.getAllTos();
     }
 
-    public UserTo getUserTo(int id){
+    UserTo getUserTo(int id){
         return service.getUserTo(id);
     }
 

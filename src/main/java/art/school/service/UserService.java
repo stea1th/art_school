@@ -1,6 +1,8 @@
 package art.school.service;
 
+import art.school.entity.Block;
 import art.school.entity.Users;
+import art.school.to.BlockTo;
 import art.school.to.UserTo;
 
 import java.util.List;
@@ -19,4 +21,6 @@ public interface UserService extends MainServiceInterface<Users> {
     UserTo getUserTo(int id);
 
     boolean isUserBanned(int id);
+
+    Block createBlockForUserWithTo(BlockTo block, int id);
 }

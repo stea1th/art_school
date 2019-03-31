@@ -1,9 +1,11 @@
 package art.school.service;
 
 import art.school.AuthorizedUser;
+import art.school.entity.Block;
 import art.school.entity.Users;
 import art.school.repository.BlockRepository;
 import art.school.repository.UserRepository;
+import art.school.to.BlockTo;
 import art.school.to.UserTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,6 +30,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private BlockRepository blockRepository;
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    @Override
+    public Block createBlockForUserWithTo(BlockTo block, int id) {
+
+        return blockRepository.save(block.createBlock(get(id)));
+    }
 
     @Override
     @Transactional
