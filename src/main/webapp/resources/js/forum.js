@@ -8,6 +8,7 @@ $(function () {
 function checkIfBlocked() {
     $.get("/api/kind/check")
         .done(function (data) {
+
             if (data !== "") {
                 var hidden = $('#i18n');
                 var string = [];
