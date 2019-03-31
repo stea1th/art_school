@@ -1,6 +1,7 @@
 package art.school.web.forum;
 
 import art.school.entity.Thema;
+import art.school.util.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -24,6 +25,9 @@ public class ForumController extends AbstractForumController {
     @Autowired
     private MessageSource messageSource;
 
+//    @Autowired
+//    private Messages messages;
+
     @GetMapping
     public String all(Model model,
                       @RequestParam(name = "select", required = false, defaultValue = "false") boolean select,
@@ -40,6 +44,7 @@ public class ForumController extends AbstractForumController {
         model.addAttribute("answers", messageSource.getMessage("forum.answers", null, locale));
         model.addAttribute("lastanswer", messageSource.getMessage("forum.last", null, locale));
         createTablePage(model, page);
+//        System.out.println("=============================" + messages.get("app.users"));
 
         return select ? "forum/fragment" : "forum/forum";
     }

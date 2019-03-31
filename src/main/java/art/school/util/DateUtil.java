@@ -1,30 +1,24 @@
 package art.school.util;
 
-import art.school.entity.Block;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Locale;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
-//@Component
+
 public class DateUtil {
 
 //    @Autowired
-//    private MessageSource messageSource;
+//    private Messages messages;
 
     public String transformDateForForum(LocalDateTime dateTime) {
         String time = dateTime.toLocalTime().truncatedTo(ChronoUnit.MINUTES).toString();
         int days = (int) DAYS.between(dateTime.toLocalDate(), LocalDate.now());
-//        Locale locale = LocaleContextHolder.getLocale();
-//        System.out.println(messageSource.getMessage("forum.title", null, locale));
+//        System.out.println("=============================" + messages.get("app.users"));
         switch (days) {
             case 0:
                 return "Сегодня, " + time;
