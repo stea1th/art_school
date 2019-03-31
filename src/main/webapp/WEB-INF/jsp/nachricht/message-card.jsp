@@ -128,9 +128,6 @@
                 <c:set var="isOwner" value="${id == message.userId}"/>
                 <c:if test="${active != false}">
                     <c:if test="${!message.text.equals('<-- Deleted -->')}">
-                        <%--<sec:authentication property="principal.banned" var="isBanned"/>--%>
-                        <%--<c:out value="${isBanned}"/>--%>
-                        <%--<sec:authorize access="not ${isBanned}">--%>
                         <sec:authorize access="not ${isBanned}">
                             <div>
                                 <button type="button" class="answer-btn" value="${message.id}" style="float:right"
@@ -150,7 +147,26 @@
                                     Удалить
                                 </button>
                             </div>
-                            <%--</sec:authorize>--%>
+                        </sec:authorize>
+                        <sec:authorize access="(hasRole('ROLE_MODERATOR') and ${enoughRights})">
+                            <c:choose>
+                                <c:when test="${message.banned == null}">
+                                    <div>
+                                        <button type="button" style="float:right" onclick="changeToBlocked(${message.userId})">
+                                            Заблокировать
+                                        </button>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div>
+                                        <button type="button" style="float:right" onclick="changeToUnblocked(${message.userId})">
+                                            Разблокировать
+                                        </button>
+                                    </div>
+                                </c:otherwise>
+
+                            </c:choose>
+
                         </sec:authorize>
                     </c:if>
 

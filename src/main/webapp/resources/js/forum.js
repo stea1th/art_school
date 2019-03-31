@@ -5,6 +5,14 @@ $(function () {
 
 });
 
+function changeToUnblocked(id){
+
+}
+
+function changeToBlocked(id){
+
+}
+
 function changeForumLanguage(lang){
     console.log(location.href);
     var locale = "&locale=";
