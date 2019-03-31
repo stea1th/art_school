@@ -1,16 +1,10 @@
 package art.school.util;
 
-import art.school.entity.Block;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.stereotype.Component;
-
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Locale;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -44,5 +38,27 @@ public class DateUtil {
 
     public static String formatDateToString(LocalDateTime dateTime){
         return dateTime.truncatedTo(ChronoUnit.MINUTES).format(DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
+    }
+
+    public static LocalDateTime transformToDate(Integer interval, String unit){
+        if(interval == null || interval == 0){
+            interval = 10000;
+            unit = "days";
+        }
+        Duration d = Duration.ZERO;
+        switch(unit){
+            case "minutes":
+                d = Duration.ofMinutes(interval);
+                break;
+            case "hours":
+                d = Duration.ofHours(interval);
+                break;
+
+            case "days":
+                d = Duration.ofDays(interval);
+                break;
+
+        }
+        return LocalDateTime.now().plus(d);
     }
 }

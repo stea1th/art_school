@@ -1,7 +1,10 @@
 package art.school.web.user;
 
+import art.school.entity.Block;
 import art.school.entity.Users;
+import art.school.service.BlockService;
 import art.school.service.UserService;
+import art.school.to.BlockTo;
 import art.school.to.UserTo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,14 @@ public abstract class AbstractUserController  {
 
     @Autowired
     private UserService service;
+
+    @Autowired
+    private BlockService blockService;
+
+
+    public Block blockUser(BlockTo block, int id){
+        return blockService.createWithTo(block, id);
+    }
 
     public Users get(int id) {
         log.info("get Users {}", id);

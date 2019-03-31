@@ -18,7 +18,7 @@
         </div>
         <div class="col-4">
             <spring:message code="forum.timeunits" var="units"/>
-            <select id="unit-time" name="unit-time" title="${units}" class="custom-select" required="required">
+            <select id="time-unit" name="timeUnit" title="${units}" class="custom-select" required="required">
                 <option value="minutes" selected><spring:message code="forum.block.minutes"/> </option>
                 <option value="hours"><spring:message code="forum.block.hours"/></option>
                 <option value="days"><spring:message code="forum.block.days"/></option>

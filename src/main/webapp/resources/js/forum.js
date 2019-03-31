@@ -10,7 +10,18 @@ function changeToUnblocked(id){
 }
 
 function changeToBlocked(id){
-    $('#createBlock').modal("show");
+    $.get("/api/admin/" + id)
+        .done(function(data){
+            $('#name').val(data.name);
+            $('#createBlock').modal("show");
+        });
+    $('#saveBlock').on('click', function(){
+        $.post("/api/admin/block/" + id, $('#block-detailsForm').serialize())
+            .done(function(){
+            location.reload();
+        });
+    });
+
 
 }
 

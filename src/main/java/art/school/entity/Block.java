@@ -36,4 +36,10 @@ public class Block extends AbstractBaseEntity{
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Users user;
+
+    public Block(String reason, LocalDateTime datum, @NotNull Users user) {
+        this.reason = reason;
+        this.datum = datum;
+        this.user = user;
+    }
 }

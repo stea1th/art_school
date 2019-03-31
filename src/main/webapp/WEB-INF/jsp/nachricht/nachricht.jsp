@@ -82,12 +82,14 @@
 
 </div>
 <spring:message code="forum.block.user" var="block"/>
+<spring:message code="button.block" var="buttonBlock"/>
 <jsp:include page="../fragments/modal.jsp">
     <jsp:param name="url" value="../forms/block-form.jsp"/>
     <jsp:param name="modalId" value="createBlock"/>
     <jsp:param name="modalTitel" value="${block}"/>
     <jsp:param name="buttons" value="../buttons/save-and-close.jsp"/>
-    <jsp:param name="saveId" value="saveUser" />
+    <jsp:param name="saveId" value="saveBlock" />
+    <jsp:param name="buttonName" value="${buttonBlock}"/>
 </jsp:include>
 
 </body>
