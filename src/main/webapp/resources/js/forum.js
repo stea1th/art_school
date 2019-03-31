@@ -10,6 +10,7 @@ function changeToUnblocked(id){
 }
 
 function changeToBlocked(id){
+    $('#createBlock').modal("show");
 
 }
 
