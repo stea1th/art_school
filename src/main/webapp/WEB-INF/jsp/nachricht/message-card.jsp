@@ -120,7 +120,7 @@
             <div id="add-message_${message.id}">
             </div>
         </div>
-        <div class="card-footer">
+        <div class="card-footer" style="height:54px;">
             <div class="row">
                 <sec:authentication property="principal.authorities" var="authorities"/>
                 <sec:authentication property="principal.id" var="id"/>
