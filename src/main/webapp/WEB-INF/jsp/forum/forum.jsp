@@ -45,13 +45,13 @@
     </div>
 </div>
 <spring:message code="forum.attention" var="attention"/>
-<spring:message code="button.itsclear" var="buttonItsClear"/>
+<spring:message code="button.itsclear" var="buttonAccepted"/>
 <jsp:include page="../fragments/modal.jsp">
     <jsp:param name="modalId" value="isBlocked"/>
     <jsp:param name="modalTitel" value="${attention}"/>
     <jsp:param name="buttons" value="../buttons/save-and-close.jsp"/>
     <jsp:param name="saveId" value="accepted" />
-    <jsp:param name="buttonName" value="${buttonItsClear}"/>
+    <jsp:param name="buttonName" value="${buttonAccepted}"/>
 </jsp:include>
 
 </body>

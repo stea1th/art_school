@@ -148,27 +148,27 @@
                                 </button>
                             </div>
                         </sec:authorize>
-                        <sec:authorize access="(hasRole('ROLE_MODERATOR') and ${enoughRights} and not ${isOwner})">
-                            <c:choose>
-                                <c:when test="${message.banned == null}">
-                                    <div>
-                                        <button type="button" style="float:right" onclick="changeToBlocked(${message.userId})">
-                                            Заблокировать
-                                        </button>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div>
-                                        <button type="button" style="float:right" onclick="changeToUnblocked(${message.userId})">
-                                            Разблокировать
-                                        </button>
-                                    </div>
-                                </c:otherwise>
-
-                            </c:choose>
-
-                        </sec:authorize>
                     </c:if>
+                    <sec:authorize access="(hasRole('ROLE_MODERATOR') and ${enoughRights} and not ${isOwner})">
+                        <c:choose>
+                            <c:when test="${message.banned == null}">
+                                <div>
+                                    <button type="button" style="float:right" onclick="changeToBlocked(${message.userId})">
+                                        Заблокировать
+                                    </button>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div>
+                                    <button type="button" style="float:right" onclick="changeToUnblocked(${message.userId})">
+                                        Разблокировать
+                                    </button>
+                                </div>
+                            </c:otherwise>
+
+                        </c:choose>
+
+                    </sec:authorize>
 
                 </c:if>
                 <div style="position:absolute; right: 15px;">
