@@ -45,6 +45,7 @@ public class NachrichtController extends AbstractNachrichtController {
         model.addAttribute("themaId", id);
         model.addAttribute("themaPage", themaPage);
         model.addAttribute("themaSize", themaSize);
+        model.addAttribute("isAttached", thema.isGepinnt());
         if(!thema.isAktiv()){
             model.addAttribute("active", thema.isAktiv());
             model.addAttribute("closedBy", thema.getUser().getName());

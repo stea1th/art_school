@@ -35,6 +35,22 @@
                     <div class="d-flex">
                         <div class="mr-auto p-2">
                             <sec:authorize access="not ${isBanned}">
+                                <sec:authorize access="hasRole('ROLE_MODERATOR')">
+                                    <c:choose>
+                                        <c:when test="${isAttached == true}">
+                                            <button type="button" style="float:right" onclick="detach(${themaId})">
+                                                Открепить
+                                                тему
+                                            </button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <button type="button" style="float:right" onclick="attach(${themaId})">
+                                                Прикрепить
+                                                тему
+                                            </button>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </sec:authorize>
                                 <c:if test="${active != false}">
                                     <sec:authorize access="hasRole('ROLE_MODERATOR')">
                                         <button type="button" style="float:right" onclick="toggleThema(${themaId})">
@@ -42,10 +58,10 @@
                                             тему
                                         </button>
                                     </sec:authorize>
-                                    <button type="button" style="float:right" onclick="answerIt()">Создать сообщение
-                                    </button>
                                     <button type="button" style="float:right" onclick="answerIt(null, true)">Создать
                                         тему
+                                    </button>
+                                    <button type="button" style="float:right" onclick="answerIt()">Создать сообщение
                                     </button>
                                 </c:if>
                                 <c:if test="${active == false}">
@@ -56,6 +72,7 @@
                                         </button>
                                     </sec:authorize>
                                 </c:if>
+
                             </sec:authorize>
                         </div>
                         <div class="ml-auto p-2">
