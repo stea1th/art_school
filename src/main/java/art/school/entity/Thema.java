@@ -35,7 +35,7 @@ public class Thema extends AbstractBaseEntity{
     private boolean gepinnt;
 
     @OneToMany(mappedBy = "thema")
-    @OrderBy(value = "datum")
+    @OrderBy(value = "id")
     private List<Nachricht> nachrichts;
 
     @ManyToOne
