@@ -53,7 +53,6 @@ public class DateUtil {
             case "hours":
                 d = Duration.ofHours(interval);
                 break;
-
             case "days":
                 d = Duration.ofDays(interval);
                 break;

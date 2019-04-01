@@ -42,7 +42,10 @@ function checkIfBlocked() {
 }
 
 function changeToUnblocked(id) {
-
+    $.post("/api/admin/unblock", {id: id})
+        .done(function(){
+            location.reload();
+        });
 }
 
 function changeToBlocked(id) {

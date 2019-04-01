@@ -66,4 +66,8 @@ public abstract class AbstractUserController  {
         return service.checkIfBlocked();
     }
 
+    void unblockUser(int id){
+        service.unblockUser(id);
+    }
+
 }

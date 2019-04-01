@@ -71,4 +71,9 @@ public class AdminRestController extends AbstractUserController {
                       BlockTo block){
         super.blockUser(block, id);
     }
+
+    @PostMapping(value = "/unblock")
+    public void unblock(@RequestParam(name = "id") int id){
+        super.unblockUser(id);
+    }
 }

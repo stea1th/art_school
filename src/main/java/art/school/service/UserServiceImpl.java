@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static art.school.util.TransformUtil.transformTo;
@@ -50,6 +51,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void accepted() {
         Block b = blockRepository.getLatestByUserIdAndByNotAccepted(SecurityUtil.getAuthId());
         if(b != null) b.setAccepted(true);
+        blockRepository.save(b);
+    }
+
+    @Override
+    public void unblockUser(int id) {
+        Block b = blockRepository.getLatestByUserId(id);
+        if(b != null){
+            b.setDatum(LocalDateTime.now());
+        }
         blockRepository.save(b);
     }
 
