@@ -34,17 +34,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void createBlockForUserWithTo(BlockTo block, int id) {
-
          blockRepository.save(block.createBlock(get(id), get(SecurityUtil.getAuthId())));
     }
 
     @Override
     public BlockTo checkIfBlocked() {
-        Block block = blockRepository.getLatestByUserId(SecurityUtil.getAuthId());
+        Block block = blockRepository.getLatestByUserIdAndByNotAccepted(SecurityUtil.getAuthId());
         if(block == null){
             return null;
         }
         return new BlockTo(block);
+    }
+
+    @Override
+    public void accepted() {
+        Block b = blockRepository.getLatestByUserIdAndByNotAccepted(SecurityUtil.getAuthId());
+        if(b != null) b.setAccepted(true);
+        blockRepository.save(b);
     }
 
     @Override

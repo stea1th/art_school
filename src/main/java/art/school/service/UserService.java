@@ -25,4 +25,6 @@ public interface UserService extends MainServiceInterface<Users> {
     void createBlockForUserWithTo(BlockTo block, int id);
 
     BlockTo checkIfBlocked();
+
+    void accepted();
 }

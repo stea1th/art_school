@@ -22,10 +22,21 @@ public interface CrudBlockRepository extends JpaRepository<Block, Integer> {
     @Transactional
     @Query(value = "select b.* from block b\n" +
             "left join users u on b.u_id = u.id\n" +
+            "where u.id = ?1 and now() < b.datum and b.accepted = ?2\n" +
+            "order by b.datum desc\n" +
+            "limit 1", nativeQuery = true)
+    Block findLatestByUserIdAndByAccepted(int id, boolean accepted);
+
+
+    @Transactional
+    @Query(value = "select b.* from block b\n" +
+            "left join users u on b.u_id = u.id\n" +
             "where u.id = ?1 and now() < b.datum\n" +
             "order by b.datum desc\n" +
             "limit 1", nativeQuery = true)
     Block findLatestByUserId(int id);
+
+
 
 
 }

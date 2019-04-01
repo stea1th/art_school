@@ -4,6 +4,7 @@ import art.school.entity.Block;
 import art.school.repository.BlockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class BlockRepositoryImpl implements BlockRepository {
     private CrudBlockRepository repository;
 
     @Override
+    @Transactional
     public Block save(Block block) {
         return repository.save(block);
     }
@@ -42,6 +44,16 @@ public class BlockRepositoryImpl implements BlockRepository {
     @Override
     public Block getLatestByUserId(int id) {
         return repository.findLatestByUserId(id);
+    }
+
+    @Override
+    public Block getLatestByUserIdAndByNotAccepted(int id){
+        return repository.findLatestByUserIdAndByAccepted(id, false);
+    }
+
+    @Override
+    public Block getLatestByUserIdAndByAccepted(int id, boolean accepted){
+        return repository.findLatestByUserIdAndByAccepted(id, accepted);
     }
 
 

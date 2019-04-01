@@ -9,4 +9,8 @@ public interface BlockRepository extends MainRepoInterface<Block> {
     List<Block> getAllByUserId(int id);
 
     Block getLatestByUserId(int id);
+
+    Block getLatestByUserIdAndByNotAccepted(int id);
+
+    Block getLatestByUserIdAndByAccepted(int id, boolean accepted);
 }

@@ -16,6 +16,10 @@ public abstract class AbstractUserController  {
     private UserService service;
 
 
+    void accepted(){
+        service.accepted();
+    }
+
     void blockUser(BlockTo block, int id){
         service.createBlockForUserWithTo(block, id);
     }

@@ -33,6 +33,12 @@ function checkIfBlocked() {
                 $('#isBlocked').modal("show");
             }
         });
+    $('#accepted').on('click', function(){
+        $.post("/api/kind/accepted")
+            .done(function(){
+                $('#isBlocked').modal("hide");
+            });
+    });
 }
 
 function changeToUnblocked(id) {
