@@ -18,8 +18,8 @@
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="mr-auto p-2">
-                            <button type="button" class="btn btn-outline-primary" style="float:right" onclick="answerIt(null, true)"><spring:message
-                                    code="app.create.theme"/>
+                            <button type="button" class="btn btn-primary" style="float:right" onclick="answerIt(null, true)"><spring:message
+                                    code="forum.theme"/>
                             </button>
                         </div>
                         <div class="ml-auto p-2">

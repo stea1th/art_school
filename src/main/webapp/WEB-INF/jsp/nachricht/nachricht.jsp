@@ -19,7 +19,9 @@
                         <h3 style="color: #1474C3;padding-left:20px;padding-bottom:20px; padding-top:20px;">
                             <c:out value="${title}"/>
                             <c:if test="${active == false}">
-                                <span style="color:red;">&nbsp;(Закрыл <c:out value="${closedBy}"/>)</span>
+
+                                <span style="color:red;">&nbsp;(<spring:message code="forum.closedby"/>&nbsp;<c:out
+                                        value="${closedBy}"/>)</span>
                             </c:if>
                         </h3>
                         <c:url var="back" value="/forum">
@@ -28,43 +30,49 @@
                             <c:param name="size" value="${themaSize}"/>
                         </c:url>
                         <span style="padding-left:10px;padding-top:20px;">&nbsp;
-                            <a type="button" href="${back}"><spring:message code="app.back"/></a>
+                            <a type="button" class="btn btn-primary btn-sm" href="${back}">
+                                <span><i class="fas fa-angle-double-left"></i></span>&nbsp;
+                                <spring:message code="app.back"/></a>
                         </span>
                     </div>
                     <input type="hidden" class="form-control" id="themaId" name="themaId" value="${themaId}"/>
-                    <div class="d-flex">
-                        <div class="mr-auto p-2">
+                    <div class="d-flex align-items-center">
+                        <div class="mr-auto p-2 ">
                             <sec:authorize access="not ${isBanned}">
                                 <sec:authorize access="hasRole('ROLE_MODERATOR')">
-                                    <button type="button" class="btn btn-outline-primary" style="float:right" onclick="toggleAttach(${themaId})">
+                                    <button type="button" class="btn btn-warning btn-sm" style="float:right"
+                                            onclick="toggleAttach(${themaId})">
                                         <c:if test="${isAttached == true}">
-                                            Открепить
-                                            тему
+                                            <spring:message code="forum.theme.detach"/>
                                         </c:if>
                                         <c:if test="${isAttached == false}">
-                                            Прикрепить
-                                            тему
+                                            <spring:message code="forum.theme.attach"/>
                                         </c:if>
                                     </button>
                                 </sec:authorize>
                                 <c:if test="${active != false}">
                                     <sec:authorize access="hasRole('ROLE_MODERATOR')">
-                                        <button type="button" class="btn btn-outline-primary" style="float:right" onclick="toggleThema(${themaId})">
-                                            Закрыть
-                                            тему
+                                        <button type="button" class="btn btn-danger btn-sm" style="float:right"
+                                                onclick="toggleThema(${themaId})">
+                                            <spring:message code="forum.theme.close"/>
                                         </button>
                                     </sec:authorize>
-                                    <button type="button" class="btn btn-primary" style="float:right" onclick="answerIt(null, true)">Создать
-                                        тему
+                                    <button type="button" class="btn btn-primary btn-sm" style="float:right"
+                                            onclick="answerIt(null, true)">
+                                        <i class="fas fa-plus"></i>&nbsp;
+                                        <spring:message code="forum.theme"/>
                                     </button>
-                                    <button type="button" class="btn btn-outline-primary" style="float:right" onclick="answerIt()">Создать сообщение
+                                    <button type="button" class="btn btn-success btn-sm" style="float:right"
+                                            onclick="answerIt()">
+                                        <i class="fas fa-plus"></i>&nbsp;
+                                        <spring:message code="forum.message"/>
                                     </button>
                                 </c:if>
                                 <c:if test="${active == false}">
                                     <sec:authorize access="hasRole('ROLE_MODERATOR')">
-                                        <button type="button" class="btn btn-outline-primary" style="float:right" onclick="toggleThema(${themaId})">
-                                            Открыть
-                                            тему
+                                        <button type="button" class="btn btn-danger btn-sm" style="float:right"
+                                                onclick="toggleThema(${themaId})">
+                                            <spring:message code="forum.theme.open"/>
                                         </button>
                                     </sec:authorize>
                                 </c:if>

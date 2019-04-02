@@ -151,7 +151,11 @@ blockquote {
 }
 
 .text-message  {
-    min-height:150px; width:100%; border:inset; border-top:none; outline: none;
+    min-height:150px;
+    width:100%;
+    border:inset;
+    border-top:none;
+    outline: none;
 }
 
 .thema-title-text {

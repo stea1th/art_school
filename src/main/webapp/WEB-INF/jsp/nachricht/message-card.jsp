@@ -21,8 +21,9 @@
                             <c:choose>
                                 <c:when test="${message.banned == null}">
                                     <div>
+                                    <spring:message code="button.block" var="block"/>
                                         <button type="button" class="btn btn-outline-warning btn-sm" style="float:right"
-                                                onclick="changeToBlocked(${message.userId})">
+                                                onclick="changeToBlocked(${message.userId})" title="${block}">
                                             <i class="fas fa-user-lock fa-2x"></i>
                                                 <%--Заблокировать--%>
                                         </button>
@@ -139,7 +140,7 @@
                             <c:if test="${!message.text.equals('<-- Deleted -->')}">
                                 <sec:authorize access="not ${isBanned}">
                                     <div>
-                                        <button type="button" class="btn btn btn-success btn-sm answer-btn"
+                                        <button type="button" class="btn btn btn-outline-success btn-sm answer-btn"
                                                 value="${message.id}" style="float:right"
                                                 onclick="answerIt(${message.id})"><i
                                                 class="fas fa-quote-right fa-2x"></i>
@@ -151,9 +152,9 @@
                                 <sec:authorize
                                         access="(hasRole('ROLE_MODERATOR') and ${enoughRights}) or (${isOwner} and not ${isBanned})">
                                     <div>
-                                        <button type="button" class="btn btn-outline-success btn-sm" style="float:right"
+                                        <button type="button" class="btn btn-outline-info btn-sm" style="float:right"
                                                 onclick="updateMessage(${message.id})">
-                                            <i class="fas fa-plus fa-2x"></i>
+                                            <i class="fas fa-pencil-alt fa-2x"></i>
                                                 <%--Изменить--%>
                                         </button>
                                     </div>
@@ -186,67 +187,8 @@
                 </div>
                 <div id="add-message_${message.id}">
                 </div>
-            </div>
-            <div class="card-footer">
-                <div class="row">
-                    <%--<sec:authentication property="principal.authorities" var="authorities"/>--%>
-                    <%--<sec:authentication property="principal.id" var="id"/>--%>
-                    <%--<c:set value="${fn:length(authorities)>= message.roleSize}" var="enoughRights"/>--%>
-                    <%--<c:set var="isOwner" value="${id == message.userId}"/>--%>
-                    <%--<c:if test="${active != false}">--%>
-                    <%--<c:if test="${!message.text.equals('<-- Deleted -->')}">--%>
-                    <%--<sec:authorize access="not ${isBanned}">--%>
-                    <%--<div>--%>
-                    <%--<button type="button" class="btn btn btn-success btn-sm answer-btn" value="${message.id}" style="float:right"--%>
-                    <%--onclick="answerIt(${message.id})"><i class="fas fa-quote-right fa-2x"></i>--%>
-                    <%--&lt;%&ndash;<i class="fas fa-plus fa-3x"></i>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;&nbsp;Ответить&ndash;%&gt;--%>
-                    <%--</button>--%>
-                    <%--</div>--%>
-                    <%--</sec:authorize>--%>
-                    <%--<sec:authorize--%>
-                    <%--access="(hasRole('ROLE_MODERATOR') and ${enoughRights}) or (${isOwner} and not ${isBanned})">--%>
-                    <%--<div>--%>
-                    <%--<button type="button" class="btn btn-outline-success btn-sm" style="float:right" onclick="updateMessage(${message.id})">--%>
-                    <%--<i class="fas fa-plus fa-2x"></i>--%>
-                    <%--&lt;%&ndash;Изменить&ndash;%&gt;--%>
-                    <%--</button>--%>
-                    <%--</div>--%>
-                    <%--<div>--%>
-                    <%--<button type="button" class="btn btn-outline-danger btn-sm" style="float:right" onclick="deleteMessage(${message.id})">--%>
-                    <%--<i class="fas fa-trash fa-2x"></i>--%>
-                    <%--&lt;%&ndash;Удалить&ndash;%&gt;--%>
-                    <%--</button>--%>
-                    <%--</div>--%>
-                    <%--</sec:authorize>--%>
-                    <%--</c:if>--%>
-                    <%--<sec:authorize access="(hasRole('ROLE_MODERATOR') and ${enoughRights} and not ${isOwner})">--%>
-                    <%--<c:choose>--%>
-                    <%--<c:when test="${message.banned == null}">--%>
-                    <%--<div>--%>
-                    <%--<button type="button" class="btn btn-outline-warning btn-sm" style="float:right" onclick="changeToBlocked(${message.userId})">--%>
-                    <%--<i class="fas fa-user-lock fa-2x"></i>--%>
-                    <%--&lt;%&ndash;Заблокировать&ndash;%&gt;--%>
-                    <%--</button>--%>
-                    <%--</div>--%>
-                    <%--</c:when>--%>
-                    <%--<c:otherwise>--%>
-                    <%--<div>--%>
-                    <%--<button type="button" class="btn btn-outline-warning btn-sm" style="float:right" onclick="changeToUnblocked(${message.userId})">--%>
-                    <%--<i class="fas fa-unlock fa-2x"></i>--%>
-                    <%--&lt;%&ndash;Разблокировать&ndash;%&gt;--%>
-                    <%--</button>--%>
-                    <%--</div>--%>
-                    <%--</c:otherwise>--%>
-
-                    <%--</c:choose>--%>
-
-                    <%--</sec:authorize>--%>
-
-                    <%--</c:if>--%>
-                    <div style="position:absolute; right: 15px;">
-                        <a id="${message.id}">#<c:out value="${message.id}"/></a>
-                    </div>
+                <div style="position:absolute; right: 15px; bottom:15px;">
+                    <a id="${message.id}">#<c:out value="${message.id}"/></a>
                 </div>
             </div>
         </div>
