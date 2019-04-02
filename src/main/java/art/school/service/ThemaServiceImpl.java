@@ -75,5 +75,12 @@ public class ThemaServiceImpl implements ThemaService {
         return repository.count();
     }
 
+    @Override
+    @Transactional
+    public void attach(int id) {
+        Thema t = get(id);
+        t.setGepinnt(!t.isGepinnt());
+    }
+
 
 }

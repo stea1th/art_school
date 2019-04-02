@@ -64,4 +64,12 @@ public class ForumController extends AbstractForumController {
     public int toggleThema (@RequestParam(name="id") Integer id){
         return super.toggle(id);
     }
+
+    @PostMapping(value="/attach")
+    @ResponseBody
+    @Secured("ROLE_MODERATOR")
+    public void toggleAttach(@RequestParam(name="id") Integer id){
+        super.attach(id);
+    }
+
 }

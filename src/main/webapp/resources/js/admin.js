@@ -8,6 +8,7 @@ $(function () {
 
 function createTable(data) {
     datatable = $('#admins').DataTable({
+        colReorder: true,
         "language": {
             "url": data
         },

@@ -8,6 +8,7 @@ $(function () {
 
 function createTable(data) {
     datatable = $('#kids').DataTable({
+        colReorder: true,
         "language": {
             "url": data
         },
@@ -32,7 +33,8 @@ function createTable(data) {
                 "data": "aktiv",
                 "render": function (data, type, row) {
                     if (type === "display") {
-                        return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='toggleThis(" + row.id + ")' style=''/>";
+                        return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='toggleThis(" + row.id + ")'/>";
+
                     }
                     return data;
                 },

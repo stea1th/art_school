@@ -57,6 +57,10 @@ public abstract class AbstractForumController {
         themaService.create(t);
     }
 
+    void attach(int id){
+        themaService.attach(id);
+    }
+
     public int toggle(int id){
 
         Thema t = get(id);

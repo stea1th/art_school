@@ -18,4 +18,6 @@ public interface ThemaService extends MainServiceInterface<Thema> {
     ThemaTo getTo(int id);
 
     long count();
+
+    void attach(int id);
 }

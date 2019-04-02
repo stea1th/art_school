@@ -4,14 +4,6 @@
 <tr>
     <td>
         <div class="thema-title">
-            <c:choose>
-                <c:when test="${item.pinned}">
-                    <span style="color: coral !important;">
-                        <i class="fas fa-exclamation"></i>
-                        &nbsp;
-                    </span>
-                </c:when>
-                <c:otherwise>
                     <c:if test="${item.aktiv}">
                         <span style="color: green !important;">
                             <i class="fas fa-check"></i>
@@ -24,9 +16,6 @@
                             &nbsp;
                         </span>
                     </c:if>
-
-                </c:otherwise>
-            </c:choose>
             <c:url value="/nachricht" var="themaUrl">
                 <c:param name="id" value="${item.id}"/>
                 <c:param name="themaPage" value="${pageNumber}"/>

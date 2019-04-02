@@ -36,37 +36,33 @@
                         <div class="mr-auto p-2">
                             <sec:authorize access="not ${isBanned}">
                                 <sec:authorize access="hasRole('ROLE_MODERATOR')">
-                                    <c:choose>
-                                        <c:when test="${isAttached == true}">
-                                            <button type="button" style="float:right" onclick="detach(${themaId})">
-                                                Открепить
-                                                тему
-                                            </button>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <button type="button" style="float:right" onclick="attach(${themaId})">
-                                                Прикрепить
-                                                тему
-                                            </button>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <button type="button" class="btn btn-outline-primary" style="float:right" onclick="toggleAttach(${themaId})">
+                                        <c:if test="${isAttached == true}">
+                                            Открепить
+                                            тему
+                                        </c:if>
+                                        <c:if test="${isAttached == false}">
+                                            Прикрепить
+                                            тему
+                                        </c:if>
+                                    </button>
                                 </sec:authorize>
                                 <c:if test="${active != false}">
                                     <sec:authorize access="hasRole('ROLE_MODERATOR')">
-                                        <button type="button" style="float:right" onclick="toggleThema(${themaId})">
+                                        <button type="button" class="btn btn-outline-primary" style="float:right" onclick="toggleThema(${themaId})">
                                             Закрыть
                                             тему
                                         </button>
                                     </sec:authorize>
-                                    <button type="button" style="float:right" onclick="answerIt(null, true)">Создать
+                                    <button type="button" class="btn btn-primary" style="float:right" onclick="answerIt(null, true)">Создать
                                         тему
                                     </button>
-                                    <button type="button" style="float:right" onclick="answerIt()">Создать сообщение
+                                    <button type="button" class="btn btn-outline-primary" style="float:right" onclick="answerIt()">Создать сообщение
                                     </button>
                                 </c:if>
                                 <c:if test="${active == false}">
                                     <sec:authorize access="hasRole('ROLE_MODERATOR')">
-                                        <button type="button" style="float:right" onclick="toggleThema(${themaId})">
+                                        <button type="button" class="btn btn-outline-primary" style="float:right" onclick="toggleThema(${themaId})">
                                             Открыть
                                             тему
                                         </button>
@@ -105,7 +101,7 @@
     <jsp:param name="modalId" value="createBlock"/>
     <jsp:param name="modalTitel" value="${block}"/>
     <jsp:param name="buttons" value="../buttons/save-and-close.jsp"/>
-    <jsp:param name="saveId" value="saveBlock" />
+    <jsp:param name="saveId" value="saveBlock"/>
     <jsp:param name="buttonName" value="${buttonBlock}"/>
 </jsp:include>
 

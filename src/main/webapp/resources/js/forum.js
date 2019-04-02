@@ -5,6 +5,12 @@ $(function () {
     checkIfBlocked();
 });
 
+function toggleAttach(id) {
+    $.post("/forum/attach", {id: id}).done(function(){
+        location.reload();
+    });
+}
+
 function checkIfBlocked() {
     $.get("/api/kind/check")
         .done(function (data) {

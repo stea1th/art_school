@@ -27,7 +27,7 @@
                 <jsp:element name="input">
                     <jsp:attribute name="type">text</jsp:attribute>
                     <jsp:attribute name="class">page-input</jsp:attribute>
-                    <jsp:attribute name="style">width: 30px; text-align: center</jsp:attribute>
+                    <jsp:attribute name="style">width: 30px; text-align: center;border:none;</jsp:attribute>
                     <jsp:attribute name="themaId">${themaId}</jsp:attribute>
                     <jsp:attribute name="size">${size}</jsp:attribute>
                     <jsp:attribute name="last">${last}</jsp:attribute>

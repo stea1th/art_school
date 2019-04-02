@@ -9,6 +9,7 @@ $(function () {
 function createTable(data) {
 
     datatable = $('#zahlungen').DataTable({
+        colReorder: true,
         "language": {
             "url": data
         },
