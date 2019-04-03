@@ -1,6 +1,7 @@
 var lockedState = false;
 var lockedSlider = false;
 var lockedValues = [60, 80];
+var i18n = $('#i18n-slider');
 
 var slider1 = document.getElementById('slider1');
 var slider2 = document.getElementById('slider2');
@@ -16,7 +17,7 @@ $(function () {
     lockButton.addEventListener('click', function (e) {
         e.preventDefault();
         lockedState = !lockedState;
-        this.textContent = lockedState ? 'Разблокировать' : 'Заблокировать';
+        this.textContent = lockedState ? i18n.attr('unlock') : i18n.attr('lock');
     });
 
     noUiSlider.create(slider1, {
@@ -53,17 +54,20 @@ $(function () {
         var result = values[handle];
         $('#dauer').val(result);
         if (result >= hour) {
-            slider2Value.innerHTML = Math.floor(result / hour) + (result < hour * 2 ? " час " : " часа ") + (result - Math.floor(result / hour) * hour) + " минут";
+            slider2Value.innerHTML = Math.floor(result / hour) +
+                (result < hour * 2 ? " " + i18n.attr('hour') +
+                    " " : " " + i18n.attr('hours') + " ") +
+                (result - Math.floor(result / hour) * hour) + " " + i18n.attr('minutes');
         } else {
-            slider2Value.innerHTML = Math.floor(result) + " минут";
+            slider2Value.innerHTML = Math.floor(result) + " " + i18n.attr('minutes');
         }
     });
 
     function setLockedValues() {
         console.log(slider1.noUiSlider.get());
         console.log(slider2.noUiSlider.get());
-        console.log(slider1.noUiSlider.get()/slider2.noUiSlider.get());
-        x = slider1.noUiSlider.get()/slider2.noUiSlider.get();
+        console.log(slider1.noUiSlider.get() / slider2.noUiSlider.get());
+        x = slider1.noUiSlider.get() / slider2.noUiSlider.get();
 
         lockedValues = [
             Number(slider1.noUiSlider.get()),
@@ -104,21 +108,21 @@ $(function () {
     }
 });
 
-function setPreis(value){
-        var result = value;
-        $('#preis').val(result);
-        slider1Value.innerHTML = result;
-        slider1.noUiSlider.set(result);
+function setPreis(value) {
+    var result = value;
+    $('#preis').val(result);
+    slider1Value.innerHTML = result;
+    slider1.noUiSlider.set(result);
 }
 
-function setZeit(value){
+function setZeit(value) {
     var hour = 60;
     var result = value;
     $('#dauer').val(result);
     if (result >= hour) {
-        slider2Value.innerHTML = Math.floor(result / hour) + (result < hour * 2 ? " час " : " часа ") + (result - Math.floor(result / hour) * hour) + " минут";
+        slider2Value.innerHTML = Math.floor(result / hour) + (result < hour * 2 ? " " + i18n.attr('hour') + " " : " " + i18n.attr('hours') + " ") + (result - Math.floor(result / hour) * hour) + " " + i18n.attr('minutes');
     } else {
-        slider2Value.innerHTML = Math.floor(result) + " минут";
+        slider2Value.innerHTML = Math.floor(result) + " " + i18n.attr('minutes');
     }
     slider2.noUiSlider.set(result);
 }

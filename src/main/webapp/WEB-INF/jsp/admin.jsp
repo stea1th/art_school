@@ -54,7 +54,7 @@
     <jsp:param name="saveId" value="saveUser" />
 </jsp:include>
 </body>
-<jsp:include page="fragments/i18n.jsp">
+<jsp:include page="i18n/i18n.jsp">
     <jsp:param name="page" value="user"/>
 </jsp:include>
 </html>

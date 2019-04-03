@@ -5,7 +5,8 @@
 
 
 <spring:message code="button.save" var="save"/>
-<button type="button" class="btn btn-primary" id="${param.saveId}">${param.buttonName != null? param.buttonName : save}
+<c:set value="btn btn-primary" var="primaryClass"/>
+<button type="button" class="${not empty param.primaryClass? param.primaryClass : primaryClass}" id="${param.saveId}">${not empty param.buttonName? param.buttonName : save}
 </button>
 
 <button type="button" class="btn btn-secondary" data-dismiss="modal"><spring:message code="button.close"/></button>

@@ -68,9 +68,9 @@ function createTable(data) {
         buttons: [
             {
                 name: 'primary',
-                text: 'Добавить способ оплаты',
+                text: $('#hidden-param').attr('addTitle'),
                 action: function (e, dt, node, config) {
-                    $('.modal-title').text('Добавить способ оплаты');
+                    $('.modal-title').html($('#hidden-param').attr('addTitle'));
                     showModal(myModal);
                 }
             }

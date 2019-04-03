@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page pageEncoding="UTF-8" %>
+
 <div class="modal fade" id="${param.modalId}" tabindex="-1" role="dialog" aria-labelledby="${param.modalId}"
      aria-hidden="true">
     <div class="modal-dialog" role="document">

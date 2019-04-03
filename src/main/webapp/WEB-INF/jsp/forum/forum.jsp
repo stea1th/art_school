@@ -58,7 +58,7 @@
 
 </body>
 
-<jsp:include page="../forum/i18n-forum.jsp">
+<jsp:include page="../i18n/i18n-forum.jsp">
     <jsp:param name="forum" value="forum"/>
 </jsp:include>
 </html>

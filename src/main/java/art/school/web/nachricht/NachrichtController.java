@@ -109,6 +109,6 @@ public class NachrichtController extends AbstractNachrichtController {
             model.addAttribute("themaId", nachricht.getThema().getId());
             model.addAttribute("updateText", answer ? null : nachricht.getText());
         }
-        return "nachricht/nachricht-form";
+        return "forms/nachricht-form";
     }
 }
