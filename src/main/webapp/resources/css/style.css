@@ -167,7 +167,7 @@ cursor:pointer;}
 }
 
 .thema-title-text {
-    border:inset;
+    /*border:inset;*/
     border-top:none;
     outline: none;
 }
