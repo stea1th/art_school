@@ -4,7 +4,7 @@
 
 
 <div class="row" style="vertical-align: middle; text-align: right;padding-right:20px">
-    <label for="input-id" style="width:100px;padding-top:10px;padding-right:7px"><spring:message code="forum.onpage"/>:&nbsp;</label>
+    <label for="input-id" style="width:120px;padding-top:10px;padding-right:7px"><spring:message code="forum.onpage"/>:&nbsp;</label>
     <div id="input-id"  style="width:50px;">
     <jsp:element name="select">
         <jsp:attribute name="class">page-size</jsp:attribute>

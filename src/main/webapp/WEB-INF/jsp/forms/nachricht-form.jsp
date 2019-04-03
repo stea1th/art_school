@@ -22,10 +22,13 @@
                     <c:out value="${updateText}" />
                 </c:if>
             </div>
-
         </div>
-        <button type="button" class="btn btn-success btn-ok" id="message-submit">Сохранить</button>
-        <button type="button" class="btn btn-secondary" onclick="hideMessageArea()">Отмена</button>
+        <jsp:include page="../buttons/save-and-close.jsp">
+            <jsp:param name="notModal" value="true"/>
+            <jsp:param name="primaryClass" value="btn btn-success btn-ok"/>
+            <jsp:param name="saveId" value="message-submit"/>
+            <jsp:param name="function" value="hideMessageArea()"/>
+        </jsp:include>
     </form>
 
 </div>
