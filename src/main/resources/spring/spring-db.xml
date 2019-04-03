@@ -19,6 +19,8 @@
     <tx:annotation-driven/>
 
     <context:component-scan base-package="art.school.**.repository"/>
+
+    <context:component-scan base-package="art.school.**.util"/>
     <jpa:repositories base-package="art.school.**.repository"/>
 
     <context:component-scan base-package="art.school.**.service"/>

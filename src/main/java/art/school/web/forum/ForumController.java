@@ -22,11 +22,9 @@ import static art.school.util.PaginationHelper.createTablePage;
 @Secured("ROLE_USER")
 public class ForumController extends AbstractForumController {
 
-    @Autowired
-    private MessageSource messageSource;
 
-//    @Autowired
-//    private Messages messages;
+    @Autowired
+    private Messages messages;
 
     @GetMapping
     public String all(Model model,
@@ -39,10 +37,10 @@ public class ForumController extends AbstractForumController {
         Page<Thema> page = super.getAll(pageable);
         model.addAttribute("list", super.getAllTos(pageable));
         model.addAttribute("link", "forum");
-        model.addAttribute("title", messageSource.getMessage("forum.title", null, locale));
-        model.addAttribute("views", messageSource.getMessage("forum.views", null, locale));
-        model.addAttribute("answers", messageSource.getMessage("forum.answers", null, locale));
-        model.addAttribute("lastanswer", messageSource.getMessage("forum.last", null, locale));
+        model.addAttribute("title", messages.get("forum.title"));
+        model.addAttribute("views", messages.get("forum.views"));
+        model.addAttribute("answers", messages.get("forum.answers"));
+        model.addAttribute("lastanswer", messages.get("forum.last"));
         createTablePage(model, page);
 //        System.out.println("=============================" + messages.get("app.users"));
 
