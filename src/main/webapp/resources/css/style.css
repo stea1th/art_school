@@ -85,14 +85,18 @@ blockquote {
     -webkit-transition: color 1s, background-color 1s;
     -o-transition: color 1s, background-color 1s;
     transition: color 1s, background-color 1s;
-    border:inset; border-bottom:none;}
+    /*border:inset;*/
+    border-bottom:none;
+cursor:pointer;}
+
 .message-quote:focus {
     resize: both;
     overflow: auto;
     max-height: 100%;
     color: #000;
     background-color: #fff;
-    border:inset; border-bottom:none;}
+    /*border:inset; */
+    border-bottom:none;}
 
 .container {
         max-width: 1400px;
@@ -153,9 +157,13 @@ blockquote {
 .text-message  {
     min-height:150px;
     width:100%;
-    border:inset;
+    /*border:inset;*/
     border-top:none;
     outline: none;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: auto;
 }
 
 .thema-title-text {

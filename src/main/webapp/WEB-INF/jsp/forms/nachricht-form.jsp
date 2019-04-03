@@ -12,7 +12,7 @@
         <div class="form-group">
             <label for="text-message"><spring:message code="forum.theme.message"/>:</label>
             <c:if test="${parentText != null}">
-                   <textarea type="text" class="message-quote" name="message-quote" rows="10" readonly>
+                   <textarea type="text" class="message-quote" name="message-quote" rows="5" readonly>
                        <c:out value="${parentText}" />
                    </textarea>
             </c:if>
@@ -22,7 +22,10 @@
                     <c:out value="${updateText}" />
                 </c:if>
             </div>
+
         </div>
+        <%--<button type="button" class="btn btn-success btn-ok" id="message-submit">Сохранить</button>--%>
+        <%--<button type="button" class="btn btn-secondary" onclick="hideMessageArea()">Отмена</button>--%>
         <jsp:include page="../buttons/save-and-close.jsp">
             <jsp:param name="notModal" value="true"/>
             <jsp:param name="primaryClass" value="btn btn-success btn-ok"/>
