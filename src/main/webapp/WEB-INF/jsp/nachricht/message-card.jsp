@@ -21,20 +21,19 @@
                             <c:choose>
                                 <c:when test="${message.banned == null}">
                                     <div>
-                                    <spring:message code="button.block" var="block"/>
+                                    <spring:message code="button.block.user" var="block"/>
                                         <button type="button" class="btn btn-outline-warning btn-sm" style="float:right"
                                                 onclick="changeToBlocked(${message.userId})" title="${block}">
                                             <i class="fas fa-user-lock fa-2x"></i>
-                                                <%--Заблокировать--%>
                                         </button>
                                     </div>
                                 </c:when>
                                 <c:otherwise>
                                     <div>
+                                        <spring:message code="button.unblock.user" var="unblock"/>
                                         <button type="button" class="btn btn-outline-warning btn-sm" style="float:right"
-                                                onclick="changeToUnblocked(${message.userId})">
+                                                onclick="changeToUnblocked(${message.userId})" title="${unblock}">
                                             <i class="fas fa-unlock fa-2x"></i>
-                                                <%--Разблокировать--%>
                                         </button>
                                     </div>
                                 </c:otherwise>
@@ -90,23 +89,23 @@
                     </li>
                     <li>
                         <div>
-                            Регистрация:&nbsp;<c:out value="${message.registriert}"/>
+                            <spring:message code="forum.registration"/>:&nbsp;<c:out value="${message.registriert}"/>
                         </div>
                     </li>
                     <li>
                         <div>
-                            Сообщений:&nbsp;<c:out value="${message.messages}"/>
+                            <spring:message code="forum.messages"/>:&nbsp;<c:out value="${message.messages}"/>
                         </div>
                     </li>
                     <li>
                         <div>
-                            Статус:&nbsp;
+                            <spring:message code="forum.status"/>:&nbsp;
                             <c:if test="${message.banned == null}">
-                                <span>Полный</span>
+                                <span><spring:message code="forum.status.full"/></span>
                             </c:if>
                             <c:if test="${message.banned != null}">
                             <span style="color:red;">
-                                Только чтение
+                                <spring:message code="forum.status.readonly"/>
                             </span>
                             </c:if>
                         </div>
@@ -140,29 +139,28 @@
                             <c:if test="${!message.text.equals('<-- Deleted -->')}">
                                 <sec:authorize access="not ${isBanned}">
                                     <div>
+                                        <spring:message code="forum.answer" var="answer"/>
                                         <button type="button" class="btn btn btn-outline-success btn-sm answer-btn"
                                                 value="${message.id}" style="float:right"
-                                                onclick="answerIt(${message.id})"><i
+                                                onclick="answerIt(${message.id})" title="${answer}"><i
                                                 class="fas fa-quote-right fa-2x"></i>
-                                                <%--<i class="fas fa-plus fa-3x"></i>--%>
-                                                <%--&nbsp;Ответить--%>
                                         </button>
                                     </div>
                                 </sec:authorize>
                                 <sec:authorize
                                         access="(hasRole('ROLE_MODERATOR') and ${enoughRights}) or (${isOwner} and not ${isBanned})">
                                     <div>
+                                        <spring:message code="forum.edit" var="edit"/>
                                         <button type="button" class="btn btn-outline-info btn-sm" style="float:right"
-                                                onclick="updateMessage(${message.id})">
+                                                onclick="updateMessage(${message.id})" title="${edit}">
                                             <i class="fas fa-pencil-alt fa-2x"></i>
-                                                <%--Изменить--%>
                                         </button>
                                     </div>
                                     <div>
+                                        <spring:message code="forum.delete" var="delete"/>
                                         <button type="button" class="btn btn-outline-danger btn-sm" style="float:right"
-                                                onclick="deleteMessage(${message.id})">
+                                                onclick="deleteMessage(${message.id})" title="${delete}">
                                             <i class="fas fa-trash fa-2x"></i>
-                                                <%--Удалить--%>
                                         </button>
                                     </div>
                                 </sec:authorize>

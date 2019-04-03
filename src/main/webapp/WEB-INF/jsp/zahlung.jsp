@@ -43,72 +43,73 @@
                         </tr>
                         </tfoot>
                     </table>
-                </input>
+                    </input>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="createZahlung" tabindex="-1" role="dialog" aria-labelledby="createZahlung"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="zahlung-titel"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="zahlung-detailsForm">
-                    <div>
-                        <input type="hidden" class="form-control" id="id" name="id">
-                    </div>
-                    <div class="form-group row">
-                        <label for="name" class="col-4 col-form-label">Название</label>
-                        <div class="col-8">
-                            <input type="text" id="name" name="name" class="form-control" required="required"/>
+    <div class="modal fade" id="createZahlung" tabindex="-1" role="dialog" aria-labelledby="createZahlung"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="zahlung-titel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="zahlung-detailsForm">
+                        <div>
+                            <input type="hidden" class="form-control" id="id" name="id">
                         </div>
-                    </div>
-                    <%--<div class="form-group row">--%>
-
-                    <div class="example">
                         <div class="form-group row">
-                            <label class="col-4 col-form-label">Цена</label>
+                            <label for="name" class="col-4 col-form-label">Название</label>
                             <div class="col-8">
-                                <div class="slider noUi-target noUi-ltr noUi-horizontal" id="slider1">
-                                </div>
-                                <span><i class="fas fa-euro-sign"></i> </span>
-                                <span class="example-val" id="slider1-span"></span>
-                                <input type="hidden" id="preis" name="preis"/>
-                            </div>
-                            <label class="col-4 col-form-label">Время</label>
-                            <div class="col-8">
-                                <div class="slider noUi-target noUi-ltr noUi-horizontal" id="slider2">
-                                </div>
-                                <span><i class="far fa-clock"></i> </span>
-                                <span class="example-val" id="slider2-span"></span>
-                                <input type="hidden" id="dauer" name="dauer"/>
+                                <input type="text" id="name" name="name" class="form-control" required="required"/>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row" id="aktiv-checkbox">
-                        <label class="col-4">Активный?</label>
-                        <div class="col-8">
-                            <div class="custom-control custom-checkbox" >
-                                <input type="checkbox" class="custom-control-input" id="aktiv" name="aktiv"
-                                       checked="checked"
-                                       value="true" required>
-                                <label class="custom-control-label" for="aktiv">Да</label>
+                        <%--<div class="form-group row">--%>
+
+                        <div class="example">
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">Цена</label>
+                                <div class="col-8">
+                                    <div class="slider noUi-target noUi-ltr noUi-horizontal" id="slider1">
+                                    </div>
+                                    <span><i class="fas fa-euro-sign"></i> </span>
+                                    <span class="example-val" id="slider1-span"></span>
+                                    <input type="hidden" id="preis" name="preis"/>
+                                </div>
+                                <label class="col-4 col-form-label">Время</label>
+                                <div class="col-8">
+                                    <div class="slider noUi-target noUi-ltr noUi-horizontal" id="slider2">
+                                    </div>
+                                    <span><i class="far fa-clock"></i> </span>
+                                    <span class="example-val" id="slider2-span"></span>
+                                    <input type="hidden" id="dauer" name="dauer"/>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button id="lockbutton" class="btn btn-outline-info btn-sm">Заблокировать</button>
-                <button type="button" class="btn btn-primary" id="saveZahlung">Сохранить</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        <div class="form-group row" id="aktiv-checkbox">
+                            <label class="col-4">Активный?</label>
+                            <div class="col-8">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="aktiv" name="aktiv"
+                                           checked="checked"
+                                           value="true" required>
+                                    <label class="custom-control-label" for="aktiv">Да</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="lockbutton" class="btn btn-outline-info btn-sm">Заблокировать</button>
+                    <button type="button" class="btn btn-primary" id="saveZahlung">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                </div>
             </div>
         </div>
     </div>
