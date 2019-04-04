@@ -21,6 +21,7 @@ $(function () {
 
 function getLocalesForTables(){
     $.get("/api/locale/tables").done(function (data) {
+        console.log(data);
         if(typeof(createTable) !== 'undefined'){
             createTable(data);
         }

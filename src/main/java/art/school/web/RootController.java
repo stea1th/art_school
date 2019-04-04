@@ -1,5 +1,6 @@
 package art.school.web;
 
+import art.school.util.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class RootController {
 
     @Autowired
-    private MessageSource messageSource;
+    private Messages messages;
 
     @GetMapping("/")
     public String root(){
@@ -54,8 +55,8 @@ public class RootController {
     @GetMapping(value = "/api/locale/tables")
     @ResponseBody
     public String getLocaleForTables(){
-        System.out.println(messageSource.getMessage("forum.title", null, LocaleContextHolder.getLocale()));
-        return messageSource.getMessage("datatables.lang", null, LocaleContextHolder.getLocale());
+        System.out.println(messages.get("datatables.lang"));
+        return messages.get("datatables.lang");
     }
 
 }
