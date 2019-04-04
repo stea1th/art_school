@@ -26,6 +26,7 @@ public class NachrichtTo {
 
     private Integer id;
     private String text;
+    private DateTo datumTo;
     private String datum;
     private String name;
     private Integer userId;
@@ -43,7 +44,7 @@ public class NachrichtTo {
 
     public NachrichtTo(Nachricht n) {
         this(n.getId(), n.getText(),
-                new DateUtil().transformDateForForum(n.getDatum()),
+                DateUtil.transformDateInTo(n.getDatum()),
                 n.getUser().getName(), n.getUser().getId(),
                 n.getThema().getId(), n.getUpdaters().isEmpty() ? null :
                         createUpdaterInfo(n.getUpdaters().get(n.getUpdaters().size() - 1)), null,
@@ -64,8 +65,8 @@ public class NachrichtTo {
         this.reload = reload;
     }
 
-    public NachrichtTo(Integer id, String text,
-                       String datum, String name,
+    NachrichtTo(Integer id, String text,
+                       DateTo datumTo, String name,
                        Integer userId, Integer themaId,
                        String updaterInfo, Integer size,
                        List<String> lines, List<String> parentMessages,
@@ -73,7 +74,7 @@ public class NachrichtTo {
                        String registriert, Integer messages) {
         this.id = id;
         this.text = text;
-        this.datum = datum;
+        this.datumTo = datumTo;
         this.name = name;
         this.userId = userId;
         this.themaId = themaId;

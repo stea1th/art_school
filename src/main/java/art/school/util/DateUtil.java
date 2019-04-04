@@ -1,5 +1,7 @@
 package art.school.util;
 
+import art.school.to.DateTo;
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,32 +10,27 @@ import java.time.temporal.ChronoUnit;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
-//@Component
 public class DateUtil {
 
-//    @Autowired
-//    private MessageSource messageSource;
-
-    public String transformDateForForum(LocalDateTime dateTime) {
+    public static DateTo transformDateInTo(LocalDateTime dateTime) {
         String time = dateTime.toLocalTime().truncatedTo(ChronoUnit.MINUTES).toString();
         int days = (int) DAYS.between(dateTime.toLocalDate(), LocalDate.now());
-//        Locale locale = LocaleContextHolder.getLocale();
-//        System.out.println(messageSource.getMessage("forum.title", null, locale));
         switch (days) {
             case 0:
-                return "Сегодня, " + time;
+                return new DateTo("forum.today", time);
             case 1:
-                return "Вчера, " + time;
+                return new DateTo("forum.yesterday", time);
             case 2:
             case 3:
             case 4:
-                return days + " дня назад, " + time;
+                return new DateTo("forum.days.ago", time, days);
             case 5:
             case 6:
             case 7:
-                return days + " дней назад, " + time;
+                return new DateTo("forum.days.ago2", time, days);
+
         }
-        return formatDateToString(dateTime);
+        return new DateTo(formatDateToString(dateTime));
     }
 
     public static String formatDateToString(LocalDateTime dateTime){
