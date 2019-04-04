@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static art.school.util.TextFormatUtil.createUpdaterInfo;
 import static art.school.util.TextFormatUtil.splitMessageByLineSeparator;
 
 @Data
@@ -31,6 +30,7 @@ public class NachrichtTo {
     private String name;
     private Integer userId;
     private Integer themaId;
+    private NachrichtUpdater updater;
     private String updaterInfo;
     private Integer size;
     private List<String> lines;
@@ -47,9 +47,9 @@ public class NachrichtTo {
                 DateUtil.transformDateInTo(n.getDatum()),
                 n.getUser().getName(), n.getUser().getId(),
                 n.getThema().getId(), n.getUpdaters().isEmpty() ? null :
-                        createUpdaterInfo(n.getUpdaters().get(n.getUpdaters().size() - 1)), null,
+                        n.getUpdaters().get(n.getUpdaters().size() - 1),
                 splitMessageByLineSeparator(n.getText()),
-                n.getParent() == null ? null : splitMessageByLineSeparator(n.getParent().getText()), null, null,
+                n.getParent() == null ? null : splitMessageByLineSeparator(n.getParent().getText()),
                 n.getUser().getRoles().size(),
                 n.getUser().getRegistriert().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
                 n.getUser().getNachrichts().size());
@@ -66,24 +66,21 @@ public class NachrichtTo {
     }
 
     NachrichtTo(Integer id, String text,
-                       DateTo datumTo, String name,
-                       Integer userId, Integer themaId,
-                       String updaterInfo, Integer size,
-                       List<String> lines, List<String> parentMessages,
-                       Integer page, Boolean reload, Integer roleSize,
-                       String registriert, Integer messages) {
+                DateTo datumTo, String name,
+                Integer userId, Integer themaId,
+                NachrichtUpdater updater,
+                List<String> lines, List<String> parentMessages,
+                Integer roleSize,
+                String registriert, Integer messages) {
         this.id = id;
         this.text = text;
         this.datumTo = datumTo;
         this.name = name;
         this.userId = userId;
         this.themaId = themaId;
-        this.updaterInfo = updaterInfo;
-        this.size = size;
+        this.updater = updater;
         this.lines = lines;
         this.parentMessages = parentMessages;
-        this.page = page;
-        this.reload = reload;
         this.roleSize = roleSize;
         this.registriert = registriert;
         this.messages = messages;

@@ -1,12 +1,11 @@
 package art.school.web.nachricht;
 
 import art.school.entity.Nachricht;
+import art.school.entity.NachrichtUpdater;
 import art.school.entity.Thema;
 import art.school.service.ThemaService;
 import art.school.service.UserService;
-import art.school.to.DateTo;
 import art.school.to.NachrichtTo;
-import art.school.util.DateUtil;
 import art.school.util.TextFormatUtil;
 import art.school.web.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +27,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static art.school.util.DateUtil.convertDateToToString;
+import static art.school.util.DateUtil.transformDateInTo;
 import static art.school.util.PaginationHelper.createTablePage;
 
 @Controller
@@ -64,11 +65,18 @@ public class NachrichtController extends AbstractNachrichtController {
         }
 
         Locale locale = LocaleContextHolder.getLocale();
-        Map.Entry<List<NachrichtTo>, Page<Nachricht>> entry = super.getAllTosAsMap(id, PageRequest.of(pageNumber, size))
+        Map.Entry<List<NachrichtTo>, Page<Nachricht>> entry = super.getAllTosAsMap(id, PageRequest.of(pageNumber, size, Sort.by("datum", "id")))
                 .entrySet().iterator().next();
         model.addAttribute("list", entry.getKey()
-                .stream().peek(i -> i.setDatum(DateUtil.convertDateToToString(i.getDatumTo(), messageSource, locale)))
-                .collect(Collectors.toList()));
+                .stream().peek(i -> {
+                    i.setDatum(convertDateToToString(i.getDatumTo(), messageSource, locale));
+                    NachrichtUpdater u = i.getUpdater();
+                    if (u != null) {
+                        i.setUpdaterInfo(messageSource.getMessage(u.getAction(), null, locale) + " " +
+                                u.getUser().getName() + " "
+                                + convertDateToToString(transformDateInTo(u.getDatum()), messageSource, locale).toLowerCase());
+                    }
+                }).collect(Collectors.toList()));
         model.addAttribute("link", "nachricht");
         model.addAttribute("isBanned", userService.isUserBanned(SecurityUtil.getAuthId()));
         createTablePage(model, entry.getValue());
@@ -91,7 +99,7 @@ public class NachrichtController extends AbstractNachrichtController {
                 nachricht.setParent(super.get(parentId));
             }
         } else {
-            nachricht = createNachrichtWithUpdaters(nachrichtTo.getId(), "Изменил");
+            nachricht = createNachrichtWithUpdaters(nachrichtTo.getId(), "forum.changedBy");
         }
         nachricht.setThema(themaService.get(nachrichtTo.getThemaId()));
         nachricht.setText(nachrichtTo.getText());
@@ -106,7 +114,7 @@ public class NachrichtController extends AbstractNachrichtController {
     @GetMapping(value = "/delete")
     @ResponseBody
     public String delete(@RequestParam(name = "id") Integer id) {
-        Nachricht nachricht = createNachrichtWithUpdaters(id, "Удалил");
+        Nachricht nachricht = createNachrichtWithUpdaters(id, "forum.deletedBy");
         String deleted = "<-- Удалено -->";
         nachricht.setText("<-- Deleted -->");
         super.create(nachricht);
