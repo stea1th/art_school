@@ -1,6 +1,7 @@
 package art.school.web.forum;
 
 import art.school.entity.Thema;
+import art.school.to.ThemaTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import static art.school.util.PaginationHelper.createTablePage;
 
@@ -31,16 +34,16 @@ public class ForumController extends AbstractForumController {
                       @RequestParam(name = "size", required = false, defaultValue = "10") int size){
 
         Locale locale = LocaleContextHolder.getLocale();
-        Pageable pageable = PageRequest.of(pageNumber, size);
-        Page<Thema> page = super.getAll(pageable);
-        model.addAttribute("list", super.getAllTos(pageable));
+        Map.Entry<List<ThemaTo>, Page<Thema>> entry = super.getAllTosAsMap(PageRequest.of(pageNumber, size))
+                .entrySet().stream().findFirst().get();
+        model.addAttribute("list",  entry.getKey());
         model.addAttribute("link", "forum");
         model.addAttribute("title", messageSource.getMessage("forum.title", null, locale));
         model.addAttribute("views", messageSource.getMessage("forum.views", null, locale));
         model.addAttribute("answers", messageSource.getMessage("forum.answers", null, locale));
         model.addAttribute("lastanswer", messageSource.getMessage("forum.last", null, locale));
         model.addAttribute("isBanned", isThisUserBanned());
-        createTablePage(model, page);
+        createTablePage(model, entry.getValue());
 
         return select ? "forum/fragment" : "forum/forum";
     }

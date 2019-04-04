@@ -9,7 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,16 +54,25 @@ public class ThemaServiceImpl implements ThemaService {
     }
 
     @Transactional
-    public List<ThemaTo> getAllTos(Pageable pageable){
-        return getAll(pageable).stream()
+    public Map<List<ThemaTo>, Page<Thema>> getAllTosAsMap(Pageable pageable){
+        Page<Thema> page = getAll(pageable);
+        List<ThemaTo> list = page.stream()
                 .map(ThemaTo::new)
                 .collect(Collectors.toList());
+        return Collections.singletonMap(list, page);
     }
 
     @Override
     @Transactional
     public List<ThemaTo> getAllTos() {
         return getAll().stream()
+                .map(ThemaTo::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ThemaTo> getAllTos(Pageable pageable) {
+        return getAll(pageable).stream()
                 .map(ThemaTo::new)
                 .collect(Collectors.toList());
     }

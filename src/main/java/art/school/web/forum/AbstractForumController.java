@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 
 import static art.school.util.ValidationUtil.assureIdConsistent;
 
@@ -67,6 +68,10 @@ public abstract class AbstractForumController {
         t.setAktiv(!t.isAktiv());
         t.setUser(t.getUser() == null? userService.get(SecurityUtil.getAuthId()) : null);
         return themaService.getAll().indexOf(themaService.create(t)) / 10;
+    }
+
+    public Map<List<ThemaTo>, Page<Thema>> getAllTosAsMap(Pageable pageable){
+        return themaService.getAllTosAsMap(pageable);
     }
 
     public List<ThemaTo> getAllTos(Pageable pageable){
