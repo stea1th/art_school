@@ -15,9 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static art.school.util.DateUtil.formatDateToString;
@@ -81,17 +79,13 @@ public class NachrichtServiceImpl implements NachrichtService {
 
     @Transactional
     public List<NachrichtTo> getAllTosByThema(int id, Pageable pageable){
-        return getPageByThemaId(id, pageable)
-                .stream()
-                .map(i-> {
-                    NachrichtTo n = new NachrichtTo(i);
-                    Block b = blockRepository.getLatestByUserId(i.getUser().getId());
-                    if(b != null){
-                        n.setBanned(formatDateToString(b.getDatum()));
-                    }
-                    return n;
-                })
-                .collect(Collectors.toCollection(LinkedList::new));
+        return convertInToList(getPageByThemaId(id, pageable));
+    }
+
+    @Transactional
+    public Map<List<NachrichtTo>, Page<Nachricht>> getAllTosAsMap(int id, Pageable pageable){
+        Page<Nachricht> page = getPageByThemaId(id, pageable);
+        return Collections.singletonMap(convertInToList(page), page);
     }
 
     @Transactional
@@ -112,5 +106,18 @@ public class NachrichtServiceImpl implements NachrichtService {
     @Transactional
     public NachrichtTo getTo(int id) {
         return new NachrichtTo(get(id));
+    }
+
+    private List<NachrichtTo> convertInToList(Page<Nachricht> page){
+        return page.stream()
+                .map(i-> {
+                    NachrichtTo n = new NachrichtTo(i);
+                    Block b = blockRepository.getLatestByUserId(i.getUser().getId());
+                    if(b != null){
+                        n.setBanned(formatDateToString(b.getDatum()));
+                    }
+                    return n;
+                })
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 }

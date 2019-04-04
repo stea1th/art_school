@@ -13,7 +13,7 @@ public class TextFormatUtil {
 
     public static String createUpdaterInfo(NachrichtUpdater updater){
         return " " + updater.getAction() + " " +
-                updater.getUser().getName() + " " +
-                new DateUtil().transformDateForForum(updater.getDatum());
+                updater.getUser().getName();
+//                + " " + new DateUtil().transformDateForForum(updater.getDatum());
     }
 }

@@ -6,6 +6,7 @@ import art.school.service.ThemaService;
 import art.school.service.UserService;
 import art.school.to.DateTo;
 import art.school.to.NachrichtTo;
+import art.school.util.DateUtil;
 import art.school.util.TextFormatUtil;
 import art.school.web.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static art.school.util.PaginationHelper.createTablePage;
 
@@ -60,18 +64,14 @@ public class NachrichtController extends AbstractNachrichtController {
         }
 
         Locale locale = LocaleContextHolder.getLocale();
-        Pageable pageable = PageRequest.of(pageNumber, size, Sort.by("datum", "id"));
-        Page<Nachricht> page = super.getPageByThemaId(id, pageable);
-        model.addAttribute("list", getAllTosByThema(id, pageable)
-                .stream().peek(i -> {
-                    DateTo d = i.getDatumTo();
-                    i.setDatum(d.getCode() == null ? d.getTime() :
-                            d.getDays() == null ? messageSource.getMessage(d.getCode(), new Object[]{d.getTime()}, locale) :
-                                    messageSource.getMessage(d.getCode(), new Object[]{d.getTime(), d.getDays()}, locale));
-                }));
+        Map.Entry<List<NachrichtTo>, Page<Nachricht>> entry = super.getAllTosAsMap(id, PageRequest.of(pageNumber, size))
+                .entrySet().iterator().next();
+        model.addAttribute("list", entry.getKey()
+                .stream().peek(i -> i.setDatum(DateUtil.convertDateToToString(i.getDatumTo(), messageSource, locale)))
+                .collect(Collectors.toList()));
         model.addAttribute("link", "nachricht");
         model.addAttribute("isBanned", userService.isUserBanned(SecurityUtil.getAuthId()));
-        createTablePage(model, page);
+        createTablePage(model, entry.getValue());
 
         return select ? "nachricht/fragment" : "nachricht/nachricht";
     }

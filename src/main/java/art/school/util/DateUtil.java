@@ -1,12 +1,14 @@
 package art.school.util;
 
 import art.school.to.DateTo;
+import org.springframework.context.MessageSource;
 
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Locale;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -56,5 +58,11 @@ public class DateUtil {
 
         }
         return LocalDateTime.now().plus(d);
+    }
+
+    public static String convertDateToToString(DateTo d, MessageSource messageSource, Locale locale){
+        return d.getCode() == null ? d.getTime() :
+                d.getDays() == null ? messageSource.getMessage(d.getCode(), new Object[]{d.getTime()}, locale) :
+                        messageSource.getMessage(d.getCode(), new Object[]{d.getTime(), d.getDays()}, locale);
     }
 }

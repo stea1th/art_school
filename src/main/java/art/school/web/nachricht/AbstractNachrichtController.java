@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 
 import static art.school.util.ValidationUtil.assureIdConsistent;
 
@@ -64,5 +65,9 @@ public class AbstractNachrichtController {
 
     public NachrichtTo getTo(int id){
        return nachrichtService.getTo(id);
+    }
+
+    public Map<List<NachrichtTo>, Page<Nachricht>> getAllTosAsMap(int id, Pageable pageable){
+        return nachrichtService.getAllTosAsMap(id, pageable);
     }
 }

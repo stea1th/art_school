@@ -1,7 +1,9 @@
 package art.school.web.forum;
 
 import art.school.entity.Thema;
+import art.school.to.DateTo;
 import art.school.to.ThemaTo;
+import art.school.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static art.school.util.PaginationHelper.createTablePage;
 
@@ -30,12 +33,16 @@ public class ForumController extends AbstractForumController {
     public String all(Model model,
                       @RequestParam(name = "select", required = false, defaultValue = "false") boolean select,
                       @RequestParam(name = "page", required = false, defaultValue = "0") int pageNumber,
-                      @RequestParam(name = "size", required = false, defaultValue = "10") int size){
+                      @RequestParam(name = "size", required = false, defaultValue = "10") int size) {
 
         Locale locale = LocaleContextHolder.getLocale();
         Map.Entry<List<ThemaTo>, Page<Thema>> entry = super.getAllTosAsMap(PageRequest.of(pageNumber, size))
-                .entrySet().stream().findFirst().get();
-        model.addAttribute("list",  entry.getKey());
+                .entrySet().iterator().next();
+
+        model.addAttribute("list", entry.getKey()
+                .stream().peek(i -> i.setLast(DateUtil.convertDateToToString(i.getDateTo(), messageSource, locale)))
+                .collect(Collectors.toList()));
+
         model.addAttribute("link", "forum");
         model.addAttribute("title", messageSource.getMessage("forum.title", null, locale));
         model.addAttribute("views", messageSource.getMessage("forum.views", null, locale));
@@ -49,29 +56,29 @@ public class ForumController extends AbstractForumController {
 
     @PostMapping(value = "/save")
     @ResponseBody
-    public Integer saveThema(@RequestParam(name="thema")String thema,
-                             @RequestParam(name="message") String message) {
+    public Integer saveThema(@RequestParam(name = "thema") String thema,
+                             @RequestParam(name = "message") String message) {
 
         return super.save(thema, message).getId();
     }
 
-    @PostMapping(value="/views")
+    @PostMapping(value = "/views")
     @ResponseBody
-    public void countClicks(@RequestParam(name="id")Integer id){
+    public void countClicks(@RequestParam(name = "id") Integer id) {
         super.countClicks(id);
     }
 
-    @PostMapping(value="/toggle")
+    @PostMapping(value = "/toggle")
     @ResponseBody
     @Secured("ROLE_MODERATOR")
-    public int toggleThema (@RequestParam(name="id") Integer id){
+    public int toggleThema(@RequestParam(name = "id") Integer id) {
         return super.toggle(id);
     }
 
-    @PostMapping(value="/attach")
+    @PostMapping(value = "/attach")
     @ResponseBody
     @Secured("ROLE_MODERATOR")
-    public void toggleAttach(@RequestParam(name="id") Integer id){
+    public void toggleAttach(@RequestParam(name = "id") Integer id) {
         super.attach(id);
     }
 

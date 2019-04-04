@@ -55,6 +55,7 @@ public class Nachricht extends AbstractBaseEntity{
     protected List<NachrichtUpdater> updaters = new ArrayList<>();
 
     @OneToMany(mappedBy = "parent")
+    @OrderBy(value="id, datum")
     protected List<Nachricht> children = new ArrayList<>();
 
 
