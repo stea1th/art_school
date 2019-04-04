@@ -19,13 +19,12 @@
             <div contenteditable="true" class="text-message form-control"
                  id="text-message" aria-required="true">
                 <c:if test="${updateText != null}">
-                    <c:out value="${updateText}" />
+                    <c:forEach var="e" items="${updateText}">
+                        <div><c:out value="${e}"/></div>
+                    </c:forEach>
                 </c:if>
             </div>
-
         </div>
-        <%--<button type="button" class="btn btn-success btn-ok" id="message-submit">Сохранить</button>--%>
-        <%--<button type="button" class="btn btn-secondary" onclick="hideMessageArea()">Отмена</button>--%>
         <jsp:include page="../buttons/save-and-close.jsp">
             <jsp:param name="notModal" value="true"/>
             <jsp:param name="primaryClass" value="btn btn-success btn-ok"/>

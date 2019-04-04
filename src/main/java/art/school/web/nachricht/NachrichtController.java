@@ -5,6 +5,7 @@ import art.school.entity.Thema;
 import art.school.service.ThemaService;
 import art.school.service.UserService;
 import art.school.to.NachrichtTo;
+import art.school.util.TextFormatUtil;
 import art.school.web.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -107,7 +108,7 @@ public class NachrichtController extends AbstractNachrichtController {
                     nachricht.getParent() != null ? nachricht.getParent().getText() : null);
             model.addAttribute("id", answer ? null : id);
             model.addAttribute("themaId", nachricht.getThema().getId());
-            model.addAttribute("updateText", answer ? null : nachricht.getText());
+            model.addAttribute("updateText", answer ? null : TextFormatUtil.splitMessageByLineSeparator(nachricht.getText()));
         }
         return "forms/nachricht-form";
     }
