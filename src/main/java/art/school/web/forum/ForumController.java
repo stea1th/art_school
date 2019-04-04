@@ -39,6 +39,7 @@ public class ForumController extends AbstractForumController {
         model.addAttribute("views", messageSource.getMessage("forum.views", null, locale));
         model.addAttribute("answers", messageSource.getMessage("forum.answers", null, locale));
         model.addAttribute("lastanswer", messageSource.getMessage("forum.last", null, locale));
+        model.addAttribute("isBanned", isThisUserBanned());
         createTablePage(model, page);
 
         return select ? "forum/fragment" : "forum/forum";

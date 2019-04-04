@@ -18,11 +18,12 @@
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="mr-auto p-2">
-                            <button type="button" class="btn btn-primary" style="float:right"
-                                    onclick="answerIt(null, true)">
-                                <%--<i class="fas fa-plus"></i>&nbsp;--%>
-                                <spring:message code="forum.theme.new"/>
-                            </button>
+                            <sec:authorize access="not ${isBanned}">
+                                <button type="button" class="btn btn-primary" style="float:right"
+                                        onclick="answerIt(null, true)">
+                                    <spring:message code="forum.theme.new"/>
+                                </button>
+                            </sec:authorize>
                         </div>
                         <div class="ml-auto p-2">
                             <jsp:include page="../fragments/table-size-selector.jsp">
@@ -35,9 +36,9 @@
                         <h1>
                             <span>Art School <spring:message code="forum.name"/></span>
                         </h1>
-                            <div class="wrapper">
-                                <%@ include file="fragment.jsp" %>
-                            </div>
+                        <div class="wrapper">
+                            <%@ include file="fragment.jsp" %>
+                        </div>
                         <div id="add-message">
                         </div>
                     </div>
@@ -52,7 +53,7 @@
     <jsp:param name="modalId" value="isBlocked"/>
     <jsp:param name="modalTitel" value="${attention}"/>
     <jsp:param name="buttons" value="../buttons/save-and-close.jsp"/>
-    <jsp:param name="saveId" value="accepted" />
+    <jsp:param name="saveId" value="accepted"/>
     <jsp:param name="buttonName" value="${buttonAccepted}"/>
 </jsp:include>
 

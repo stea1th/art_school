@@ -93,4 +93,8 @@ public abstract class AbstractForumController {
     public long count(){
         return themaService.count();
     }
+
+    public boolean isThisUserBanned(){
+        return userService.isUserBanned(SecurityUtil.getAuthId());
+    }
 }
