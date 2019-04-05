@@ -3,7 +3,25 @@ var answer;
 
 $(function () {
     checkIfBlocked();
+
+    scrollFunction();
+
 });
+
+function topFunction(){
+    $('body').scrollTo();
+}
+
+function scrollFunction() {
+    $(window).scroll(function(){
+        if ($('body')[0].scrollTop > 280 ) {
+            $("#myBtn").css('display', 'block');
+        } else {
+            $("#myBtn").css('display', 'none');
+        }
+    });
+
+}
 
 function toggleAttach(id) {
     $.post("/forum/attach", {id: id}).done(function(){

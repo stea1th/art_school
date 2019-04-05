@@ -24,7 +24,7 @@
     <div class="form-group" style="padding-left:90px;">
         <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="chkbx1" name="remember-me"
-                   value="true" required>
+                   value="true" >
             <label class="custom-control-label" for="chkbx1">&nbsp;<spring:message code="app.remember"/></label>
         </div>
     </div>

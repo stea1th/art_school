@@ -100,7 +100,7 @@
             </div>
         </div>
     </div>
-
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-angle-double-up fa-2x"></i></button>
 </div>
 <spring:message code="forum.block.user" var="block"/>
 <spring:message code="slider.lock" var="buttonBlock"/>
