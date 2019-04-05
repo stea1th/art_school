@@ -45,6 +45,11 @@ public class RootController {
         return "admin";
     }
 
+    @GetMapping("/profile")
+    public String profile() {
+        return "profile";
+    }
+
     @GetMapping(value = "/api/locale")
     @ResponseBody
     public String getLocale(){
@@ -54,7 +59,6 @@ public class RootController {
     @GetMapping(value = "/api/locale/tables")
     @ResponseBody
     public String getLocaleForTables(){
-        System.out.println(messageSource.getMessage("forum.title", null, LocaleContextHolder.getLocale()));
         return messageSource.getMessage("datatables.lang", null, LocaleContextHolder.getLocale());
     }
 

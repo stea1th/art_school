@@ -78,7 +78,7 @@
                        aria-expanded="false" class="nav-link dropdown-toggle navbar-icon-link">
                         <i class="fas fa-user-circle fa-2x"></i></a>
                     <div aria-labelledby="userdetails" class="dropdown-menu dropdown-menu-right">
-                        <a href="#" class="dropdown-item">Profile</a>
+                        <a href="profile" class="dropdown-item">Profile</a>
                         <div class="dropdown-divider my-0"></div>
                         <a href="<c:url value="/perform_logout" />" class="dropdown-item">Logout</a>
 

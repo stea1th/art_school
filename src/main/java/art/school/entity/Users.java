@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.BatchSize;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -54,6 +55,11 @@ public class Users extends AbstractBaseEntity {
     @Column(name = "aktiv")
     @NotNull
     private Boolean aktiv;
+
+    @Column(name = "image", length = 5242880)
+    @Lob
+    @Nullable
+    private byte[] image;
 
     @Enumerated(EnumType.STRING)
     @BatchSize(size = 200)

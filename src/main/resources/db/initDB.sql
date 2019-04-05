@@ -33,7 +33,8 @@ create table users
   admin_passwort    VARCHAR                 NOT NULL,
   passwort          VARCHAR                 NOT NULL,
   registriert       TIMESTAMP DEFAULT now() NOT NULL,
-  aktiv             BOOL DEFAULT TRUE       NOT NULL
+  aktiv             BOOL DEFAULT TRUE       NOT NULL,
+  image             BYTEA
 );
 create unique index user_unique_email_index on users(email);
 
