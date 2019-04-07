@@ -3,14 +3,10 @@ package art.school.web.user;
 import art.school.to.UserTo;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.util.Arrays;
-import java.util.Map;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api/profile")
@@ -23,9 +19,12 @@ public class ProfileRestController extends AbstractUserController {
     }
 
     @PostMapping(value= "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void saveProfile(@RequestParam(value= "file")MultipartFile file){
-        System.out.println("Hallo1");
-        System.out.println(file.getOriginalFilename());
+    public void saveProfile(UserTo userTo){
+        System.out.println(userTo.getName());
+        System.out.println(userTo.getAdresse());
+        System.out.println(userTo.getEmail());
+        System.out.println(userTo.getFile().getOriginalFilename());
+        super.updateProfile(userTo);
     }
 
 }

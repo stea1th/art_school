@@ -27,9 +27,34 @@ function getProfile(){
 
 function saveProfile(){
     $('#saveProfile').on('click', function () {
+        $('.error-field').hide();
         var formData = new FormData();
+        var pass = $('#new-passwort').val();
+        var email = $('#email').val();
+        formData.append('name', $('#name').val());
+        formData.append('adresse', $('#adresse').val());
+        if(pass !== $('#repeat-passwort').val()){
+            $('#repeat').append('<div style="color:red" class="error-field">Invalid password</div>');
+            return;
+        } else {
+            formData.append('adminPasswort', pass);
+        }
+
+        if(!email.includes("@")){
+            $('#email-div').append('<div style="color:red" class="error-field">Invalid email</div>');
+            return;
+        } else {
+            if(email !== ''){
+                formData.append('email', email);
+            }
+        }
+
         file = imageInput[0].files[0];
-        formData.append('file', file);
+        if(file !== undefined ){
+            if(file.size < 5242880 && validFileType(file)){
+                formData.append('file', file);
+            }
+        }
         $.ajax({
             url: "/api/profile/save",
             cache: false,
@@ -52,7 +77,7 @@ function inputOnClick(){
         if(file.size < 5242880 && validFileType(file)){
             $('#text-input').val(file.name);
             var image = document.createElement('img');
-            image.style.cssText = 'width:250px;height:250px;text-align: center;';
+            image.style.cssText = 'width:300px;height:300px;text-align: center;';
             image.src = window.URL.createObjectURL(file);
             $('#preview').empty().append(image);
         }

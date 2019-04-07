@@ -58,6 +58,8 @@
                         </c:choose>
                     </li>
                     <li>
+                        <c:choose>
+                            <c:when test="${message.encodedImage == null}">
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-astronaut"
                              role="img"
                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
@@ -86,6 +88,11 @@
                                   y="0"
                                   width="100%" height="100%" class=""></rect>
                         </svg>
+                            </c:when>
+                            <c:otherwise>
+                                <img src="data:image/jpeg;base64,${message.encodedImage}" alt="Hallo!" width="113.75px" height="130px">
+                            </c:otherwise>
+                        </c:choose>
                     </li>
                     <li>
                         <div>

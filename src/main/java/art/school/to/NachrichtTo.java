@@ -5,6 +5,7 @@ import art.school.entity.Nachricht;
 import art.school.entity.NachrichtUpdater;
 import art.school.entity.NachrichtUpdaterId;
 import art.school.util.DateUtil;
+import art.school.util.FileHelper;
 import art.school.web.SecurityUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,6 +42,7 @@ public class NachrichtTo {
     private String registriert;
     private Integer messages;
     private String banned;
+    private String encodedImage;
 
     public NachrichtTo(Nachricht n) {
         this(n.getId(), n.getText(),
@@ -52,7 +54,8 @@ public class NachrichtTo {
                 n.getParent() == null ? null : splitMessageByLineSeparator(n.getParent().getText()),
                 n.getUser().getRoles().size(),
                 n.getUser().getRegistriert().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
-                n.getUser().getNachrichts().size());
+                n.getUser().getNachrichts().size(),
+                n.getUser().getImage() != null? FileHelper.convertByteArrayToString(n.getUser().getImage()) : null);
     }
 
     public NachrichtTo(Integer id) {
@@ -71,7 +74,7 @@ public class NachrichtTo {
                 NachrichtUpdater updater,
                 List<String> lines, List<String> parentMessages,
                 Integer roleSize,
-                String registriert, Integer messages) {
+                String registriert, Integer messages, String encodedImage) {
         this.id = id;
         this.text = text;
         this.datumTo = datumTo;
@@ -84,6 +87,7 @@ public class NachrichtTo {
         this.roleSize = roleSize;
         this.registriert = registriert;
         this.messages = messages;
+        this.encodedImage = encodedImage;
     }
 
     public boolean isNew() {

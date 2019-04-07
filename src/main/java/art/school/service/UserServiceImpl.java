@@ -98,6 +98,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     }
 
+    public void updateProfile(UserTo userTo){
+        create(userTo.updateProfile(get(SecurityUtil.getAuthId())));
+    }
+
     @Transactional
     public UserTo getUserTo(int id){
         return new UserTo(get(id));

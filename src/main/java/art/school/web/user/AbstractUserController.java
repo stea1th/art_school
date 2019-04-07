@@ -75,4 +75,8 @@ public abstract class AbstractUserController  {
         service.unblockUser(id);
     }
 
+    void updateProfile(UserTo userTo){
+        service.updateProfile(userTo);
+    }
+
 }

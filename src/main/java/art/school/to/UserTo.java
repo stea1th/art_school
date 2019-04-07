@@ -2,12 +2,16 @@ package art.school.to;
 
 import art.school.entity.Role;
 import art.school.entity.Users;
+import art.school.util.FileHelper;
 import art.school.util.RolesUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -25,6 +29,7 @@ public class UserTo {
     private String roles;
     private Boolean aktiv;
     private String registriert;
+    private MultipartFile file;
 
     public UserTo(Users u) {
         this(u.getId(),
@@ -58,6 +63,25 @@ public class UserTo {
         u.setAktiv(aktiv);
         u.setRoles(RolesUtil.createRoles(Integer.parseInt(roles == null? "0" : roles)));
         return u;
+    }
+
+    public Users updateProfile(Users u){
+        u.setEmail(email);
+        u.setAdresse(adresse);
+        u.setAdminPasswort((adminPasswort == null || "".equals(adminPasswort))? u.getAdminPasswort() : adminPasswort);
+        u.setImage(file == null? u.getImage() : FileHelper.convertFileToByteArray(file));
+        return u;
+    }
+
+    public UserTo(Integer id, String name, String adresse, String email, String adminPasswort, String roles, Boolean aktiv, String registriert) {
+        this.id = id;
+        this.name = name;
+        this.adresse = adresse;
+        this.email = email;
+        this.adminPasswort = adminPasswort;
+        this.roles = roles;
+        this.aktiv = aktiv;
+        this.registriert = registriert;
     }
 
     public boolean isNew(){

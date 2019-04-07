@@ -17,7 +17,7 @@
                     <form action="#" enctype="multipart/form-data" id="profile-image-form">
                         <div class="d-flex justify-content-around">
                             <div class="p-4">
-                                <div id="preview" class="form-control"
+                                <div id="preview" class="form-control image-holder"
                                      style="width:300px;height:300px;outline:2px solid #000;text-align: center;">
                                     <h3 style="display: inline-block;padding-top: 130px;">NO PHOTO</h3>
                                 </div>
@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="email" class="col-4 col-form-label">E-Mail</label>
-                                    <div class="col-8">
+                                    <div class="col-8" id="email-div">
                                         <input type="email" id="email" name="email" class="form-control" required="required"/>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="repeat-passwort" class="col-4 col-form-label">Повторить пароль</label>
-                                    <div class="col-8">
+                                    <div class="col-8" id="repeat">
                                         <input type="text" id="repeat-passwort" name="repeatPasswort" class="form-control"/>
                                     </div>
                                 </div>

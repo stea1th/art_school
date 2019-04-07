@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Type;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -57,7 +58,8 @@ public class Users extends AbstractBaseEntity {
     private Boolean aktiv;
 
     @Column(name = "image", length = 5242880)
-    @Lob
+//    @Lob
+    @Type(type="org.hibernate.type.BinaryType")
     @Nullable
     private byte[] image;
 

@@ -14,6 +14,8 @@ public interface UserService extends MainServiceInterface<Users> {
 
     Users getUsersByEmail(String email);
 
+    void updateProfile(UserTo userTo);
+
     List<UserTo> getAllKinds();
 
     List<UserTo> getAllTos();
