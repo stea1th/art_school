@@ -17,7 +17,7 @@
                     <div class="d-flex justify-content-around">
                         <div class="p-6">
                             <form action="#" enctype="multipart/form-data" id="profile-image-form">
-                                <div class="form-control" style="width:300px;height:300px;outline:2px solid #000;text-align: center;">
+                                <div id="preview" class="form-control" style="width:300px;height:300px;outline:2px solid #000;text-align: center;">
                                     <h3 style="display: inline-block;padding-top: 130px;">NO PHOTO</h3>
                                 </div>
                                 <br>
@@ -25,7 +25,7 @@
                                     <div class="input-group" >
                                         <input type="text" id="text-input" class="form-control" placeholder="Recipient's username" style="padding-top:0;padding-bottom:0;height: 30px;" readonly>
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-success btn-sm" type="button" onclick="addImage()"><i class="fas fa-search"></i></button>
+                                            <button class="btn btn-outline-success btn-sm" type="button" onclick="updateImage()"><i class="fas fa-search"></i></button>
                                             <button class="btn btn-outline-danger btn-sm" type="button" onclick="clearImageInput()"><i class="fas fa-trash"></i></button>
                                         </div>
                                     </div>
