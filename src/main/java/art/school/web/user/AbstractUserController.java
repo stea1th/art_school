@@ -4,6 +4,7 @@ import art.school.entity.Users;
 import art.school.service.UserService;
 import art.school.to.BlockTo;
 import art.school.to.UserTo;
+import art.school.web.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,6 +23,10 @@ public abstract class AbstractUserController  {
 
     void blockUser(BlockTo block, int id){
         service.createBlockForUserWithTo(block, id);
+    }
+
+    public UserTo getToForProfile(){
+        return service.getUserTo(SecurityUtil.getAuthId());
     }
 
     public Users get(int id) {

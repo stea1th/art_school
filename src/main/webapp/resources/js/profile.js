@@ -10,7 +10,36 @@ var imageInput = $('#image-input');
 $(function () {
 
     inputOnClick();
+
+    getProfile();
+
+    saveProfile();
 });
+
+function getProfile(){
+    $.get("/api/profile")
+        .done(function(data){
+            $('#profile-image-form input').each(function(){
+                $(this).val(data[$(this).attr('name')]);
+            });
+        });
+}
+
+function saveProfile(){
+    $('#saveProfile').on('click', function () {
+        var formData = new FormData();
+        file = imageInput[0].files[0];
+        formData.append('file', file);
+        $.ajax({
+            url: "/api/profile/save",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
+            type: 'POST'
+        });
+    });
+}
 
 function updateImage(){
     imageInput.click();

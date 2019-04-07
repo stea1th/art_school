@@ -18,17 +18,17 @@
             <input type="text" id="adresse" name="adresse" class="form-control" required="required"/>
         </div>
     </div>
-        <div class="form-group row">
-            <label for="email" class="col-4 col-form-label">E-Mail</label>
-            <div class="col-8">
-                <input type="email" id="email" name="email" class="form-control" required="required"/>
-            </div>
+    <div class="form-group row">
+        <label for="email" class="col-4 col-form-label">E-Mail</label>
+        <div class="col-8">
+            <input type="email" id="email" name="email" class="form-control" required="required"/>
         </div>
+    </div>
     <sec:authorize access="hasRole('ROLE_ADMIN')">
         <div class="form-group row">
             <label for="passwort" class="col-4 col-form-label">Пароль</label>
             <div class="col-8">
-                <input type="email" id="passwort" name="adminPasswort" class="form-control"/>
+                <input type="text" id="passwort" name="adminPasswort" class="form-control"/>
             </div>
         </div>
         <div class="form-group row">
