@@ -31,4 +31,6 @@ public interface UserService extends MainServiceInterface<Users> {
     void accepted();
 
     void unblockUser(int id);
+
+    String getImage(int authId);
 }

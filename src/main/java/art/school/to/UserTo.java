@@ -30,6 +30,8 @@ public class UserTo {
     private Boolean aktiv;
     private String registriert;
     private MultipartFile file;
+    private String encodedImage;
+    private Boolean removeImage;
 
     public UserTo(Users u) {
         this(u.getId(),
@@ -44,7 +46,8 @@ public class UserTo {
                         .findFirst().orElse(null),
                 u.getAktiv(),
                 u.getRegistriert().truncatedTo(ChronoUnit.SECONDS)
-                        .toString().replace("T", " "));
+                        .toString().replace("T", " "),
+                FileHelper.convertByteArrayToString(u.getImage()));
 
     }
 
@@ -69,11 +72,14 @@ public class UserTo {
         u.setEmail(email);
         u.setAdresse(adresse);
         u.setAdminPasswort((adminPasswort == null || "".equals(adminPasswort))? u.getAdminPasswort() : adminPasswort);
-        u.setImage(file == null? u.getImage() : FileHelper.convertFileToByteArray(file));
+        u.setImage(file != null? FileHelper.convertFileToByteArray(file) : removeImage? null : u.getImage());
         return u;
     }
 
-    public UserTo(Integer id, String name, String adresse, String email, String adminPasswort, String roles, Boolean aktiv, String registriert) {
+    public UserTo(Integer id, String name,
+                  String adresse, String email,
+                  String adminPasswort, String roles,
+                  Boolean aktiv, String registriert, String encodedImage) {
         this.id = id;
         this.name = name;
         this.adresse = adresse;
@@ -82,6 +88,7 @@ public class UserTo {
         this.roles = roles;
         this.aktiv = aktiv;
         this.registriert = registriert;
+        this.encodedImage = encodedImage;
     }
 
     public boolean isNew(){

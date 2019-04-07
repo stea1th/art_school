@@ -55,7 +55,7 @@ public class NachrichtTo {
                 n.getUser().getRoles().size(),
                 n.getUser().getRegistriert().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
                 n.getUser().getNachrichts().size(),
-                n.getUser().getImage() != null? FileHelper.convertByteArrayToString(n.getUser().getImage()) : null);
+                FileHelper.convertByteArrayToString(n.getUser().getImage()));
     }
 
     public NachrichtTo(Integer id) {

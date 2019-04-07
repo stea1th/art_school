@@ -79,4 +79,7 @@ public abstract class AbstractUserController  {
         service.updateProfile(userTo);
     }
 
+    String getMyImage() {
+        return service.getImage(SecurityUtil.getAuthId());
+    }
 }

@@ -20,11 +20,12 @@ public class ProfileRestController extends AbstractUserController {
 
     @PostMapping(value= "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void saveProfile(UserTo userTo){
-        System.out.println(userTo.getName());
-        System.out.println(userTo.getAdresse());
-        System.out.println(userTo.getEmail());
-        System.out.println(userTo.getFile().getOriginalFilename());
         super.updateProfile(userTo);
+    }
+
+    @GetMapping(value = "/my-image")
+    public String getMyImage(){
+        return super.getMyImage();
     }
 
 }

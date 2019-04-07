@@ -22,6 +22,12 @@ function getProfile(){
             $('#profile-image-form input').each(function(){
                 $(this).val(data[$(this).attr('name')]);
             });
+            if(data.encodedImage !== null){
+                var image = document.createElement('img');
+                image.style.cssText = 'width:300px;height:300px;text-align: center;';
+                image.src = "data:image/jpeg;base64," + data.encodedImage;
+                $('#preview').empty().append(image);
+            }
         });
 }
 
@@ -48,8 +54,10 @@ function saveProfile(){
                 formData.append('email', email);
             }
         }
+        formData.append('removeImage', imageInput.attr('del') === 'true');
 
         file = imageInput[0].files[0];
+
         if(file !== undefined ){
             if(file.size < 5242880 && validFileType(file)){
                 formData.append('file', file);
@@ -73,7 +81,6 @@ function updateImage(){
 function inputOnClick(){
     imageInput.on('change', function(){
         file = imageInput[0].files[0];
-        console.log(file);
         if(file.size < 5242880 && validFileType(file)){
             $('#text-input').val(file.name);
             var image = document.createElement('img');
@@ -81,15 +88,22 @@ function inputOnClick(){
             image.src = window.URL.createObjectURL(file);
             $('#preview').empty().append(image);
         }
-
     });
 }
 
 function clearImageInput(){
     $('#text-input').val('');
     $('#image-input').val('');
-    $('#preview').empty().append('<h3 style="display: inline-block;padding-top: 130px;">NO PHOTO</h3>');
-
+    $.get("/api/profile/my-image").done(function(data){
+        if(data === ''){
+            $('#preview').empty().append('<h3 style="display: inline-block;padding-top: 130px;">NO PHOTO</h3>');
+        } else {
+            var image = document.createElement('img');
+            image.style.cssText = 'width:300px;height:300px;text-align: center;';
+            image.src = "data:image/jpeg;base64," + data;
+            $('#preview').empty().append(image);
+        }
+    });
 }
 
 function validFileType(file) {
@@ -99,5 +113,10 @@ function validFileType(file) {
         }
     }
     return false;
+}
+
+function removeImage(){
+    $('#preview').empty().append('<h3 style="display: inline-block;padding-top: 130px;">NO PHOTO</h3>');
+    imageInput.attr('del', true);
 }
 

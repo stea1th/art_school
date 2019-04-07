@@ -7,6 +7,7 @@ import art.school.repository.BlockRepository;
 import art.school.repository.UserRepository;
 import art.school.to.BlockTo;
 import art.school.to.UserTo;
+import art.school.util.FileHelper;
 import art.school.web.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -61,6 +62,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             b.setDatum(LocalDateTime.now());
         }
         blockRepository.save(b);
+    }
+
+    @Override
+    public String getImage(int authId) {
+        byte[] arr = get(authId).getImage();
+        if(arr == null) return null;
+        return FileHelper.convertByteArrayToString(arr);
     }
 
     @Override
