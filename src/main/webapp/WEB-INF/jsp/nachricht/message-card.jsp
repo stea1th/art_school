@@ -57,7 +57,7 @@
                             </c:otherwise>
                         </c:choose>
                     </li>
-                    <li>
+                    <li style="padding-top: 5px;">
                         <c:choose>
                             <c:when test="${message.encodedImage == null}">
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-astronaut"
