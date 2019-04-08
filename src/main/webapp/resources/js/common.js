@@ -264,7 +264,7 @@ function showModal(modalName) {
 function succesNoty(icon, text) {
     new Noty({
         type: 'success',
-        text: icon + text,
+        text: icon + '&nbsp;' + text,
         theme: 'bootstrap-v4',
         layout: 'bottomRight',
         timeout: 1500,
@@ -278,7 +278,7 @@ function succesNoty(icon, text) {
 function failNoty(icon, text) {
     new Noty({
         type: 'error',
-        text: icon + text,
+        text: icon + '&nbsp;' + text,
         theme: 'bootstrap-v4',
         layout: 'bottomRight',
         timeout: 1500,

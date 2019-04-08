@@ -40,14 +40,18 @@ function saveProfile(){
         formData.append('name', $('#name').val());
         formData.append('adresse', $('#adresse').val());
         if(pass !== $('#repeat-passwort').val()){
-            $('#repeat').append('<div style="color:red" class="error-field">Invalid password</div>');
+            var err = $('#i18n').attr('invalidPassword');
+            $('#repeat').append('<div style="color:red" class="error-field">err</div>');
+            failNoty('<i class="far fa-times-circle"></i>', err);
             return;
         } else {
             formData.append('adminPasswort', pass);
         }
 
         if(!email.includes("@")){
-            $('#email-div').append('<div style="color:red" class="error-field">Invalid email</div>');
+            var err = $('#i18n').attr('invalidEmail');
+            $('#email-div').append('<div style="color:red" class="error-field">err</div>');
+            failNoty('<i class="far fa-times-circle"></i>', err);
             return;
         } else {
             if(email !== ''){
@@ -70,6 +74,8 @@ function saveProfile(){
             processData: false,
             data: formData,
             type: 'POST'
+        }).done(function(){
+            succesNoty('<i class="far fa-thumbs-up"></i>', $('#i18n').attr('saveProfile'));
         });
     });
 }

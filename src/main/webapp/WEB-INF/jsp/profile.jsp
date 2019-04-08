@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -13,77 +14,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ml-auto mr-auto">
             <div class="card border-light mb-3" id="table-card3">
                 <div class="card-body">
-                    <%--<h1>PROFILE</h1>--%>
-                    <form action="#" enctype="multipart/form-data" id="profile-image-form">
-                        <div class="d-flex justify-content-around">
-                            <div class="p-4">
-                                <div id="preview" class="form-control image-holder"
-                                     style="width:300px;height:300px;outline:2px solid #000;text-align: center;">
-                                    <h3 style="display: inline-block;padding-top: 130px;">NO PHOTO</h3>
-                                </div>
-                                <br>
-                                <div class="form-group d-flex">
-                                    <%--<div class="input-group">--%>
-                                    <%--<input type="text" id="text-input" class="form-control"--%>
-                                    <%--placeholder="image name"--%>
-                                    <%--style="padding-top:0;padding-bottom:0;height: 30px;" readonly>--%>
-                                    <%--<div class="input-group">--%>
-                                    <button class="btn btn-outline-success btn-sm flex-fill" type="button"
-                                            onclick="updateImage()"><i class="fas fa-search"></i>&nbsp;Find
-                                    </button>
-                                    <button class="btn btn-outline-warning btn-sm flex-fill" type="button"
-                                            onclick="clearImageInput()"><i class="fas fa-backspace"></i>&nbsp;Clear
-                                    </button>
-                                    <button class="btn btn-outline-danger btn-sm flex-fill" type="button"
-                                            onclick="removeImage()"><i class="fas fa-trash"></i>&nbsp;Delete
-                                    </button>
-                                    <%--<i class="fas fa-trash"></i>--%>
-                                    <%--</div>--%>
-                                    <%--</div>--%>
-                                    <input type="file" name="image" id="image-input" accept="image/*" hidden>
-                                </div>
-
-                            </div>
-                            <div class="p-4">
-                                <div class="form-group row">
-                                    <label for="name" class="col-4 col-form-label">Имя</label>
-                                    <div class="col-8">
-                                        <input type="text" id="name" name="name" class="form-control"
-                                               required="required" readonly/>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="adresse" class="col-4 col-form-label">Адрес</label>
-                                    <div class="col-8">
-                                        <input type="text" id="adresse" name="adresse" class="form-control"
-                                               required="required"/>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="email" class="col-4 col-form-label">E-Mail</label>
-                                    <div class="col-8" id="email-div">
-                                        <input type="email" id="email" name="email" class="form-control"
-                                               required="required"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-4">
-                                <div class="form-group row">
-                                    <label for="new-passwort" class="col-4 col-form-label">Новый пароль</label>
-                                    <div class="col-8">
-                                        <input type="text" id="new-passwort" name="newPasswort" class="form-control"/>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="repeat-passwort" class="col-4 col-form-label">Повторить пароль</label>
-                                    <div class="col-8" id="repeat">
-                                        <input type="text" id="repeat-passwort" name="repeatPasswort"
-                                               class="form-control"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    <jsp:include page="../jsp/forms/profile-form.jsp"/>
                     <hr>
                     <div class="form-control">
                         <jsp:include page="../jsp/buttons/save-and-close.jsp">
@@ -98,6 +29,8 @@
         </div>
     </div>
 </div>
+<jsp:include page="../jsp/i18n/i18n-profile.jsp">
+    <jsp:param name="page" value="profile"/>
+</jsp:include>
 </body>
-
 </html>
