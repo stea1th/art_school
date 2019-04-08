@@ -9,7 +9,7 @@
         <div class="p-4">
             <div id="preview" class="form-control image-holder"
                  style="width:300px;height:300px;text-align: center;">
-                <h3 style="display: inline-block;padding-top: 130px;"><spring:message code="form.nophoto"/></h3>
+                <h3 style="display: inline-block;padding-top: 130px;"><spring:message code="profile.nophoto"/></h3>
             </div>
             <br>
             <div class="form-group d-flex">

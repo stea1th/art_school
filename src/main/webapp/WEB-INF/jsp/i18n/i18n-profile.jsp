@@ -8,4 +8,6 @@
     <jsp:attribute name="invalidPassword"><spring:message code="${param.page}.invalid.password"/></jsp:attribute>
     <jsp:attribute name="invalidEmail"><spring:message code="${param.page}.invalid.email"/></jsp:attribute>
     <jsp:attribute name="saveProfile"><spring:message code="${param.page}.save.successfull"/></jsp:attribute>
+    <jsp:attribute name="noPhoto"><spring:message code="${param.page}.nophoto"/></jsp:attribute>
+
 </jsp:element>

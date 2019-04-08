@@ -41,7 +41,8 @@ function saveProfile(){
         formData.append('adresse', $('#adresse').val());
         if(pass !== $('#repeat-passwort').val()){
             var err = $('#i18n').attr('invalidPassword');
-            $('#repeat').append('<div style="color:red" class="error-field">err</div>');
+            console.log(err);
+            $('#repeat').append('<div style="color:red" class="error-field">' +err+ '</div>');
             failNoty('<i class="far fa-times-circle"></i>', err);
             return;
         } else {
@@ -50,7 +51,7 @@ function saveProfile(){
 
         if(!email.includes("@")){
             var err = $('#i18n').attr('invalidEmail');
-            $('#email-div').append('<div style="color:red" class="error-field">err</div>');
+            $('#email-div').append('<div style="color:red" class="error-field">' +err+ '</div>');
             failNoty('<i class="far fa-times-circle"></i>', err);
             return;
         } else {
@@ -102,7 +103,8 @@ function clearImageInput(){
     $('#image-input').val('');
     $.get("/api/profile/my-image").done(function(data){
         if(data === ''){
-            $('#preview').empty().append('<h3 style="display: inline-block;padding-top: 130px;">NO PHOTO</h3>');
+            var err = $('#i18n').attr('noPhoto');
+            $('#preview').empty().append('<h3 style="display: inline-block;padding-top: 130px;">' + err + '</h3>');
         } else {
             var image = document.createElement('img');
             image.style.cssText = 'width:300px;height:300px;text-align: center;';
