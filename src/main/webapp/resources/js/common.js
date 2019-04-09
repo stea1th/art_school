@@ -25,8 +25,6 @@ function getUserImageForNavBar() {
         $.get("/api/profile/my-image")
             .done(function (data) {
                 var image;
-                console.log(data === '');
-                console.log(data);
                 if (data !== '') {
                     image = document.createElement('img');
                     image.style.cssText = 'width:60px;height:60px;border-radius:50%;background-color:white;';
@@ -209,7 +207,6 @@ function deleteRow(id) {
 function updateRow(id) {
     $.get(ajaxUrl + "/" + id)
         .done(function (data) {
-            console.log(data);
             $.each(data, function (k, v) {
                 if ($('#slider1').length) {
                     $('.modal-title').text('Обновить способ оплаты');

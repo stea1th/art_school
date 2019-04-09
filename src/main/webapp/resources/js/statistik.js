@@ -27,7 +27,6 @@ function getStatisticOnYearChange() {
 function getStatistic(year) {
     $.get(ajaxStatistik + "/chart/" + year)
         .done(function (data) {
-            console.log(data);
             if(barChart === undefined){
                 createChart(data);
             } else {
@@ -37,7 +36,6 @@ function getStatistic(year) {
 }
 
 function addValue(data) {
-    console.log(data);
     myData = data[0];
     removeData();
     $.map(myData, function (d) {

@@ -58,7 +58,6 @@ public class Users extends AbstractBaseEntity {
     private Boolean aktiv;
 
     @Column(name = "image", length = 5242880)
-//    @Lob
     @Type(type="org.hibernate.type.BinaryType")
     @Nullable
     private byte[] image;

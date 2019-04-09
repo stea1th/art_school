@@ -89,7 +89,6 @@ function changeToBlocked(id) {
 }
 
 function changeForumLanguage(lang) {
-    console.log(location.href);
     var locale = "&locale=";
     var link = location.pathname.includes('/forum') ? location.href.split("?")[0] : location.href;
     var url = link + (link.includes('?') ? "&" : "?") + "page=" + ($('.page-input').attr('this') - 1) + "&size=" + $('.page-size').val();
