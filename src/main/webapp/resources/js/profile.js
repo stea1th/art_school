@@ -5,6 +5,7 @@ var fileTypes = [
 ];
 var file;
 var imageInput = $('#image-input');
+var err;
 
 
 $(function () {
@@ -40,8 +41,7 @@ function saveProfile(){
         formData.append('name', $('#name').val());
         formData.append('adresse', $('#adresse').val());
         if(pass !== $('#repeat-passwort').val()){
-            var err = $('#i18n').attr('invalidPassword');
-            console.log(err);
+            err = $('#i18n').attr('invalidPassword');
             $('#repeat').append('<div style="color:red" class="error-field">' +err+ '</div>');
             failNoty('<i class="far fa-times-circle"></i>', err);
             return;
@@ -50,7 +50,7 @@ function saveProfile(){
         }
 
         if(!email.includes("@")){
-            var err = $('#i18n').attr('invalidEmail');
+            err = $('#i18n').attr('invalidEmail');
             $('#email-div').append('<div style="color:red" class="error-field">' +err+ '</div>');
             failNoty('<i class="far fa-times-circle"></i>', err);
             return;
@@ -100,11 +100,10 @@ function inputOnClick(){
 }
 
 function clearImageInput(){
-    $('#text-input').val('');
     $('#image-input').val('');
     $.get("/api/profile/my-image").done(function(data){
         if(data === ''){
-            var err = $('#i18n').attr('noPhoto');
+            err = $('#i18n').attr('noPhoto');
             $('#preview').empty().append('<h3 style="display: inline-block;padding-top: 130px;">' + err + '</h3>');
         } else {
             var image = document.createElement('img');
@@ -125,7 +124,7 @@ function validFileType(file) {
 }
 
 function removeImage(){
-    var err = $('#i18n').attr('noPhoto');
+    err = $('#i18n').attr('noPhoto');
     $('#preview').empty().append('<h3 style="display: inline-block;padding-top: 130px;">' + err + '</h3>');
     $('#image-input').val('');
     imageInput.attr('del', true);
