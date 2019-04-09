@@ -62,7 +62,7 @@
             <sec:authorize access="isAuthenticated()">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle testIt" href="#" id="dropdown04" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false"><spring:message code="app.lang"/></a>
+                       aria-haspopup="true" aria-expanded="false" style="padding-top: 27px;"><spring:message code="app.lang"/></a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <div class="dropdown-item" style="cursor: pointer" onclick="changeLanguage('en')">
                             <spring:message code="app.lang.en"/></div>
@@ -73,15 +73,13 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-
                     <a id="userdetails" href="#" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false" class="nav-link dropdown-toggle navbar-icon-link">
-                        <i class="fas fa-user-circle fa-2x"></i></a>
+                    </a>
                     <div aria-labelledby="userdetails" class="dropdown-menu dropdown-menu-right">
                         <a href="profile" class="dropdown-item">Profile</a>
                         <div class="dropdown-divider my-0"></div>
                         <a href="<c:url value="/perform_logout" />" class="dropdown-item">Logout</a>
-
                     </div>
                 </li>
             </sec:authorize>

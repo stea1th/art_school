@@ -76,6 +76,7 @@ function saveProfile(){
             data: formData,
             type: 'POST'
         }).done(function(){
+            getUserImageForNavBar();
             succesNoty('<i class="far fa-thumbs-up"></i>', $('#i18n').attr('saveProfile'));
         });
     });
@@ -124,7 +125,9 @@ function validFileType(file) {
 }
 
 function removeImage(){
-    $('#preview').empty().append('<h3 style="display: inline-block;padding-top: 130px;">NO PHOTO</h3>');
+    var err = $('#i18n').attr('noPhoto');
+    $('#preview').empty().append('<h3 style="display: inline-block;padding-top: 130px;">' + err + '</h3>');
     imageInput.attr('del', true);
 }
+
 

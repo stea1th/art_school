@@ -1,4 +1,3 @@
-
 var ajaxUrl;
 
 $(function () {
@@ -17,30 +16,49 @@ $(function () {
 
     getLocalesForTables();
 
+    getUserImageForNavBar();
+
 });
 
-function getLocalesForTables(){
+function getUserImageForNavBar() {
+    if (location.pathname !== '/login') {
+        $.get("/api/profile/my-image")
+            .done(function (data) {
+                var image;
+                if (data !== '') {
+                    image = document.createElement('img');
+                    image.style.cssText = 'width:60px;height:60px;border-radius:50%;background-color:white;';
+                    image.src = "data:image/jpeg;base64," + data;
+                } else {
+                    image = '<i class="fas fa-user-circle fa-3x"></i>';
+                }
+                $('#userdetails').empty().html(image);
+            });
+    }
+}
+
+function getLocalesForTables() {
     $.get("/api/locale/tables").done(function (data) {
-        if(typeof(createTable) !== 'undefined'){
+        if (typeof(createTable) !== 'undefined') {
             createTable(data);
         }
     });
 }
 
-function changeLanguage(lang){
+function changeLanguage(lang) {
     var locale = "locale=";
     var url;
-    if(location.pathname.includes('/forum') || location.pathname.includes('/nachricht')){
+    if (location.pathname.includes('/forum') || location.pathname.includes('/nachricht')) {
         changeForumLanguage(lang);
     } else {
-        if(location.href.includes("?" + locale)){
+        if (location.href.includes("?" + locale)) {
             url = location.href.split("?" + locale)[0];
-        } else if(location.href.includes("&" + locale)){
+        } else if (location.href.includes("&" + locale)) {
             url = location.href.split("&" + locale)[0];
         } else {
             url = location.href;
         }
-        location.href = url + (url.includes('?')? "&" : "?") + locale + lang;
+        location.href = url + (url.includes('?') ? "&" : "?") + locale + lang;
     }
 
 }
@@ -51,35 +69,35 @@ function saveOrUpdateUser() {
     });
 }
 
-function pageInputField(){
+function pageInputField() {
     var pageInputDiv = $('.page-input-div');
     var n;
-    pageInputDiv.on('click', function(){
+    pageInputDiv.on('click', function () {
         var input = $(this).find('input');
         n = input.val();
         input.val('');
         $(this).find('input').removeClass('disabled').focus();
     });
 
-    pageInputDiv.on('focusout', function(){
+    pageInputDiv.on('focusout', function () {
         var input = $(this).find('input');
-        if(input.val() !== n){
+        if (input.val() !== n) {
             input.val(n);
         }
     })
 }
 
-function selectSizeOnChange(){
-    $('.page-size').on('change', function(){
+function selectSizeOnChange() {
+    $('.page-size').on('change', function () {
         $.get($(this).attr('link'), {
             id: $(this).attr('themaId'),
             size: $(this).val(),
             select: true
-        }).done(function(data){
+        }).done(function (data) {
             $('.wrapper').empty().append(data);
             pageNumberInput();
             selectSizeOnChange();
-            if(isFunctionDefined('saveMessage')){
+            if (isFunctionDefined('saveMessage')) {
                 saveMessage();
             }
         });
@@ -87,18 +105,18 @@ function selectSizeOnChange(){
 }
 
 function isFunctionDefined(functionName) {
-    if(eval("typeof(" + functionName + ") == typeof(Function)")) {
+    if (eval("typeof(" + functionName + ") == typeof(Function)")) {
         return true;
     }
 }
 
-function pageNumberInput(){
+function pageNumberInput() {
     var input = $('.page-input');
-    input.on('keypress', function(e){
-        if(e.which === 13){
+    input.on('keypress', function (e) {
+        if (e.which === 13) {
             var number = input.val();
-            if(number>=1 && number < parseInt(input.attr('last')) + 2){
-                location.href = input.attr('link') + "?id="+ input.attr('themaId') + "&page=" + (number-1)
+            if (number >= 1 && number < parseInt(input.attr('last')) + 2) {
+                location.href = input.attr('link') + "?id=" + input.attr('themaId') + "&page=" + (number - 1)
                     + "&sort=" + input.attr('sort')
                     + "&size=" + input.attr('size');
             } else {
@@ -133,8 +151,8 @@ function saveOrUpdate(form) {
 function manageNavBar() {
     $('ul.navbar-nav li.active').removeClass('active');
     $('a[href="' + location.pathname.replace("/", "") + '"]').closest('li').addClass('active');
-    if(location.pathname === "/nachricht"){
-        $('a[href="'+"/forum".replace("/", "")+'"]').closest('li').addClass('active');
+    if (location.pathname === "/nachricht") {
+        $('a[href="' + "/forum".replace("/", "") + '"]').closest('li').addClass('active');
     }
 }
 
@@ -214,13 +232,13 @@ function updateRow(id) {
 
 function toggleThis(id) {
     $.post(ajaxUrl + "/toggle/" + id, {"id": id})
-        .done(function(data){
+        .done(function (data) {
             toggleOnOff(data);
         });
 }
 
 function toggleOnOff(data) {
-    if(data){
+    if (data) {
         succesNoty("<i class=\"far fa-eye \"></i>", " Включили");
     } else {
         failNoty("<i class=\"far fa-eye-slash \"></i>", " Выключили");
@@ -231,14 +249,14 @@ function getSelect(url, sel, name, selected) {
     sel.empty().append('<option disabled selected>' + name + '</option>');
     $.getJSON(url, function (data) {
         $.each(data, function (key, val) {
-            if(val.id === undefined){
-                if(selected === val){
+            if (val.id === undefined) {
+                if (selected === val) {
                     sel.append('<option selected value="' + key + '">' + val + '</option>');
                 } else {
                     sel.append('<option value="' + key + '">' + val + '</option>');
                 }
             } else {
-                if(selected === val.name){
+                if (selected === val.name) {
                     sel.append('<option selected value="' + val.id + '">' + val.name + '</option>');
                 } else {
                     sel.append('<option value="' + val.id + '">' + val.name + '</option>');
@@ -294,7 +312,7 @@ function warnNoty(id) {
     var n = new Noty({
         type: 'warning',
         text: "<span><i class='fas fa-exclamation-circle fa-2x'></i></span> &nbsp;"
-        + "Вы уверены, что готовы удалить данный объект?",
+            + "Вы уверены, что готовы удалить данный объект?",
         theme: 'bootstrap-v4',
         layout: 'center',
         // timeout: 1500
