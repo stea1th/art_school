@@ -127,6 +127,7 @@ function validFileType(file) {
 function removeImage(){
     var err = $('#i18n').attr('noPhoto');
     $('#preview').empty().append('<h3 style="display: inline-block;padding-top: 130px;">' + err + '</h3>');
+    $('#image-input').val('');
     imageInput.attr('del', true);
 }
 

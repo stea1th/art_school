@@ -25,6 +25,8 @@ function getUserImageForNavBar() {
         $.get("/api/profile/my-image")
             .done(function (data) {
                 var image;
+                console.log(data === '');
+                console.log(data);
                 if (data !== '') {
                     image = document.createElement('img');
                     image.style.cssText = 'width:60px;height:60px;border-radius:50%;background-color:white;';
