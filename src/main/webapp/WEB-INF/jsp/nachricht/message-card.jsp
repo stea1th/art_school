@@ -90,7 +90,7 @@
                         </svg>
                             </c:when>
                             <c:otherwise>
-                                <img src="data:image/jpeg;base64,${message.encodedImage}" alt="Hallo!" width="113.75px" height="130px">
+                                <img src="data:image/jpeg;base64,${message.encodedImage}" alt="Hallo!" width="91px" height="104px">
                             </c:otherwise>
                         </c:choose>
                     </li>
