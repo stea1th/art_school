@@ -17,7 +17,6 @@ import java.util.List;
 public class TestMain {
     public static void main(String[] args) throws JsonProcessingException {
 
-
         try(ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-db.xml")) {
             UnterrichtRestController controller = appCtx.getBean(UnterrichtRestController.class);
             List<UnterrichtTo> list = new ArrayList<>();
