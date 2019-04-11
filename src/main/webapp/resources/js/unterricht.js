@@ -164,7 +164,7 @@ function saveUnterricht() {
 function updateUnterricht(event, zt) {
     var kindSelect = $('#kind');
     var zahlungSelect = $('#zahlung');
-    $('#create').text('Изменить урок');
+    $('.modal-title').text('Изменить урок');
     kindSelect.hide();
     zahlungSelect.hide();
     $.get(ajaxUnterricht + "/get/" + event.id).done(function (data) {
@@ -202,7 +202,7 @@ function updateUnterricht(event, zt) {
 }
 
 function createUnterricht(date, zt) {
-    $('#create').text('Создать урок');
+    $('.modal-title').text('Создать урок');
     $('#datum').val(date.format());
     getSelect(ajaxKind + "/filter/aktiv", $('#kind'), 'Выберите ученика');
     getSelect(ajaxZahlung + "/filter/aktiv", $('#zahlung'), 'Выберите оплату');

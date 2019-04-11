@@ -6,7 +6,7 @@
 
 <spring:message code="button.save" var="save"/>
 <c:set value="btn btn-primary" var="primaryClass"/>
-<button type="button" class="${not empty param.primaryClass? param.primaryClass : primaryClass}" id="${param.saveId}">${not empty param.buttonName? param.buttonName : save}
+<button type="button" class="${not empty param.primaryClass? param.primaryClass : primaryClass}" id="${param.saveId}" onclick="${param.onclick}">${not empty param.buttonName? param.buttonName : save}
 </button>
 <c:choose>
     <c:when test="${empty param.notModal}">

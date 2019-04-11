@@ -8,72 +8,6 @@
 <script type="text/javascript" src='<c:url value="/resources/js/unterricht.js"/>' defer></script>
 <jsp:include page="fragments/bodyNav.jsp"/>
 <br/>
-<div class="modal fade" id="createUnterricht" tabindex="-1" role="dialog" aria-labelledby="createUnterricht"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="create"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="detailsForm">
-                    <div>
-                        <input type="hidden" class="form-control" id="id" name="id">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" readonly="" class="form-control" id="datum" name="datum" hidden>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="kind" class="col-4 col-form-label">Ученик</label>
-                        <div class="col-8" id="kind-div">
-                            <select id="kind" name="kind" class="custom-select" required="required">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="zahlung" class="col-4 col-form-label">Оплата</label>
-                        <div class="col-8" id="zahlung-div">
-                            <select id="zahlung" name="zahlung" class="custom-select" required="required">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="zeit" class="col-4 col-form-label">Время</label>
-                        <div class="col-8">
-                            <input id="zeit" name="zeit" required/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-4">Оплатили?</label>
-                        <div class="col-8">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="bezahlt" name="bezahlt"
-                                       checked="checked"
-                                       value="true" required>
-                                <label class="custom-control-label" for="bezahlt">Да</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-12">
-                        <textarea class="form-control" id="notiz" name="notiz" rows="3"
-                                  placeholder="Заметка"></textarea>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" onclick="saveUnterricht()">Сохранить</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="container">
     <div class="row">
@@ -86,5 +20,13 @@
         </div>
     </div>
 </div>
+<jsp:include page="fragments/modal.jsp">
+    <jsp:param name="url" value="../forms/unterricht-form.jsp"/>
+    <jsp:param name="modalId" value="createUnterricht"/>
+    <jsp:param name="buttons" value="../buttons/save-and-close.jsp"/>
+    <jsp:param name="saveId" value="saveUnterricht" />
+    <jsp:param name="onclick" value="saveUnterricht()" />
+
+</jsp:include>
 </body>
 </html>
