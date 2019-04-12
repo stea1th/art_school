@@ -43,6 +43,7 @@ public class NachrichtTo {
     private Integer messages;
     private String banned;
     private String encodedImage;
+    private Boolean active;
 
     public NachrichtTo(Nachricht n) {
         this(n.getId(), n.getText(),
@@ -55,7 +56,8 @@ public class NachrichtTo {
                 n.getUser().getRoles().size(),
                 n.getUser().getRegistriert().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
                 n.getUser().getNachrichts().size(),
-                FileHelper.convertByteArrayToString(n.getUser().getImage()));
+                FileHelper.convertByteArrayToString(n.getUser().getImage()),
+                n.getUser().getAktiv());
     }
 
     public NachrichtTo(Integer id) {
@@ -74,7 +76,7 @@ public class NachrichtTo {
                 NachrichtUpdater updater,
                 List<String> lines, List<String> parentMessages,
                 Integer roleSize,
-                String registriert, Integer messages, String encodedImage) {
+                String registriert, Integer messages, String encodedImage, Boolean active) {
         this.id = id;
         this.text = text;
         this.datumTo = datumTo;
@@ -88,6 +90,7 @@ public class NachrichtTo {
         this.registriert = registriert;
         this.messages = messages;
         this.encodedImage = encodedImage;
+        this.active = active;
     }
 
     public boolean isNew() {
