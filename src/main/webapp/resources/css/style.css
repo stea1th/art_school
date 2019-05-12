@@ -98,7 +98,7 @@ cursor:pointer;}
     /*border:inset; */
     border-bottom:none;}
 
-.container {
+.container-fluid {
         max-width: 1200px;
 }
 

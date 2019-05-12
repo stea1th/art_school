@@ -18,6 +18,10 @@ $(function () {
 
     getUserImageForNavBar();
 
+    new PerfectScrollbar('.list-scrollbar');
+    var nanobar = new Nanobar();
+    nanobar.go(100);
+
 });
 
 function getUserImageForNavBar() {
