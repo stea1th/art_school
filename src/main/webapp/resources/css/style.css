@@ -221,7 +221,10 @@ cursor:pointer;}
     padding:0;
 }
 
-
+.navbar{
+    background: white;
+    border: none;
+}
 
 
 

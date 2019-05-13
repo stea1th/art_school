@@ -127,35 +127,3 @@
             </div>
         </nav>
 
-        <%--<!-- content container -->--%>
-        <%--<div class="container-fluid">--%>
-
-            <%--<!-- one box -->--%>
-            <%--<div class="content-box mb-3 content-lighten">--%>
-                <%--<h3>Website content</h3>--%>
-                <%--<p>Here is content this website page.</p>--%>
-            <%--</div>--%>
-
-            <%--<!-- two box -->--%>
-            <%--<div class="row">--%>
-                <%--<div class="col-sm-6 mb-3 col-md-6">--%>
-                    <%--<div class="content-box content-lighten">--%>
-                        <%--<h3>Website content</h3>--%>
-                        <%--<p>Here is content this website page.</p>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="col-sm-6 mb-3 col-md-6">--%>
-                    <%--<div class="content-box content-lighten">--%>
-                        <%--<h3>Website content</h3>--%>
-                        <%--<p>Here is content this website page.</p>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</div>--%>
-
-<!-- javascript library -->
-
-
-<%--</html>--%>
