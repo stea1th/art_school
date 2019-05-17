@@ -18,6 +18,8 @@ $(function () {
 
     getUserImageForNavBar();
 
+    setSideBarClosed();
+
     new PerfectScrollbar('.list-scrollbar');
     var nanobar = new Nanobar();
     nanobar.go(100);
@@ -334,4 +336,9 @@ function warnNoty(id) {
             })
         ]
     }).show();
+}
+
+function setSideBarClosed(){
+    console.log($('#wrapper'));
+    $('#wrapper').addClass('sidebar-toggle');
 }
