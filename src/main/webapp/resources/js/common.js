@@ -18,13 +18,17 @@ $(function () {
 
     getUserImageForNavBar();
 
-    setSideBarClosed();
+    // setSideBarClosed();
 
     new PerfectScrollbar('.list-scrollbar');
     var nanobar = new Nanobar();
     nanobar.go(100);
 
 });
+
+// function setSideBarClosed(){
+//     $('#wrapper').addClass('sidebar-toggle');
+// }
 
 function getUserImageForNavBar() {
     if (location.pathname !== '/login') {
@@ -33,7 +37,7 @@ function getUserImageForNavBar() {
                 var image;
                 if (data !== '') {
                     image = document.createElement('img');
-                    image.style.cssText = 'width:60px;height:60px;border-radius:50%;background-color:white;';
+                    image.style.cssText = 'width:40px;height:40px;border-radius:50%;background-color:white;';
                     image.src = "data:image/jpeg;base64," + data;
                 } else {
                     image = '<i class="fas fa-user-circle fa-3x"></i>';
@@ -55,6 +59,7 @@ function changeLanguage(lang) {
     var locale = "locale=";
     var url;
     if (location.pathname.includes('/forum') || location.pathname.includes('/nachricht')) {
+        console.log(location.pathname);
         changeForumLanguage(lang);
     } else {
         if (location.href.includes("?" + locale)) {
@@ -338,7 +343,3 @@ function warnNoty(id) {
     }).show();
 }
 
-function setSideBarClosed(){
-    console.log($('#wrapper'));
-    $('#wrapper').addClass('sidebar-toggle');
-}

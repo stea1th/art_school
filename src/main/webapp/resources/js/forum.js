@@ -90,7 +90,8 @@ function changeToBlocked(id) {
 
 function changeForumLanguage(lang) {
     var locale = "&locale=";
-    var link = location.pathname.includes('/forum') ? location.href.split("?")[0] : location.href;
+    var link = location.href.replace('#', '');
+    link = location.pathname.includes('/forum') ? link.split("?")[0] : link;
     var url = link + (link.includes('?') ? "&" : "?") + "page=" + ($('.page-input').attr('this') - 1) + "&size=" + $('.page-size').val();
     location.href = (url.includes(locale) ? url.split(locale)[0] : url.includes('#') ? url.split('#')[0] : url) + locale + lang;
 }

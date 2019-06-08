@@ -9,7 +9,10 @@
 <body class="body body-lighten">
 <script type="text/javascript" src='<c:url value="/resources/js/forum.js"/>' defer></script>
 <%--<jsp:include page="../fragments/bodyNav.jsp"/>--%>
+
 <br/>
+<br/>
+
 <div class="d-flex" id="wrapper">
     <jsp:include page="../fragments/sidebarNav.jsp"/>
     <div class="container-fluid">

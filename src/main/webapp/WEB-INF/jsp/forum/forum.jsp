@@ -10,10 +10,13 @@
 <body class="body body-lighten">
 <script type="text/javascript" src='<c:url value="/resources/js/forum.js"/>' defer></script>
 <%--<jsp:include page="../fragments/bodyNav.jsp"/>--%>
+
+<br/>
 <br/>
 
-<div class="d-flex" id="wrapper">
+<div class="d-flex sidebar-toggle" id="wrapper">
     <jsp:include page="../fragments/sidebarNav.jsp"/>
+    <%--<div class="container">--%>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ml-auto mr-auto">
@@ -51,6 +54,7 @@
             </div>
         </div>
     </div>
+    <%--</div>--%>
 </div>
 <spring:message code="forum.attention" var="attention"/>
 <spring:message code="button.itsclear" var="buttonAccepted"/>
