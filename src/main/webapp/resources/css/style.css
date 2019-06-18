@@ -224,6 +224,16 @@ cursor:pointer;}
 .navbar{
     background: white;
     border: none;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.blackiconcolor{
+    color: black !important;
+}
+
+.blackiconcolor:hover{
+    color: #BBBBBB !important;
 }
 
 

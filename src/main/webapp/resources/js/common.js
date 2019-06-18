@@ -37,10 +37,10 @@ function getUserImageForNavBar() {
                 var image;
                 if (data !== '') {
                     image = document.createElement('img');
-                    image.style.cssText = 'width:40px;height:40px;border-radius:50%;background-color:white;';
+                    image.style.cssText = 'width:58px;height:58px;border-radius:50%;background-color:white;';
                     image.src = "data:image/jpeg;base64," + data;
                 } else {
-                    image = '<i class="fas fa-user-circle fa-3x"></i>';
+                    image = '<i class="fas fa-user-circle fa-3x blackiconcolor"></i>';
                 }
                 $('#userdetails').empty().html(image);
             });
