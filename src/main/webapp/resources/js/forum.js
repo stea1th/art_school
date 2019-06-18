@@ -9,7 +9,7 @@ $(function () {
 });
 
 function topFunction(){
-    $('body').scrollTo();
+    $('head').scrollTo();
 }
 
 function scrollFunction() {
