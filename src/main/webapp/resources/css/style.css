@@ -236,6 +236,18 @@ cursor:pointer;}
     color: #BBBBBB !important;
 }
 
+.outer{
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+}
+
+#myChart{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
 
 
 
