@@ -20,7 +20,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ml-auto mr-auto">
-                <br>
+                <%--<br>--%>
                 <div class="card border-light mb-3" id="table-card3">
                     <div class="card-body">
                         <div class="d-flex">

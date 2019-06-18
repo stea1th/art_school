@@ -18,7 +18,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 ml-auto mr-auto">
-                <br>
+                <%--<br>--%>
                 <div class="card border-light mb-3" id="table-card3">
                     <div class="card-body">
                         <div class="row">

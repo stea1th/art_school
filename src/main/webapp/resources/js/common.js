@@ -37,7 +37,7 @@ function getUserImageForNavBar() {
                 var image;
                 if (data !== '') {
                     image = document.createElement('img');
-                    image.style.cssText = 'width:58px;height:58px;border-radius:50%;background-color:white;';
+                    image.style.cssText = 'width:60px;height:60px;border-radius:50%;background-color:white;';
                     image.src = "data:image/jpeg;base64," + data;
                 } else {
                     image = '<i class="fas fa-user-circle fa-3x blackiconcolor"></i>';
