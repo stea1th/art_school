@@ -25,7 +25,7 @@
     <script type="text/javascript" src='webjars/jquery-ui/1.12.1/jquery-ui.min.js'></script>
     <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>--%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" />
     <script src="webjars/bootstrap/4.1.3/js/bootstrap.js"></script>
 
 
@@ -56,7 +56,7 @@
 
 
     <%--SideBar--%>
-    <link rel='stylesheet' href='resources/css/sidebar.min.css' />
+    <link rel='stylesheet' href='resources/css/sidebar.css' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.4.0/css/perfect-scrollbar.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.4.0/perfect-scrollbar.min.js"></script>
     <script type="text/javascript" src='<c:url value="/resources/js/sidebar/nanobar.min.js"/>' defer></script>

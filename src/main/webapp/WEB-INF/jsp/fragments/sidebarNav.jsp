@@ -15,91 +15,116 @@
 
             <!-- simple menu -->
             <li class="list-item">
-                <p class="list-title text-uppercase">Translate</p>
+                <p class="list-title text-uppercase">Profile</p>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="list-link">Czech</a></li>
-                    <li><a href="#" class="list-link current">English</a></li>
+                    <li><a href="#" class="list-link link-arrow"><span class="list-icon"><i class="fas fa-user"></i></span>Info</a>
+                        <ul class="list-unstyled list-hidden">
+                            <li>
+                                <div>Name: Igor</div>
+                                <div>Status: Moderator</div>
+                                <div>Registered: 12.12.2017</div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><a href="profile" class="list-link"><span class="list-icon"><i
+                            class="fas fa-user-edit"></i></span>Edit</a></li>
+                    <li><a href="<c:url value="/perform_logout" />" class="list-link"><span class="list-icon"><i
+                            class="fas fa-sign-out-alt"></i></span>Logout</a></li>
                 </ul>
             </li>
 
             <!-- multi-level dropdown menu -->
             <li class="list-item">
-                <p class="list-title text-uppercase">Dashboard</p>
+                <p class="list-title text-uppercase">Navigation</p>
                 <ul class="list-unstyled">
                     <sec:authorize access="hasRole('ROLE_MODERATOR')">
                         <li>
-                            <a class="list-link" href="unterricht"><spring:message code="app.lesson"/><span class="sr-only">(current)</span></a>
+                            <a class="list-link" href="unterricht"><span class="list-icon"><i
+                                    class="fas fa-graduation-cap" aria-hidden="true"></i></span><spring:message
+                                    code="app.lesson"/><span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li><a href="#" class="list-link link-arrow"><span class="list-icon"><i
+                                class="fas fa-list-ul"></i></span>Tables</a>
+                            <ul class="list-unstyled list-hidden">
+                                <li>
+                                    <a class="list-link" href="kind"><span class="list-icon"><i
+                                            class="fas fa-users"></i></span><spring:message code="app.users"/></a>
+                                </li>
+                                <li>
+                                    <a class="list-link" href="zahlung"><span class="list-icon"><i
+                                            class="fas fa-money-bill-alt"></i></span><spring:message
+                                            code="app.payment"/></a>
+                                </li>
+                                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                    <li>
+                                        <a class="list-link" href="admin"><span class="list-icon"><i
+                                                class="fas fa-user-secret"></i></span><spring:message code="app.admin"/></a>
+                                    </li>
+                                </sec:authorize>
+                            </ul>
                         </li>
                         <li>
-                            <a class="list-link" href="kind"><spring:message code="app.users"/></a>
-                        </li>
-                        <li>
-                            <a class="list-link" href="zahlung"><spring:message code="app.payment"/></a>
-                        </li>
-                        <li>
-                            <a class="list-link" href="statistik"><spring:message code="app.statistic"/></a>
+                            <a class="list-link" href="statistik"><span class="list-icon"><i
+                                    class="fas fa-chart-pie"></i></span><spring:message code="app.statistic"/></a>
                         </li>
                     </sec:authorize>
                     <li>
-                        <a class="list-link" href="forum"><spring:message code="forum.name"/></a>
+                        <a class="list-link" href="forum"><span class="list-icon"><i
+                                class="fab fa-facebook-f"></i></span><spring:message code="forum.name"/></a>
                     </li>
-                    <sec:authorize access="hasRole('ROLE_ADMIN')">
-                        <li >
-                            <a class="list-link" href="admin"><spring:message code="app.admin"/></a>
-                        </li>
-                    </sec:authorize>
+
                     <%--<li><a href="#" class="list-link"><span class="list-icon"><i class="fa fa-home"--%>
-                                                                                 <%--aria-hidden="true"></i></span>Home</a>--%>
+                    <%--aria-hidden="true"></i></span>Home</a>--%>
                     <%--</li>--%>
                     <%--<li><a href="#" class="list-link link-arrow link-current"><span class="list-icon"><i--%>
-                            <%--class="fa fa-cog" aria-hidden="true"></i></span>Settings</a>--%>
-                        <%--<ul class="list-unstyled list-hidden">--%>
-                            <%--<li><a href="#" class="list-link">Timezone</a></li>--%>
-                            <%--<li><a href="#" class="list-link">Permissions</a></li>--%>
-                            <%--<li><a href="#" class="list-link link-arrow link-current">Maintenance</a>--%>
-                                <%--<ul class="list-unstyled list-hidden">--%>
-                                    <%--<li><a href="#" class="list-link">On</a></li>--%>
-                                    <%--<li><a href="#" class="list-link link-current">Off</a></li>--%>
-                                <%--</ul>--%>
-                            <%--</li>--%>
-                        <%--</ul>--%>
+                    <%--class="fa fa-cog" aria-hidden="true"></i></span>Settings</a>--%>
+                    <%--<ul class="list-unstyled list-hidden">--%>
+                    <%--<li><a href="#" class="list-link">Timezone</a></li>--%>
+                    <%--<li><a href="#" class="list-link">Permissions</a></li>--%>
+                    <%--<li><a href="#" class="list-link link-arrow link-current">Maintenance</a>--%>
+                    <%--<ul class="list-unstyled list-hidden">--%>
+                    <%--<li><a href="#" class="list-link">On</a></li>--%>
+                    <%--<li><a href="#" class="list-link link-current">Off</a></li>--%>
+                    <%--</ul>--%>
+                    <%--</li>--%>
+                    <%--</ul>--%>
                     <%--</li>--%>
 
                     <!-- notice info -->
-                    <li><a href="#" class="list-link">Notice</a></li>
                 </ul>
             </li>
 
-            <!-- multi-level dropdown menu -->
-            <li class="list-item">
-                <p class="list-title text-uppercase">Coments</p>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="list-link"><span class="list-icon"><i class="fa fa-plus"
-                                                                                 aria-hidden="true"></i></span>New</a>
-                    </li>
-                    <li><a href="#" class="list-link link-arrow"><span class="list-icon"><i class="fa fa-comments-o"
-                                                                                            aria-hidden="true"></i></span>Settings
-                        comments</a>
-                        <ul class="list-unstyled list-hidden">
-                            <li><a href="#" class="list-link link-current">Disable</a></li>
-                            <li><a href="#" class="list-link">Enable</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
+            <%--<!-- multi-level dropdown menu -->--%>
+            <%--<li class="list-item">--%>
+            <%--<p class="list-title text-uppercase">Coments</p>--%>
+            <%--<ul class="list-unstyled">--%>
+            <%--<li><a href="#" class="list-link"><span class="list-icon"><i class="fa fa-plus"--%>
+            <%--aria-hidden="true"></i></span>New</a>--%>
+            <%--</li>--%>
+            <%--<li><a href="#" class="list-link link-arrow"><span class="list-icon"><i class="fa fa-comments-o"--%>
+            <%--aria-hidden="true"></i></span>Settings--%>
+            <%--comments</a>--%>
+            <%--<ul class="list-unstyled list-hidden">--%>
+            <%--<li><a href="#" class="list-link link-current">Disable</a></li>--%>
+            <%--<li><a href="#" class="list-link">Enable</a></li>--%>
+            <%--</ul>--%>
+            <%--</li>--%>
+            <%--</ul>--%>
+            <%--</li>--%>
 
-            <!-- simple menu -->
-            <li class="list-item">
-                <p class="list-title text-uppercase">Blog</p>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="list-link"><span class="list-icon"><i class="fa fa-plus"
-                                                                                 aria-hidden="true"></i></span>Add</a>
-                    </li>
-                    <li><a href="#" class="list-link"><span class="list-icon"><i class="fa fa-table"
-                                                                                 aria-hidden="true"></i></span>List</a>
-                    </li>
-                </ul>
-            </li>
+            <%--<!-- simple menu -->--%>
+            <%--<li class="list-item">--%>
+            <%--<p class="list-title text-uppercase">Blog</p>--%>
+            <%--<ul class="list-unstyled">--%>
+            <%--<li><a href="#" class="list-link"><span class="list-icon"><i class="fa fa-plus"--%>
+            <%--aria-hidden="true"></i></span>Add</a>--%>
+            <%--</li>--%>
+            <%--<li><a href="#" class="list-link"><span class="list-icon"><i class="fa fa-table"></i></span>List</a>--%>
+            <%--</li>--%>
+            <%--</ul>--%>
+            <%--</li>--%>
         </ul>
     </div>
 </div>
@@ -145,7 +170,8 @@
         <sec:authorize access="isAuthenticated()">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle testIt" href="#" id="dropdown04" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false" style="padding-top: 27px;"><spring:message code="app.lang"/></a>
+                   aria-haspopup="true" aria-expanded="false" style="padding-top: 27px;"><spring:message
+                        code="app.lang"/></a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
                     <div class="dropdown-item" style="cursor: pointer" onclick="changeLanguage('en')">
                         <spring:message code="app.lang.en"/></div>
@@ -168,26 +194,26 @@
         </sec:authorize>
     </ul>
     <%--<div class="collapse navbar-collapse">--%>
-        <%--<div class="dropdown dropdown-logged dropdown-logged-lighten">--%>
-            <%--<a href="#" data-toggle="dropdown" class="dropdown-logged-toggle dropdown-link">--%>
-                <%--<span class="dropdown-user float-left">Accgit</span>--%>
-                <%--<img src="img/avatar.png" alt="avatar" class="dropdown-avatar">--%>
-            <%--</a>--%>
-            <%--<div class="dropdown-menu dropdown-logged-menu dropdown-menu-right border-0 dropdown-menu-lighten">--%>
-                <%--<div class="dropdown-menu-arrow"></div>--%>
-                <%--<a class="dropdown-item dropdown-logged-item" href="#"><i class="fa fa-user-o"--%>
-                                                                          <%--aria-hidden="true"></i>Your--%>
-                    <%--profile</a>--%>
-                <%--<a class="dropdown-item dropdown-logged-item" href="#"><i class="fa fa-comments-o"--%>
-                                                                          <%--aria-hidden="true"></i>Your--%>
-                    <%--comments</a>--%>
-                <%--<a class="dropdown-item dropdown-logged-item" href="#"><i class="fa fa-key"--%>
-                                                                          <%--aria-hidden="true"></i>Change password</a>--%>
-                <%--<div class="dropdown-divider border-light"></div>--%>
-                <%--<a class="dropdown-item dropdown-logged-item" href="#"><i class="fa fa-sign-out"--%>
-                                                                          <%--aria-hidden="true"></i>Logout</a>--%>
-            <%--</div>--%>
-        <%--</div>--%>
+    <%--<div class="dropdown dropdown-logged dropdown-logged-lighten">--%>
+    <%--<a href="#" data-toggle="dropdown" class="dropdown-logged-toggle dropdown-link">--%>
+    <%--<span class="dropdown-user float-left">Accgit</span>--%>
+    <%--<img src="img/avatar.png" alt="avatar" class="dropdown-avatar">--%>
+    <%--</a>--%>
+    <%--<div class="dropdown-menu dropdown-logged-menu dropdown-menu-right border-0 dropdown-menu-lighten">--%>
+    <%--<div class="dropdown-menu-arrow"></div>--%>
+    <%--<a class="dropdown-item dropdown-logged-item" href="#"><i class="fa fa-user-o"--%>
+    <%--aria-hidden="true"></i>Your--%>
+    <%--profile</a>--%>
+    <%--<a class="dropdown-item dropdown-logged-item" href="#"><i class="fa fa-comments-o"--%>
+    <%--aria-hidden="true"></i>Your--%>
+    <%--comments</a>--%>
+    <%--<a class="dropdown-item dropdown-logged-item" href="#"><i class="fa fa-key"--%>
+    <%--aria-hidden="true"></i>Change password</a>--%>
+    <%--<div class="dropdown-divider border-light"></div>--%>
+    <%--<a class="dropdown-item dropdown-logged-item" href="#"><i class="fa fa-sign-out"--%>
+    <%--aria-hidden="true"></i>Logout</a>--%>
+    <%--</div>--%>
+    <%--</div>--%>
     <%--</div>--%>
 </nav>
 
