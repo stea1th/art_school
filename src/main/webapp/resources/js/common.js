@@ -62,16 +62,17 @@ function getLocalesForTables() {
 function changeLanguage(lang) {
     let locale = "locale=";
     let url;
-    if (location.pathname.includes('/forum') || location.pathname.includes('/nachricht')) {
-        console.log(location.pathname);
+    const forumNames = ['/forum', '/nachricht'];
+    if (forumNames.includes(location.pathname)) {
         changeForumLanguage(lang);
     } else {
-        if (location.href.includes("?" + locale)) {
-            url = location.href.split("?" + locale)[0];
-        } else if (location.href.includes("&" + locale)) {
-            url = location.href.split("&" + locale)[0];
+        let link = location.href.replace('#', '');
+        if (link.includes("?" + locale)) {
+            url = link.split("?" + locale)[0];
+        } else if (link.includes("&" + locale)) {
+            url = link.split("&" + locale)[0];
         } else {
-            url = location.href;
+            url = link;
         }
         location.href = url + (url.includes('?') ? "&" : "?") + locale + lang;
     }
