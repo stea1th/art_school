@@ -1,8 +1,7 @@
-var ajaxUrl;
 
 $(function () {
 
-    manageNavBar();
+    manageSideBar();
 
     createAnimationOnWelcome();
 
@@ -20,9 +19,8 @@ $(function () {
 
     // setSideBarClosed();
 
-    new PerfectScrollbar('.list-scrollbar');
-    var nanobar = new Nanobar();
-    nanobar.go(100);
+    initSideBar();
+
 
 });
 
@@ -30,11 +28,17 @@ $(function () {
 //     $('#wrapper').addClass('sidebar-toggle');
 // }
 
+function initSideBar(){
+    new PerfectScrollbar('.list-scrollbar');
+    let nanobar = new Nanobar();
+    nanobar.go(100);
+}
+
 function getUserImageForNavBar() {
     if (location.pathname !== '/login') {
         $.get("/api/profile/my-image")
             .done(function (data) {
-                var image;
+                let image;
                 if (data !== '') {
                     image = document.createElement('img');
                     image.style.cssText = 'width:60px;height:60px;border-radius:50%;background-color:white;';
@@ -56,8 +60,8 @@ function getLocalesForTables() {
 }
 
 function changeLanguage(lang) {
-    var locale = "locale=";
-    var url;
+    let locale = "locale=";
+    let url;
     if (location.pathname.includes('/forum') || location.pathname.includes('/nachricht')) {
         console.log(location.pathname);
         changeForumLanguage(lang);
@@ -81,17 +85,17 @@ function saveOrUpdateUser() {
 }
 
 function pageInputField() {
-    var pageInputDiv = $('.page-input-div');
-    var n;
+    let pageInputDiv = $('.page-input-div');
+    let n;
     pageInputDiv.on('click', function () {
-        var input = $(this).find('input');
+        let input = $(this).find('input');
         n = input.val();
         input.val('');
         $(this).find('input').removeClass('disabled').focus();
     });
 
     pageInputDiv.on('focusout', function () {
-        var input = $(this).find('input');
+        let input = $(this).find('input');
         if (input.val() !== n) {
             input.val(n);
         }
@@ -122,10 +126,10 @@ function isFunctionDefined(functionName) {
 }
 
 function pageNumberInput() {
-    var input = $('.page-input');
+    let input = $('.page-input');
     input.on('keypress', function (e) {
         if (e.which === 13) {
-            var number = input.val();
+            let number = input.val();
             if (number >= 1 && number < parseInt(input.attr('last')) + 2) {
                 location.href = input.attr('link') + "?id=" + input.attr('themaId') + "&page=" + (number - 1)
                     + "&sort=" + input.attr('sort')
@@ -138,8 +142,8 @@ function pageNumberInput() {
 }
 
 function saveOrUpdate(form) {
-    var successIcon = "<span><i class='far fa-check-circle '></i></span> &nbsp;";
-    var failIcon = "<span><i class='far fa-times-circle'></i></span> &nbsp;";
+    const successIcon = "<span><i class='far fa-check-circle '></i></span> &nbsp;";
+    const failIcon = "<span><i class='far fa-times-circle'></i></span> &nbsp;";
     $.post(ajaxUrl + "/save", form.serialize())
         .done(function (data) {
             myModal.modal('toggle');
@@ -157,14 +161,6 @@ function saveOrUpdate(form) {
                 failNoty(failIcon, 'Ошибка ' + jqXHR.status + ':\n Цена и Время не должны повторяться');
             }
         });
-}
-
-function manageNavBar() {
-    $('ul.navbar-nav li.active').removeClass('active');
-    $('a[href="' + location.pathname.replace("/", "") + '"]').closest('li').addClass('active');
-    if (location.pathname === "/nachricht") {
-        $('a[href="' + "/forum".replace("/", "") + '"]').closest('li').addClass('active');
-    }
 }
 
 function createAnimationOnWelcome() {
@@ -319,7 +315,7 @@ function failNoty(icon, text) {
 }
 
 function warnNoty(id) {
-    var n = new Noty({
+    let n = new Noty({
         type: 'warning',
         text: "<span><i class='fas fa-exclamation-circle fa-2x'></i></span> &nbsp;"
             + "Вы уверены, что готовы удалить данный объект?",
@@ -341,5 +337,21 @@ function warnNoty(id) {
             })
         ]
     }).show();
+}
+
+function manageSideBar() {
+    const pathNames = ["/kind", "/zahlung", "/admin"];
+    let path = $('a[href="' + location.pathname.replace("/", "") + '"]');
+    $('a').removeClass('link-current');
+    path.addClass('link-current');
+    if (location.pathname === "/nachricht") {
+        $('a[href="' + "/forum".replace("/", "") + '"]').addClass('link-current');
+    }
+    if (pathNames.includes(location.pathname)){
+        let selectedUl = path.closest('ul');
+        selectedUl.css('display', 'block');
+        let linkArrow = selectedUl.parent()[0].firstChild;
+        $(linkArrow).addClass('transition active rotate');
+    }
 }
 
