@@ -5,16 +5,16 @@ import art.school.entity.Users;
 import art.school.to.BlockTo;
 import art.school.to.UserTo;
 import art.school.web.SecurityUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,7 +25,8 @@ public class AdminRestController extends AbstractUserController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Secured("ROLE_ADMIN")
     public List<UserTo> all() {
-        return getAllTos();
+        Locale locale = LocaleContextHolder.getLocale();
+        return getAllTos().stream().peek(i-> i.setRoles(messageSource.getMessage(i.getRoles(), null, locale))).collect(Collectors.toList());
     }
 
     @PostMapping("/toggle/{id}")

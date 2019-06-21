@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -22,12 +23,12 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Имя</th>
-                                <th>E-Mail</th>
-                                <th>Пароль</th>
-                                <th>Роль</th>
-                                <th>Активный</th>
-                                <th>Регистрация</th>
+                                <th><spring:message code='app.username'/></th>
+                                <th><spring:message code='app.email'/></th>
+                                <th><spring:message code='app.password'/></th>
+                                <th><spring:message code='app.role'/></th>
+                                <th><spring:message code='app.active'/></th>
+                                <th><spring:message code='forum.registration'/></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -35,12 +36,12 @@
                             <tfoot>
                             <tr>
                                 <th>Id</th>
-                                <th>Имя</th>
-                                <th>E-Mail</th>
-                                <th>Пароль</th>
-                                <th>Роль</th>
-                                <th>Активный</th>
-                                <th>Регистрация</th>
+                                <th><spring:message code='app.username'/></th>
+                                <th><spring:message code='app.email'/></th>
+                                <th><spring:message code='app.password'/></th>
+                                <th><spring:message code='app.role'/></th>
+                                <th><spring:message code='app.active'/></th>
+                                <th><spring:message code='forum.registration'/></th>
                                 <th></th>
                                 <th></th>
                             </tr>

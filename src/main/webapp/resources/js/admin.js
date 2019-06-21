@@ -30,12 +30,12 @@ function createTable(data) {
             {"data": "name"},
             {"data": "email"},
             {"data": "adminPasswort"},
-            {"data": "roles"},
-            {"data": "aktiv",
+            {"data": "roles",},
+            {
+                "data": "aktiv",
                 "render": function (data, type, row) {
                     if (type === "display") {
-                        var checkbox = "<input type='checkbox' " + (data? "checked" : "") + " " + (row.roles.indexOf('Администратор')!== -1? "disabled" : "") + " onclick='toggleThis(" + row.id + ")' style=''/>";
-                        return checkbox;
+                        return "<input type='checkbox' " + (data ? "checked" : "") + " " + (row.isAdmin ? "disabled" : "") + " onclick='toggleThis(" + row.id + ")' style=''/>";
                     }
                     return data;
                 },
@@ -58,7 +58,7 @@ function createTable(data) {
         buttons: [
             {
                 text: $('#hidden-param').attr('addTitle'),
-                action: function ( e, dt, node, config ) {
+                action: function (e, dt, node, config) {
                     $('.modal-title').html($('#hidden-param').attr('addTitle'));
                     getSelect("/api/admin/roles", $('#roles'), "Выбери роль");
                     showModal(myModal);

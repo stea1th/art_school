@@ -32,6 +32,7 @@ public class UserTo {
     private MultipartFile file;
     private String encodedImage;
     private Boolean removeImage;
+    private Boolean isAdmin;
 
     public UserTo(Users u) {
         this(u.getId(),
@@ -47,7 +48,8 @@ public class UserTo {
                 u.getAktiv(),
                 u.getRegistriert().truncatedTo(ChronoUnit.SECONDS)
                         .toString().replace("T", " "),
-                FileHelper.convertByteArrayToString(u.getImage()));
+                FileHelper.convertByteArrayToString(u.getImage()),
+                u.getRoles().stream().map(Role::getName).anyMatch(i-> i.equals("forum.admin")));
 
     }
 
@@ -79,7 +81,7 @@ public class UserTo {
     public UserTo(Integer id, String name,
                   String adresse, String email,
                   String adminPasswort, String roles,
-                  Boolean aktiv, String registriert, String encodedImage) {
+                  Boolean aktiv, String registriert, String encodedImage, boolean isAdmin) {
         this.id = id;
         this.name = name;
         this.adresse = adresse;
@@ -89,6 +91,7 @@ public class UserTo {
         this.aktiv = aktiv;
         this.registriert = registriert;
         this.encodedImage = encodedImage;
+        this.isAdmin = isAdmin;
     }
 
     public boolean isNew(){
