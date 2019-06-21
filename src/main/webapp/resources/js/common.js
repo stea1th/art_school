@@ -1,8 +1,6 @@
 
 $(function () {
 
-    manageSideBar();
-
     createAnimationOnWelcome();
 
     pageNumberInput();
@@ -15,41 +13,7 @@ $(function () {
 
     getLocalesForTables();
 
-    getUserImageForNavBar();
-
-    // setSideBarClosed();
-
-    initSideBar();
-
-
 });
-
-// function setSideBarClosed(){
-//     $('#wrapper').addClass('sidebar-toggle');
-// }
-
-function initSideBar(){
-    new PerfectScrollbar('.list-scrollbar');
-    let nanobar = new Nanobar();
-    nanobar.go(100);
-}
-
-function getUserImageForNavBar() {
-    if (location.pathname !== '/login') {
-        $.get("/api/profile/my-image")
-            .done(function (data) {
-                let image;
-                if (data !== '') {
-                    image = document.createElement('img');
-                    image.style.cssText = 'width:60px;height:60px;border-radius:50%;background-color:white;';
-                    image.src = "data:image/jpeg;base64," + data;
-                } else {
-                    image = '<i class="fas fa-user-circle fa-3x blackiconcolor"></i>';
-                }
-                $('#userdetails').empty().html(image);
-            });
-    }
-}
 
 function getLocalesForTables() {
     $.get("/api/locale/tables").done(function (data) {
@@ -76,7 +40,6 @@ function changeLanguage(lang) {
         }
         location.href = url + (url.includes('?') ? "&" : "?") + locale + lang;
     }
-
 }
 
 function saveOrUpdateUser() {
@@ -100,7 +63,7 @@ function pageInputField() {
         if (input.val() !== n) {
             input.val(n);
         }
-    })
+    });
 }
 
 function selectSizeOnChange() {
@@ -209,7 +172,7 @@ function deleteRow(id) {
         type: 'DELETE'
     }).done(function () {
         datatable.ajax.reload();
-    })
+    });
 }
 
 function updateRow(id) {
@@ -234,7 +197,7 @@ function updateRow(id) {
             });
             getSelect("/api/admin/roles", $('#roles'), "Выбери роль", data.roles);
 
-        })
+        });
 }
 
 function toggleThis(id) {
@@ -340,19 +303,5 @@ function warnNoty(id) {
     }).show();
 }
 
-function manageSideBar() {
-    const pathNames = ["/kind", "/zahlung", "/admin"];
-    let path = $('a[href="' + location.pathname.replace("/", "") + '"]');
-    $('a').removeClass('link-current');
-    path.addClass('link-current');
-    if (location.pathname === "/nachricht") {
-        $('a[href="' + "/forum".replace("/", "") + '"]').addClass('link-current');
-    }
-    if (pathNames.includes(location.pathname)){
-        let selectedUl = path.closest('ul');
-        selectedUl.css('display', 'block');
-        let linkArrow = selectedUl.parent()[0].firstChild;
-        $(linkArrow).addClass('transition active rotate');
-    }
-}
+
 
