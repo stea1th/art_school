@@ -6,7 +6,8 @@ $(function () {
 
     initSideBar();
 
-    hideSideBarByClickAndScroll();
+    // hide sidebar by clicking is temporary out of order
+    // hideSideBarByClick();
 
     toggleSideBar();
 
@@ -46,49 +47,51 @@ function manageSideBar() {
     }
 }
 
-function hideSideBarByClickAndScroll() {
+function hideSideBarByClick() {
     $('.card-body').on('click', function () {
-        $('#wrapper').addClass('sidebar-toggle');
-
+        closeSideBar();
     });
 
-    $(window).scroll(function () {
-        console.log($('a[href="' + "/forum".replace("/", "") + '"]')[0].offsetTop);
-        if ($('body')[0].scrollTop > 300) {
-            $('#wrapper').addClass('sidebar-toggle');
-        }
-    });
-}
+    // hide sidebar by scrolling is temporary out of order
 
-// function setSideBarClosed(){
-//     $('#wrapper').addClass('sidebar-toggle');
-// }
-
-function initSideBar() {
-    new PerfectScrollbar('.list-scrollbar');
-    let nanobar = new Nanobar();
-    nanobar.go(100);
+    // $(window).scroll(function () {
+    //     console.log($('a[href="' + "/forum".replace("/", "") + '"]')[0].offsetTop);
+    //     if ($('body')[0].scrollTop > 300) {
+    //         closeSideBar();
+    //     }
+    // });
 }
 
 function toggleSideBar() {
     let status = getCookie("sidebar");
-    const wrapper = $('#wrapper');
     if (status !== "") {
+        console.log(status);
         if(status > 0){
-            wrapper.removeClass('sidebar-toggle');
+            openSideBar();
         } else {
-            wrapper.addClass('sidebar-toggle');
+            closeSideBar();
         }
     } else {
-        setCookie('sidebar', wrapper.hasClass('sidebar-toggle') ? 0 : 1, 365);
+        setCookie('sidebar', setSideBarValue(), 365);
     }
 }
 
 function setSideBarCookieOnClassChanged(){
-    const wrapper = $('#wrapper');
-    wrapper.on('classChanged', function(){
-        setCookie('sidebar', wrapper.hasClass('sidebar-toggle') ? 0 : 1, 365);
+    $('#wrapper').on('classChanged', function(){
+        setCookie('sidebar', setSideBarValue(), 365);
     });
+}
+
+function openSideBar(){
+    $('#wrapper').removeClass('sidebar-toggle');
+}
+
+function closeSideBar(){
+    $('#wrapper').addClass('sidebar-toggle');
+}
+
+function setSideBarValue(){
+    return $('#wrapper').hasClass('sidebar-toggle') ? 0 : 1;
 }
 
 (function( func ) {
@@ -107,5 +110,10 @@ function setSideBarCookieOnClassChanged(){
     }
 })($.fn.removeClass);
 
-
-
+function initSideBar() {
+    if (window.location.pathname !== "/login") {
+        new PerfectScrollbar('.list-scrollbar');
+        let nanobar = new Nanobar();
+        nanobar.go(100);
+    }
+}
