@@ -63,6 +63,7 @@
     <script type="text/javascript" src='<c:url value="/resources/js/sidebar/sidebar.menu.js"/>' defer></script>
 
     <script type="text/javascript" src='<c:url value="/resources/js/common.js"/>' defer></script>
+    <script type="text/javascript" src='<c:url value="/resources/js/sidebar.js"/>' defer></script>
 
 </head>
 

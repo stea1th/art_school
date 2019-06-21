@@ -11,7 +11,7 @@
 
 <br/>
 
-<div class="d-flex" id="wrapper">
+<div class="d-flex sidebar-toggle" id="wrapper">
     <jsp:include page="fragments/sidebarNav.jsp"/>
     <div class="container-fluid">
         <div class="row">
