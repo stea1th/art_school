@@ -11,7 +11,11 @@ $(function () {
 
     toggleSideBar();
 
+    toggleSideBarByUser();
+
     setSideBarCookieOnClassChanged();
+
+    hideSideBarByScroll();
 });
 
 function getUserImageForNavBar() {
@@ -47,26 +51,32 @@ function manageSideBar() {
     }
 }
 
-function hideSideBarByClick() {
-    $('.card-body').on('click', function () {
-        closeSideBar();
-    });
+// function hideSideBarByClick() {
+//     $('.card-body').on('click', function () {
+//         closeSideBar();
+//     });
+// }
 
+function hideSideBarByScroll() {
     // hide sidebar by scrolling is temporary out of order
 
-    // $(window).scroll(function () {
-    //     console.log($('a[href="' + "/forum".replace("/", "") + '"]')[0].offsetTop);
-    //     if ($('body')[0].scrollTop > 300) {
-    //         closeSideBar();
-    //     }
-    // });
+    $(window).scroll(function () {
+        // console.log($('a[href="' + "/forum".replace("/", "") + '"]')[0].offsetTop);
+        if (!$('#wrapper').hasClass('closed')) {
+            if ($('body')[0].scrollTop > 300) {
+                closeSideBar();
+            } else {
+                console.log("Up");
+                openSideBar();
+            }
+        }
+    });
 }
 
 function toggleSideBar() {
     let status = getCookie("sidebar");
     if (status !== "") {
-        console.log(status);
-        if(status > 0){
+        if (status > 0) {
             openSideBar();
         } else {
             closeSideBar();
@@ -76,35 +86,47 @@ function toggleSideBar() {
     }
 }
 
-function setSideBarCookieOnClassChanged(){
-    $('#wrapper').on('classChanged', function(){
+function setSideBarCookieOnClassChanged() {
+    $('#wrapper').on('classChanged', function () {
         setCookie('sidebar', setSideBarValue(), 365);
     });
 }
 
-function openSideBar(){
+function toggleSideBarByUser() {
+    $('#sidebar-toggle').on('click', function () {
+        const wrapper = $('#wrapper');
+        console.log(wrapper.hasClass('sidebar-toggle'));
+        if (wrapper.hasClass('sidebar-toggle')) {
+            wrapper.addClass('closed');
+        } else {
+            wrapper.removeClass('closed');
+        }
+    });
+}
+
+function openSideBar() {
     $('#wrapper').removeClass('sidebar-toggle');
 }
 
-function closeSideBar(){
+function closeSideBar() {
     $('#wrapper').addClass('sidebar-toggle');
 }
 
-function setSideBarValue(){
+function setSideBarValue() {
     return $('#wrapper').hasClass('sidebar-toggle') ? 0 : 1;
 }
 
-(function( func ) {
-    $.fn.addClass = function() { // replace the existing function on $.fn
-        func.apply( this, arguments ); // invoke the original function
+(function (func) {
+    $.fn.addClass = function () { // replace the existing function on $.fn
+        func.apply(this, arguments); // invoke the original function
         this.trigger('classChanged'); // trigger the custom event
         return this; // retain jQuery chainability
     }
 })($.fn.addClass); // pass the original function as an argument
 
-(function( func ) {
-    $.fn.removeClass = function() {
-        func.apply( this, arguments );
+(function (func) {
+    $.fn.removeClass = function () {
+        func.apply(this, arguments);
         this.trigger('classChanged');
         return this;
     }
