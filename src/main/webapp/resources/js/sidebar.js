@@ -58,15 +58,13 @@ function manageSideBar() {
 // }
 
 function hideSideBarByScroll() {
-    // hide sidebar by scrolling is temporary out of order
 
     $(window).scroll(function () {
-        // console.log($('a[href="' + "/forum".replace("/", "") + '"]')[0].offsetTop);
         if (!$('#wrapper').hasClass('closed')) {
-            if ($('body')[0].scrollTop > 300) {
+            let height = $('a[href="' + "/forum".replace("/", "") + '"]')[0].offsetTop;
+            if ($('body')[0].scrollTop > height) {
                 closeSideBar();
             } else {
-                console.log("Up");
                 openSideBar();
             }
         }
