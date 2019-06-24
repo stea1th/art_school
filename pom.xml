@@ -171,25 +171,11 @@
             <artifactId>spring-data-commons</artifactId>
         </dependency>
 
-        <!--PostgreSQL-->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
-        </dependency>
-
         <!--H2-->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.199</version>
-        </dependency>
-
-        <!--HSQLDB-->
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>2.5.0</version>
         </dependency>
 
         <!--Hibernate-->
@@ -232,6 +218,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
 
@@ -346,8 +333,35 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson-json.version}</version>
         </dependency>
-
     </dependencies>
+    <profiles>
+        <profile>
+            <id>postgres</id>
+            <dependencies>
+                <!--PostgreSQL-->
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <version>${postgresql.version}</version>
+                </dependency>
+            </dependencies>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>hsqldb</id>
+            <dependencies>
+                <!--HSQLDB-->
+                <dependency>
+                    <groupId>org.hsqldb</groupId>
+                    <artifactId>hsqldb</artifactId>
+                    <version>2.5.0</version>
+                </dependency>
+            </dependencies>
+
+        </profile>
+    </profiles>
     <dependencyManagement>
         <dependencies>
             <dependency>

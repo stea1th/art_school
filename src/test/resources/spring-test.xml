@@ -6,23 +6,23 @@
        xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:property-placeholder location="classpath:hsql.properties"/>
+    <!--<context:property-placeholder location="classpath:db/hsql.properties"/>-->
 
-    <tx:annotation-driven/>
+    <!--<tx:annotation-driven/>-->
 
-    <!--<context:component-scan base-package="art.school.**.repository"/>-->
-    <!--<jpa:repositories base-package="art.school.**.repository"/>-->
+    <!--&lt;!&ndash;<context:component-scan base-package="art.school.**.repository"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;<jpa:repositories base-package="art.school.**.repository"/>&ndash;&gt;-->
 
-    <context:component-scan base-package="art.school.**.util"/>
+    <!--<context:component-scan base-package="art.school.**.util"/>-->
 
-    <context:component-scan base-package="art.school.**.service"/>
+    <!--<context:component-scan base-package="art.school.**.service"/>-->
 
-    <context:component-scan base-package="art.school.**.web"/>
+    <!--<context:component-scan base-package="art.school.**.web"/>-->
 
-    <jdbc:embedded-database id="dataSource" type="HSQL">
-        <jdbc:script encoding="utf-8" location="classpath:initDB-test.sql"/>
-        <!--<jdbc:script location="classpath:test-data.sql"/>-->
-    </jdbc:embedded-database>
+    <!--<jdbc:embedded-database id="dataSource" type="HSQL">-->
+        <!--<jdbc:script encoding="utf-8" location="classpath:db/initDB-test.sql"/>-->
+        <!--&lt;!&ndash;<jdbc:script location="classpath:test-data.sql"/>&ndash;&gt;-->
+    <!--</jdbc:embedded-database>-->
 
     <!--<bean id="dataSource"-->
           <!--class="org.h2.jdbcx.JdbcDataSource">-->

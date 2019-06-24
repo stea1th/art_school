@@ -7,32 +7,33 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.*;
-
-@ContextConfiguration(locations = {"classpath:spring-test.xml"})
-@RunWith(SpringJUnit4ClassRunner.class)
+@SpringJUnitWebConfig(locations = {"classpath:spring/spring-db.xml",
+            "classpath:spring/spring-app.xml",
+            "classpath:spring/spring-mvc.xml"})
+@Transactional
+@ActiveProfiles({"hsqldb"})
 public class AbstractUserControllerTest {
 
     @Autowired
     private UserService service;
 
     @PostConstruct
-    private void postConstruct(){
+    private void postConstruct() {
 
     }
 
     @Before
     public void setUp() throws Exception {
-        service.create(new Users(7, "Vadim", "Einsteinring" , true, LocalDateTime.now()));
+        service.create(new Users(7, "Vadim", "Einsteinring", true, LocalDateTime.now()));
 
     }
 
@@ -43,7 +44,7 @@ public class AbstractUserControllerTest {
 
     @Test
     public void get() {
-//        System.out.println(service.get(7));
+        System.out.println(service.get(7));
 
     }
 

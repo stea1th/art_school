@@ -16,7 +16,27 @@
         <jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>
     </jdbc:initialize-database>
 
+
+
     <tx:annotation-driven/>
+
+    <beans profile="hsqldb">
+        <context:property-placeholder location="classpath:db/hsql.properties" system-properties-mode="OVERRIDE"/>
+        <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"
+              p:driverClass="org.hsqldb.jdbcDriver"
+              p:jdbcUrl="${database.url}"
+              p:user="${database.username}"
+              p:password="${database.password}"/>
+    </beans>
+
+    <beans profile="postgres">
+        <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
+        <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"
+              p:driverClass="org.postgresql.Driver"
+              p:jdbcUrl="${database.url}"
+              p:user="${database.username}"
+              p:password="${database.password}"/>
+    </beans>
 
     <context:component-scan base-package="art.school.**.repository"/>
     <jpa:repositories base-package="art.school.**.repository"/>
@@ -26,14 +46,6 @@
     <context:component-scan base-package="art.school.**.service"/>
 
     <context:component-scan base-package="art.school.**.web"/>
-
-    <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"
-          p:driverClass="org.postgresql.Driver"
-          p:jdbcUrl="${database.url}"
-          p:user="${database.username}"
-          p:password="${database.password}"/>
-
 
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
@@ -60,10 +72,12 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
           p:entityManagerFactory-ref="entityManagerFactory"/>
 
+
+
     <!--<context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>-->
     <!--<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close"-->
-          <!--p:driverClassName="org.postgresql.Driver"-->
-          <!--p:url="${database.url}"-->
-          <!--p:username="${database.username}"-->
-          <!--p:password="${database.password}"/>-->
+    <!--p:driverClassName="org.postgresql.Driver"-->
+    <!--p:url="${database.url}"-->
+    <!--p:username="${database.username}"-->
+    <!--p:password="${database.password}"/>-->
 </beans>
