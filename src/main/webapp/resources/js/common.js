@@ -191,7 +191,7 @@ function updateRow(id) {
 
                 }
                 $('form').find('input[name=' + k + ']').val(v);
-                showModal(myModal);
+                showModal({id: myModal});
                 $('#aktiv-checkbox').hide();
             });
             getSelect("/api/admin/roles", $('#roles'), "Выбери роль", data.roles);
@@ -237,15 +237,19 @@ function getSelect(url, sel, name, selected) {
     return sel;
 }
 
-function showModal(modalName) {
+function showModal(config) {
 
-    modalName.modal('show');
-    $('#aktiv-checkbox').show();
-    modalName.on('hidden.bs.modal', function () {
-        $(this).find('form')[0].reset();
-        $("#id").val("");
-    });
-
+    if(config.id){
+        config.id.modal('show');
+        $('#aktiv-checkbox').show();
+        config.id.on('hidden.bs.modal', function () {
+            $(this).find('form')[0].reset();
+            $("#id").val("");
+        });
+    }
+    if(config.init){
+        config.init();
+    }
 }
 
 function succesNoty(icon, text) {
@@ -323,6 +327,14 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function initSelectPicker(){
+    $.fn.selectpicker.Constructor.BootstrapVersion = '4';
+    $('.select-picker').selectpicker({
+        style: 'btn-light'
+    });
+    $('.select-picker').selectpicker('refresh');
 }
 
 

@@ -189,7 +189,12 @@ function updateUnterricht(event, zt) {
     });
 
     $('.modal-footer').prepend(renderDeleteBtn(event.id));
-    showModal(myModal);
+    showModal({
+        id: myModal,
+        init: function () {
+            initSelectPicker();
+        }
+    });
 
     myModal.on('hidden.bs.modal', function () {
         $(this).find('form')[0].reset();
@@ -206,11 +211,16 @@ function createUnterricht(date, zt) {
     $('#datum').val(date.format());
     getSelect(ajaxKind + "/filter/aktiv", $('#kind'), 'Выберите ученика');
     getSelect(ajaxZahlung + "/filter/aktiv", $('#zahlung'), 'Выберите оплату');
-    showModal(myModal);
-    myModal.on('hidden.bs.modal', function () {
-        $(this).find('form')[0].reset();
-        $('#zeit').val(zt);
+    showModal({
+        id: myModal,
+        init: function () {
+            initSelectPicker();
+        }
     });
+    // myModal.on('hidden.bs.modal', function () {
+    //     $(this).find('form')[0].reset();
+    //     $('#zeit').val(zt);
+    // });
 }
 
 
