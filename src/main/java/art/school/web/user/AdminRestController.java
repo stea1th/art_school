@@ -4,6 +4,8 @@ import art.school.entity.Role;
 import art.school.entity.Users;
 import art.school.to.BlockTo;
 import art.school.to.UserTo;
+import art.school.util.Messages;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,13 +21,16 @@ import java.util.stream.Collectors;
 @Secured("ROLE_MODERATOR")
 public class AdminRestController extends AbstractUserController {
 
+    @Autowired
+    private Messages message;
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Secured("ROLE_ADMIN")
     public List<UserTo> all() {
-        Locale locale = LocaleContextHolder.getLocale();
         return getAllTos().stream()
-                .peek(i -> i.setRoles(messageSource.getMessage(i.getRoles(), null, locale)))
+                .peek(i -> i.setRoles(message.get(i.getRoles())))
                 .collect(Collectors.toList());
+//        return getAllTos();
     }
 
     @PostMapping("/toggle/{id}")
