@@ -54,9 +54,9 @@
     <script type="text/javascript" src='webjars/fullcalendar/3.9.0/fullcalendar.js' ></script>
     <script type="text/javascript" src='webjars/fullcalendar/3.9.0/locale-all.js' ></script>
 
-    <%--Bootstrap4 Select--%>
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css' />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+    <%--Chosen Select--%>
+    <link rel='stylesheet' href='resources/css/chosen.css' />
+    <script type="text/javascript" src='<c:url value="/resources/js/chosen/chosen.jquery.js"/>' defer></script>
 
     <%--SideBar--%>
     <link rel='stylesheet' href='resources/css/sidebar.css' />

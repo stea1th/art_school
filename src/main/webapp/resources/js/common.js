@@ -12,6 +12,10 @@ $(function () {
 
     getLocalesForTables();
 
+    // initSelectPicker();
+
+    initChosen();
+
 });
 
 function getLocalesForTables() {
@@ -233,7 +237,9 @@ function getSelect(url, sel, name, selected) {
 
             }
         });
+        updateChosen();
     });
+
     return sel;
 }
 
@@ -329,12 +335,16 @@ function getCookie(cname) {
     return "";
 }
 
-function initSelectPicker(){
-    $.fn.selectpicker.Constructor.BootstrapVersion = '4';
-    $('.select-picker').selectpicker({
-        style: 'btn-light'
-    });
-    $('.select-picker').selectpicker('refresh');
+function initChosen(){
+    $('.chosen-select').chosen({width: "100%"});
+}
+
+function updateChosen(){
+    $('.chosen-select').trigger('chosen:updated');
+}
+
+function destroyChosen(){
+    $('.chosen-select').chosen('destroy');
 }
 
 

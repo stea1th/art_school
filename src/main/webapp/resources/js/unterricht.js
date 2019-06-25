@@ -162,6 +162,7 @@ function saveUnterricht() {
 }
 
 function updateUnterricht(event, zt) {
+    destroyChosen();
     var kindSelect = $('#kind');
     var zahlungSelect = $('#zahlung');
     $('.modal-title').text('Изменить урок');
@@ -190,10 +191,7 @@ function updateUnterricht(event, zt) {
 
     $('.modal-footer').prepend(renderDeleteBtn(event.id));
     showModal({
-        id: myModal,
-        init: function () {
-            initSelectPicker();
-        }
+        id: myModal
     });
 
     myModal.on('hidden.bs.modal', function () {
@@ -214,13 +212,13 @@ function createUnterricht(date, zt) {
     showModal({
         id: myModal,
         init: function () {
-            initSelectPicker();
+            initChosen();
         }
     });
-    // myModal.on('hidden.bs.modal', function () {
-    //     $(this).find('form')[0].reset();
-    //     $('#zeit').val(zt);
-    // });
+    myModal.on('hidden.bs.modal', function () {
+        $(this).find('form')[0].reset();
+        $('#zeit').val(zt);
+    });
 }
 
 
