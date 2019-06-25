@@ -56,7 +56,11 @@ function createTable(data) {
         dom: 'Bfrtip',
         buttons: [
             {
-                text: $('#hidden-param').attr('addTitle'),
+                className: 'btn-primary',
+                text: '<i class="fas fa-plus"></i>&nbsp;' + $('#hidden-param').attr('addTitle'),
+                init: function(api, node, config){
+                    $(node).removeClass('btn-secondary');
+                },
                 action: function (e, dt, node, config) {
                     $('.modal-title').html($('#hidden-param').attr('addTitle'));
                     getSelect("/api/admin/roles", $('#roles'), "Выбери роль");

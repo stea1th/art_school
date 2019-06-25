@@ -27,7 +27,7 @@
                             <div class="mr-auto p-2">
                                 <sec:authorize access="not ${isBanned}">
                                     <button type="button" class="btn btn-primary" style="float:right"
-                                            onclick="answerIt(null, true)">
+                                            onclick="answerIt(null, true)"><span><i class="fas fa-plus"></i></span>
                                         <spring:message code="forum.theme.new"/>
                                     </button>
                                 </sec:authorize>
