@@ -71,7 +71,7 @@ function createTable(data) {
                 text: $('#hidden-param').attr('addTitle'),
                 action: function (e, dt, node, config) {
                     $('.modal-title').html($('#hidden-param').attr('addTitle'));
-                    showModal(myModal);
+                    showModal({id: myModal});
                 }
             }
         ]

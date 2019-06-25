@@ -34,7 +34,7 @@
         <div class="form-group row">
             <label for="roles" class="col-4 col-form-label">Роли</label>
             <div class="col-8">
-                <select id="roles" name="roles" class="custom-select" required="required">
+                <select id="roles" name="roles" class="custom-select chosen-select" required="required">
                 </select>
             </div>
         </div>

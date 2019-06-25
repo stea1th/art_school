@@ -54,6 +54,9 @@
     <script type="text/javascript" src='webjars/fullcalendar/3.9.0/fullcalendar.js' ></script>
     <script type="text/javascript" src='webjars/fullcalendar/3.9.0/locale-all.js' ></script>
 
+    <%--Chosen Select--%>
+    <link rel='stylesheet' href='resources/css/chosen.css' />
+    <script type="text/javascript" src='<c:url value="/resources/js/chosen/chosen.jquery.js"/>' defer></script>
 
     <%--SideBar--%>
     <link rel='stylesheet' href='resources/css/sidebar.css' />

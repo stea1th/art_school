@@ -61,7 +61,7 @@ function createTable(data) {
                 action: function (e, dt, node, config) {
                     $('.modal-title').html($('#hidden-param').attr('addTitle'));
                     getSelect("/api/admin/roles", $('#roles'), "Выбери роль");
-                    showModal(myModal);
+                    showModal({id: myModal});
                 }
             }
         ]

@@ -4,9 +4,6 @@ import art.school.entity.Role;
 import art.school.entity.Users;
 import art.school.to.BlockTo;
 import art.school.to.UserTo;
-import art.school.web.SecurityUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,7 +23,9 @@ public class AdminRestController extends AbstractUserController {
     @Secured("ROLE_ADMIN")
     public List<UserTo> all() {
         Locale locale = LocaleContextHolder.getLocale();
-        return getAllTos().stream().peek(i-> i.setRoles(messageSource.getMessage(i.getRoles(), null, locale))).collect(Collectors.toList());
+        return getAllTos().stream()
+                .peek(i -> i.setRoles(messageSource.getMessage(i.getRoles(), null, locale)))
+                .collect(Collectors.toList());
     }
 
     @PostMapping("/toggle/{id}")
@@ -38,27 +37,30 @@ public class AdminRestController extends AbstractUserController {
 
     @GetMapping("/roles")
     @Secured("ROLE_ADMIN")
-    public Map<Integer, String> getRoles(){
+    public Map<Integer, String> getRoles() {
+        Locale locale = LocaleContextHolder.getLocale();
         return Arrays.stream(Role.values())
-                .collect(Collectors.toMap(Enum::ordinal, Role::getName));
+                .collect(Collectors.toMap(Enum::ordinal, i -> messageSource.getMessage(i.getName(), null, locale)));
     }
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     @SuppressWarnings("unchecked")
-    public ResponseEntity saveOrUpdate(UserTo z){
+    public ResponseEntity saveOrUpdate(UserTo z) {
 
-        Map<String, String> response = new LinkedHashMap<>();
-        Users kind = z.isNew()? z.createUser() : z.updateUser(super.get(z.getId()));
-        String message = z.isNew()? "Save" : "Update";
+        Map<String, String> response = new HashMap<>();
+        Users kind = z.isNew() ? z.createUser() : z.updateUser(super.get(z.getId()));
         super.create(kind);
-        response.put(message, z.getName());
+        response.put(z.isNew() ? "Save" : "Update", z.getName());
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserTo getUser(@PathVariable("id") int id){
-        return getUserTo(id);
+    public UserTo getUser(@PathVariable("id") int id) {
+        Locale locale = LocaleContextHolder.getLocale();
+        UserTo user = getUserTo(id);
+        user.setRoles(messageSource.getMessage(user.getRoles(), null, locale));
+        return user;
     }
 
     @DeleteMapping(value = "/{id}")
@@ -69,12 +71,12 @@ public class AdminRestController extends AbstractUserController {
 
     @PostMapping(value = "/block/{id}")
     public void block(@PathVariable(name = "id") int id,
-                      BlockTo block){
+                      BlockTo block) {
         super.blockUser(block, id);
     }
 
     @PostMapping(value = "/unblock")
-    public void unblock(@RequestParam(name = "id") int id){
+    public void unblock(@RequestParam(name = "id") int id) {
         super.unblockUser(id);
     }
 }
