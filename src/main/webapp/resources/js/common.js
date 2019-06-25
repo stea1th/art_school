@@ -181,6 +181,7 @@ function deleteRow(id) {
 function updateRow(id) {
     $.get(ajaxUrl + "/" + id)
         .done(function (data) {
+            console.log(data);
             $.each(data, function (k, v) {
                 if ($('#slider1').length) {
                     $('.modal-title').text('Обновить способ оплаты');
@@ -346,6 +347,7 @@ function updateChosen(){
 function destroyChosen(){
     $('.chosen-select').chosen('destroy');
 }
+
 
 
 
