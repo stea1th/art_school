@@ -65,10 +65,12 @@ public class NachrichtController extends AbstractNachrichtController {
         }
 
         Locale locale = LocaleContextHolder.getLocale();
-        Map.Entry<List<NachrichtTo>, Page<Nachricht>> entry = super.getAllTosAsMap(id, PageRequest.of(pageNumber, size, Sort.by("datum", "id")))
+        Map.Entry<List<NachrichtTo>, Page<Nachricht>> entry = super
+                .getAllTosAsMap(id, PageRequest.of(pageNumber, size, Sort.by("datum", "id")))
                 .entrySet().iterator().next();
         model.addAttribute("list", entry.getKey()
-                .stream().peek(i -> {
+                .stream()
+                .peek(i -> {
                     i.setDatum(convertDateToToString(i.getDatumTo(), messageSource, locale));
                     NachrichtUpdater u = i.getUpdater();
                     if (u != null) {

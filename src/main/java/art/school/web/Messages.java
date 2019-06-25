@@ -1,4 +1,4 @@
-package art.school.util;
+package art.school.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -7,6 +7,8 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.util.Locale;
 
 @Component
 public class Messages {
@@ -14,18 +16,15 @@ public class Messages {
     @Autowired
     private MessageSource messageSource;
 
-    private MessageSourceAccessor acessor;
-
-    @PostConstruct
-    private void init(){
-        acessor = new MessageSourceAccessor(messageSource, LocaleContextHolder.getLocale());
-    }
+    private MessageSourceAccessor accessor;
 
     public String get(String code){
-        return acessor.getMessage(code);
+        accessor = new MessageSourceAccessor(messageSource, LocaleContextHolder.getLocale());
+        return accessor.getMessage(code);
     }
 
     public String get(String code, Object... args){
-        return acessor.getMessage(code, args);
+        accessor = new MessageSourceAccessor(messageSource, LocaleContextHolder.getLocale());
+        return accessor.getMessage(code, args);
     }
 }
