@@ -93,7 +93,6 @@ function setSideBarCookieOnClassChanged() {
 function toggleSideBarByUser() {
     $('#sidebar-toggle').on('click', function () {
         const wrapper = $('#wrapper');
-        console.log(wrapper.hasClass('sidebar-toggle'));
         if (wrapper.hasClass('sidebar-toggle')) {
             wrapper.addClass('closed');
         } else {
