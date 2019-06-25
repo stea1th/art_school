@@ -4,7 +4,7 @@ import art.school.entity.Role;
 import art.school.entity.Users;
 import art.school.to.BlockTo;
 import art.school.to.UserTo;
-import art.school.web.Messages;
+import art.school.util.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
