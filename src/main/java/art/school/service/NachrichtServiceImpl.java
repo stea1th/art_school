@@ -19,6 +19,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static art.school.util.DateUtil.formatDateToString;
+import static art.school.util.TransformUtil.transformTo;
 
 @Service
 public class NachrichtServiceImpl implements NachrichtService {
@@ -90,12 +91,12 @@ public class NachrichtServiceImpl implements NachrichtService {
 
     @Transactional
     public List<NachrichtTo> getAllTosByThema(int id){
-        return TransformUtil.transformTo(getAllByThemaId(id), NachrichtTo.class);
+        return transformTo(getAllByThemaId(id), NachrichtTo.class);
     }
 
     @Transactional
     public List<NachrichtTo> getAllTos(){
-        return TransformUtil.transformTo(getAll(), NachrichtTo.class);
+        return transformTo(getAll(), NachrichtTo.class);
     }
 
     public Long count(){
