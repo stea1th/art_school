@@ -115,6 +115,8 @@ function saveOrUpdate(form) {
         .done(function (data) {
             myModal.modal('toggle');
             $.each(data, function (k, v) {
+                console.log(k);
+                console.log(v);
                 if (k === 'Save') {
                     succesNoty(successIcon, 'Пользователь "' + v + '"' + " удачно сохранен");
                 } else {
