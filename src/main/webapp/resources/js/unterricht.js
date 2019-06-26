@@ -197,8 +197,6 @@ function updateUnterricht(event, zt) {
     myModal.on('hidden.bs.modal', function () {
         $(this).find('form')[0].reset();
         calendar.fullCalendar('refetchEvents');
-        kindSelect.show();
-        zahlungSelect.show();
         $('#zeit').val(zt);
         $('.temp').remove();
     });
