@@ -4,16 +4,16 @@ import art.school.entity.Role;
 import art.school.entity.Users;
 import art.school.to.BlockTo;
 import art.school.to.UserTo;
-import art.school.util.Messages;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
 @Secured("ROLE_MODERATOR")
 public class AdminRestController extends AbstractUserController {
 
-    @Autowired
-    private Messages message;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Secured("ROLE_ADMIN")
@@ -30,7 +28,6 @@ public class AdminRestController extends AbstractUserController {
         return getAllTos().stream()
                 .peek(i -> i.setRoles(message.get(i.getRoles())))
                 .collect(Collectors.toList());
-//        return getAllTos();
     }
 
     @PostMapping("/toggle/{id}")
@@ -43,9 +40,8 @@ public class AdminRestController extends AbstractUserController {
     @GetMapping("/roles")
     @Secured("ROLE_ADMIN")
     public Map<Integer, String> getRoles() {
-        Locale locale = LocaleContextHolder.getLocale();
         return Arrays.stream(Role.values())
-                .collect(Collectors.toMap(Enum::ordinal, i -> messageSource.getMessage(i.getName(), null, locale)));
+                .collect(Collectors.toMap(Enum::ordinal, i -> message.get(i.getName())));
     }
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -62,9 +58,8 @@ public class AdminRestController extends AbstractUserController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public UserTo getUser(@PathVariable("id") int id) {
-        Locale locale = LocaleContextHolder.getLocale();
         UserTo user = getUserTo(id);
-        user.setRoles(messageSource.getMessage(user.getRoles(), null, locale));
+        user.setRoles(message.get(user.getRoles()));
         return user;
     }
 

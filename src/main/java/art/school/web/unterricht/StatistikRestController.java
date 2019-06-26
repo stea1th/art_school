@@ -20,13 +20,10 @@ public class StatistikRestController extends AbstractUnterrichtController {
 
     @GetMapping(value = "/chart/{year}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MonthForStatistik> getStatistik(@PathVariable("year") int year) {
-//        map.forEach((k, v) -> System.out.println("Sum for " + k + " are " + BigDecimal.valueOf(v).setScale(2, RoundingMode.CEILING)));
-//        DataForStatistik.test();
-//        DataForStatistik.getAllWeeksForMonth(Month.DECEMBER);
         return DataForStatistik.getResponse(super.getAllByYear(year));
     }
 
-    @GetMapping(value ="/years", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/years", produces = MediaType.APPLICATION_JSON_VALUE)
     public Set<Integer> getAllYears() {
         return super.getYears();
     }

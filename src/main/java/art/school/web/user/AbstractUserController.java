@@ -4,33 +4,31 @@ import art.school.entity.Users;
 import art.school.service.UserService;
 import art.school.to.BlockTo;
 import art.school.to.UserTo;
+import art.school.util.Messages;
 import art.school.web.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 
 import java.util.List;
-import java.util.Locale;
 
 @Slf4j
-public abstract class AbstractUserController  {
+public abstract class AbstractUserController {
 
     @Autowired
     private UserService service;
 
     @Autowired
-    MessageSource messageSource;
+    Messages message;
 
-    void accepted(){
+    void accepted() {
         service.accepted();
     }
 
-    void blockUser(BlockTo block, int id){
+    void blockUser(BlockTo block, int id) {
         service.createBlockForUserWithTo(block, id);
     }
 
-    public UserTo getToForProfile(){
+    UserTo getToForProfile() {
         return service.getUserTo(SecurityUtil.getAuthId());
     }
 
@@ -39,36 +37,36 @@ public abstract class AbstractUserController  {
         return service.get(id);
     }
 
-    public Users create(Users users){
+    public Users create(Users users) {
         log.info("create Users {}", users);
         return service.create(users);
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         log.info("delete Users {}", id);
         service.delete(id);
     }
 
-    void toggleAktiv(int id){
+    void toggleAktiv(int id) {
         log.info("toggle Users {} Status", id);
         service.toggleAktiv(id);
     }
 
-    public List<Users> getAll(){
+    public List<Users> getAll() {
         log.info("getAll Users");
         return service.getAll();
     }
 
-    List<UserTo> getAllKinds(){
+    List<UserTo> getAllKinds() {
         log.info("getAll Kinds");
         return service.getAllKinds();
     }
 
-    public List<UserTo> getAllTos(){
+    public List<UserTo> getAllTos() {
         return service.getAllTos();
     }
 
-    UserTo getUserTo(int id){
+    UserTo getUserTo(int id) {
         return service.getUserTo(id);
     }
 
@@ -76,11 +74,11 @@ public abstract class AbstractUserController  {
         return service.checkIfBlocked();
     }
 
-    void unblockUser(int id){
+    void unblockUser(int id) {
         service.unblockUser(id);
     }
 
-    void updateProfile(UserTo userTo){
+    void updateProfile(UserTo userTo) {
         service.updateProfile(userTo);
     }
 

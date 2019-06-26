@@ -3,13 +3,9 @@ package art.school.web.nachricht;
 import art.school.entity.Nachricht;
 import art.school.entity.NachrichtUpdater;
 import art.school.entity.Thema;
-import art.school.service.ThemaService;
-import art.school.service.UserService;
 import art.school.to.NachrichtTo;
 import art.school.util.TextFormatUtil;
 import art.school.web.SecurityUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,15 +31,6 @@ import static art.school.util.PaginationHelper.createTablePage;
 @RequestMapping(value = "/nachricht")
 @Secured("ROLE_USER")
 public class NachrichtController extends AbstractNachrichtController {
-
-    @Autowired
-    private ThemaService themaService;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private MessageSource messageSource;
 
     @GetMapping
     public String getAllNachrichts(Model model, @RequestParam(name = "id") Integer id,
@@ -74,7 +61,7 @@ public class NachrichtController extends AbstractNachrichtController {
                     i.setDatum(convertDateToToString(i.getDatumTo(), messageSource, locale));
                     NachrichtUpdater u = i.getUpdater();
                     if (u != null) {
-                        i.setUpdaterInfo(messageSource.getMessage(u.getAction(), null, locale) + " " +
+                        i.setUpdaterInfo(message.get(u.getAction()) + " " +
                                 u.getUser().getName() + " "
                                 + convertDateToToString(transformDateInTo(u.getDatum()), messageSource, locale).toLowerCase());
                     }
