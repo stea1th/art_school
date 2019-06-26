@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,9 @@ public interface CrudUnterrichtRepository extends JpaRepository<Unterricht, Inte
     @Query(value = "select distinct substring(CONCAT(u.datum, \'\'), 1, 4) from Unterricht u ", nativeQuery = true)
     List<String> getYears();
 
-    @Query(value = "select * from Unterricht u where extract(year from u.datum) = 2019 ", nativeQuery = true)
-    List<Unterricht> getAllByYear( int year);
+    //    @Query(value = "select * from Unterricht u where extract(year from u.datum) = 2019 ", nativeQuery = true)
+//    List<Unterricht> getAllByYear( int year);
+    @Transactional
+    @Modifying
+    List<Unterricht> findAllByDatumIsBetween(LocalDateTime after, LocalDateTime before);
 }

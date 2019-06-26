@@ -74,6 +74,7 @@ public class UnterrichtServiceImpl implements UnterrichtService {
     }
 
     @Override
+    @Transactional
     public List<Unterricht> getAllByYear(int year) {
         return repository.getAllByYear(year);
     }
