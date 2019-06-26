@@ -37,7 +37,7 @@ public class Unterricht extends AbstractBaseEntity {
     @NotNull
     private Users user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "z_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull

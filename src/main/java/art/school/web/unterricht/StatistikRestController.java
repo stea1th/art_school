@@ -24,7 +24,6 @@ public class StatistikRestController extends AbstractUnterrichtController {
 
     @GetMapping(value = "/years", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<String> getAllYears() {
-        super.getYears().forEach(System.out::println);
         return super.getYears();
     }
 }

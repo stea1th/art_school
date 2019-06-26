@@ -32,15 +32,18 @@ public class ZahlungServiceImpl implements ZahlungService {
     }
 
     @Override
+    @Transactional
     public Zahlung get(int id) {
         return checkNotFoundWithId(repository.get(id), id);
     }
 
+    @Transactional
     public ZahlungTo getTo(int id){
         return new ZahlungTo(get(id));
     }
 
     @Override
+    @Transactional
     public void update(Zahlung zahlung) {
         Assert.notNull(zahlung, "zahlung must not be null");
         checkNotFoundWithId(repository.save(zahlung), zahlung.getId());

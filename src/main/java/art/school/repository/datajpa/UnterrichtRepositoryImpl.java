@@ -11,9 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 public class UnterrichtRepositoryImpl implements UnterrichtRepository {
