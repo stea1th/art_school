@@ -11,7 +11,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class UnterrichtRepositoryImpl implements UnterrichtRepository {
@@ -32,7 +34,7 @@ public class UnterrichtRepositoryImpl implements UnterrichtRepository {
     public Unterricht save(Unterricht unterricht, Integer... ids) {
         Users kind = userRepository.get(ids[0]);
         Zahlung zahlung = zahlungRepository.get(ids[1]);
-        if( kind == null || zahlung == null){
+        if (kind == null || zahlung == null) {
             return null;
         }
         unterricht.setUser(kind);
@@ -59,5 +61,14 @@ public class UnterrichtRepositoryImpl implements UnterrichtRepository {
     @Override
     public List<Unterricht> getAll() {
         return repository.findAll(SORT_BY_DATE);
+    }
+
+    public List<String> getYears() {
+        return repository.getYears();
+    }
+
+    @Override
+    public List<Unterricht> getAllByYear(int year) {
+        return repository.getAllByYear(year);
     }
 }

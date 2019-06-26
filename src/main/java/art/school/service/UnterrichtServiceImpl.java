@@ -3,21 +3,17 @@ package art.school.service;
 import art.school.entity.Unterricht;
 import art.school.repository.UnterrichtRepository;
 import art.school.to.RequestUnterrichtTo;
-import art.school.to.UserTo;
-import art.school.to.ZahlungTo;
+import art.school.to.UnterrichtTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static art.school.util.ValidationUtil.assureIdConsistent;
-import static art.school.util.ValidationUtil.checkNew;
-import static art.school.util.ValidationUtil.checkNotFoundWithId;
+import static art.school.util.DateUtil.parseStringsToLocalDateTime;
+import static art.school.util.ValidationUtil.*;
 
 @Service
 public class UnterrichtServiceImpl implements UnterrichtService {
@@ -35,7 +31,9 @@ public class UnterrichtServiceImpl implements UnterrichtService {
     @Transactional
     public void toggleBezahlt(int id) {
         Unterricht u = get(id);
-        u.setBezahlt(!u.isBezahlt());
+        if (u != null) {
+            u.setBezahlt(!u.isBezahlt());
+        }
     }
 
     @Override
@@ -49,24 +47,38 @@ public class UnterrichtServiceImpl implements UnterrichtService {
     @Transactional
     public void updateFromTo(RequestUnterrichtTo unterrichtTo) {
         Unterricht u = get(unterrichtTo.getId());
-        u.setDatum(LocalDateTime.of(LocalDate.parse(unterrichtTo.getDatum()),
-                LocalTime.parse(unterrichtTo.getZeit())));
+        u.setDatum(parseStringsToLocalDateTime(unterrichtTo.getDatum(), unterrichtTo.getZeit()));
         u.setBezahlt(unterrichtTo.isBezahlt());
         u.setNotiz(unterrichtTo.getNotiz());
         assureIdConsistent(u, u.getId());
-        create(u, unterrichtTo.getKind()!=null? unterrichtTo.getKind() : u.getUser().getId(),
-                unterrichtTo.getZahlung()!=null? unterrichtTo.getZahlung() : u.getZahlung().getId());
+        create(u, unterrichtTo.getKind() != null ? unterrichtTo.getKind() : u.getUser().getId(),
+                unterrichtTo.getZahlung() != null ? unterrichtTo.getZahlung() : u.getZahlung().getId());
 
     }
 
     @Override
     @Transactional
     public RequestUnterrichtTo createRequestUnterrichtTo(int id) {
-        Unterricht u = get(id);
-        RequestUnterrichtTo to = new RequestUnterrichtTo(u);
-        to.setKindTo(new UserTo(u.getUser()));
-        to.setZahlungTo(new ZahlungTo(u.getZahlung()));
-        return to;
+        return new RequestUnterrichtTo(get(id));
+    }
+
+    @Override
+    @Transactional
+    public List<UnterrichtTo> getAllTos() {
+        return getAll()
+                .stream()
+                .map(UnterrichtTo::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> getYears() {
+        return repository.getYears();
+    }
+
+    @Override
+    public List<Unterricht> getAllByYear(int year) {
+        return repository.getAllByYear(year);
     }
 
     @Override
@@ -76,8 +88,7 @@ public class UnterrichtServiceImpl implements UnterrichtService {
 
     @Override
     public void delete(int id) {
-       checkNotFoundWithId(repository.delete(id), id);
-
+        checkNotFoundWithId(repository.delete(id), id);
     }
 
     @Override

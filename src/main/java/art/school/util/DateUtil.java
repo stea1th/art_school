@@ -6,6 +6,7 @@ import org.springframework.context.MessageSource;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
@@ -35,17 +36,17 @@ public class DateUtil {
         return new DateTo(formatDateToString(dateTime));
     }
 
-    public static String formatDateToString(LocalDateTime dateTime){
+    public static String formatDateToString(LocalDateTime dateTime) {
         return dateTime.truncatedTo(ChronoUnit.MINUTES).format(DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
     }
 
-    public static LocalDateTime transformToDate(Integer interval, String unit){
-        if(interval == null || interval == 0){
+    public static LocalDateTime transformToDate(Integer interval, String unit) {
+        if (interval == null || interval == 0) {
             interval = 10000;
             unit = "days";
         }
         Duration d = Duration.ZERO;
-        switch(unit){
+        switch (unit) {
             case "minutes":
                 d = Duration.ofMinutes(interval);
                 break;
@@ -60,9 +61,19 @@ public class DateUtil {
         return LocalDateTime.now().plus(d);
     }
 
-    public static String convertDateToToString(DateTo d, MessageSource messageSource, Locale locale){
+    public static String convertDateToToString(DateTo d, MessageSource messageSource, Locale locale) {
         return d.getCode() == null ? d.getTime() :
                 d.getDays() == null ? messageSource.getMessage(d.getCode(), new Object[]{d.getTime()}, locale) :
                         messageSource.getMessage(d.getCode(), new Object[]{d.getTime(), d.getDays()}, locale);
+    }
+
+    public static LocalDateTime parseStringsToLocalDateTime(String date, String time) {
+        return LocalDateTime.of(LocalDate.parse(date),
+                LocalTime.parse(time));
+    }
+
+    public static LocalDateTime splitAndParseStrings(String s) {
+        String[] dateParts = s.split("T");
+        return parseStringsToLocalDateTime(dateParts[0], dateParts[1]);
     }
 }

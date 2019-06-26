@@ -38,7 +38,7 @@ public class Thema extends AbstractBaseEntity{
     @OrderBy(value = "id")
     private List<Nachricht> nachrichts;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "u_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Users user;

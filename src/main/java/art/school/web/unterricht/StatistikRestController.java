@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Set;
 
 
 @RestController
@@ -24,7 +23,8 @@ public class StatistikRestController extends AbstractUnterrichtController {
     }
 
     @GetMapping(value = "/years", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Set<Integer> getAllYears() {
+    public List<String> getAllYears() {
+        super.getYears().forEach(System.out::println);
         return super.getYears();
     }
 }
