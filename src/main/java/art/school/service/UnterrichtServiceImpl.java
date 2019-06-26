@@ -37,6 +37,7 @@ public class UnterrichtServiceImpl implements UnterrichtService {
     }
 
     @Override
+    @Transactional
     public Unterricht createFromTo(RequestUnterrichtTo unterrichtTo) {
         Unterricht u = unterrichtTo.createUnterricht();
         checkNew(u);

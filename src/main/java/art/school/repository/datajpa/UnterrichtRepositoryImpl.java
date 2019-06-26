@@ -11,11 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 public class UnterrichtRepositoryImpl implements UnterrichtRepository {
@@ -71,10 +67,6 @@ public class UnterrichtRepositoryImpl implements UnterrichtRepository {
 
     @Override
     public List<Unterricht> getAllByYear(int year) {
-
-        LocalDateTime after = LocalDateTime.of(year - 1, 12, 31, 23, 59);
-        LocalDateTime before = LocalDateTime.of(year + 1, 1, 1, 0, 1);
-        repository.findAllByDatumIsBetween(after, before).forEach(i-> System.out.println(i.getId()));
-        return repository.findAllByDatumIsBetween(after, before);
+        return repository.getAllByYear(year);
     }
 }
