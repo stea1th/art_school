@@ -31,13 +31,13 @@ public class Unterricht extends AbstractBaseEntity {
     @Column(name = "notiz")
     private String notiz;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "u_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Users user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "z_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull

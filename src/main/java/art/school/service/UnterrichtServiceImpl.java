@@ -70,6 +70,7 @@ public class UnterrichtServiceImpl implements UnterrichtService {
     }
 
     @Override
+    @Transactional
     public List<UnterrichtTo> getAllTos() {
         return getAll()
                 .stream()
