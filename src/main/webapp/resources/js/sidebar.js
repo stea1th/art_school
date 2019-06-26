@@ -60,7 +60,7 @@ function manageSideBar() {
 function hideSideBarByScroll() {
 
     $(window).scroll(function () {
-        if (!$('#wrapper').hasClass('closed')) {
+        if (!$('#wrapper').hasClass('closed') && getCookie('sidebarClosedByUser') === '0') {
             let height = $('a[href="' + "/forum".replace("/", "") + '"]')[0].offsetTop;
             if ($('body')[0].scrollTop > height) {
                 closeSideBar();
@@ -95,8 +95,10 @@ function toggleSideBarByUser() {
         const wrapper = $('#wrapper');
         if (wrapper.hasClass('sidebar-toggle')) {
             wrapper.addClass('closed');
+            setCookie('sidebarClosedByUser', 1, 365);
         } else {
             wrapper.removeClass('closed');
+            setCookie('sidebarClosedByUser', 0, 365);
         }
     });
 }
