@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public abstract class AbstractUnterrichtController {
 
     @Autowired
-    UnterrichtService unterrichtService;
+    private UnterrichtService unterrichtService;
 
     public Unterricht get(int id) {
         log.info("get Unterricht {}", id);
@@ -62,15 +62,17 @@ public abstract class AbstractUnterrichtController {
         return unterrichtService.getAllTos();
     }
 
-    public Set<Integer> getYears() {
-        return getAll().stream().map(i -> i.getDatum().getYear()).collect(Collectors.toSet());
+    public List<String> getYears() {
+        return unterrichtService.getYears();
     }
 
+//    public Set<Integer> getYears() {
+//        return getAll().stream().map(i -> i.getDatum().getYear()).collect(Collectors.toSet());
+//    }
+
     public List<Unterricht> getAllByYear(int year) {
-        return unterrichtService.getAll()
-                .stream()
-                .filter(i -> i.getDatum().getYear() == year)
-                .collect(Collectors.toList());
+        System.out.println(unterrichtService.getYears().size());
+        return unterrichtService.getAllByYear(year);
     }
 
     public RequestUnterrichtTo createRequestUnterrichtTo(int id) {

@@ -18,6 +18,9 @@ public interface UnterrichtService extends MainServiceInterface<Unterricht> {
 
     RequestUnterrichtTo createRequestUnterrichtTo(int id);
 
-
     List<UnterrichtTo> getAllTos();
+
+    List<String> getYears();
+
+    List<Unterricht> getAllByYear(int year);
 }

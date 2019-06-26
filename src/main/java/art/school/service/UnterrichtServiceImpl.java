@@ -78,6 +78,16 @@ public class UnterrichtServiceImpl implements UnterrichtService {
     }
 
     @Override
+    public List<String> getYears() {
+        return repository.getYears();
+    }
+
+    @Override
+    public List<Unterricht> getAllByYear(int year) {
+        return repository.getAllByYear(year);
+    }
+
+    @Override
     public Unterricht create(Unterricht unterricht) {
         return null;
     }
@@ -85,7 +95,6 @@ public class UnterrichtServiceImpl implements UnterrichtService {
     @Override
     public void delete(int id) {
         checkNotFoundWithId(repository.delete(id), id);
-
     }
 
     @Override

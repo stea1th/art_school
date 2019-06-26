@@ -37,6 +37,7 @@ public class UnterrichtRestController extends AbstractUnterrichtController {
     public ResponseEntity<String> updateOnDragAndDrop(
             @PathVariable("id") int id,
             @RequestParam(value = "date") String date) {
+
         super.updateOnDrop(id, date);
         return new ResponseEntity<>(HttpStatus.OK);
     }
