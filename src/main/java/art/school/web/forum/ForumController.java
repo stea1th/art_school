@@ -2,9 +2,6 @@ package art.school.web.forum;
 
 import art.school.entity.Thema;
 import art.school.to.ThemaTo;
-import art.school.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,15 +15,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static art.school.util.DateUtil.convertDateToToString;
 import static art.school.util.PaginationHelper.createTablePage;
 
 @Controller
 @RequestMapping(value = "/forum")
 @Secured("ROLE_USER")
 public class ForumController extends AbstractForumController {
-
-    @Autowired
-    private MessageSource messageSource;
 
     @GetMapping
     public String all(Model model,
@@ -39,14 +34,14 @@ public class ForumController extends AbstractForumController {
                 .entrySet().iterator().next();
 
         model.addAttribute("list", entry.getKey()
-                .stream().peek(i -> i.setLast(DateUtil.convertDateToToString(i.getDateTo(), messageSource, locale)))
+                .stream().peek(i -> i.setLast(convertDateToToString(i.getDateTo(), messageSource, locale)))
                 .collect(Collectors.toList()));
 
         model.addAttribute("link", "forum");
-        model.addAttribute("title", messageSource.getMessage("forum.title", null, locale));
-        model.addAttribute("views", messageSource.getMessage("forum.views", null, locale));
-        model.addAttribute("answers", messageSource.getMessage("forum.answers", null, locale));
-        model.addAttribute("lastanswer", messageSource.getMessage("forum.last", null, locale));
+        model.addAttribute("title", message.get("forum.title"));
+        model.addAttribute("views", message.get("forum.views"));
+        model.addAttribute("answers", message.get("forum.answers"));
+        model.addAttribute("lastanswer", message.get("forum.last"));
         model.addAttribute("isBanned", isThisUserBanned());
         createTablePage(model, entry.getValue());
 

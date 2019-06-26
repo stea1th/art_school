@@ -1,8 +1,7 @@
 package art.school.web;
 
+import art.school.util.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,28 +11,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class RootController {
 
     @Autowired
-    private MessageSource messageSource;
+    private Messages message;
 
     @GetMapping("/")
-    public String root(){
+    public String root() {
         return "redirect:forum";
     }
 
     @GetMapping("/unterricht")
-    public String unterricht(){
+    public String unterricht() {
         return "unterricht";
     }
 
     @GetMapping("/kind")
-    public String kinder(){
+    public String kinder() {
         return "kind";
     }
 
     @GetMapping("/zahlung")
-    public String zahlung() { return "zahlung";}
+    public String zahlung() {
+        return "zahlung";
+    }
 
     @GetMapping("/statistik")
-    public String statistik() { return "statistik";}
+    public String statistik() {
+        return "statistik";
+    }
 
     @GetMapping("/login")
     public String login() {
@@ -52,14 +55,14 @@ public class RootController {
 
     @GetMapping(value = "/api/locale")
     @ResponseBody
-    public String getLocale(){
+    public String getLocale() {
         return LocaleContextHolder.getLocale().toString();
     }
 
     @GetMapping(value = "/api/locale/tables")
     @ResponseBody
-    public String getLocaleForTables(){
-        return messageSource.getMessage("datatables.lang", null, LocaleContextHolder.getLocale());
+    public String getLocaleForTables() {
+        return message.get("datatables.lang");
     }
 
 }

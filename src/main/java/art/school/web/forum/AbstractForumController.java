@@ -6,8 +6,10 @@ import art.school.service.NachrichtService;
 import art.school.service.ThemaService;
 import art.school.service.UserService;
 import art.school.to.ThemaTo;
+import art.school.util.Messages;
 import art.school.web.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -27,7 +29,13 @@ public abstract class AbstractForumController {
     @Autowired
     private UserService userService;
 
-    public List<Thema> getAll(){
+    @Autowired
+    MessageSource messageSource;
+
+    @Autowired
+    Messages message;
+
+    public List<Thema> getAll() {
         return themaService.getAll();
     }
 
@@ -39,7 +47,7 @@ public abstract class AbstractForumController {
         return themaService.getTo(id);
     }
 
-    public Page<Thema> getAll(Pageable pageable){
+    public Page<Thema> getAll(Pageable pageable) {
         return themaService.getAll(pageable);
     }
 
@@ -52,54 +60,54 @@ public abstract class AbstractForumController {
         return thema;
     }
 
-    void countClicks(int id){
-        Thema t =  get(id);
-        t.setViews(t.getViews()+1);
+    void countClicks(int id) {
+        Thema t = get(id);
+        t.setViews(t.getViews() + 1);
         themaService.create(t);
     }
 
-    void attach(int id){
+    void attach(int id) {
         themaService.attach(id);
     }
 
-    public int toggle(int id){
+    public int toggle(int id) {
 
         Thema t = get(id);
         t.setAktiv(!t.isAktiv());
-        t.setUser(t.getUser() == null? userService.get(SecurityUtil.getAuthId()) : null);
+        t.setUser(t.getUser() == null ? userService.get(SecurityUtil.getAuthId()) : null);
         return themaService.getAll().indexOf(themaService.create(t)) / 10;
     }
 
-    public Map<List<ThemaTo>, Page<Thema>> getAllTosAsMap(Pageable pageable){
+    public Map<List<ThemaTo>, Page<Thema>> getAllTosAsMap(Pageable pageable) {
         return themaService.getAllTosAsMap(pageable);
     }
 
-    public List<ThemaTo> getAllTos(Pageable pageable){
+    public List<ThemaTo> getAllTos(Pageable pageable) {
         return themaService.getAllTos(pageable);
     }
 
-    public List<ThemaTo> getAllTos(){
+    public List<ThemaTo> getAllTos() {
         return themaService.getAllTos();
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         themaService.delete(id);
     }
 
-    public Thema create(Thema t){
+    public Thema create(Thema t) {
         return themaService.create(t);
     }
 
-    public void update(Thema t, int id){
+    public void update(Thema t, int id) {
         assureIdConsistent(t, id);
         themaService.update(t);
     }
 
-    public long count(){
+    public long count() {
         return themaService.count();
     }
 
-    public boolean isThisUserBanned(){
+    public boolean isThisUserBanned() {
         return userService.isUserBanned(SecurityUtil.getAuthId());
     }
 }
