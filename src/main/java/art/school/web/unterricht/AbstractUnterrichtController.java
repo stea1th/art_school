@@ -7,12 +7,9 @@ import art.school.to.UnterrichtTo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+
+import static art.school.util.DateUtil.splitAndParseStrings;
 
 
 @Slf4j
@@ -36,25 +33,18 @@ public abstract class AbstractUnterrichtController {
         unterrichtService.delete(id);
     }
 
-    public void toggleBezahlt(int id) {
-        log.info("toggle Unterricht {} Status", id);
-        unterrichtService.toggleBezahlt(id);
-    }
-
     public void update(RequestUnterrichtTo unterrichtTo) {
         log.info("update {} with id={}", unterrichtTo, unterrichtTo.getId());
         unterrichtService.updateFromTo(unterrichtTo);
     }
 
     void updateOnDrop(int id, String s) {
-        String[] dateParts = s.replace("T", " ").split(" ");
         Unterricht u = unterrichtService.get(id);
-        u.setDatum(LocalDateTime.of(LocalDate.parse(dateParts[0]), LocalTime.parse(dateParts[1])));
+        u.setDatum(splitAndParseStrings(s));
         unterrichtService.create(u, u.getUser().getId(), u.getZahlung().getId());
     }
 
     public List<Unterricht> getAll() {
-        log.info("getAll Unterrichts");
         return unterrichtService.getAll();
     }
 
@@ -66,12 +56,7 @@ public abstract class AbstractUnterrichtController {
         return unterrichtService.getYears();
     }
 
-//    public Set<Integer> getYears() {
-//        return getAll().stream().map(i -> i.getDatum().getYear()).collect(Collectors.toSet());
-//    }
-
     public List<Unterricht> getAllByYear(int year) {
-        System.out.println(unterrichtService.getYears().size());
         return unterrichtService.getAllByYear(year);
     }
 

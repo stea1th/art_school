@@ -32,9 +32,9 @@ public class RequestUnterrichtTo {
                 u.getUser().getId(),
                 u.getZahlung().getId(),
                 u.isBezahlt(),
-                u.getNotiz());
-//                new UserTo(u.getUser()),
-//                new ZahlungTo(u.getZahlung()));
+                u.getNotiz(),
+                new UserTo(u.getUser()),
+                new ZahlungTo(u.getZahlung()));
     }
 
     public RequestUnterrichtTo(Integer id, String datum, String zeit, Integer kind, Integer zahlung, boolean bezahlt, String notiz) {
@@ -51,7 +51,7 @@ public class RequestUnterrichtTo {
         return id == null;
     }
 
-    public Unterricht createUnterricht(){
+    public Unterricht createUnterricht() {
         return new Unterricht(id, LocalDateTime.of(LocalDate.parse(datum),
                 LocalTime.parse(zeit)), bezahlt, notiz);
     }
