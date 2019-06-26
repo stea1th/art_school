@@ -3,6 +3,7 @@ package art.school.service;
 import art.school.entity.Unterricht;
 import art.school.repository.UnterrichtRepository;
 import art.school.to.RequestUnterrichtTo;
+import art.school.to.UnterrichtTo;
 import art.school.to.UserTo;
 import art.school.to.ZahlungTo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static art.school.util.ValidationUtil.assureIdConsistent;
-import static art.school.util.ValidationUtil.checkNew;
-import static art.school.util.ValidationUtil.checkNotFoundWithId;
+import static art.school.util.ValidationUtil.*;
 
 @Service
 public class UnterrichtServiceImpl implements UnterrichtService {
@@ -54,8 +54,8 @@ public class UnterrichtServiceImpl implements UnterrichtService {
         u.setBezahlt(unterrichtTo.isBezahlt());
         u.setNotiz(unterrichtTo.getNotiz());
         assureIdConsistent(u, u.getId());
-        create(u, unterrichtTo.getKind()!=null? unterrichtTo.getKind() : u.getUser().getId(),
-                unterrichtTo.getZahlung()!=null? unterrichtTo.getZahlung() : u.getZahlung().getId());
+        create(u, unterrichtTo.getKind() != null ? unterrichtTo.getKind() : u.getUser().getId(),
+                unterrichtTo.getZahlung() != null ? unterrichtTo.getZahlung() : u.getZahlung().getId());
 
     }
 
@@ -70,13 +70,21 @@ public class UnterrichtServiceImpl implements UnterrichtService {
     }
 
     @Override
+    public List<UnterrichtTo> getAllTos() {
+        return getAll()
+                .stream()
+                .map(UnterrichtTo::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Unterricht create(Unterricht unterricht) {
         return null;
     }
 
     @Override
     public void delete(int id) {
-       checkNotFoundWithId(repository.delete(id), id);
+        checkNotFoundWithId(repository.delete(id), id);
 
     }
 

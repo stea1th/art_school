@@ -2,6 +2,9 @@ package art.school.service;
 
 import art.school.entity.Unterricht;
 import art.school.to.RequestUnterrichtTo;
+import art.school.to.UnterrichtTo;
+
+import java.util.List;
 
 public interface UnterrichtService extends MainServiceInterface<Unterricht> {
 
@@ -16,4 +19,5 @@ public interface UnterrichtService extends MainServiceInterface<Unterricht> {
     RequestUnterrichtTo createRequestUnterrichtTo(int id);
 
 
+    List<UnterrichtTo> getAllTos();
 }
