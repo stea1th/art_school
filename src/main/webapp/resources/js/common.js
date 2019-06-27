@@ -111,25 +111,31 @@ function pageNumberInput() {
 function saveOrUpdate(form) {
     const successIcon = "<span><i class='far fa-check-circle '></i></span> &nbsp;";
     const failIcon = "<span><i class='far fa-times-circle'></i></span> &nbsp;";
-    $.post(ajaxUrl + "/save", form.serialize())
-        .done(function (data) {
-            myModal.modal('toggle');
-            $.each(data, function (k, v) {
-                console.log(k);
-                console.log(v);
-                if (k === 'Save') {
-                    succesNoty(successIcon, 'Пользователь "' + v + '"' + " удачно сохранен");
-                } else {
-                    succesNoty(successIcon, 'Пользователь "' + v + '"' + " удачно обновлен");
+    let map = new Map();
+    Array.from(form[0].elements).forEach(function (el) {
+        if ($(el).attr('required')) {
+            map.set('#' + $(el).parent()[0].id, $(el).val());
+        }
+    });
+    if (!isInputEmpty(map)) {
+        $.post(ajaxUrl + "/save", form.serialize())
+            .done(function (data) {
+                myModal.modal('toggle');
+                $.each(data, function (k, v) {
+                    if (k === 'Save') {
+                        succesNoty(successIcon, 'Пользователь "' + v + '"' + " удачно сохранен");
+                    } else {
+                        succesNoty(successIcon, 'Пользователь "' + v + '"' + " удачно обновлен");
+                    }
+                });
+                datatable.ajax.reload();
+            })
+            .fail(function (jqXHR, textStatus) {
+                if (jqXHR.status === 422) {
+                    failNoty(failIcon, 'Ошибка ' + jqXHR.status + ':\n Цена и Время не должны повторяться');
                 }
             });
-            datatable.ajax.reload();
-        })
-        .fail(function (jqXHR, textStatus) {
-            if (jqXHR.status === 422) {
-                failNoty(failIcon, 'Ошибка ' + jqXHR.status + ':\n Цена и Время не должны повторяться');
-            }
-        });
+    }
 }
 
 function createAnimationOnWelcome() {
@@ -389,8 +395,8 @@ function isInputValid(config) {
     return isTrue;
 }
 
-function appendWarning(config){
-    $(config.id).append('<div style="color:red" class='+ config.class+ '>' + $('#i18n-commons').attr(config.attr) + '</div>');
+function appendWarning(config) {
+    $(config.id).append('<div style="color:red" class=' + config.class + '>' + $('#i18n-commons').attr(config.attr) + '</div>');
 }
 
 
