@@ -1,6 +1,7 @@
 package art.school.service;
 
 import art.school.entity.Unterricht;
+import art.school.statik.MonthForStatistik;
 import art.school.to.RequestUnterrichtTo;
 import art.school.to.UnterrichtTo;
 
@@ -23,4 +24,6 @@ public interface UnterrichtService extends MainServiceInterface<Unterricht> {
     List<String> getYears();
 
     List<Unterricht> getAllByYear(int year);
+
+    List<MonthForStatistik> getStatistik(int year);
 }

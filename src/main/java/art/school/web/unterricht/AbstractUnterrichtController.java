@@ -2,6 +2,7 @@ package art.school.web.unterricht;
 
 import art.school.entity.Unterricht;
 import art.school.service.UnterrichtService;
+import art.school.statik.MonthForStatistik;
 import art.school.to.RequestUnterrichtTo;
 import art.school.to.UnterrichtTo;
 import lombok.extern.slf4j.Slf4j;
@@ -56,11 +57,11 @@ public abstract class AbstractUnterrichtController {
         return unterrichtService.getYears();
     }
 
-    public List<Unterricht> getAllByYear(int year) {
-        return unterrichtService.getAllByYear(year);
-    }
-
     public RequestUnterrichtTo createRequestUnterrichtTo(int id) {
         return unterrichtService.createRequestUnterrichtTo(id);
+    }
+
+    public List<MonthForStatistik> getStatistik(int year) {
+        return unterrichtService.getStatistik(year);
     }
 }

@@ -2,8 +2,10 @@ package art.school.service;
 
 import art.school.entity.Unterricht;
 import art.school.repository.UnterrichtRepository;
+import art.school.statik.MonthForStatistik;
 import art.school.to.RequestUnterrichtTo;
 import art.school.to.UnterrichtTo;
+import art.school.util.DataForStatistik;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,6 +80,12 @@ public class UnterrichtServiceImpl implements UnterrichtService {
     @Transactional
     public List<Unterricht> getAllByYear(int year) {
         return repository.getAllByYear(year);
+    }
+
+    @Override
+    @Transactional
+    public List<MonthForStatistik> getStatistik(int year) {
+        return DataForStatistik.getResponse(getAllByYear(year));
     }
 
     @Override

@@ -1,7 +1,6 @@
 package art.school.web.unterricht;
 
 import art.school.statik.MonthForStatistik;
-import art.school.util.DataForStatistik;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +18,7 @@ public class StatistikRestController extends AbstractUnterrichtController {
 
     @GetMapping(value = "/chart/{year}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MonthForStatistik> getStatistik(@PathVariable("year") int year) {
-        return DataForStatistik.getResponse(super.getAllByYear(year));
+        return super.getStatistik(year);
     }
 
     @GetMapping(value = "/years", produces = MediaType.APPLICATION_JSON_VALUE)
