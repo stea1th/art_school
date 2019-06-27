@@ -5,14 +5,14 @@
 <%@page pageEncoding="UTF-8" %>
 
 <form action="#" enctype="multipart/form-data" id="profile-image-form">
-    <div class="d-flex justify-content-around">
-        <div class="p-4">
-            <div id="preview" class="form-control image-holder"
-                 style="width:300px;height:300px;text-align: center;">
-                <h3 style="display: inline-block;padding-top: 130px;"><spring:message code="error.nophoto"/></h3>
+    <div class="d-flex flex-row h-100">
+        <div class="w-50" >
+            <div id="preview" class="form-control image-holder d-flex"
+                 style="width:300px;height:300px;text-align: center; padding-left: 70px;">
+                <h3 style="display: inline-block;padding: 80px 130px;text-align: center;"><spring:message code="error.nophoto"/></h3>
             </div>
             <br>
-            <div class="form-group d-flex">
+            <div class="form-group d-flex w-75">
                 <button class="btn btn-outline-success btn-sm flex-fill" type="button"
                         onclick="updateImage()"><i class="fas fa-search"></i>&nbsp;<spring:message code="button.find"/>
                 </button>
@@ -26,30 +26,28 @@
             </div>
 
         </div>
-        <div class="p-4">
+        <div class="w-50">
             <div class="form-group row">
-                <label for="name" class="col-4 col-form-label"><spring:message code="form.name"/></label>
+                <label for="name" class="col-4 col-form-label"><spring:message code="form.name"/><spring:message code="app.asteriks"/></label>
                 <div class="col-8">
                     <input type="text" id="name" name="name" class="form-control"
                            required="required" readonly/>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="adresse" class="col-4 col-form-label"><spring:message code="form.address"/></label>
+                <label for="adresse" class="col-4 col-form-label"><spring:message code="form.address"/><spring:message code="app.asteriks"/></label>
                 <div class="col-8" id="adresse-div">
                     <input type="text" id="adresse" name="adresse" class="form-control"
                            required="required"/>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="email" class="col-4 col-form-label"><spring:message code="form.email"/></label>
+                <label for="email" class="col-4 col-form-label"><spring:message code="form.email"/><spring:message code="app.asteriks"/></label>
                 <div class="col-8" id="email-div">
                     <input type="email" id="email" name="email" class="form-control"
                            required="required"/>
                 </div>
             </div>
-        </div>
-        <div class="p-4">
             <div class="form-group row">
                 <label for="new-passwort" class="col-4 col-form-label"><spring:message code="form.password.new"/></label>
                 <div class="col-8">
@@ -64,5 +62,20 @@
                 </div>
             </div>
         </div>
+        <%--<div class="p-4">--%>
+            <%--<div class="form-group row">--%>
+                <%--<label for="new-passwort" class="col-4 col-form-label"><spring:message code="form.password.new"/></label>--%>
+                <%--<div class="col-8">--%>
+                    <%--<input type="text" id="new-passwort" name="newPasswort" class="form-control"/>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="form-group row">--%>
+                <%--<label for="repeat-passwort" class="col-4 col-form-label"><spring:message code="form.password.repeat"/></label>--%>
+                <%--<div class="col-8" id="repeat">--%>
+                    <%--<input type="text" id="repeat-passwort" name="repeatPasswort"--%>
+                           <%--class="form-control"/>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
     </div>
 </form>
