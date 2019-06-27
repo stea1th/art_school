@@ -36,7 +36,7 @@
             </div>
             <div class="form-group row">
                 <label for="adresse" class="col-4 col-form-label"><spring:message code="form.address"/></label>
-                <div class="col-8">
+                <div class="col-8" id="adresse-div">
                     <input type="text" id="adresse" name="adresse" class="form-control"
                            required="required"/>
                 </div>

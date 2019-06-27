@@ -351,14 +351,14 @@ function destroyChosen(){
 
 function isInputEmpty(map){
     $('.warning').remove();
-    let ok = 0;
+    let isTrue = false;
     map.forEach(function(k, v){
         if(k === ''){
             $(v).append("<div class='warning' style='color: red; '>"+$('#i18n-commons').attr('warningEmptyField')+"</div>");
-            ok++;
+            isTrue = true;
         }
     });
-    return ok > 0;
+    return isTrue;
 }
 
 

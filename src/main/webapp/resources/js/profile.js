@@ -34,52 +34,72 @@ function getProfile(){
 
 function saveProfile(){
     $('#saveProfile').on('click', function () {
-        $('.error-field').hide();
-        var formData = new FormData();
-        var pass = $('#new-passwort').val();
-        var email = $('#email').val();
-        formData.append('name', $('#name').val());
-        formData.append('adresse', $('#adresse').val());
-        if(pass !== $('#repeat-passwort').val()){
-            err = $('#i18n').attr('invalidPassword');
-            $('#repeat').append('<div style="color:red" class="error-field">' +err+ '</div>');
-            failNoty('<i class="far fa-times-circle"></i>', err);
-            return;
-        } else {
-            formData.append('adminPasswort', pass);
-        }
+        // $('.error-field').hide();
+        let formData = new FormData();
+        let pass = $('#new-passwort').val();
+        let email = $('#email').val();
+        let adresse = $('#adresse').val();
 
-        if(!email.includes("@")){
-            err = $('#i18n').attr('invalidEmail');
-            $('#email-div').append('<div style="color:red" class="error-field">' +err+ '</div>');
-            failNoty('<i class="far fa-times-circle"></i>', err);
-            return;
-        } else {
-            if(email !== ''){
-                formData.append('email', email);
-            }
-        }
-        formData.append('removeImage', imageInput.attr('del') === 'true');
+        let map = new Map();
+        map.set('#adresse-div', adresse);
 
-        file = imageInput[0].files[0];
-
-        if(file !== undefined ){
-            if(file.size < 5242880 && validFileType(file)){
-                formData.append('file', file);
-            }
-        }
-        $.ajax({
-            url: "/api/profile/save",
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: formData,
-            type: 'POST'
-        }).done(function(){
-            getUserImageForNavBar();
-            succesNoty('<i class="far fa-thumbs-up"></i>', $('#i18n').attr('saveProfile'));
+        let isValid = isInputValid({
+            pass: pass,
+            repeat: $('#repeat-passwort').val(),
+            repeatInput: '#repeat',
+            email: email,
+            emailInput: '#email-div'
         });
+
+        console.log(isValid);
+        console.log(!isInputEmpty(map));
+        console.log(isValid && !isInputEmpty(map));
+        if(isValid && !isInputEmpty(map)){
+            formData.append('name', $('#name').val());
+            formData.append('adresse', adresse);
+            formData.append('adminPasswort', pass);
+            formData.append('email', email);
+            formData.append('removeImage', imageInput.attr('del') === 'true');
+
+            file = imageInput[0].files[0];
+
+            if(file !== undefined ){
+                if(file.size < 5242880 && validFileType(file)){
+                    formData.append('file', file);
+                }
+            }
+            $.ajax({
+                url: "/api/profile/save",
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData,
+                type: 'POST'
+            }).done(function(){
+                getUserImageForNavBar();
+                succesNoty('<i class="far fa-thumbs-up"></i>', $('#i18n').attr('saveProfile'));
+            });
+        } else {
+            failNoty('<i class="far fa-times-circle"></i>', 'Something wrong!!');
+        }
     });
+}
+
+function isInputValid(config){
+    $('.error-field').remove();
+    let isTrue = true;
+    if(config.pass !== config.repeat){
+        err = $('#i18n').attr('invalidPassword');
+        $(config.repeatInput).append('<div style="color:red" class="error-field">' +err+ '</div>');
+        isTrue = false;
+    }
+
+    if(!config.email.includes("@")){
+        err = $('#i18n').attr('invalidEmail');
+        $(config.emailInput).append('<div style="color:red" class="error-field">' +err+ '</div>');
+        isTrue = false;
+    }
+    return isTrue;
 }
 
 function updateImage(){
