@@ -6,11 +6,11 @@
     <form method="post" id="message-form" action="#">
         <input type="hidden" class="form-control" id="id" name="id" value="${id}"/>
         <div id="thema-title-invisible" class="form-group" style="display: none;">
-            <label for="thema-title-text"><spring:message code="forum.theme.title"/>:</label>
-            <input class="thema-title-text form-control" type="text" id="thema-title-text" required>
+            <label for="thema-title-text" class="label"><spring:message code="forum.theme.title" /><spring:message code="app.asteriks"/>:</label>
+            <input class="thema-title-text form-control" type="text" id="thema-title-text" maxlength="40" required>
         </div>
-        <div class="form-group">
-            <label for="text-message"><spring:message code="forum.theme.message"/>:</label>
+        <div id="thema-text-invisible" class="form-group">
+            <label for="text-message" class="label"><spring:message code="forum.theme.message"/><spring:message code="app.asteriks"/>:</label>
             <c:if test="${parentText != null}">
                    <textarea type="text" class="message-quote" name="message-quote" rows="5" readonly>
                        <c:out value="${parentText}" />
