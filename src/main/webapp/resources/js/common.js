@@ -354,7 +354,7 @@ function isInputEmpty(map){
     let ok = 0;
     map.forEach(function(k, v){
         if(k === ''){
-            $(v).append("<div class='warning' style='color: red; '>Pflichtfelder sind nicht ausgefüllt</div>");
+            $(v).append("<div class='warning' style='color: red; '>"+$('#i18n-commons').attr('warningEmptyField')+"</div>");
             ok++;
         }
     });
