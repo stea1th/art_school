@@ -349,6 +349,18 @@ function destroyChosen(){
     $('.chosen-select').chosen('destroy');
 }
 
+function isInputEmpty(map){
+    $('.warning').remove();
+    let ok = 0;
+    map.forEach(function(k, v){
+        if(k === ''){
+            $(v).append("<div class='warning' style='color: red; '>Pflichtfelder sind nicht ausgefüllt</div>");
+            ok++;
+        }
+    });
+    return ok > 0;
+}
+
 
 
 

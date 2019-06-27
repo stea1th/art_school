@@ -148,21 +148,12 @@ function updateMessage(id) {
 
 function saveThema() {
     $('.btn-ok').on('click', function () {
-        // let ok = 0;
         let title = $('#thema-title-text').val();
         let text = $('#text-message')[0].innerText;
         let map = new Map();
-        map.set(title, $('#thema-title-invisible'));
-        map.set(text, $('#thema-text-invisible'));
+        map.set('#thema-title-invisible', title);
+        map.set('#thema-text-invisible', text);
 
-        // if (title.val() === '') {
-        //     $('#thema-title-invisible').append("<div class='warning' style='color: red; '>Pflichtfelder sind nicht ausgefüllt</div>");
-        //     ok++;
-        // }
-        // if (text[0].innerText === '') {
-        //     $('#thema-text-invisible').append("<div class='warning' style='color: red;'>Pflichtfelder sind nicht ausgefüllt</div>");
-        //     ok++;
-        // }
         if (!isInputEmpty(map)) {
             $.post("/forum/save", {
                 thema: title,
@@ -174,20 +165,6 @@ function saveThema() {
 
     });
 }
-
-function isInputEmpty(map){
-    $('.warning').remove();
-    let ok = 0;
-    map.forEach(function(k, v){
-        console.log(k);
-        if(k === ''){
-            v.append("<div class='warning' style='color: red; '>Pflichtfelder sind nicht ausgefüllt</div>");
-            ok++;
-        }
-    });
-    return ok > 0;
-}
-
 
 function saveMessage(id) {
     $('.btn-ok').on('click', function () {
