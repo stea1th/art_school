@@ -350,10 +350,11 @@ function destroyChosen() {
 }
 
 function isInputEmpty(map) {
+
     $('.warning').remove();
     let isTrue = false;
     map.forEach(function (k, v) {
-        if (k === '') {
+        if (k === '' || k.charCodeAt(0) === 10) {
             appendWarning({
                 id: v,
                 class: 'warning',

@@ -153,7 +153,6 @@ function saveThema() {
         let map = new Map();
         map.set('#thema-title-invisible', title);
         map.set('#thema-text-invisible', text);
-
         if (!isInputEmpty(map)) {
             $.post("/forum/save", {
                 thema: title,
@@ -168,22 +167,27 @@ function saveThema() {
 
 function saveMessage(id) {
     $('.btn-ok').on('click', function () {
-        var size = $('.page-size').val();
-        $.post("/nachricht/save", {
-            id: $(this).parent().find('#id').val(),
-            themaId: $('#themaId').val(),
-            size: size,
-            text: $(this).parent().find('.text-message')[0].innerText,
-            page: $('.page-input').attr('this'),
-            parentId: id
-        }).done(function (data) {
-            var id = $('#themaId').val();
-            location.reload();
-            if (data.reload) {
-                location.href = "/nachricht?id=" + id + "&page=" + data.page
-                    + "&size=" + size + "#" + data.id;
-            }
-        });
+        let size = $('.page-size').val();
+        let map = new Map();
+        let text = $(this).parent().find('.text-message')[0].innerText;
+        map.set('#thema-text-invisible', text);
+        if(!isInputEmpty(map)){
+            $.post("/nachricht/save", {
+                id: $(this).parent().find('#id').val(),
+                themaId: $('#themaId').val(),
+                size: size,
+                text: text,
+                page: $('.page-input').attr('this'),
+                parentId: id
+            }).done(function (data) {
+                let id = $('#themaId').val();
+                location.reload();
+                if (data.reload) {
+                    location.href = "/nachricht?id=" + id + "&page=" + data.page
+                        + "&size=" + size + "#" + data.id;
+                }
+            });
+        }
     });
 }
 
