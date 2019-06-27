@@ -6,4 +6,6 @@
     <jsp:attribute name="type">hidden</jsp:attribute>
     <jsp:attribute name="id">i18n-commons</jsp:attribute>
     <jsp:attribute name="warningEmptyField"><spring:message code="error.required.field"/></jsp:attribute>
+    <jsp:attribute name="invalidPassword"><spring:message code="error.invalid.password"/></jsp:attribute>
+    <jsp:attribute name="invalidEmail"><spring:message code="error.invalid.email"/></jsp:attribute>
 </jsp:element>

@@ -51,9 +51,6 @@ function saveProfile(){
             emailInput: '#email-div'
         });
 
-        console.log(isValid);
-        console.log(!isInputEmpty(map));
-        console.log(isValid && !isInputEmpty(map));
         if(isValid && !isInputEmpty(map)){
             formData.append('name', $('#name').val());
             formData.append('adresse', adresse);
@@ -83,23 +80,6 @@ function saveProfile(){
             failNoty('<i class="far fa-times-circle"></i>', 'Something wrong!!');
         }
     });
-}
-
-function isInputValid(config){
-    $('.error-field').remove();
-    let isTrue = true;
-    if(config.pass !== config.repeat){
-        err = $('#i18n').attr('invalidPassword');
-        $(config.repeatInput).append('<div style="color:red" class="error-field">' +err+ '</div>');
-        isTrue = false;
-    }
-
-    if(!config.email.includes("@")){
-        err = $('#i18n').attr('invalidEmail');
-        $(config.emailInput).append('<div style="color:red" class="error-field">' +err+ '</div>');
-        isTrue = false;
-    }
-    return isTrue;
 }
 
 function updateImage(){

@@ -247,7 +247,7 @@ function getSelect(url, sel, name, selected) {
 
 function showModal(config) {
 
-    if(config.id){
+    if (config.id) {
         config.id.modal('show');
         $('#aktiv-checkbox').show();
         config.id.on('hidden.bs.modal', function () {
@@ -255,7 +255,7 @@ function showModal(config) {
             $("#id").val("");
         });
     }
-    if(config.init){
+    if (config.init) {
         config.init();
     }
 }
@@ -325,8 +325,8 @@ function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
         while (c.charAt(0) === ' ') {
             c = c.substring(1);
         }
@@ -337,28 +337,59 @@ function getCookie(cname) {
     return "";
 }
 
-function initChosen(){
+function initChosen() {
     $('.chosen-select').chosen({width: "100%"});
 }
 
-function updateChosen(){
+function updateChosen() {
     $('.chosen-select').trigger('chosen:updated');
 }
 
-function destroyChosen(){
+function destroyChosen() {
     $('.chosen-select').chosen('destroy');
 }
 
-function isInputEmpty(map){
+function isInputEmpty(map) {
     $('.warning').remove();
     let isTrue = false;
-    map.forEach(function(k, v){
-        if(k === ''){
-            $(v).append("<div class='warning' style='color: red; '>"+$('#i18n-commons').attr('warningEmptyField')+"</div>");
+    map.forEach(function (k, v) {
+        if (k === '') {
+            appendWarning({
+                id: v,
+                class: 'warning',
+                attr: 'warningEmptyField'
+            });
             isTrue = true;
         }
     });
     return isTrue;
+}
+
+function isInputValid(config) {
+    $('.error-field').remove();
+    let isTrue = true;
+    if (config.pass !== config.repeat) {
+        appendWarning({
+            id: config.repeatInput,
+            class: "error-field",
+            attr: 'invalidPassword'
+        });
+        isTrue = false;
+    }
+
+    if (!config.email.includes("@")) {
+        appendWarning({
+            id: config.emailInput,
+            class: "error-field",
+            attr: 'invalidEmail'
+        });
+        isTrue = false;
+    }
+    return isTrue;
+}
+
+function appendWarning(config){
+    $(config.id).append('<div style="color:red" class='+ config.class+ '>' + $('#i18n-commons').attr(config.attr) + '</div>');
 }
 
 

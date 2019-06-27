@@ -250,6 +250,10 @@ cursor:pointer;}
     font-size: 24px;
 }
 
+input[readonly], input[disabled] {
+    cursor: not-allowed;
+}
+
 
 
 
