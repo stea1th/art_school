@@ -8,13 +8,13 @@ $(function () {
 
 });
 
-function topFunction(){
+function topFunction() {
     $('head').scrollTo();
 }
 
 function scrollFunction() {
-    $(window).scroll(function(){
-        if ($('body')[0].scrollTop > 280 ) {
+    $(window).scroll(function () {
+        if ($('body')[0].scrollTop > 280) {
             $("#myBtn").css('display', 'block');
         } else {
             $("#myBtn").css('display', 'none');
@@ -24,7 +24,7 @@ function scrollFunction() {
 }
 
 function toggleAttach(id) {
-    $.post("/forum/attach", {id: id}).done(function(){
+    $.post("/forum/attach", {id: id}).done(function () {
         location.reload();
     });
 }
@@ -52,14 +52,14 @@ function checkIfBlocked() {
                     ":&nbsp;",
                     data.blockedByName,
                     "</div>"
-                    );
+                );
                 $('#isBlocked .modal-body').html(string);
                 $('#isBlocked').modal("show");
             }
         });
-    $('#accepted').on('click', function(){
+    $('#accepted').on('click', function () {
         $.post("/api/kind/accepted")
-            .done(function(){
+            .done(function () {
                 $('#isBlocked').modal("hide");
             });
     });
@@ -67,7 +67,7 @@ function checkIfBlocked() {
 
 function changeToUnblocked(id) {
     $.post("/api/admin/unblock", {id: id})
-        .done(function(){
+        .done(function () {
             location.reload();
         });
 }
@@ -90,7 +90,7 @@ function changeToBlocked(id) {
 
 function changeForumLanguage(lang) {
     var locale = "&locale=";
-    var link = location.pathname.includes('/forum')? location.href.replace('#', '') : location.href;
+    var link = location.pathname.includes('/forum') ? location.href.replace('#', '') : location.href;
     link = location.pathname.includes('/forum') ? link.split("?")[0] : link;
     var url = link + (link.includes('?') ? "&" : "?") + "page=" + ($('.page-input').attr('this') - 1) + "&size=" + $('.page-size').val();
     location.href = (url.includes(locale) ? url.split(locale)[0] : url.includes('#') ? url.split('#')[0] : url) + locale + lang;
@@ -148,35 +148,46 @@ function updateMessage(id) {
 
 function saveThema() {
     $('.btn-ok').on('click', function () {
-        $.post("/forum/save", {
-            thema: $('#thema-title-text').val(),
-            message: $('#text-message')[0].innerText
-        })
-            .done(function (id) {
+        let title = $('#thema-title-text').val();
+        let text = $('#text-message')[0].innerText;
+        let map = new Map();
+        map.set('#thema-title-invisible', title);
+        map.set('#thema-text-invisible', text);
+        if (!isInputEmpty(map)) {
+            $.post("/forum/save", {
+                thema: title,
+                message: text
+            }).done(function (id) {
                 location.href = "/nachricht?id=" + id;
             });
+        }
+
     });
 }
 
-
 function saveMessage(id) {
     $('.btn-ok').on('click', function () {
-        var size = $('.page-size').val();
-        $.post("/nachricht/save", {
-            id: $(this).parent().find('#id').val(),
-            themaId: $('#themaId').val(),
-            size: size,
-            text: $(this).parent().find('.text-message')[0].innerText,
-            page: $('.page-input').attr('this'),
-            parentId: id
-        }).done(function (data) {
-            var id = $('#themaId').val();
-            location.reload();
-            if (data.reload) {
-                location.href = "/nachricht?id=" + id + "&page=" + data.page
-                    + "&size=" + size + "#" + data.id;
-            }
-        });
+        let size = $('.page-size').val();
+        let map = new Map();
+        let text = $(this).parent().find('.text-message')[0].innerText;
+        map.set('#thema-text-invisible', text);
+        if(!isInputEmpty(map)){
+            $.post("/nachricht/save", {
+                id: $(this).parent().find('#id').val(),
+                themaId: $('#themaId').val(),
+                size: size,
+                text: text,
+                page: $('.page-input').attr('this'),
+                parentId: id
+            }).done(function (data) {
+                let id = $('#themaId').val();
+                location.reload();
+                if (data.reload) {
+                    location.href = "/nachricht?id=" + id + "&page=" + data.page
+                        + "&size=" + size + "#" + data.id;
+                }
+            });
+        }
     });
 }
 

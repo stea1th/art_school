@@ -35,7 +35,7 @@
     </div>
 </div>
 <jsp:include page="../jsp/i18n/i18n-profile.jsp">
-    <jsp:param name="page" value="profile"/>
+    <jsp:param name="page" value="error"/>
 </jsp:include>
 </body>
 </html>

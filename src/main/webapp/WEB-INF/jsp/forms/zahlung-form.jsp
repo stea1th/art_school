@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page pageEncoding="UTF-8" %>
 
 <form id="zahlung-detailsForm">
@@ -8,8 +9,8 @@
     </div>
     <div><jsp:include page="../i18n/i18n-slider.jsp"/></div>
     <div class="form-group row">
-        <label for="name" class="col-4 col-form-label">Название</label>
-        <div class="col-8">
+        <label for="name" class="col-4 col-form-label">Название<spring:message code="app.asteriks"/></label>
+        <div class="col-8" id="name-div">
             <input type="text" id="name" name="name" class="form-control" required="required"/>
         </div>
     </div>

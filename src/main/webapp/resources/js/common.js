@@ -111,25 +111,31 @@ function pageNumberInput() {
 function saveOrUpdate(form) {
     const successIcon = "<span><i class='far fa-check-circle '></i></span> &nbsp;";
     const failIcon = "<span><i class='far fa-times-circle'></i></span> &nbsp;";
-    $.post(ajaxUrl + "/save", form.serialize())
-        .done(function (data) {
-            myModal.modal('toggle');
-            $.each(data, function (k, v) {
-                console.log(k);
-                console.log(v);
-                if (k === 'Save') {
-                    succesNoty(successIcon, 'Пользователь "' + v + '"' + " удачно сохранен");
-                } else {
-                    succesNoty(successIcon, 'Пользователь "' + v + '"' + " удачно обновлен");
+    let map = new Map();
+    Array.from(form[0].elements).forEach(function (el) {
+        if ($(el).attr('required')) {
+            map.set('#' + $(el).parent()[0].id, $(el).val());
+        }
+    });
+    if (!isInputEmpty(map)) {
+        $.post(ajaxUrl + "/save", form.serialize())
+            .done(function (data) {
+                myModal.modal('toggle');
+                $.each(data, function (k, v) {
+                    if (k === 'Save') {
+                        succesNoty(successIcon, 'Пользователь "' + v + '"' + " удачно сохранен");
+                    } else {
+                        succesNoty(successIcon, 'Пользователь "' + v + '"' + " удачно обновлен");
+                    }
+                });
+                datatable.ajax.reload();
+            })
+            .fail(function (jqXHR, textStatus) {
+                if (jqXHR.status === 422) {
+                    failNoty(failIcon, 'Ошибка ' + jqXHR.status + ':\n Цена и Время не должны повторяться');
                 }
             });
-            datatable.ajax.reload();
-        })
-        .fail(function (jqXHR, textStatus) {
-            if (jqXHR.status === 422) {
-                failNoty(failIcon, 'Ошибка ' + jqXHR.status + ':\n Цена и Время не должны повторяться');
-            }
-        });
+    }
 }
 
 function createAnimationOnWelcome() {
@@ -247,7 +253,7 @@ function getSelect(url, sel, name, selected) {
 
 function showModal(config) {
 
-    if(config.id){
+    if (config.id) {
         config.id.modal('show');
         $('#aktiv-checkbox').show();
         config.id.on('hidden.bs.modal', function () {
@@ -255,7 +261,7 @@ function showModal(config) {
             $("#id").val("");
         });
     }
-    if(config.init){
+    if (config.init) {
         config.init();
     }
 }
@@ -325,8 +331,8 @@ function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
         while (c.charAt(0) === ' ') {
             c = c.substring(1);
         }
@@ -337,16 +343,60 @@ function getCookie(cname) {
     return "";
 }
 
-function initChosen(){
+function initChosen() {
     $('.chosen-select').chosen({width: "100%"});
 }
 
-function updateChosen(){
+function updateChosen() {
     $('.chosen-select').trigger('chosen:updated');
 }
 
-function destroyChosen(){
+function destroyChosen() {
     $('.chosen-select').chosen('destroy');
+}
+
+function isInputEmpty(map) {
+
+    $('.warning').remove();
+    let isTrue = false;
+    map.forEach(function (k, v) {
+        if (k === '' || k.charCodeAt(0) === 10) {
+            appendWarning({
+                id: v,
+                class: 'warning',
+                attr: 'warningEmptyField'
+            });
+            isTrue = true;
+        }
+    });
+    return isTrue;
+}
+
+function isInputValid(config) {
+    $('.error-field').remove();
+    let isTrue = true;
+    if (config.pass !== config.repeat) {
+        appendWarning({
+            id: config.repeatInput,
+            class: "error-field",
+            attr: 'invalidPassword'
+        });
+        isTrue = false;
+    }
+
+    if (!config.email.includes("@")) {
+        appendWarning({
+            id: config.emailInput,
+            class: "error-field",
+            attr: 'invalidEmail'
+        });
+        isTrue = false;
+    }
+    return isTrue;
+}
+
+function appendWarning(config) {
+    $(config.id).append('<div style="color:red" class=' + config.class + '>' + $('#i18n-commons').attr(config.attr) + '</div>');
 }
 
 

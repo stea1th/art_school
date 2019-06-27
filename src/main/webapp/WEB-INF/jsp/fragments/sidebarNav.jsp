@@ -193,27 +193,9 @@
             </li>
         </sec:authorize>
     </ul>
-    <%--<div class="collapse navbar-collapse">--%>
-    <%--<div class="dropdown dropdown-logged dropdown-logged-lighten">--%>
-    <%--<a href="#" data-toggle="dropdown" class="dropdown-logged-toggle dropdown-link">--%>
-    <%--<span class="dropdown-user float-left">Accgit</span>--%>
-    <%--<img src="img/avatar.png" alt="avatar" class="dropdown-avatar">--%>
-    <%--</a>--%>
-    <%--<div class="dropdown-menu dropdown-logged-menu dropdown-menu-right border-0 dropdown-menu-lighten">--%>
-    <%--<div class="dropdown-menu-arrow"></div>--%>
-    <%--<a class="dropdown-item dropdown-logged-item" href="#"><i class="fa fa-user-o"--%>
-    <%--aria-hidden="true"></i>Your--%>
-    <%--profile</a>--%>
-    <%--<a class="dropdown-item dropdown-logged-item" href="#"><i class="fa fa-comments-o"--%>
-    <%--aria-hidden="true"></i>Your--%>
-    <%--comments</a>--%>
-    <%--<a class="dropdown-item dropdown-logged-item" href="#"><i class="fa fa-key"--%>
-    <%--aria-hidden="true"></i>Change password</a>--%>
-    <%--<div class="dropdown-divider border-light"></div>--%>
-    <%--<a class="dropdown-item dropdown-logged-item" href="#"><i class="fa fa-sign-out"--%>
-    <%--aria-hidden="true"></i>Logout</a>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
+
 </nav>
+<jsp:include page="../i18n/i18n-commons.jsp">
+    <jsp:param name="page" value="zahlung"/>
+</jsp:include>
 
