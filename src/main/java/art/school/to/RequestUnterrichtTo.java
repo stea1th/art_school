@@ -5,10 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+
+import static art.school.util.DateUtil.parseStringsToLocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -52,7 +51,6 @@ public class RequestUnterrichtTo {
     }
 
     public Unterricht createUnterricht() {
-        return new Unterricht(id, LocalDateTime.of(LocalDate.parse(datum),
-                LocalTime.parse(zeit)), bezahlt, notiz);
+        return new Unterricht(id, parseStringsToLocalDateTime(datum, zeit), bezahlt, notiz);
     }
 }
