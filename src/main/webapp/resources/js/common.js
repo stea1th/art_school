@@ -115,7 +115,7 @@ function saveOrUpdate(form) {
 
     let email = form.find('#email');
     let isValid = true;
-    if(email){
+    if(email.length > 0){
         isValid = isInputValid({
                 email: email[0].id,
                 emailInput: '#email-div'
@@ -419,6 +419,7 @@ function isInputValid(config) {
 function appendWarning(config) {
     $(config.id).append('<div style="color:red" class=' + config.class + '>' + $('#i18n-commons').attr(config.attr) + '</div>');
 }
+
 
 
 
