@@ -68,12 +68,16 @@ public class DateUtil {
     }
 
     public static LocalDateTime parseStringsToLocalDateTime(String date, String time) {
-        return LocalDateTime.of(LocalDate.parse(date),
+        return LocalDateTime.of(LocalDate.parse(getDateAndTime(date)[0]),
                 LocalTime.parse(time));
     }
 
     public static LocalDateTime splitAndParseStrings(String s) {
-        String[] dateParts = s.split("T");
+        String[] dateParts = getDateAndTime(s);
         return parseStringsToLocalDateTime(dateParts[0], dateParts[1]);
+    }
+
+    private static String[] getDateAndTime(String s) {
+        return s.replace("T", " ").split(" ");
     }
 }

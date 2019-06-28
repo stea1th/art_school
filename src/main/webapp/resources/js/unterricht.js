@@ -95,7 +95,9 @@ function onDrop(event) {
         .done(function () {
             calendar.fullCalendar('refetchEvents');
             $(".popover").remove();
-        });
+        }).fail(function(xhqr){
+            console.log(xhqr);
+    });
 }
 
 function dateTimePicker(zt) {
