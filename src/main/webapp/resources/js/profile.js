@@ -18,18 +18,18 @@ $(function () {
 });
 
 function getProfile(){
-    $.get("/api/profile")
-        .done(function(data){
-            $('#profile-image-form input').each(function(){
-                $(this).val(data[$(this).attr('name')]);
-            });
-            if(data.encodedImage !== null){
-                var image = document.createElement('img');
-                image.style.cssText = 'width:300px;height:300px;text-align: center;';
-                image.src = "data:image/jpeg;base64," + data.encodedImage;
-                $('#preview').empty().append(image);
-            }
+    let data = getThisUserProfile();
+    if(data !== null){
+        $('#profile-image-form input').each(function(){
+            $(this).val(data[$(this).attr('name')]);
         });
+        if(data.encodedImage !== null){
+            var image = document.createElement('img');
+            image.style.cssText = 'width:300px;height:300px;text-align: center;';
+            image.src = "data:image/jpeg;base64," + data.encodedImage;
+            $('#preview').empty().append(image);
+        }
+    }
 }
 
 function saveProfile(){

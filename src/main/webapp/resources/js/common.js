@@ -420,6 +420,20 @@ function appendWarning(config) {
     $(config.id).append('<div style="color:red" class=' + config.class + '>' + $('#i18n-commons').attr(config.attr) + '</div>');
 }
 
+function getThisUserProfile(){
+    $.get("/api/profile")
+        .done(function(data){
+            return data;
+        });
+    return null;
+}
+
+function getUserInfoForSideBar(){
+    let data = getThisUserProfile();
+    if(data !== null){
+
+    }
+}
 
 
 
