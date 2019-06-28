@@ -111,13 +111,18 @@ function pageNumberInput() {
 function saveOrUpdate(form) {
     const successIcon = "<span><i class='far fa-check-circle '></i></span> &nbsp;";
     const failIcon = "<span><i class='far fa-times-circle'></i></span> &nbsp;";
-    let map = new Map();
-    Array.from(form[0].elements).forEach(function (el) {
-        if ($(el).attr('required')) {
-            map.set('#' + $(el).parent()[0].id, $(el).val());
-        }
-    });
-    if (!isInputEmpty(map)) {
+    let map = getMapFromFormWithRequiredElements(form);
+
+    let email = form.find('#email');
+    let isValid = true;
+    if(email){
+        isValid = isInputValid({
+                email: email[0].id,
+                emailInput: '#email-div'
+            });
+    }
+
+    if (!isInputEmpty(map) && isValid) {
         $.post(ajaxUrl + "/save", form.serialize())
             .done(function (data) {
                 myModal.modal('toggle');
@@ -136,6 +141,20 @@ function saveOrUpdate(form) {
                 }
             });
     }
+}
+
+function getMapFromFormWithRequiredElements(form){
+    let map = new Map();
+    Array.from(form[0].elements).forEach(function (el) {
+        if ($(el).attr('required')) {
+            let parent = $(el).parent();
+            if(parent[0].id === ''){
+                parent = parent.parent();
+            }
+            map.set('#' + parent[0].id, $(el).val());
+        }
+    });
+    return map;
 }
 
 function createAnimationOnWelcome() {
@@ -252,6 +271,8 @@ function getSelect(url, sel, name, selected) {
 }
 
 function showModal(config) {
+    $('.error-field').remove();
+    $('.warning').remove();
 
     if (config.id) {
         config.id.modal('show');
@@ -360,7 +381,7 @@ function isInputEmpty(map) {
     $('.warning').remove();
     let isTrue = false;
     map.forEach(function (k, v) {
-        if (k === '' || k.charCodeAt(0) === 10) {
+        if (k === '' || k === null || k.charCodeAt(0) === 10) {
             appendWarning({
                 id: v,
                 class: 'warning',
