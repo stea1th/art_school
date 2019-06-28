@@ -225,7 +225,7 @@ function updateRow(id) {
                 showModal({id: myModal});
                 $('#aktiv-checkbox').hide();
             });
-            getSelect("/api/admin/roles", $('#roles'), "Выбери роль", data.roles);
+            getSelect("/api/admin/roles", $('#roles'), $('#i18n-commons').attr('chooseRole'), data.roles);
 
         });
 }
