@@ -254,6 +254,10 @@ input[readonly], input[disabled] {
     cursor: not-allowed;
 }
 
+.slider-div {
+    padding-top: 5px;
+}
+
 
 
 

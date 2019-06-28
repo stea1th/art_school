@@ -210,7 +210,7 @@ function updateRow(id) {
         .done(function (data) {
             $.each(data, function (k, v) {
                 if ($('#slider1').length) {
-                    $('.modal-title').text('Обновить способ оплаты');
+                    $('.modal-title').text($('#hidden-param').attr('updateTitle'));
                     if (k === 'preis') {
                         setPreis(v);
                     }

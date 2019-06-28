@@ -15,28 +15,29 @@
 
             <!-- simple menu -->
             <li class="list-item">
-                <p class="list-title text-uppercase">Profile</p>
+                <p class="list-title text-uppercase"><spring:message code="app.profile"/></p>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="list-link link-arrow"><span class="list-icon"><i class="fas fa-user"></i></span>Info</a>
+                    <li><a href="#" class="list-link link-arrow"><span class="list-icon"><i
+                            class="fas fa-user"></i></span><spring:message code="app.info"/></a>
                         <ul class="list-unstyled list-hidden">
                             <li>
-                                <div>Name: Igor</div>
-                                <div>Status: Moderator</div>
-                                <div>Registered: 12.12.2017</div>
+                                <div><spring:message code="form.name"/>:&nbsp;Igor</div>
+                                <div><spring:message code="forum.status"/>:&nbsp;Moderator</div>
+                                <div><spring:message code="forum.registration"/>:&nbsp;12.12.2017</div>
                             </li>
                         </ul>
                     </li>
 
                     <li><a href="profile" class="list-link"><span class="list-icon"><i
-                            class="fas fa-user-edit"></i></span>Edit</a></li>
+                            class="fas fa-user-edit"></i></span><spring:message code="forum.edit"/></a></li>
                     <li><a href="<c:url value="/perform_logout" />" class="list-link"><span class="list-icon"><i
-                            class="fas fa-sign-out-alt"></i></span>Logout</a></li>
+                            class="fas fa-sign-out-alt"></i></span><spring:message code="app.logout"/></a></li>
                 </ul>
             </li>
 
             <!-- multi-level dropdown menu -->
             <li class="list-item">
-                <p class="list-title text-uppercase">Navigation</p>
+                <p class="list-title text-uppercase"><spring:message code="app.navigation"/></p>
                 <ul class="list-unstyled">
                     <sec:authorize access="hasRole('ROLE_MODERATOR')">
                         <li>
@@ -46,7 +47,7 @@
                                     class="sr-only">(current)</span></a>
                         </li>
                         <li><a href="#" class="list-link link-arrow"><span class="list-icon"><i
-                                class="fas fa-list-ul"></i></span>Tables</a>
+                                class="fas fa-list-ul"></i></span><spring:message code="app.tables"/></a>
                             <ul class="list-unstyled list-hidden">
                                 <li>
                                     <a class="list-link" href="kind"><span class="list-icon"><i
@@ -74,57 +75,8 @@
                         <a class="list-link" href="forum"><span class="list-icon"><i
                                 class="fab fa-facebook-f"></i></span><spring:message code="forum.name"/></a>
                     </li>
-
-                    <%--<li><a href="#" class="list-link"><span class="list-icon"><i class="fa fa-home"--%>
-                    <%--aria-hidden="true"></i></span>Home</a>--%>
-                    <%--</li>--%>
-                    <%--<li><a href="#" class="list-link link-arrow link-current"><span class="list-icon"><i--%>
-                    <%--class="fa fa-cog" aria-hidden="true"></i></span>Settings</a>--%>
-                    <%--<ul class="list-unstyled list-hidden">--%>
-                    <%--<li><a href="#" class="list-link">Timezone</a></li>--%>
-                    <%--<li><a href="#" class="list-link">Permissions</a></li>--%>
-                    <%--<li><a href="#" class="list-link link-arrow link-current">Maintenance</a>--%>
-                    <%--<ul class="list-unstyled list-hidden">--%>
-                    <%--<li><a href="#" class="list-link">On</a></li>--%>
-                    <%--<li><a href="#" class="list-link link-current">Off</a></li>--%>
-                    <%--</ul>--%>
-                    <%--</li>--%>
-                    <%--</ul>--%>
-                    <%--</li>--%>
-
-                    <!-- notice info -->
                 </ul>
             </li>
-
-            <%--<!-- multi-level dropdown menu -->--%>
-            <%--<li class="list-item">--%>
-            <%--<p class="list-title text-uppercase">Coments</p>--%>
-            <%--<ul class="list-unstyled">--%>
-            <%--<li><a href="#" class="list-link"><span class="list-icon"><i class="fa fa-plus"--%>
-            <%--aria-hidden="true"></i></span>New</a>--%>
-            <%--</li>--%>
-            <%--<li><a href="#" class="list-link link-arrow"><span class="list-icon"><i class="fa fa-comments-o"--%>
-            <%--aria-hidden="true"></i></span>Settings--%>
-            <%--comments</a>--%>
-            <%--<ul class="list-unstyled list-hidden">--%>
-            <%--<li><a href="#" class="list-link link-current">Disable</a></li>--%>
-            <%--<li><a href="#" class="list-link">Enable</a></li>--%>
-            <%--</ul>--%>
-            <%--</li>--%>
-            <%--</ul>--%>
-            <%--</li>--%>
-
-            <%--<!-- simple menu -->--%>
-            <%--<li class="list-item">--%>
-            <%--<p class="list-title text-uppercase">Blog</p>--%>
-            <%--<ul class="list-unstyled">--%>
-            <%--<li><a href="#" class="list-link"><span class="list-icon"><i class="fa fa-plus"--%>
-            <%--aria-hidden="true"></i></span>Add</a>--%>
-            <%--</li>--%>
-            <%--<li><a href="#" class="list-link"><span class="list-icon"><i class="fa fa-table"></i></span>List</a>--%>
-            <%--</li>--%>
-            <%--</ul>--%>
-            <%--</li>--%>
         </ul>
     </div>
 </div>
@@ -186,9 +138,11 @@
                    aria-expanded="false" class="nav-link dropdown-toggle navbar-icon-link">
                 </a>
                 <div aria-labelledby="userdetails" class="dropdown-menu dropdown-menu-right">
-                    <a href="profile" class="dropdown-item">Profile</a>
+                    <a href="profile" class="dropdown-item"><span><i
+                            class="fas fa-user-edit"></i>&nbsp;</span><spring:message code="forum.edit"/></a>
                     <div class="dropdown-divider my-0"></div>
-                    <a href="<c:url value="/perform_logout" />" class="dropdown-item">Logout</a>
+                    <a href="<c:url value="/perform_logout" />" class="dropdown-item"><span><i
+                            class="fas fa-sign-out-alt"></i></span>&nbsp;<spring:message code="app.logout"/></a>
                 </div>
             </li>
         </sec:authorize>
