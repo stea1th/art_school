@@ -12,22 +12,22 @@
     </div>
 
     <div class="form-group row">
-        <label for="kind" class="col-4 col-form-label">Ученик</label>
+        <label for="kind" class="col-4 col-form-label">Ученик<spring:message code="app.asteriks"/></label>
         <div class="col-8" id="kind-div">
-            <select id="kind" name="kind" class="custom-select chosen-select" required="required">
+            <select id="kind" name="kind" class="custom-select chosen-select" required>
             </select>
         </div>
     </div>
     <div class="form-group row">
-        <label for="zahlung" class="col-4 col-form-label">Оплата</label>
+        <label for="zahlung" class="col-4 col-form-label">Оплата<spring:message code="app.asteriks"/></label>
         <div class="col-8" id="zahlung-div">
-            <select id="zahlung" name="zahlung" class="custom-select chosen-select" required="required">
+            <select id="zahlung" name="zahlung" class="custom-select chosen-select" required>
             </select>
         </div>
     </div>
     <div class="form-group row">
-        <label for="zeit" class="col-4 col-form-label">Время</label>
-        <div class="col-8">
+        <label for="zeit" class="col-4 col-form-label">Время<spring:message code="app.asteriks"/></label>
+        <div class="col-8" id="zeit-div">
             <input id="zeit" name="zeit" required/>
         </div>
     </div>
@@ -37,7 +37,7 @@
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="bezahlt" name="bezahlt"
                        checked="checked"
-                       value="true" required>
+                       value="true">
                 <label class="custom-control-label" for="bezahlt">Да</label>
             </div>
         </div>

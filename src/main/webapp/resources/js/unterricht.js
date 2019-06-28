@@ -95,9 +95,7 @@ function onDrop(event) {
         .done(function () {
             calendar.fullCalendar('refetchEvents');
             $(".popover").remove();
-        }).fail(function(xhqr){
-            console.log(xhqr);
-    });
+        });
 }
 
 function dateTimePicker(zt) {
@@ -155,12 +153,16 @@ function renderMenuBtn(id, name, url, aktiv) {
 }
 
 function saveUnterricht() {
+    let form = $('#detailsForm');
+    let map = getMapFromFormWithRequiredElements(form);
 
-    $.post(ajaxUnterricht + '/save', $('#detailsForm').serialize())
-        .done(function () {
-            $('#createUnterricht').modal('hide');
-            calendar.fullCalendar('refetchEvents');
-        });
+    if(!isInputEmpty(map)){
+        $.post(ajaxUnterricht + '/save', form.serialize())
+            .done(function () {
+                $('#createUnterricht').modal('hide');
+                calendar.fullCalendar('refetchEvents');
+            });
+    }
 }
 
 function updateUnterricht(event, zt) {
