@@ -29,7 +29,15 @@ public interface CrudUserRepository extends JpaRepository<Users, Integer> {
             "where u.id not in (\n" +
             "select u.id from users u\n" +
             "left join user_roles role2 on u.id = role2.user_id\n" +
-            "where role2.role = 'ROLE_ADMIN' or role2.role = 'ROLE_MODERATOR')\n" +
+            "where role2.role = 'ROLE_MODERATOR')\n" +
             "order by u.name asc", nativeQuery = true)
-    List<Users> findKinds();
+    List<Users> findKids();
+
+    @Query(value = "select * from users u where u.id not in\n" +
+            "                            (select u.id from users u left join user_roles role2 " +
+            "on u.id = role2.user_id where role2.role = 'ROLE_MODERATOR')\n" +
+            "and u.aktiv = true\n" +
+            "order by u.name asc", nativeQuery = true)
+    List<Users> findOnlyActiveKids();
+
 }
