@@ -16,6 +16,8 @@ $(function () {
 
     initChosen();
 
+    getThisUserProfile();
+
 });
 
 function getLocalesForTables() {
@@ -423,16 +425,23 @@ function appendWarning(config) {
 function getThisUserProfile(){
     $.get("/api/profile")
         .done(function(data){
-            return data;
+           getUserInfoForSideBar(data);
+           if(location.pathname === '/profile'){
+               getProfile(data);
+           }
         });
-    return null;
 }
 
-function getUserInfoForSideBar(){
-    let data = getThisUserProfile();
-    if(data !== null){
+function getUserInfoForSideBar(data){
+    $('#side-name').text(data.name);
+    $('#side-status').text(data.roles);
+    $('#side-registration').text(formatDate(data.registriert));
+}
 
-    }
+function formatDate(date){
+    let arr = date.split(' ');
+    let el = arr[0].split('-');
+    return el[2] + '.' + el[1] + '.' +el[0];
 }
 
 

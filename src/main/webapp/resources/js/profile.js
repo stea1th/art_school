@@ -12,13 +12,10 @@ $(function () {
 
     inputOnClick();
 
-    getProfile();
-
     saveProfile();
 });
 
-function getProfile(){
-    let data = getThisUserProfile();
+function getProfile(data){
     if(data !== null){
         $('#profile-image-form input').each(function(){
             $(this).val(data[$(this).attr('name')]);

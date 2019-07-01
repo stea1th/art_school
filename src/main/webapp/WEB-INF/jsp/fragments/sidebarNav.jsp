@@ -21,9 +21,9 @@
                             class="fas fa-user"></i></span><spring:message code="app.info"/></a>
                         <ul class="list-unstyled list-hidden">
                             <li>
-                                <div><spring:message code="form.name"/>:&nbsp;Igor</div>
-                                <div><spring:message code="forum.status"/>:&nbsp;Moderator</div>
-                                <div><spring:message code="forum.registration"/>:&nbsp;12.12.2017</div>
+                                <div><spring:message code="form.name"/>:&nbsp;<span id="side-name"></span></div>
+                                <div><spring:message code="forum.status"/>:&nbsp;<span id="side-status">Moderator</span></div>
+                                <div><spring:message code="forum.registration"/>:&nbsp;<span id="side-registration">12.12.2017</span></div>
                             </li>
                         </ul>
                     </li>

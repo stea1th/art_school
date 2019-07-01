@@ -15,7 +15,9 @@ public class ProfileRestController extends AbstractUserController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public UserTo getProfile() {
-        return super.getToForProfile();
+        UserTo u = super.getToForProfile();
+        u.setRoles(message.get(u.getRoles()));
+        return u;
     }
 
     @PostMapping(value= "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
