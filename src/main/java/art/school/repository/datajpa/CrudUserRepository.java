@@ -40,4 +40,7 @@ public interface CrudUserRepository extends JpaRepository<Users, Integer> {
             "order by u.name asc", nativeQuery = true)
     List<Users> findOnlyActiveKids();
 
+    @Query(value = "select t.user from Thema t where t.id = :themaId")
+    Users findUsersByThemaId(@Param("themaId") int themaId);
+
 }

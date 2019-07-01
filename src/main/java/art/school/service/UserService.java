@@ -1,6 +1,5 @@
 package art.school.service;
 
-import art.school.entity.Block;
 import art.school.entity.Users;
 import art.school.to.BlockTo;
 import art.school.to.UserTo;
@@ -35,4 +34,6 @@ public interface UserService extends MainServiceInterface<Users> {
     String getImage(int authId);
 
     List<UserTo> getOnlyActiveKids();
+
+    Users getUsersByThemaId(int themaId);
 }

@@ -78,6 +78,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public Users getUsersByThemaId(int themaId) {
+        return repository.getUsersByThemaId(themaId);
+    }
+
+    @Override
     @Transactional
     public void toggleAktiv(int id) {
         Users users = get(id);
