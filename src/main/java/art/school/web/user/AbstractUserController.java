@@ -57,9 +57,13 @@ public abstract class AbstractUserController {
         return service.getAll();
     }
 
-    List<UserTo> getAllKinds() {
+    List<UserTo> getAllKids() {
         log.info("getAll Kinds");
-        return service.getAllKinds();
+        return service.getAllKids();
+    }
+
+    List<UserTo> getOnlyActiveKids() {
+        return service.getOnlyActiveKids();
     }
 
     public List<UserTo> getAllTos() {

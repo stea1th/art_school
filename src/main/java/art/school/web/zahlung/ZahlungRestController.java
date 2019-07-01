@@ -8,9 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedHashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/zahlung")
@@ -34,10 +33,8 @@ public class ZahlungRestController extends AbstractZahlungController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    @SuppressWarnings("unchecked")
     public ResponseEntity saveOrUpdate(ZahlungTo z) {
 
-        Map<String, String> response = new LinkedHashMap<>();
         Zahlung zahlung = new Zahlung(z);
         String message;
         try {
@@ -48,11 +45,10 @@ public class ZahlungRestController extends AbstractZahlungController {
                 super.update(zahlung, zahlung.getId());
                 message = "Update";
             }
-        }catch(Exception e){
-            return new ResponseEntity(e.getLocalizedMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
         }
-        response.put(message, z.getName());
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity<>(Collections.singletonMap(message, z.getName()), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

@@ -16,7 +16,7 @@ public interface UserService extends MainServiceInterface<Users> {
 
     void updateProfile(UserTo userTo);
 
-    List<UserTo> getAllKinds();
+    List<UserTo> getAllKids();
 
     List<UserTo> getAllTos();
 
@@ -33,4 +33,6 @@ public interface UserService extends MainServiceInterface<Users> {
     void unblockUser(int id);
 
     String getImage(int authId);
+
+    List<UserTo> getOnlyActiveKids();
 }

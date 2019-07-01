@@ -36,13 +36,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void createBlockForUserWithTo(BlockTo block, int id) {
-         blockRepository.save(block.createBlock(get(id), get(SecurityUtil.getAuthId())));
+        blockRepository.save(block.createBlock(get(id), get(SecurityUtil.getAuthId())));
     }
 
     @Override
     public BlockTo checkIfBlocked() {
         Block block = blockRepository.getLatestByUserIdAndByNotAccepted(SecurityUtil.getAuthId());
-        if(block == null){
+        if (block == null) {
             return null;
         }
         return new BlockTo(block);
@@ -51,14 +51,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void accepted() {
         Block b = blockRepository.getLatestByUserIdAndByNotAccepted(SecurityUtil.getAuthId());
-        if(b != null) b.setAccepted(true);
+        if (b != null) b.setAccepted(true);
         blockRepository.save(b);
     }
 
     @Override
     public void unblockUser(int id) {
         Block b = blockRepository.getLatestByUserId(id);
-        if(b != null){
+        if (b != null) {
             b.setDatum(LocalDateTime.now());
         }
         blockRepository.save(b);
@@ -67,8 +67,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public String getImage(int authId) {
         byte[] arr = get(authId).getImage();
-        if(arr == null) return null;
+        if (arr == null) return null;
         return FileHelper.convertByteArrayToString(arr);
+    }
+
+    @Override
+    @Transactional
+    public List<UserTo> getOnlyActiveKids() {
+        return transformTo(repository.getOnlyActiveKids(), UserTo.class);
     }
 
     @Override
@@ -106,12 +112,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     }
 
-    public void updateProfile(UserTo userTo){
+    public void updateProfile(UserTo userTo) {
         create(userTo.updateProfile(get(SecurityUtil.getAuthId())));
     }
 
     @Transactional
-    public UserTo getUserTo(int id){
+    public UserTo getUserTo(int id) {
         return new UserTo(get(id));
     }
 
@@ -121,7 +127,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Transactional
-    public List<Users> getAll(){
+    public List<Users> getAll() {
         return repository.getAll();
     }
 
@@ -133,16 +139,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     @Transactional
-    public List<UserTo> getAllKinds() {
-        return transformTo(repository.getAllKinds(), UserTo.class);
+    public List<UserTo> getAllKids() {
+        return transformTo(repository.getAllKids(), UserTo.class);
     }
 
     @Override
     @Transactional
     public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
         Users users = repository.getUsersByEmail(email);
-        if(users == null){
-            throw new UsernameNotFoundException("Users " + email +" is not found");
+        if (users == null) {
+            throw new UsernameNotFoundException("Users " + email + " is not found");
         }
         return new AuthorizedUser(users);
     }

@@ -11,7 +11,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -46,14 +46,11 @@ public class AdminRestController extends AbstractUserController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    @SuppressWarnings("unchecked")
     public ResponseEntity saveOrUpdate(UserTo z) {
 
-        Map<String, String> response = new HashMap<>();
         Users kind = z.isNew() ? z.createUser() : z.updateUser(super.get(z.getId()));
         super.create(kind);
-        response.put(z.isNew() ? "Save" : "Update", z.getName());
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity<>(Collections.singletonMap(z.isNew() ? "Save" : "Update", z.getName()), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

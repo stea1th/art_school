@@ -3,7 +3,6 @@ package art.school.repository.datajpa;
 import art.school.entity.Users;
 import art.school.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,8 +35,13 @@ public class UserRepositoryImpl implements UserRepository {
         return repository.findAll();
     }
 
-    public List<Users> getAllKinds(){
-        return repository.findKinds();
+    public List<Users> getAllKids(){
+        return repository.findKids();
+    }
+
+    @Override
+    public List<Users> getOnlyActiveKids() {
+        return repository.findOnlyActiveKids();
     }
 
     @Override

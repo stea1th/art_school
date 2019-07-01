@@ -8,6 +8,7 @@ public interface UserRepository extends MainRepoInterface<Users> {
 
     Users getUsersByEmail(String email);
 
-    List<Users> getAllKinds();
+    List<Users> getAllKids();
 
+    List<Users> getOnlyActiveKids();
 }
