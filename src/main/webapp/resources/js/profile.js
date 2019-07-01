@@ -31,7 +31,6 @@ function getProfile(data){
 
 function saveProfile(){
     $('#saveProfile').on('click', function () {
-        // $('.error-field').hide();
         let formData = new FormData();
         let pass = $('#new-passwort').val();
         let email = $('#email').val();

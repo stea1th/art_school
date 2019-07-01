@@ -119,7 +119,7 @@ function saveOrUpdate(form) {
     let isValid = true;
     if(email.length > 0){
         isValid = isInputValid({
-                email: email[0].id,
+                email: email.val(),
                 emailInput: '#email-div'
             });
     }
@@ -135,6 +135,7 @@ function saveOrUpdate(form) {
                         succesNoty(successIcon, 'Пользователь "' + v + '"' + " удачно обновлен");
                     }
                 });
+                getThisUserProfile();
                 datatable.ajax.reload();
             })
             .fail(function (jqXHR, textStatus) {
@@ -439,8 +440,7 @@ function getUserInfoForSideBar(data){
 }
 
 function formatDate(date){
-    let arr = date.split(' ');
-    let el = arr[0].split('-');
+    let el = date.split(' ')[0].split('-');
     return el[2] + '.' + el[1] + '.' +el[0];
 }
 
