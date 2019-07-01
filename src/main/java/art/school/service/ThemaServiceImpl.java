@@ -1,8 +1,10 @@
 package art.school.service;
 
+import art.school.entity.Nachricht;
 import art.school.entity.Thema;
 import art.school.repository.ThemaRepository;
 import art.school.to.ThemaTo;
+import art.school.web.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,9 +23,42 @@ public class ThemaServiceImpl implements ThemaService {
     @Autowired
     private ThemaRepository repository;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private NachrichtService nachrichtService;
+
     @Override
     public Thema create(Thema thema) {
         return repository.save(thema);
+    }
+
+    @Override
+    @Transactional
+    public Thema create(String title, String message) {
+        Thema thema = create(new Thema(title));
+        Nachricht nachricht = new Nachricht(message);
+        nachricht.setUser(userService.get(SecurityUtil.getAuthId()));
+        nachricht.setThema(thema);
+        nachrichtService.create(nachricht);
+        return thema;
+    }
+
+    @Override
+    @Transactional
+    public int toggle(int id) {
+        Thema t = get(id);
+        t.setAktiv(!t.isAktiv());
+        t.setUser(t.getUser() == null ? userService.get(SecurityUtil.getAuthId()) : null);
+        return getAll().indexOf(create(t)) / 10;
+    }
+
+    @Override
+    @Transactional
+    public void countClicks(int id) {
+        Thema t = get(id);
+        t.setViews(t.getViews() + 1);
     }
 
     @Override
@@ -32,6 +67,7 @@ public class ThemaServiceImpl implements ThemaService {
     }
 
     @Override
+    @Transactional
     public Thema get(int id) {
         return repository.get(id);
     }
@@ -66,6 +102,7 @@ public class ThemaServiceImpl implements ThemaService {
     }
 
     @Override
+    @Transactional
     public List<ThemaTo> getAllTos(Pageable pageable) {
         return transformTo(getAll(pageable).getContent(), ThemaTo.class);
     }
@@ -86,6 +123,4 @@ public class ThemaServiceImpl implements ThemaService {
         Thema t = get(id);
         t.setGepinnt(!t.isGepinnt());
     }
-
-
 }

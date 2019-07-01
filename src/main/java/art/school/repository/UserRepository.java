@@ -11,4 +11,6 @@ public interface UserRepository extends MainRepoInterface<Users> {
     List<Users> getAllKids();
 
     List<Users> getOnlyActiveKids();
+
+    Users getUsersByThemaId(int themaId);
 }

@@ -1,8 +1,6 @@
 package art.school.web.forum;
 
-import art.school.entity.Nachricht;
 import art.school.entity.Thema;
-import art.school.service.NachrichtService;
 import art.school.service.ThemaService;
 import art.school.service.UserService;
 import art.school.to.ThemaTo;
@@ -22,9 +20,6 @@ public abstract class AbstractForumController {
 
     @Autowired
     private ThemaService themaService;
-
-    @Autowired
-    private NachrichtService nachrichtService;
 
     @Autowired
     private UserService userService;
@@ -52,18 +47,11 @@ public abstract class AbstractForumController {
     }
 
     public Thema save(String title, String message) {
-        Thema thema = themaService.create(new Thema(title));
-        Nachricht nachricht = new Nachricht(message);
-        nachricht.setUser(userService.get(SecurityUtil.getAuthId()));
-        nachricht.setThema(thema);
-        nachrichtService.create(nachricht);
-        return thema;
+        return themaService.create(title, message);
     }
 
     void countClicks(int id) {
-        Thema t = get(id);
-        t.setViews(t.getViews() + 1);
-        themaService.create(t);
+        themaService.countClicks(id);
     }
 
     void attach(int id) {
@@ -71,11 +59,7 @@ public abstract class AbstractForumController {
     }
 
     public int toggle(int id) {
-
-        Thema t = get(id);
-        t.setAktiv(!t.isAktiv());
-        t.setUser(t.getUser() == null ? userService.get(SecurityUtil.getAuthId()) : null);
-        return themaService.getAll().indexOf(themaService.create(t)) / 10;
+        return themaService.toggle(id);
     }
 
     public Map<List<ThemaTo>, Page<Thema>> getAllTosAsMap(Pageable pageable) {

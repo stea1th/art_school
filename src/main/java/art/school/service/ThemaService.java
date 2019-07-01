@@ -23,4 +23,10 @@ public interface ThemaService extends MainServiceInterface<Thema> {
     long count();
 
     void attach(int id);
+
+    Thema create(String title, String message);
+
+    int toggle(int id);
+
+    void countClicks(int id);
 }

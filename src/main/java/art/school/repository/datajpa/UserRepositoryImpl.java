@@ -35,13 +35,18 @@ public class UserRepositoryImpl implements UserRepository {
         return repository.findAll();
     }
 
-    public List<Users> getAllKids(){
+    public List<Users> getAllKids() {
         return repository.findKids();
     }
 
     @Override
     public List<Users> getOnlyActiveKids() {
         return repository.findOnlyActiveKids();
+    }
+
+    @Override
+    public Users getUsersByThemaId(int themaId) {
+        return repository.findUsersByThemaId(themaId);
     }
 
     @Override
