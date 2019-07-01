@@ -7,6 +7,7 @@ var myModal = $('#createUnterricht');
 var kindBtn = null;
 var zahlungBtn = null;
 var language;
+let i18n = $('#i18n-commons');
 
 
 $(function () {
@@ -115,11 +116,11 @@ function dateTimePicker(zt) {
 function createMenuButton(btn, aktiv) {
     if (aktiv) {
         btn.removeClass('btn-outline-primary');
-        btn.text('Деактивировать ' + btn.data('name'));
+        btn.text(i18n.attr('makeDeactive') + " " + btn.data('name'));
         btn.addClass('btn-outline-info');
     } else {
         btn.removeClass('btn-outline-info');
-        btn.text('Aктивировать ' + btn.data('name'));
+        btn.text(i18n.attr('makeActive') + " " + btn.data('name'));
         btn.addClass('btn-outline-primary');
     }
 }
@@ -138,7 +139,7 @@ function toggleThis(btn) {
 }
 
 function renderDeleteBtn(id) {
-    var btn = $('<button type="button" class="btn btn-outline-danger temp" id="delete-unt" onclick="deleteUnterricht()">Удалить</button>');
+    var btn = $('<button type="button" class="btn btn-outline-danger temp" id="delete-unt" onclick="deleteUnterricht()">' + i18n.attr('delete') + '</button>');
     btn.data('id', id);
     return btn;
 }
@@ -156,7 +157,7 @@ function saveUnterricht() {
     let form = $('#detailsForm');
     let map = getMapFromFormWithRequiredElements(form);
 
-    if(!isInputEmpty(map)){
+    if (!isInputEmpty(map)) {
         $.post(ajaxUnterricht + '/save', form.serialize())
             .done(function () {
                 $('#createUnterricht').modal('hide');
@@ -169,7 +170,7 @@ function updateUnterricht(event, zt) {
     destroyChosen();
     var kindSelect = $('#kind');
     var zahlungSelect = $('#zahlung');
-    $('.modal-title').text('Изменить урок');
+    $('.modal-title').text(i18n.attr('editLesson'));
     kindSelect.hide();
     zahlungSelect.hide();
     $.get(ajaxUnterricht + "/get/" + event.id).done(function (data) {
@@ -195,7 +196,10 @@ function updateUnterricht(event, zt) {
 
     $('.modal-footer').prepend(renderDeleteBtn(event.id));
     showModal({
-        id: myModal
+        id: myModal,
+        init: function () {
+            translatePlaceholder();
+        }
     });
 
     myModal.on('hidden.bs.modal', function () {
@@ -207,20 +211,25 @@ function updateUnterricht(event, zt) {
 }
 
 function createUnterricht(date, zt) {
-    $('.modal-title').text('Создать урок');
+    $('.modal-title').text(i18n.attr('createLesson'));
     $('#datum').val(date.format());
-    getSelect(ajaxKind + "/filter/aktiv", $('#kind'), 'Выберите ученика');
-    getSelect(ajaxZahlung + "/filter/aktiv", $('#zahlung'), 'Выберите оплату');
+    getSelect(ajaxKind + "/filter/aktiv", $('#kind'), i18n.attr('chooseStudent'));
+    getSelect(ajaxZahlung + "/filter/aktiv", $('#zahlung'), i18n.attr('choosePayment'));
     showModal({
         id: myModal,
         init: function () {
             initChosen();
+            translatePlaceholder();
         }
     });
     myModal.on('hidden.bs.modal', function () {
         $(this).find('form')[0].reset();
         $('#zeit').val(zt);
     });
+}
+
+function translatePlaceholder() {
+    $('#notiz').attr('placeholder', $('#i18n-commons').attr('note'));
 }
 
 

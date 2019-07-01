@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -21,10 +22,10 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th data-priority="1">Имя</th>
-                                <th>Адрес</th>
-                                <th data-priority="1">Активный</th>
-                                <th>Регистрация</th>
+                                <th data-priority="1"><spring:message code='app.username'/></th>
+                                <th><spring:message code='form.address'/></th>
+                                <th data-priority="1"><spring:message code='app.active'/></th>
+                                <th><spring:message code='forum.registration'/></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -32,10 +33,10 @@
                             <tfoot>
                             <tr>
                                 <th>Id</th>
-                                <th>Имя</th>
-                                <th>Адрес</th>
-                                <th>Активный</th>
-                                <th>Регистрация</th>
+                                <th><spring:message code='app.username'/></th>
+                                <th><spring:message code='form.address'/></th>
+                                <th><spring:message code='app.active'/></th>
+                                <th><spring:message code='forum.registration'/></th>
                                 <th></th>
                                 <th></th>
                             </tr>

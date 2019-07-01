@@ -16,6 +16,8 @@ $(function () {
 
     initChosen();
 
+    getThisUserProfile();
+
 });
 
 function getLocalesForTables() {
@@ -115,9 +117,9 @@ function saveOrUpdate(form) {
 
     let email = form.find('#email');
     let isValid = true;
-    if(email){
+    if(email.length > 0){
         isValid = isInputValid({
-                email: email[0].id,
+                email: email.val(),
                 emailInput: '#email-div'
             });
     }
@@ -133,6 +135,7 @@ function saveOrUpdate(form) {
                         succesNoty(successIcon, 'Пользователь "' + v + '"' + " удачно обновлен");
                     }
                 });
+                getThisUserProfile();
                 datatable.ajax.reload();
             })
             .fail(function (jqXHR, textStatus) {
@@ -210,7 +213,7 @@ function updateRow(id) {
         .done(function (data) {
             $.each(data, function (k, v) {
                 if ($('#slider1').length) {
-                    $('.modal-title').text('Обновить способ оплаты');
+                    $('.modal-title').text($('#hidden-param').attr('updateTitle'));
                     if (k === 'preis') {
                         setPreis(v);
                     }
@@ -225,7 +228,7 @@ function updateRow(id) {
                 showModal({id: myModal});
                 $('#aktiv-checkbox').hide();
             });
-            getSelect("/api/admin/roles", $('#roles'), "Выбери роль", data.roles);
+            getSelect("/api/admin/roles", $('#roles'), $('#i18n-commons').attr('chooseRole'), data.roles);
 
         });
 }
@@ -418,6 +421,27 @@ function isInputValid(config) {
 
 function appendWarning(config) {
     $(config.id).append('<div style="color:red" class=' + config.class + '>' + $('#i18n-commons').attr(config.attr) + '</div>');
+}
+
+function getThisUserProfile(){
+    $.get("/api/profile")
+        .done(function(data){
+           getUserInfoForSideBar(data);
+           if(location.pathname === '/profile'){
+               getProfile(data);
+           }
+        });
+}
+
+function getUserInfoForSideBar(data){
+    $('#side-name').text(data.name);
+    $('#side-status').text(data.roles);
+    $('#side-registration').text(formatDate(data.registriert));
+}
+
+function formatDate(date){
+    let el = date.split(' ')[0].split('-');
+    return el[2] + '.' + el[1] + '.' +el[0];
 }
 
 

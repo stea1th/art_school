@@ -27,10 +27,10 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th data-priority="1">Название</th>
-                                <th>Цена</th>
-                                <th>Продолжительность</th>
-                                <th data-priority="1">Активный</th>
+                                <th data-priority="1"><spring:message code='forum.title'/></th>
+                                <th><spring:message code='app.price'/></th>
+                                <th><spring:message code='app.duration'/></th>
+                                <th data-priority="1"><spring:message code='app.active'/></th>
                                 <th data-priority="2"></th>
                                 <th data-priority="2"></th>
                             </tr>
@@ -38,10 +38,10 @@
                             <tfoot>
                             <tr>
                                 <th>Id</th>
-                                <th>Название</th>
-                                <th>Цена</th>
-                                <th>Продолжительность</th>
-                                <th>Активный</th>
+                                <th><spring:message code='forum.title'/></th>
+                                <th><spring:message code='app.price'/></th>
+                                <th><spring:message code='app.duration'/></th>
+                                <th><spring:message code='app.active'/></th>
                                 <th></th>
                                 <th></th>
                             </tr>

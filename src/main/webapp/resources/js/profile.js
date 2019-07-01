@@ -12,29 +12,25 @@ $(function () {
 
     inputOnClick();
 
-    getProfile();
-
     saveProfile();
 });
 
-function getProfile(){
-    $.get("/api/profile")
-        .done(function(data){
-            $('#profile-image-form input').each(function(){
-                $(this).val(data[$(this).attr('name')]);
-            });
-            if(data.encodedImage !== null){
-                var image = document.createElement('img');
-                image.style.cssText = 'width:300px;height:300px;text-align: center;';
-                image.src = "data:image/jpeg;base64," + data.encodedImage;
-                $('#preview').empty().append(image);
-            }
+function getProfile(data){
+    if(data !== null){
+        $('#profile-image-form input').each(function(){
+            $(this).val(data[$(this).attr('name')]);
         });
+        if(data.encodedImage !== null){
+            var image = document.createElement('img');
+            image.style.cssText = 'width:300px;height:300px;text-align: center;';
+            image.src = "data:image/jpeg;base64," + data.encodedImage;
+            $('#preview').empty().append(image);
+        }
+    }
 }
 
 function saveProfile(){
     $('#saveProfile').on('click', function () {
-        // $('.error-field').hide();
         let formData = new FormData();
         let pass = $('#new-passwort').val();
         let email = $('#email').val();

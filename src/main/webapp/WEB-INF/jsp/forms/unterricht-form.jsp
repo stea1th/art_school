@@ -12,40 +12,39 @@
     </div>
 
     <div class="form-group row">
-        <label for="kind" class="col-4 col-form-label">Ученик<spring:message code="app.asteriks"/></label>
+        <label for="kind" class="col-4 col-form-label"><spring:message code="app.student"/><spring:message code="app.asteriks"/></label>
         <div class="col-8" id="kind-div">
             <select id="kind" name="kind" class="custom-select chosen-select" required>
             </select>
         </div>
     </div>
     <div class="form-group row">
-        <label for="zahlung" class="col-4 col-form-label">Оплата<spring:message code="app.asteriks"/></label>
+        <label for="zahlung" class="col-4 col-form-label"><spring:message code="app.payment"/><spring:message code="app.asteriks"/></label>
         <div class="col-8" id="zahlung-div">
             <select id="zahlung" name="zahlung" class="custom-select chosen-select" required>
             </select>
         </div>
     </div>
     <div class="form-group row">
-        <label for="zeit" class="col-4 col-form-label">Время<spring:message code="app.asteriks"/></label>
+        <label for="zeit" class="col-4 col-form-label"><spring:message code="app.time"/><spring:message code="app.asteriks"/></label>
         <div class="col-8" id="zeit-div">
             <input id="zeit" name="zeit" required/>
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-4">Оплатили?</label>
+        <label class="col-4"><spring:message code="app.payed"/>?</label>
         <div class="col-8">
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="bezahlt" name="bezahlt"
                        checked="checked"
                        value="true">
-                <label class="custom-control-label" for="bezahlt">Да</label>
+                <label class="custom-control-label" for="bezahlt"><spring:message code="app.yes"/></label>
             </div>
         </div>
     </div>
     <div class="form-group row">
         <div class="col-12">
-                        <textarea class="form-control" id="notiz" name="notiz" rows="3"
-                                  placeholder="Заметка"></textarea>
+                        <textarea class="form-control" id="notiz" name="notiz" rows="3"></textarea>
         </div>
     </div>
 </form>
