@@ -168,11 +168,9 @@ function saveUnterricht() {
 
 function updateUnterricht(event, zt) {
     destroyChosen();
-    var kindSelect = $('#kind');
-    var zahlungSelect = $('#zahlung');
     $('.modal-title').text(i18n.attr('editLesson'));
-    kindSelect.hide();
-    zahlungSelect.hide();
+    $('#kind').hide().removeAttr('required');
+    $('#zahlung').hide().removeAttr('required');
     $.get(ajaxUnterricht + "/get/" + event.id).done(function (data) {
         kindBtn = renderMenuBtn(data.kind, data.kindTo.name, ajaxAdmin, data.kindTo.aktiv);
         zahlungBtn = renderMenuBtn(data.zahlung, data.zahlungTo.name, ajaxZahlung, data.zahlungTo.aktiv);
@@ -213,8 +211,11 @@ function updateUnterricht(event, zt) {
 function createUnterricht(date, zt) {
     $('.modal-title').text(i18n.attr('createLesson'));
     $('#datum').val(date.format());
-    getSelect(ajaxKind + "/filter/aktiv", $('#kind'), i18n.attr('chooseStudent'));
-    getSelect(ajaxZahlung + "/filter/aktiv", $('#zahlung'), i18n.attr('choosePayment'));
+    let kind = $('#kind');
+    let zahlung = $('#zahlung');
+
+    getSelect(ajaxKind + "/filter/aktiv", kind[0].hasAttribute('required') ? kind : kind.attr('required', 'true'), i18n.attr('chooseStudent'));
+    getSelect(ajaxZahlung + "/filter/aktiv", zahlung[0].hasAttribute('required') ? zahlung : zahlung.attr('required', 'true'), i18n.attr('choosePayment'));
     showModal({
         id: myModal,
         init: function () {
