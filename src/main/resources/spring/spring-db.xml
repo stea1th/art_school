@@ -12,11 +12,7 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
 
-    <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="changeLog" value="classpath:db/liquibase.xml"/>
-        <property name="dropFirst" value="true"/>
-    </bean>
+    <!--SQL-Init-->
     <!--<jdbc:initialize-database data-source="dataSource" enabled="${database.init}">-->
         <!--<jdbc:script encoding="utf-8" location="classpath:db/${jdbc.initLocation}"/>-->
         <!--<jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>-->
@@ -34,6 +30,13 @@
     <context:component-scan base-package="art.school.**.web"/>
 
     <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
+
+    <!--Liquibase-->
+    <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase"
+          p:dataSource-ref="dataSource"
+          p:changeLog="classpath:db/changelog/liquibase-master.xml"
+          p:contexts=""
+          p:dropFirst="false"/>
 
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"
