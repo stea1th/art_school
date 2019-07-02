@@ -1,0 +1,200 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-1">
+        <createSequence sequenceName="global_seq"/>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-2">
+        <createTable tableName="block">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="block_pkey"/>
+            </column>
+            <column name="reason" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now() + '01:00:00'::interval" name="datum" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="accepted" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="u_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="adm_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-3">
+        <createTable tableName="nachricht">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="nachricht_pkey"/>
+            </column>
+            <column name="text" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="datum" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="u_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="t_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="n_id" type="INTEGER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-4">
+        <createTable tableName="nachricht_updater">
+            <column name="user_id" type="INTEGER">
+                <constraints primaryKey="true" primaryKeyName="nachricht_updater_pkey"/>
+            </column>
+            <column name="nachricht_id" type="INTEGER">
+                <constraints primaryKey="true" primaryKeyName="nachricht_updater_pkey"/>
+            </column>
+            <column defaultValueComputed="now()" name="datum" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="action" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-5">
+        <createTable tableName="thema">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="thema_pkey"/>
+            </column>
+            <column name="titel" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="views" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="aktiv" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="gepinnt" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="u_id" type="INTEGER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-6">
+        <createTable tableName="unterricht">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="unterricht_pkey"/>
+            </column>
+            <column defaultValueComputed="now()" name="datum" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="bezahlt" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="notiz" type="TEXT"/>
+            <column name="u_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="z_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-7">
+        <createTable tableName="user_roles">
+            <column name="user_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-8">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="users_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="adresse" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="admin_passwort" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="passwort" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="registriert" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="aktiv" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image" type="BYTEA"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-9">
+        <createTable tableName="zahlung">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="zahlung_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="preis" type="numeric">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dauer" type="TIME WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="aktiv" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-10">
+        <addUniqueConstraint columnNames="user_id, role" constraintName="user_roles_idx" tableName="user_roles"/>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-11">
+        <addUniqueConstraint columnNames="preis, dauer" constraintName="zahlung_unique_preis_dauer_idx" tableName="zahlung"/>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-12">
+        <createIndex indexName="user_unique_email_index" tableName="users" unique="true">
+            <column name="email"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-13">
+        <addForeignKeyConstraint baseColumnNames="adm_id" baseTableName="block" constraintName="block_adm_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-14">
+        <addForeignKeyConstraint baseColumnNames="u_id" baseTableName="block" constraintName="block_u_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-15">
+        <addForeignKeyConstraint baseColumnNames="n_id" baseTableName="nachricht" constraintName="nachricht_n_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="nachricht" validate="true"/>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-16">
+        <addForeignKeyConstraint baseColumnNames="t_id" baseTableName="nachricht" constraintName="nachricht_t_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="thema" validate="true"/>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-17">
+        <addForeignKeyConstraint baseColumnNames="u_id" baseTableName="nachricht" constraintName="nachricht_u_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-18">
+        <addForeignKeyConstraint baseColumnNames="u_id" baseTableName="thema" constraintName="thema_u_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-19">
+        <addForeignKeyConstraint baseColumnNames="u_id" baseTableName="unterricht" constraintName="unterricht_u_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-20">
+        <addForeignKeyConstraint baseColumnNames="z_id" baseTableName="unterricht" constraintName="unterricht_z_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="zahlung" validate="true"/>
+    </changeSet>
+    <changeSet author="Vadim Vlasov (generated)" id="1562053276953-21">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_roles" constraintName="user_roles_user_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
