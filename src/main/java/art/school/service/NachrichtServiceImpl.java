@@ -3,6 +3,7 @@ package art.school.service;
 import art.school.entity.Block;
 import art.school.entity.Nachricht;
 import art.school.entity.NachrichtUpdater;
+import art.school.helper.NachrichtHelper;
 import art.school.repository.BlockRepository;
 import art.school.repository.NachrichtRepository;
 import art.school.repository.NachrichtUpdaterRepository;
@@ -32,6 +33,9 @@ public class NachrichtServiceImpl implements NachrichtService {
 
     @Autowired
     private BlockRepository blockRepository;
+
+    @Autowired
+    private NachrichtHelper nachrichtHelper;
 
 
     @Override
@@ -106,13 +110,13 @@ public class NachrichtServiceImpl implements NachrichtService {
     @Override
     @Transactional
     public NachrichtTo getTo(int id) {
-        return new NachrichtTo(get(id));
+        return nachrichtHelper.createNachrichtTo(get(id));
     }
 
     private List<NachrichtTo> convertInToList(Page<Nachricht> page){
         return page.stream()
                 .map(i-> {
-                    NachrichtTo n = new NachrichtTo(i);
+                    NachrichtTo n = nachrichtHelper.createNachrichtTo(i);
                     Block b = blockRepository.getLatestByUserId(i.getUser().getId());
                     if(b != null){
                         n.setBanned(formatDateToString(b.getDatum()));

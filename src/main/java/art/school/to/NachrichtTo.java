@@ -1,11 +1,8 @@
 package art.school.to;
 
 
-import art.school.entity.Nachricht;
 import art.school.entity.NachrichtUpdater;
 import art.school.entity.NachrichtUpdaterId;
-import art.school.util.DateUtil;
-import art.school.util.FileUtil;
 import art.school.web.SecurityUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,10 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import static art.school.util.TextFormatUtil.splitMessageByLineSeparator;
 
 @Data
 @AllArgsConstructor
@@ -45,20 +39,20 @@ public class NachrichtTo {
     private String encodedImage;
     private Boolean active;
 
-    public NachrichtTo(Nachricht n) {
-        this(n.getId(), n.getText(),
-                DateUtil.transformDateInTo(n.getDatum()),
-                n.getUser().getName(), n.getUser().getId(),
-                n.getThema().getId(), n.getUpdaters().isEmpty() ? null :
-                        n.getUpdaters().get(n.getUpdaters().size() - 1),
-                splitMessageByLineSeparator(n.getText()),
-                n.getParent() == null ? null : splitMessageByLineSeparator(n.getParent().getText()),
-                n.getUser().getRoles().size(),
-                n.getUser().getRegistriert().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
-                n.getUser().getNachrichts().size(),
-                FileUtil.convertByteArrayToString(n.getUser().getImage()),
-                n.getUser().getAktiv());
-    }
+//    public NachrichtTo(Nachricht n) {
+//        this(n.getId(), n.getText(),
+//                DateUtil.transformDateInTo(n.getDatum()),
+//                n.getUser().getName(), n.getUser().getId(),
+//                n.getThema().getId(), n.getUpdaters().isEmpty() ? null :
+//                        n.getUpdaters().get(n.getUpdaters().size() - 1),
+//                splitMessageByLineSeparator(n.getText()),
+//                n.getParent() == null ? null : splitMessageByLineSeparator(n.getParent().getText()),
+//                n.getUser().getRoles().size(),
+//                n.getUser().getRegistriert().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+//                n.getUser().getNachrichts().size(),
+//                FileUtil.convertByteArrayToString(n.getUser().getImage()),
+//                n.getUser().getAktiv());
+//    }
 
     public NachrichtTo(Integer id) {
         this.id = id;
@@ -70,28 +64,28 @@ public class NachrichtTo {
         this.reload = reload;
     }
 
-    NachrichtTo(Integer id, String text,
-                DateTo datumTo, String name,
-                Integer userId, Integer themaId,
-                NachrichtUpdater updater,
-                List<String> lines, List<String> parentMessages,
-                Integer roleSize,
-                String registriert, Integer messages, String encodedImage, Boolean active) {
-        this.id = id;
-        this.text = text;
-        this.datumTo = datumTo;
-        this.name = name;
-        this.userId = userId;
-        this.themaId = themaId;
-        this.updater = updater;
-        this.lines = lines;
-        this.parentMessages = parentMessages;
-        this.roleSize = roleSize;
-        this.registriert = registriert;
-        this.messages = messages;
-        this.encodedImage = encodedImage;
-        this.active = active;
-    }
+//    NachrichtTo(Integer id, String text,
+//                DateTo datumTo, String name,
+//                Integer userId, Integer themaId,
+//                NachrichtUpdater updater,
+//                List<String> lines, List<String> parentMessages,
+//                Integer roleSize,
+//                String registriert, Integer messages, String encodedImage, Boolean active) {
+//        this.id = id;
+//        this.text = text;
+//        this.datumTo = datumTo;
+//        this.name = name;
+//        this.userId = userId;
+//        this.themaId = themaId;
+//        this.updater = updater;
+//        this.lines = lines;
+//        this.parentMessages = parentMessages;
+//        this.roleSize = roleSize;
+//        this.registriert = registriert;
+//        this.messages = messages;
+//        this.encodedImage = encodedImage;
+//        this.active = active;
+//    }
 
     public boolean isNew() {
         return (id == null || id.equals(themaId));
