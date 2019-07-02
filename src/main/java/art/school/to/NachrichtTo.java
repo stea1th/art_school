@@ -5,7 +5,7 @@ import art.school.entity.Nachricht;
 import art.school.entity.NachrichtUpdater;
 import art.school.entity.NachrichtUpdaterId;
 import art.school.util.DateUtil;
-import art.school.util.FileHelper;
+import art.school.util.FileUtil;
 import art.school.web.SecurityUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -56,7 +56,7 @@ public class NachrichtTo {
                 n.getUser().getRoles().size(),
                 n.getUser().getRegistriert().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
                 n.getUser().getNachrichts().size(),
-                FileHelper.convertByteArrayToString(n.getUser().getImage()),
+                FileUtil.convertByteArrayToString(n.getUser().getImage()),
                 n.getUser().getAktiv());
     }
 

@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-public class FileHelper {
+public class FileUtil {
 
     public static byte[] convertFileToByteArray(MultipartFile file) {
 

@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static art.school.util.DateUtil.convertDateToToString;
-import static art.school.util.PaginationHelper.createTablePage;
+import static art.school.util.PaginationUtil.createTablePage;
 
 @Controller
 @RequestMapping(value = "/forum")

@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 import static art.school.util.DateUtil.convertDateToToString;
 import static art.school.util.DateUtil.transformDateInTo;
-import static art.school.util.PaginationHelper.createTablePage;
+import static art.school.util.PaginationUtil.createTablePage;
 
 @Controller
 @RequestMapping(value = "/nachricht")
