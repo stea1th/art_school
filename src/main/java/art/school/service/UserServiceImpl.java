@@ -3,6 +3,7 @@ package art.school.service;
 import art.school.AuthorizedUser;
 import art.school.entity.Block;
 import art.school.entity.Users;
+import art.school.helper.BlockHelper;
 import art.school.helper.UserHelper;
 import art.school.repository.BlockRepository;
 import art.school.repository.UserRepository;
@@ -35,11 +36,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private UserHelper userHelper;
 
+    @Autowired
+    private BlockHelper blockHelper;
+
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Override
-    public void createBlockForUserWithTo(BlockTo block, int id) {
-        blockRepository.save(block.createBlock(get(id), get(SecurityUtil.getAuthId())));
+    public void createBlockForUserWithTo(BlockTo to, int id) {
+        blockRepository.save(blockHelper.createBlock(get(id), get(SecurityUtil.getAuthId()), to));
     }
 
     @Override
@@ -48,7 +52,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (block == null) {
             return null;
         }
-        return new BlockTo(block);
+        return blockHelper.createTo(block);
     }
 
     @Override
