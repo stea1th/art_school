@@ -89,4 +89,8 @@ public abstract class AbstractUserController {
     String getMyImage() {
         return service.getImage(SecurityUtil.getAuthId());
     }
+
+    Users createWithTo(UserTo to) {
+        return service.createWithTo(to);
+    }
 }

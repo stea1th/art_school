@@ -5,18 +5,23 @@ import art.school.entity.Users;
 import art.school.entity.Zahlung;
 import art.school.to.RequestUnterrichtTo;
 import art.school.to.UnterrichtTo;
-import art.school.to.UserTo;
 import art.school.to.ZahlungTo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static art.school.util.DateUtil.parseStringsToLocalDateTime;
 
 @Component
 public class UnterrichtHelper {
+
+    @Autowired
+    private UserHelper userHelper;
 
     public UnterrichtTo createTo(Unterricht u) {
         UnterrichtTo to = new UnterrichtTo();
@@ -47,7 +52,7 @@ public class UnterrichtHelper {
         to.setZahlung(zahlung.getId());
         to.setBezahlt(u.isBezahlt());
         to.setNotiz(u.getNotiz());
-        to.setKindTo(new UserTo(user));
+        to.setKindTo(userHelper.createTo(user));
         to.setZahlungTo(new ZahlungTo(zahlung));
 
         return to;
@@ -61,5 +66,12 @@ public class UnterrichtHelper {
         u.setNotiz(to.getNotiz());
 
         return u;
+    }
+
+    public List<UnterrichtTo> transformTos(List<Unterricht> list) {
+        return list
+                .stream()
+                .map(this::createTo)
+                .collect(Collectors.toList());
     }
 }

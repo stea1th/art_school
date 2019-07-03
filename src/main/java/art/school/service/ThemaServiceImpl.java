@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class ThemaServiceImpl implements ThemaService {
@@ -99,19 +98,19 @@ public class ThemaServiceImpl implements ThemaService {
     @Transactional
     public Map<List<ThemaTo>, Page<Thema>> getAllTosAsMap(Pageable pageable) {
         Page<Thema> page = getAll(pageable);
-        return Collections.singletonMap(transformTos(page.getContent()), page);
+        return Collections.singletonMap(themaHelper.transformTos(page.getContent()), page);
     }
 
     @Override
     @Transactional
     public List<ThemaTo> getAllTos() {
-        return transformTos(getAll());
+        return themaHelper.transformTos(getAll());
     }
 
     @Override
     @Transactional
     public List<ThemaTo> getAllTos(Pageable pageable) {
-        return transformTos(getAll(pageable).getContent());
+        return themaHelper.transformTos(getAll(pageable).getContent());
     }
 
     @Transactional
@@ -129,12 +128,5 @@ public class ThemaServiceImpl implements ThemaService {
     public void attach(int id) {
         Thema t = get(id);
         t.setGepinnt(!t.isGepinnt());
-    }
-
-    private List<ThemaTo> transformTos(List<Thema> list) {
-        return list
-                .stream()
-                .map(i -> themaHelper.createTo(i))
-                .collect(Collectors.toList());
     }
 }

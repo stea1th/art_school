@@ -7,11 +7,11 @@ import art.school.util.FileUtil;
 import art.school.web.SecurityUtil;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static art.school.util.DateUtil.transformDateInTo;
 import static art.school.util.TextFormatUtil.splitMessageByLineSeparator;
@@ -77,5 +77,10 @@ public class NachrichtHelper {
 
     public Nachricht createNachricht(String text) {
         return createNachricht(null, text, LocalDateTime.now());
+    }
+
+    public List<NachrichtTo> transformTos(List<Nachricht> list) {
+        return list.stream().map(this::createTo)
+                .collect(Collectors.toList());
     }
 }

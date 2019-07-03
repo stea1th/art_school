@@ -102,12 +102,12 @@ public class NachrichtServiceImpl implements NachrichtService {
 
     @Transactional
     public List<NachrichtTo> getAllTosByThema(int id) {
-        return transformTos(getAllByThemaId(id));
+        return nachrichtHelper.transformTos(getAllByThemaId(id));
     }
 
     @Transactional
     public List<NachrichtTo> getAllTos() {
-        return transformTos(getAll());
+        return nachrichtHelper.transformTos(getAll());
     }
 
     public Long count() {
@@ -130,11 +130,6 @@ public class NachrichtServiceImpl implements NachrichtService {
                     }
                     return n;
                 })
-                .collect(Collectors.toList());
-    }
-
-    private List<NachrichtTo> transformTos(List<Nachricht> list) {
-        return list.stream().map(i -> nachrichtHelper.createTo(i))
                 .collect(Collectors.toList());
     }
 }

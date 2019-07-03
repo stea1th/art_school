@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ThemaHelper {
@@ -44,5 +46,12 @@ public class ThemaHelper {
         t.setGepinnt(gepinnt);
 
         return t;
+    }
+
+    public List<ThemaTo> transformTos(List<Thema> list) {
+        return list
+                .stream()
+                .map(this::createTo)
+                .collect(Collectors.toList());
     }
 }
