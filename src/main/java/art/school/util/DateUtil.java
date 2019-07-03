@@ -33,11 +33,19 @@ public class DateUtil {
                 return new DateTo("forum.days.ago2", time, days);
 
         }
-        return new DateTo(formatDateToString(dateTime));
+        return new DateTo(formatDateTimeToString(dateTime));
     }
 
-    public static String formatDateToString(LocalDateTime dateTime) {
+    public static String formatDateTimeToString(LocalDateTime dateTime) {
         return dateTime.truncatedTo(ChronoUnit.MINUTES).format(DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
+    }
+
+    public static String formatDateToString(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+    }
+
+    public static String formatDateToString(LocalDateTime date) {
+        return formatDateToString(date.toLocalDate());
     }
 
     public static LocalDateTime transformToDate(Integer interval, String unit) {

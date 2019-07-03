@@ -1,6 +1,7 @@
 package art.school.web.nachricht;
 
 import art.school.entity.Nachricht;
+import art.school.helper.NachrichtHelper;
 import art.school.service.NachrichtService;
 import art.school.service.ThemaService;
 import art.school.service.UserService;
@@ -32,6 +33,9 @@ public class AbstractNachrichtController {
 
     @Autowired
     MessageSource messageSource;
+
+    @Autowired
+    NachrichtHelper nachrichtHelper;
 
     public List<Nachricht> getAllByThemaId(int themaId) {
         return nachrichtService.getAllByThemaId(themaId);

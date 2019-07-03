@@ -8,18 +8,19 @@ import art.school.repository.BlockRepository;
 import art.school.repository.NachrichtRepository;
 import art.school.repository.NachrichtUpdaterRepository;
 import art.school.to.NachrichtTo;
-import art.school.util.TransformUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-import static art.school.util.DateUtil.formatDateToString;
+import static art.school.util.DateUtil.formatDateTimeToString;
 import static art.school.util.TransformUtil.transformTo;
 
 @Service
@@ -75,54 +76,57 @@ public class NachrichtServiceImpl implements NachrichtService {
 
     @Transactional
     public Nachricht createNachrichtWithUpdaters(Integer id, String action) {
-        Nachricht nachricht = id == null? new Nachricht() :  get(id);
-        List<NachrichtUpdater> updaters = nachricht.isNew()? new ArrayList<>() : nachricht.getUpdaters();
-        updaters.add(nachrichtUpdaterRepository.save(new NachrichtTo(id).createUpdater(action)));
-        nachricht.setUpdaters(updaters);
-        return nachricht;
+        if (id != null) {
+            Nachricht nachricht = get(id);
+            List<NachrichtUpdater> updaters = nachricht.getUpdaters();
+            updaters.add(nachrichtUpdaterRepository.save(nachrichtHelper.createUpdater(id, action)));
+            nachricht.setUpdaters(updaters);
+            return nachricht;
+        }
+        return null;
     }
 
     @Transactional
-    public List<NachrichtTo> getAllTosByThema(int id, Pageable pageable){
+    public List<NachrichtTo> getAllTosByThema(int id, Pageable pageable) {
         return convertInToList(getPageByThemaId(id, pageable));
     }
 
     @Transactional
-    public Map<List<NachrichtTo>, Page<Nachricht>> getAllTosAsMap(int id, Pageable pageable){
+    public Map<List<NachrichtTo>, Page<Nachricht>> getAllTosAsMap(int id, Pageable pageable) {
         Page<Nachricht> page = getPageByThemaId(id, pageable);
         return Collections.singletonMap(convertInToList(page), page);
     }
 
     @Transactional
-    public List<NachrichtTo> getAllTosByThema(int id){
+    public List<NachrichtTo> getAllTosByThema(int id) {
         return transformTo(getAllByThemaId(id), NachrichtTo.class);
     }
 
     @Transactional
-    public List<NachrichtTo> getAllTos(){
+    public List<NachrichtTo> getAllTos() {
         return transformTo(getAll(), NachrichtTo.class);
     }
 
-    public Long count(){
+    public Long count() {
         return repository.count();
     }
 
     @Override
     @Transactional
     public NachrichtTo getTo(int id) {
-        return nachrichtHelper.createNachrichtTo(get(id));
+        return nachrichtHelper.createTo(get(id));
     }
 
-    private List<NachrichtTo> convertInToList(Page<Nachricht> page){
+    private List<NachrichtTo> convertInToList(Page<Nachricht> page) {
         return page.stream()
-                .map(i-> {
-                    NachrichtTo n = nachrichtHelper.createNachrichtTo(i);
+                .map(i -> {
+                    NachrichtTo n = nachrichtHelper.createTo(i);
                     Block b = blockRepository.getLatestByUserId(i.getUser().getId());
-                    if(b != null){
-                        n.setBanned(formatDateToString(b.getDatum()));
+                    if (b != null) {
+                        n.setBanned(formatDateTimeToString(b.getDatum()));
                     }
                     return n;
                 })
-                .collect(Collectors.toCollection(LinkedList::new));
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
