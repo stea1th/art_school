@@ -15,7 +15,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Set;
 
@@ -58,7 +57,7 @@ public class Users extends AbstractBaseEntity {
     private Boolean aktiv;
 
     @Column(name = "image", length = 5242880)
-    @Type(type="org.hibernate.type.BinaryType")
+    @Type(type = "org.hibernate.type.BinaryType")
     @Nullable
     private byte[] image;
 
@@ -73,34 +72,9 @@ public class Users extends AbstractBaseEntity {
     private List<Nachricht> nachrichts;
 
     @OneToMany(mappedBy = "user")
-    protected List<Unterricht> unterrichts ;
+    protected List<Unterricht> unterrichts;
 
     @OneToMany(mappedBy = "user")
-    protected List<Block> blocks ;
+    protected List<Block> blocks;
 
-
-    public Users(Integer id, @NotBlank @Size(max = 50) String name, @NotBlank @Size(min = 3, max = 50) String adresse, boolean aktiv, @NotNull LocalDateTime registriert) {
-        super(id);
-        this.name = name;
-        this.adresse = adresse;
-        this.aktiv = aktiv;
-        this.registriert = registriert;
-    }
-
-    public Users(@NotBlank @Size(max = 50) String name, @NotBlank @Size(min = 3, max = 50) String adresse) {
-        this(null, name, adresse, true, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-    }
-
-    public Users(Integer id, @NotBlank String name, @Email @NotBlank @Size(max = 100) String email,
-                 @NotBlank @Size(min = 3, max = 50) String adresse, String adminPasswort,
-                 @NotNull LocalDateTime registriert, @NotNull Boolean aktiv, Set<Role> roles) {
-        super(id);
-        this.name = name;
-        this.email = email;
-        this.adresse = adresse;
-        this.adminPasswort = adminPasswort;
-        this.registriert = registriert;
-        this.aktiv = aktiv;
-        this.roles = roles;
-    }
 }

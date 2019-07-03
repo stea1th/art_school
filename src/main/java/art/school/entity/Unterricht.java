@@ -43,30 +43,4 @@ public class Unterricht extends AbstractBaseEntity {
     @NotNull
     private Zahlung zahlung;
 
-    public Unterricht(Integer id, @NotNull LocalDateTime datum, boolean bezahlt, String notiz) {
-        super(id);
-        this.datum = datum;
-        this.bezahlt = bezahlt;
-        this.notiz = notiz;
-    }
-
-    public Unterricht(@NotNull LocalDateTime datum, String notiz) {
-        this(null, datum, false, notiz);
-    }
-
-    public Unterricht(@NotNull LocalDateTime datum, boolean bezahlt, String notiz) {
-        this(null, datum, bezahlt, notiz);
-    }
-
-    public Unterricht(String notiz) {
-        this(null, LocalDateTime.now(), false, notiz);
-    }
-
-    public Unterricht(boolean bezahlt, String notiz) {
-        this(null, LocalDateTime.now(), bezahlt, notiz);
-    }
-
-    public Unterricht(boolean bezahlt) {
-        this(null, LocalDateTime.now(), bezahlt, "");
-    }
 }
