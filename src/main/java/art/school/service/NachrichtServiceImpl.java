@@ -14,14 +14,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import static art.school.util.DateUtil.formatDateTimeToString;
-import static art.school.util.TransformUtil.transformTo;
 
 @Service
 public class NachrichtServiceImpl implements NachrichtService {
@@ -104,12 +102,12 @@ public class NachrichtServiceImpl implements NachrichtService {
 
     @Transactional
     public List<NachrichtTo> getAllTosByThema(int id) {
-        return transformTo(getAllByThemaId(id), NachrichtTo.class);
+        return transformTos(getAllByThemaId(id));
     }
 
     @Transactional
     public List<NachrichtTo> getAllTos() {
-        return transformTo(getAll(), NachrichtTo.class);
+        return transformTos(getAll());
     }
 
     public Long count() {
@@ -132,6 +130,11 @@ public class NachrichtServiceImpl implements NachrichtService {
                     }
                     return n;
                 })
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toList());
+    }
+
+    private List<NachrichtTo> transformTos(List<Nachricht> list) {
+        return list.stream().map(i -> nachrichtHelper.createTo(i))
+                .collect(Collectors.toList());
     }
 }

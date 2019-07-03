@@ -58,15 +58,4 @@ public class Nachricht extends AbstractBaseEntity{
     @OrderBy(value="id, datum")
     protected List<Nachricht> children = new ArrayList<>();
 
-
-
-    public Nachricht(Integer id, @NotBlank String text, @NotNull LocalDateTime datum) {
-        super(id);
-        this.text = text;
-        this.datum = datum;
-    }
-
-    public Nachricht(@NotBlank String text) {
-        this(null, text, LocalDateTime.now());
-    }
 }

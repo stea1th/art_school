@@ -2,6 +2,8 @@ package art.school.service;
 
 import art.school.entity.Nachricht;
 import art.school.entity.Thema;
+import art.school.helper.NachrichtHelper;
+import art.school.helper.ThemaHelper;
 import art.school.repository.ThemaRepository;
 import art.school.to.ThemaTo;
 import art.school.web.SecurityUtil;
@@ -14,8 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import static art.school.util.TransformUtil.transformTo;
+import java.util.stream.Collectors;
 
 @Service
 public class ThemaServiceImpl implements ThemaService {
@@ -29,6 +30,12 @@ public class ThemaServiceImpl implements ThemaService {
     @Autowired
     private NachrichtService nachrichtService;
 
+    @Autowired
+    private ThemaHelper themaHelper;
+
+    @Autowired
+    private NachrichtHelper nachrichtHelper;
+
     @Override
     public Thema create(Thema thema) {
         return repository.save(thema);
@@ -37,8 +44,8 @@ public class ThemaServiceImpl implements ThemaService {
     @Override
     @Transactional
     public Thema create(String title, String message) {
-        Thema thema = create(new Thema(title));
-        Nachricht nachricht = new Nachricht(message);
+        Thema thema = create(themaHelper.createThema(title));
+        Nachricht nachricht = nachrichtHelper.createNachricht(message);
         nachricht.setUser(userService.get(SecurityUtil.getAuthId()));
         nachricht.setThema(thema);
         nachrichtService.create(nachricht);
@@ -92,24 +99,24 @@ public class ThemaServiceImpl implements ThemaService {
     @Transactional
     public Map<List<ThemaTo>, Page<Thema>> getAllTosAsMap(Pageable pageable) {
         Page<Thema> page = getAll(pageable);
-        return Collections.singletonMap(transformTo(page.getContent(), ThemaTo.class), page);
+        return Collections.singletonMap(transformTos(page.getContent()), page);
     }
 
     @Override
     @Transactional
     public List<ThemaTo> getAllTos() {
-        return transformTo(getAll(), ThemaTo.class);
+        return transformTos(getAll());
     }
 
     @Override
     @Transactional
     public List<ThemaTo> getAllTos(Pageable pageable) {
-        return transformTo(getAll(pageable).getContent(), ThemaTo.class);
+        return transformTos(getAll(pageable).getContent());
     }
 
     @Transactional
     public ThemaTo getTo(int id) {
-        return new ThemaTo(get(id));
+        return themaHelper.createTo(get(id));
     }
 
     @Override
@@ -122,5 +129,12 @@ public class ThemaServiceImpl implements ThemaService {
     public void attach(int id) {
         Thema t = get(id);
         t.setGepinnt(!t.isGepinnt());
+    }
+
+    private List<ThemaTo> transformTos(List<Thema> list) {
+        return list
+                .stream()
+                .map(i -> themaHelper.createTo(i))
+                .collect(Collectors.toList());
     }
 }

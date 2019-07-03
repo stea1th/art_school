@@ -37,7 +37,7 @@ public class TransformUtil {
 //        try {
 //            for (S s : list) {
 //
-//                T xt = <T> h.newInstance().getClass().getMethod("createTo", s.getClass()).invoke(h, s);
+//                T xt = (T) h.newInstance().getMethod("createTo", s.getClass()).invoke(h, s);
 //                System.out.println(xt.getClass().getMethod("getTitle").invoke(xt));
 //
 //            }

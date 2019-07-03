@@ -43,14 +43,4 @@ public class Thema extends AbstractBaseEntity{
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Users user;
 
-    public Thema(Integer id, @NotBlank String titel, @NotNull int views, @NotNull boolean aktiv, @NotNull boolean gepinnt) {
-        super(id);
-        this.titel = titel;
-        this.views = views;
-        this.aktiv = aktiv;
-    }
-
-    public Thema(@NotBlank String titel) {
-        this(null, titel, 0, true, false);
-    }
 }

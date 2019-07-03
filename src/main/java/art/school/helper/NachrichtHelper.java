@@ -7,6 +7,8 @@ import art.school.util.FileUtil;
 import art.school.web.SecurityUtil;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -63,5 +65,17 @@ public class NachrichtHelper {
         updater.setDatum(LocalDateTime.now());
         updater.setAction(action);
         return updater;
+    }
+
+    public Nachricht createNachricht(Integer id, String text, LocalDateTime datum) {
+        Nachricht n = new Nachricht();
+        n.setId(id);
+        n.setText(text);
+        n.setDatum(datum);
+        return n;
+    }
+
+    public Nachricht createNachricht(String text) {
+        return createNachricht(null, text, LocalDateTime.now());
     }
 }
