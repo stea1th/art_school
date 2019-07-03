@@ -27,4 +27,6 @@ public interface NachrichtService extends MainServiceInterface<Nachricht> {
     NachrichtTo getTo(int id);
 
     Map<List<NachrichtTo>, Page<Nachricht>> getAllTosAsMap(int id, Pageable pageable);
+
+    NachrichtTo getTo(int id, int page, boolean reload);
 }

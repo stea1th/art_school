@@ -34,9 +34,6 @@ public class AbstractNachrichtController {
     @Autowired
     MessageSource messageSource;
 
-    @Autowired
-    NachrichtHelper nachrichtHelper;
-
     public List<Nachricht> getAllByThemaId(int themaId) {
         return nachrichtService.getAllByThemaId(themaId);
     }
@@ -85,6 +82,10 @@ public class AbstractNachrichtController {
 
     public NachrichtTo getTo(int id) {
         return nachrichtService.getTo(id);
+    }
+
+    public NachrichtTo getTo(int id, int page, boolean reload){
+        return nachrichtService.getTo(id, page, reload);
     }
 
     public Map<List<NachrichtTo>, Page<Nachricht>> getAllTosAsMap(int id, Pageable pageable) {

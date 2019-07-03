@@ -31,4 +31,19 @@ public class TransformUtil {
         }
         return trans;
     }
+
+//    public static <T, S, H> List<T> transformTos(List<S> list, Class<T> t, Class<H> h){
+//        List<T> trans = new ArrayList<>();
+//        try {
+//            for (S s : list) {
+//
+//                T xt = <T> h.newInstance().getClass().getMethod("createTo", s.getClass()).invoke(h, s);
+//                System.out.println(xt.getClass().getMethod("getTitle").invoke(xt));
+//
+//            }
+//        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+//            e.printStackTrace();
+//        }
+//        return trans;
+//    }
 }

@@ -97,6 +97,11 @@ public class NachrichtServiceImpl implements NachrichtService {
         return Collections.singletonMap(convertInToList(page), page);
     }
 
+    @Override
+    public NachrichtTo getTo(int id, int page, boolean reload) {
+        return nachrichtHelper.createTo(id, page, reload);
+    }
+
     @Transactional
     public List<NachrichtTo> getAllTosByThema(int id) {
         return transformTo(getAllByThemaId(id), NachrichtTo.class);

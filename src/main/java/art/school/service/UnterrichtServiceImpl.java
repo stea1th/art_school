@@ -1,20 +1,22 @@
 package art.school.service;
 
 import art.school.entity.Unterricht;
+import art.school.helper.UnterrichtHelper;
 import art.school.repository.UnterrichtRepository;
 import art.school.statik.MonthForStatistik;
 import art.school.to.RequestUnterrichtTo;
 import art.school.to.UnterrichtTo;
 import art.school.util.DataForStatistik;
+import art.school.util.TransformUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static art.school.util.DateUtil.parseStringsToLocalDateTime;
-import static art.school.util.TransformUtil.transformTo;
 import static art.school.util.ValidationUtil.*;
 
 @Service
@@ -22,6 +24,9 @@ public class UnterrichtServiceImpl implements UnterrichtService {
 
     @Autowired
     private UnterrichtRepository repository;
+
+    @Autowired
+    private UnterrichtHelper unterrichtHelper;
 
     @Override
     public Unterricht create(Unterricht unterricht, Integer... arr) {
@@ -41,7 +46,7 @@ public class UnterrichtServiceImpl implements UnterrichtService {
     @Override
     @Transactional
     public Unterricht createFromTo(RequestUnterrichtTo unterrichtTo) {
-        Unterricht u = unterrichtTo.createUnterricht();
+        Unterricht u = unterrichtHelper.createUnterricht(unterrichtTo);
         checkNew(u);
         return create(u, unterrichtTo.getKind(), unterrichtTo.getZahlung());
     }
@@ -62,13 +67,17 @@ public class UnterrichtServiceImpl implements UnterrichtService {
     @Override
     @Transactional
     public RequestUnterrichtTo createRequestUnterrichtTo(int id) {
-        return new RequestUnterrichtTo(get(id));
+        return unterrichtHelper.createRequestTo(get(id));
     }
 
     @Override
     @Transactional
     public List<UnterrichtTo> getAllTos() {
-        return transformTo(getAll(), UnterrichtTo.class);
+//        return transformTo(getAll(), UnterrichtTo.class);
+        return getAll()
+                .stream()
+                .map(i -> unterrichtHelper.createTo(i))
+                .collect(Collectors.toList());
     }
 
     @Override
