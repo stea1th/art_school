@@ -5,7 +5,6 @@ import art.school.entity.Users;
 import art.school.entity.Zahlung;
 import art.school.to.RequestUnterrichtTo;
 import art.school.to.UnterrichtTo;
-import art.school.to.ZahlungTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +21,9 @@ public class UnterrichtHelper {
 
     @Autowired
     private UserHelper userHelper;
+
+    @Autowired
+    private ZahlungHelper zahlungHelper;
 
     public UnterrichtTo createTo(Unterricht u) {
         UnterrichtTo to = new UnterrichtTo();
@@ -53,7 +55,7 @@ public class UnterrichtHelper {
         to.setBezahlt(u.isBezahlt());
         to.setNotiz(u.getNotiz());
         to.setKindTo(userHelper.createTo(user));
-        to.setZahlungTo(new ZahlungTo(zahlung));
+        to.setZahlungTo(zahlungHelper.createTo(zahlung));
 
         return to;
     }

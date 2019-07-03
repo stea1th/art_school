@@ -13,4 +13,6 @@ public interface ZahlungService extends MainServiceInterface<Zahlung>{
     ZahlungTo getTo(int id);
 
     List<ZahlungTo> onlyAktiv();
+
+    Zahlung createWithTo(ZahlungTo to);
 }

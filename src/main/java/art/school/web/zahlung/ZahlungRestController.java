@@ -1,6 +1,5 @@
 package art.school.web.zahlung;
 
-import art.school.entity.Zahlung;
 import art.school.to.ZahlungTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,22 +32,10 @@ public class ZahlungRestController extends AbstractZahlungController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ResponseEntity saveOrUpdate(ZahlungTo z) {
+    public ResponseEntity saveOrUpdate(ZahlungTo to) {
 
-        Zahlung zahlung = new Zahlung(z);
-        String message;
-        try {
-            if (zahlung.isNew()) {
-                super.create(zahlung);
-                message = "Save";
-            } else {
-                super.update(zahlung, zahlung.getId());
-                message = "Update";
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
-        }
-        return new ResponseEntity<>(Collections.singletonMap(message, z.getName()), HttpStatus.OK);
+        createWithTo(to);
+        return new ResponseEntity<>(Collections.singletonMap(to.isNew() ? "Save" : "Update", to.getName()), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

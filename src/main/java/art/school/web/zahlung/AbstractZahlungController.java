@@ -62,4 +62,8 @@ public abstract class AbstractZahlungController {
         return zahlungService.onlyAktiv();
     }
 
+    public Zahlung createWithTo(ZahlungTo to){
+        return zahlungService.createWithTo(to);
+    }
+
 }
