@@ -26,7 +26,7 @@ public class BlockTo {
 
     public BlockTo(Block block){
         this(block.getReason(),
-                DateUtil.formatDateToString(block.getDatum()),
+                DateUtil.formatDateTimeToString(block.getDatum()),
                 block.getBlockedBy().getName());
     }
 

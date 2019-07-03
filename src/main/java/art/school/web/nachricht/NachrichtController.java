@@ -11,7 +11,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +27,7 @@ import java.util.stream.Collectors;
 
 import static art.school.util.DateUtil.convertDateToToString;
 import static art.school.util.DateUtil.transformDateInTo;
-import static art.school.util.PaginationHelper.createTablePage;
+import static art.school.util.PaginationUtil.createTablePage;
 
 @Controller
 @RequestMapping(value = "/nachricht")
@@ -97,17 +99,16 @@ public class NachrichtController extends AbstractNachrichtController {
         Pageable pageable = PageRequest.of(pageNumber, nachrichtTo.getSize());
         Page<Nachricht> page = super.getPageByThemaId(nachrichtTo.getThemaId(), pageable);
 
-        return new NachrichtTo(nachricht.getId(), nachrichtTo.isNew() ? page.getTotalPages() - 1 : pageNumber - 1, nachrichtTo.isNew());
+        return nachrichtHelper.createTo(nachricht.getId(), nachrichtTo.isNew() ? page.getTotalPages() - 1 : pageNumber - 1, nachrichtTo.isNew());
     }
 
     @GetMapping(value = "/delete")
     @ResponseBody
-    public String delete(@RequestParam(name = "id") Integer id) {
+    public ResponseEntity<String> delete(@RequestParam(name = "id") Integer id) {
         Nachricht nachricht = createNachrichtWithUpdaters(id, "forum.deletedBy");
-        String deleted = "<-- Удалено -->";
         nachricht.setText("<-- Deleted -->");
         super.create(nachricht);
-        return deleted;
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(value = "/text")

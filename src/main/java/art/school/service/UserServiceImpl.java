@@ -7,7 +7,7 @@ import art.school.repository.BlockRepository;
 import art.school.repository.UserRepository;
 import art.school.to.BlockTo;
 import art.school.to.UserTo;
-import art.school.util.FileHelper;
+import art.school.util.FileUtil;
 import art.school.web.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public String getImage(int authId) {
         byte[] arr = get(authId).getImage();
         if (arr == null) return null;
-        return FileHelper.convertByteArrayToString(arr);
+        return FileUtil.convertByteArrayToString(arr);
     }
 
     @Override

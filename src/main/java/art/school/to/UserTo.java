@@ -2,7 +2,7 @@ package art.school.to;
 
 import art.school.entity.Role;
 import art.school.entity.Users;
-import art.school.util.FileHelper;
+import art.school.util.FileUtil;
 import art.school.util.RolesUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -48,7 +46,7 @@ public class UserTo {
                 u.getAktiv(),
                 u.getRegistriert().truncatedTo(ChronoUnit.SECONDS)
                         .toString().replace("T", " "),
-                FileHelper.convertByteArrayToString(u.getImage()),
+                FileUtil.convertByteArrayToString(u.getImage()),
                 u.getRoles().stream().map(Role::getName).anyMatch(i-> i.equals("forum.admin")));
 
     }
@@ -74,7 +72,7 @@ public class UserTo {
         u.setEmail(email);
         u.setAdresse(adresse);
         u.setAdminPasswort((adminPasswort == null || "".equals(adminPasswort))? u.getAdminPasswort() : adminPasswort);
-        u.setImage(file != null? FileHelper.convertFileToByteArray(file) : removeImage? null : u.getImage());
+        u.setImage(file != null? FileUtil.convertFileToByteArray(file) : removeImage? null : u.getImage());
         return u;
     }
 

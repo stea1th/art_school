@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 
 @Data
 @NoArgsConstructor
-public class PaginationHelper {
+public class PaginationUtil {
 
     private static String getItems(Page<?> page) {
 

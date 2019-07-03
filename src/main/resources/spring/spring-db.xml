@@ -25,6 +25,8 @@
 
     <context:component-scan base-package="art.school.**.util"/>
 
+    <context:component-scan base-package="art.school.**.helper"/>
+
     <context:component-scan base-package="art.school.**.service"/>
 
     <context:component-scan base-package="art.school.**.web"/>
