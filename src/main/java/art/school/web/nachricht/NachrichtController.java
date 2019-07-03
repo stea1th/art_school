@@ -99,7 +99,7 @@ public class NachrichtController extends AbstractNachrichtController {
         Pageable pageable = PageRequest.of(pageNumber, nachrichtTo.getSize());
         Page<Nachricht> page = super.getPageByThemaId(nachrichtTo.getThemaId(), pageable);
 
-        return nachrichtHelper.createTo(nachricht.getId(), nachrichtTo.isNew() ? page.getTotalPages() - 1 : pageNumber - 1, nachrichtTo.isNew());
+        return super.getTo(nachricht.getId(), nachrichtTo.isNew() ? page.getTotalPages() - 1 : pageNumber - 1, nachrichtTo.isNew());
     }
 
     @GetMapping(value = "/delete")
