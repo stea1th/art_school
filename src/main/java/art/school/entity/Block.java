@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @ToString
 @Entity
 @Table(name = "block")
-public class Block extends AbstractBaseEntity{
+public class Block extends AbstractBaseEntity {
 
     @Column(name = "reason")
     private String reason;
@@ -43,16 +43,4 @@ public class Block extends AbstractBaseEntity{
     @NotNull
     private Users blockedBy;
 
-    public Block(String reason, LocalDateTime datum, @NotNull Users user) {
-        this.reason = reason;
-        this.datum = datum;
-        this.user = user;
-    }
-
-    public Block(String reason, LocalDateTime datum, @NotNull Users user, @NotNull Users blockedBy) {
-        this.reason = reason;
-        this.datum = datum;
-        this.user = user;
-        this.blockedBy = blockedBy;
-    }
 }

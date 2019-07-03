@@ -1,7 +1,6 @@
 package art.school.web.user;
 
 import art.school.entity.Role;
-import art.school.entity.Users;
 import art.school.to.BlockTo;
 import art.school.to.UserTo;
 import org.springframework.http.HttpStatus;
@@ -46,11 +45,9 @@ public class AdminRestController extends AbstractUserController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ResponseEntity saveOrUpdate(UserTo z) {
-
-        Users kind = z.isNew() ? z.createUser() : z.updateUser(super.get(z.getId()));
-        super.create(kind);
-        return new ResponseEntity<>(Collections.singletonMap(z.isNew() ? "Save" : "Update", z.getName()), HttpStatus.OK);
+    public ResponseEntity saveOrUpdate(UserTo to) {
+        createWithTo(to);
+        return new ResponseEntity<>(Collections.singletonMap(to.isNew() ? "Save" : "Update", to.getName()), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

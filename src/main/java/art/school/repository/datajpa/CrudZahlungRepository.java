@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Optional;
 
 @Transactional(readOnly = true)
@@ -21,4 +22,6 @@ public interface CrudZahlungRepository extends JpaRepository<Zahlung, Integer> {
     @Modifying
     @Query("DELETE FROM Zahlung z WHERE z.id=:id")
     int delete(@Param("id") int id);
+
+    List<Zahlung> findAllByAktivIsTrue();
 }

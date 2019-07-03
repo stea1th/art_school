@@ -1,6 +1,7 @@
 package art.school.service;
 
 import art.school.entity.Zahlung;
+import art.school.helper.ZahlungHelper;
 import art.school.repository.ZahlungRepository;
 import art.school.to.ZahlungTo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,6 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
-import static art.school.util.TransformUtil.transformTo;
-import static art.school.util.TransformUtil.transformToFilterAktiv;
 import static art.school.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
@@ -19,6 +18,9 @@ public class ZahlungServiceImpl implements ZahlungService {
 
     @Autowired
     private ZahlungRepository repository;
+
+    @Autowired
+    private ZahlungHelper zahlungHelper;
 
     @Override
     public Zahlung create(Zahlung zahlung) {
@@ -28,7 +30,7 @@ public class ZahlungServiceImpl implements ZahlungService {
 
     @Override
     public void delete(int id) {
-      checkNotFoundWithId(repository.delete(id), id);
+        checkNotFoundWithId(repository.delete(id), id);
     }
 
     @Override
@@ -38,8 +40,8 @@ public class ZahlungServiceImpl implements ZahlungService {
     }
 
     @Transactional
-    public ZahlungTo getTo(int id){
-        return new ZahlungTo(get(id));
+    public ZahlungTo getTo(int id) {
+        return zahlungHelper.createTo(get(id));
     }
 
     @Override
@@ -55,8 +57,8 @@ public class ZahlungServiceImpl implements ZahlungService {
     }
 
     @Transactional
-    public List<ZahlungTo> getAllTos(){
-        return transformTo(getAll(), ZahlungTo.class);
+    public List<ZahlungTo> getAllTos() {
+        return zahlungHelper.transformTos(getAll());
     }
 
     @Override
@@ -68,7 +70,13 @@ public class ZahlungServiceImpl implements ZahlungService {
     }
 
     @Transactional
-    public List<ZahlungTo> onlyAktiv(){
-        return transformToFilterAktiv(getAll(), ZahlungTo.class);
+    public List<ZahlungTo> onlyAktiv() {
+        return zahlungHelper.transformTos(repository.getOnlyAktiv());
+    }
+
+    @Override
+    public Zahlung createWithTo(ZahlungTo to) {
+        Zahlung z = to.isNew() ? zahlungHelper.createZahlung(to) : zahlungHelper.updateZahlung(get(to.getId()), to);
+        return create(z);
     }
 }

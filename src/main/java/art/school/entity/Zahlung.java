@@ -1,6 +1,5 @@
 package art.school.entity;
 
-import art.school.to.ZahlungTo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -20,7 +19,7 @@ import java.util.List;
 @ToString(exclude = "unterrichts")
 @Entity
 @Table(name = "zahlung", uniqueConstraints = {@UniqueConstraint(columnNames = {"preis", "dauer"}, name = "zahlung_unique_preis_dauer_idx")})
-public class Zahlung extends AbstractBaseEntity{
+public class Zahlung extends AbstractBaseEntity {
 
     @Column(name = "name", nullable = false)
     @NotBlank
@@ -41,19 +40,4 @@ public class Zahlung extends AbstractBaseEntity{
     @OneToMany(mappedBy = "zahlung")
     private List<Unterricht> unterrichts;
 
-    public Zahlung(Integer id,@NotBlank String name, @NotNull BigDecimal preis, @NotNull LocalTime dauer, boolean aktiv) {
-        super(id);
-        this.name= name;
-        this.preis = preis;
-        this.dauer = dauer;
-        this.aktiv = aktiv;
-    }
-
-    public Zahlung(@NotBlank String name, @NotNull BigDecimal preis, @NotNull LocalTime dauer, boolean aktiv) {
-        this(null, name, preis, dauer, aktiv);
-    }
-
-    public Zahlung(ZahlungTo z){
-        this(z.getId(), z.getName(), z.getPreis(), LocalTime.ofSecondOfDay(Long.valueOf(z.getDauer().split("\\.")[0]) * 60) , z.isAktiv());
-    }
 }

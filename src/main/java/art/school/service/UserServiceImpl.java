@@ -3,6 +3,8 @@ package art.school.service;
 import art.school.AuthorizedUser;
 import art.school.entity.Block;
 import art.school.entity.Users;
+import art.school.helper.BlockHelper;
+import art.school.helper.UserHelper;
 import art.school.repository.BlockRepository;
 import art.school.repository.UserRepository;
 import art.school.to.BlockTo;
@@ -20,7 +22,6 @@ import org.springframework.util.Assert;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static art.school.util.TransformUtil.transformTo;
 import static art.school.util.ValidationUtil.checkNotFoundWithId;
 
 @Service("userService")
@@ -32,11 +33,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private BlockRepository blockRepository;
 
+    @Autowired
+    private UserHelper userHelper;
+
+    @Autowired
+    private BlockHelper blockHelper;
+
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Override
-    public void createBlockForUserWithTo(BlockTo block, int id) {
-        blockRepository.save(block.createBlock(get(id), get(SecurityUtil.getAuthId())));
+    public void createBlockForUserWithTo(BlockTo to, int id) {
+        blockRepository.save(blockHelper.createBlock(get(id), get(SecurityUtil.getAuthId()), to));
     }
 
     @Override
@@ -45,7 +52,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (block == null) {
             return null;
         }
-        return new BlockTo(block);
+        return blockHelper.createTo(block);
     }
 
     @Override
@@ -74,7 +81,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public List<UserTo> getOnlyActiveKids() {
-        return transformTo(repository.getOnlyActiveKids(), UserTo.class);
+        return userHelper.transformTos(repository.getOnlyActiveKids());
     }
 
     @Override
@@ -101,6 +108,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return repository.save(users);
     }
 
+    public Users createWithTo(UserTo to) {
+        Users u = to.isNew() ? userHelper.createUser(to) : userHelper.updateUser(get(to.getId()), to);
+        return create(u);
+    }
+
     @Override
     public void delete(int id) {
         checkNotFoundWithId(repository.delete(id), id);
@@ -109,7 +121,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public Users get(int id) {
-        return checkNotFoundWithId(repository.get(id), id);
+        return repository.get(id);
     }
 
     @Override
@@ -118,12 +130,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     public void updateProfile(UserTo userTo) {
-        create(userTo.updateProfile(get(SecurityUtil.getAuthId())));
+        create(userHelper.updateProfile(get(SecurityUtil.getAuthId()), userTo));
     }
 
     @Transactional
     public UserTo getUserTo(int id) {
-        return new UserTo(get(id));
+        return userHelper.createTo(get(id));
     }
 
     @Override
@@ -139,13 +151,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public List<UserTo> getAllTos() {
-        return transformTo(getAll(), UserTo.class);
+        return userHelper.transformTos(getAll());
     }
 
     @Override
     @Transactional
     public List<UserTo> getAllKids() {
-        return transformTo(repository.getAllKids(), UserTo.class);
+        return userHelper.transformTos(repository.getAllKids());
     }
 
     @Override

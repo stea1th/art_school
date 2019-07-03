@@ -7,14 +7,12 @@ import art.school.statik.MonthForStatistik;
 import art.school.to.RequestUnterrichtTo;
 import art.school.to.UnterrichtTo;
 import art.school.util.DataForStatistik;
-import art.school.util.TransformUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static art.school.util.DateUtil.parseStringsToLocalDateTime;
 import static art.school.util.ValidationUtil.*;
@@ -73,11 +71,7 @@ public class UnterrichtServiceImpl implements UnterrichtService {
     @Override
     @Transactional
     public List<UnterrichtTo> getAllTos() {
-//        return transformTo(getAll(), UnterrichtTo.class);
-        return getAll()
-                .stream()
-                .map(i -> unterrichtHelper.createTo(i))
-                .collect(Collectors.toList());
+        return unterrichtHelper.transformTos(getAll());
     }
 
     @Override

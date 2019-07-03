@@ -36,4 +36,6 @@ public interface UserService extends MainServiceInterface<Users> {
     List<UserTo> getOnlyActiveKids();
 
     Users getUsersByThemaId(int themaId);
+
+    Users createWithTo(UserTo to);
 }

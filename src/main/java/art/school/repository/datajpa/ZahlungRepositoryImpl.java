@@ -34,4 +34,9 @@ public class ZahlungRepositoryImpl implements ZahlungRepository {
     public List<Zahlung> getAll() {
         return repository.findAll();
     }
+
+    @Override
+    public List<Zahlung> getOnlyAktiv() {
+        return repository.findAllByAktivIsTrue();
+    }
 }
