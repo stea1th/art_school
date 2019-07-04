@@ -29,4 +29,6 @@ public interface ThemaService extends MainServiceInterface<Thema> {
     int toggle(int id);
 
     void countClicks(int id);
+
+    void deleteAll(Integer[] arr);
 }

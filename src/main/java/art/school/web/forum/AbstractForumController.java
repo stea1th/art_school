@@ -94,4 +94,8 @@ public abstract class AbstractForumController {
     public boolean isThisUserBanned() {
         return userService.isUserBanned(SecurityUtil.getAuthId());
     }
+
+    protected void deleteAllThemes(Integer[] arr) {
+        themaService.deleteAll(arr);
+    }
 }

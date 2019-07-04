@@ -273,7 +273,6 @@ function proofSet(set) {
     } else {
         del.removeAttr('disabled');
     }
-
 }
 
 function checkThemeIcon(icon) {
@@ -292,6 +291,14 @@ function uncheckThemeIcon(icon) {
 }
 
 function deleteThemes(){
+    let arr = Array.from(set);
+    $.get("/forum/delete", {arr: arr})
+        .done(function(){
+            location.reload();
+        });
+    // set.forEach(function(el){
+    //     console.log(el);
+    // });
 
 }
 
