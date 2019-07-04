@@ -6,20 +6,22 @@ import art.school.to.BlockTo;
 import art.school.util.DateUtil;
 import org.springframework.stereotype.Component;
 
+import static art.school.util.TextFormatUtil.escapeText;
+
 @Component
 public class BlockHelper {
 
-    public BlockTo createTo(Block b){
+    public BlockTo createTo(Block b) {
 
         BlockTo to = new BlockTo();
-        to.setReason(b.getReason());
+        to.setReason(escapeText(b.getReason()));
         to.setDate(DateUtil.formatDateTimeToString(b.getDatum()));
         to.setBlockedByName(b.getBlockedBy().getName());
 
         return to;
     }
 
-    public Block createBlock(Users u, Users adm, BlockTo to){
+    public Block createBlock(Users u, Users adm, BlockTo to) {
         Block b = new Block();
         b.setReason(to.getReason());
         b.setDatum(DateUtil.transformToDate(to.getInterval(), to.getTimeUnit()));
