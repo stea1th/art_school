@@ -6,7 +6,12 @@
 <table id="forum" class="display responsive no-wrap" width="100%">
     <thead>
     <tr>
-        <th class="w-50  text-center">${title}</th>
+        <th class="w-5 text-center">
+            <div id="choose-all-themes" class="choose-wrapper">
+                <span style="color: #1474C3 !important;"><i class="far fa-circle"></i></span>
+            </div>
+        </th>
+        <th class="w-45  text-center">${title}</th>
         <th class="w-10 text-center">${views}</th>
         <th class="w-10 text-center">${answers}</th>
         <th class="w-30 text-center">${lastanswer}</th>
@@ -26,4 +31,10 @@
         <%@ include file="../fragments/pagination.jsp" %>
     </div>
 </div>
+<sec:authorize access="hasRole('ROLE_ADMIN')" var="admin"/>
+<jsp:element name="input">
+    <jsp:attribute name="type">hidden</jsp:attribute>
+    <jsp:attribute name="id">check-theme-icon</jsp:attribute>
+    <jsp:attribute name="is-admin">${admin}</jsp:attribute>
+</jsp:element>
 <hr>

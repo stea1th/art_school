@@ -440,8 +440,10 @@ function getUserInfoForSideBar(data){
 }
 
 function formatDate(date){
-    let el = date.split(' ')[0].split('-');
-    return el[2] + '.' + el[1] + '.' +el[0];
+    if(date !== undefined){
+        let el = date.split(' ')[0].split('-');
+        return el[2] + '.' + el[1] + '.' +el[0];
+    }
 }
 
 
