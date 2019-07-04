@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static art.school.util.DateUtil.transformDateInTo;
+import static art.school.util.TextFormatUtil.escapeText;
 import static art.school.util.TextFormatUtil.splitMessageByLineSeparator;
 
 @Component
@@ -28,15 +29,15 @@ public class NachrichtHelper {
         Nachricht parent = n.getParent();
 
         to.setId(n.getId());
-        to.setText(n.getText());
+        to.setText(escapeText(n.getText()));
         to.setDatumTo(transformDateInTo(n.getDatum()));
         to.setName(user.getName());
         to.setUserId(user.getId());
         to.setThemaId(thema.getId());
         to.setUpdater(updaters.isEmpty() ? null :
                 updaters.pop());
-        to.setLines(splitMessageByLineSeparator(n.getText()));
-        to.setParentMessages(parent == null ? null : splitMessageByLineSeparator(parent.getText()));
+        to.setLines(splitMessageByLineSeparator(escapeText(n.getText())));
+        to.setParentMessages(parent == null ? null : splitMessageByLineSeparator(escapeText(parent.getText())));
         to.setRoleSize(user.getRoles().size());
         to.setRegistriert(DateUtil.formatDateToString(user.getRegistriert()));
         to.setMessages(user.getNachrichts().size());
