@@ -26,9 +26,15 @@
                         <div class="d-flex">
                             <div class="mr-auto p-2">
                                 <sec:authorize access="not ${isBanned}">
-                                    <button type="button" class="btn btn-primary" style="float:right"
+                                    <button type="button" class="btn btn-primary" style="float:left"
                                             onclick="answerIt(null, true)"><span><i class="fas fa-plus"></i></span>
                                         <spring:message code="forum.theme.new"/>
+                                    </button>
+                                </sec:authorize>
+                                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                    <button type="button" id="delete-themes-btn" class="btn btn-danger" style="float:left"
+                                            onclick="deleteThemes()"><span><i class="fas fa-trash"></i></span>
+                                        <spring:message code="button.delete"/>
                                     </button>
                                 </sec:authorize>
                             </div>

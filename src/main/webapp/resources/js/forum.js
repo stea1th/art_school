@@ -1,10 +1,17 @@
-var messageId;
-var answer;
+let messageId;
+let answer;
+let set = new Set();
 
 $(function () {
     checkIfBlocked();
 
     scrollFunction();
+
+    clickableIconsForAdmin();
+
+    chooseAllThemes();
+
+    proofSet(set);
 
 });
 
@@ -171,7 +178,7 @@ function saveMessage(id) {
         let map = new Map();
         let text = $(this).parent().find('.text-message')[0].innerText;
         map.set('#thema-text-invisible', text);
-        if(!isInputEmpty(map)){
+        if (!isInputEmpty(map)) {
             $.post("/nachricht/save", {
                 id: $(this).parent().find('#id').val(),
                 themaId: $('#themaId').val(),
@@ -217,3 +224,84 @@ $.fn.scrollTo = function () {
         scrollTop: $(this).length === 0 ? 0 : $(this).offset().top
     }, 1000);
 };
+
+function clickableIconsForAdmin() {
+    if ($('#check-theme-icon').attr('is-admin') === 'true') {
+        const icons = $('.thema-icon');
+        icons.css('cursor', 'pointer');
+        icons.on('click', function () {
+            if (!$(this).hasClass('checked')) {
+                checkThemeIcon(this);
+            } else {
+                uncheckThemeIcon(this);
+            }
+            proofSet(set);
+        });
+    }
+}
+
+function chooseAllThemes() {
+    if ($('#check-theme-icon').attr('is-admin') === 'true') {
+        const icon = $('#choose-all-themes');
+        icon.css('cursor', 'pointer');
+        icon.on('click', function () {
+            if (!$(this).hasClass('checked')) {
+                $(this).empty().addClass('checked').append('<span style="color: #1474C3 !important;"><i class="fas fa-times"></i></span>');
+                $('.thema-icon').each(function () {
+                    checkThemeIcon(this);
+                });
+            } else {
+                $(this).empty().removeClass('checked').append('<span style="color: #1474C3 !important;"><i class="far fa-circle"></i></span>');
+                set.clear();
+                $('.thema-icon').each(function () {
+                    uncheckThemeIcon(this);
+                });
+            }
+            proofSet(set);
+        });
+
+    }
+}
+
+function proofSet(set) {
+    if (set.size !== $('.thema-icon').length) {
+        $('#choose-all-themes').empty().removeClass('checked').append('<span style="color: #1474C3 !important;"><i class="far fa-circle"></i></span>');
+    }
+    const del = $('#delete-themes-btn');
+    if (set.size === 0) {
+        del.attr('disabled', 'disabled');
+    } else {
+        del.removeAttr('disabled');
+    }
+}
+
+function checkThemeIcon(icon) {
+    let parent = $(icon).parent().parent();
+    set.add($(icon).data('themaid'));
+    $(icon).empty().addClass('checked').append('<span><i class="fas fa-times"></i></span>');
+    parent.css('background-color', '#fac0b0');
+}
+
+function uncheckThemeIcon(icon) {
+    let active = $(icon).data('item-active');
+    let parent = $(icon).parent().parent();
+    set.delete($(icon).data('themaid'));
+    $(icon).empty().removeClass('checked').append(active ? '<span style="color: green !important;">\n' +
+        '                            <i class="far fa-thumbs-up"></i>\n' +
+        '                        </span>' : '<span style="color: red !important;">\n' +
+        '                            <i class="fas fa-lock"></i>\n' +
+        '                        </span>');
+
+    parent.css('background-color', 'white');
+}
+
+function deleteThemes() {
+    let arr = Array.from(set);
+    $.get("/forum/delete", {arr: arr})
+        .done(function () {
+            succesNoty('<i class="fas fa-trash"></i>', "Wird gelöscht!!!");
+            setTimeout("location.reload();", 1800);
+        });
+}
+
+

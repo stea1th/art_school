@@ -76,4 +76,13 @@ public class ForumController extends AbstractForumController {
         super.attach(id);
     }
 
+
+    @GetMapping(value = "/delete")
+    @ResponseBody
+    @Secured("ROLE_ADMIN")
+    public String delete(@RequestParam(name = "arr[]") Integer[] arr) {
+        deleteAllThemes(arr);
+        return null;
+    }
+
 }

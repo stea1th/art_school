@@ -3,19 +3,21 @@
 
 <tr>
     <td>
-        <div class="thema-title">
-                    <c:if test="${item.aktiv}">
+        <div class="thema-icon" data-themaid="${item.id}" data-item-active="${item.aktiv}">
+            <c:if test="${item.aktiv}">
                         <span style="color: green !important;">
-                            <i class="fas fa-check"></i>
-                            &nbsp;
+                            <i class="far fa-thumbs-up"></i>
                         </span>
-                    </c:if>
-                    <c:if test="${!item.aktiv}">
+            </c:if>
+            <c:if test="${!item.aktiv}">
                         <span style="color: red !important;">
                             <i class="fas fa-lock"></i>
-                            &nbsp;
                         </span>
-                    </c:if>
+            </c:if>
+        </div>
+    </td>
+    <td>
+        <div class="thema-title">
             <c:url value="/nachricht" var="themaUrl">
                 <c:param name="id" value="${item.id}"/>
                 <c:param name="themaPage" value="${pageNumber}"/>
@@ -39,10 +41,11 @@
     </td>
     <td class="text-center">
 
-        <div><a href='<c:url value="/nachricht?id=${item.id}&themaPage=${pageNumber}&themaSize=${size}&page=${item.page}#${item.anker}"/>'
-                onclick="countClicks(${item.id})"><c:out
-                value="${item.last}"/>
-            <span><i class="fas fa-angle-double-right"></i></span>
-        </a></div>
+        <div>
+            <a href='<c:url value="/nachricht?id=${item.id}&themaPage=${pageNumber}&themaSize=${size}&page=${item.page}#${item.anker}"/>'
+               onclick="countClicks(${item.id})"><c:out
+                    value="${item.last}"/>
+                <span><i class="fas fa-angle-double-right"></i></span>
+            </a></div>
     </td>
 </tr>
