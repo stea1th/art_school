@@ -33,6 +33,15 @@
             </c:if>
         </div>
     </td>
+    <td class="text-center" style="width: 85px;">
+        <div>
+            <sec:authorize access="hasRole('ROLE_MODERATOR')">
+                <button type="button"  class="btn btn-warning edit-theme-btn" style="float:left"
+                        onclick="editTheme()" hidden><span><i class="fas fa-trash"></i></span>
+                </button>
+            </sec:authorize>
+        </div>
+    </td>
     <td class="text-center">
         <strong><c:out value="${item.views}"/></strong>
     </td>

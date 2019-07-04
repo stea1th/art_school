@@ -268,10 +268,16 @@ function proofSet(set) {
         $('#choose-all-themes').empty().removeClass('checked').append('<span style="color: #1474C3 !important;"><i class="far fa-circle"></i></span>');
     }
     const del = $('#delete-themes-btn');
+    const edit = $('.edit-theme-btn');
     if (set.size === 0) {
         del.attr('disabled', 'disabled');
     } else {
         del.removeAttr('disabled');
+    }
+    if(set.size === 1){
+        $('.thema-icon.checked').parent().parent().find('.edit-theme-btn').removeAttr('hidden');
+    } else {
+        edit.attr('hidden', 'true');
     }
 }
 
@@ -279,7 +285,8 @@ function checkThemeIcon(icon) {
     let parent = $(icon).parent().parent();
     set.add($(icon).data('themaid'));
     $(icon).empty().addClass('checked').append('<span><i class="fas fa-times"></i></span>');
-    parent.css('background-color', '#fac0b0');
+    parent.find('.edit-theme-btn').removeAttr('hidden');
+    parent.css('background-color', '#dbfae2');
 }
 
 function uncheckThemeIcon(icon) {
@@ -292,16 +299,25 @@ function uncheckThemeIcon(icon) {
         '                            <i class="fas fa-lock"></i>\n' +
         '                        </span>');
 
-    parent.css('background-color', 'white');
+    parent.find('.edit-theme-btn').attr('hidden', 'hidden');
+    parent.css('background-color', '');
 }
 
 function deleteThemes() {
     let arr = Array.from(set);
     $.get("/forum/delete", {arr: arr})
         .done(function () {
+            $('.thema-icon.checked').each(function(){
+                $(this).parent().parent().css('background-color', '#fac8ba')
+            })
             succesNoty('<i class="fas fa-trash"></i>', "Wird gelöscht!!!");
             setTimeout("location.reload();", 1800);
         });
+}
+
+function editTheme(){
+   console.log("Hi!!!");
+
 }
 
 
