@@ -11,6 +11,8 @@ $(function () {
 
     chooseAllThemes();
 
+    proofSet(set);
+
 });
 
 function topFunction() {
@@ -265,6 +267,12 @@ function proofSet(set) {
     if (set.size !== $('.thema-icon').length) {
         $('#choose-all-themes').empty().removeClass('checked').append('<span style="color: #1474C3 !important;"><i class="far fa-circle"></i></span>');
     }
+    const del = $('#delete-themes-btn');
+    if(set.size === 0){
+        del.attr('disabled', 'disabled');
+    } else {
+        del.removeAttr('disabled');
+    }
 
 }
 
@@ -281,6 +289,10 @@ function uncheckThemeIcon(icon) {
         '                        </span>' : '<span style="color: red !important;">\n' +
         '                            <i class="fas fa-lock"></i>\n' +
         '                        </span>');
+}
+
+function deleteThemes(){
+
 }
 
 
