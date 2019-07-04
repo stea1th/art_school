@@ -3,7 +3,6 @@
 
 <tr>
     <td>
-
         <div class="thema-icon" data-themaid="${item.id}" data-item-active="${item.aktiv}">
             <c:if test="${item.aktiv}">
                         <span style="color: green !important;">
@@ -16,7 +15,6 @@
                         </span>
             </c:if>
         </div>
-
     </td>
     <td>
         <div class="thema-title">
