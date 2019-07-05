@@ -8,7 +8,7 @@
     <tr>
         <th class="w-5 text-center">
             <div id="choose-all-themes" class="choose-wrapper" style="width: 48px;">
-                <span style="color: #1474C3 !important;"><i class="far fa-circle"></i></span>
+                <span style="color: #1474C3 !important;"><i class="far fa-square"></i></span>
             </div>
         </th>
         <th class="w-40  text-center">${title}</th>

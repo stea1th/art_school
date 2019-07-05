@@ -4,6 +4,9 @@
 <head>
     <title>Art School</title>
 
+    <%--Favicon--%>
+    <link rel="shortcut icon" type="image/x-icon" href="/resources/css/pics/style1b_pic1_m.png" />
+
     <%--Animatejs--%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
