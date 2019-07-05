@@ -1,3 +1,4 @@
+
 let messageId;
 let answer;
 let set = new Set();
@@ -308,16 +309,34 @@ function deleteThemes() {
     $.get("/forum/delete", {arr: arr})
         .done(function () {
             $('.thema-icon.checked').each(function(){
-                $(this).parent().parent().css('background-color', '#fac8ba')
-            })
+                $('.edit-theme-btn').attr('hidden', 'true');
+                changeColor({
+                    element: $(this).parent().parent()[0],
+                    property: 'background-color',
+                    from: '#dbfae2',
+                    to: '#fa4547',
+                    duration: "1300ms",
+                    timingFunction: "ease-in"
+                });
+            });
             succesNoty('<i class="fas fa-trash"></i>', "Wird gelöscht!!!");
-            setTimeout("location.reload();", 1800);
+            setTimeout("location.reload();", 1300);
         });
 }
 
 function editTheme(){
-   console.log("Hi!!!");
+   console.log(this);
 
+}
+
+function changeColor(config){
+    transition.begin(config.element, {
+        property: config.property,
+        from: config.from,
+        to: config.to,
+        duration: config.duration,
+        timingFunction: config.timingFunction
+    });
 }
 
 
