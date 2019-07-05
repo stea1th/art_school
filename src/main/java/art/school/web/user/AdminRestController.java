@@ -46,6 +46,9 @@ public class AdminRestController extends AbstractUserController {
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity saveOrUpdate(UserTo to) {
+        if(to.isNew()){
+            emailUtil.sendSimpleEmail("noreply.vadim@mail.ru", "stea1th@mail.ru", "Просто тест", "Пробуем, авось что то и получится!!!!");
+        }
         createWithTo(to);
         return new ResponseEntity<>(Collections.singletonMap(to.isNew() ? "Save" : "Update", to.getName()), HttpStatus.OK);
     }

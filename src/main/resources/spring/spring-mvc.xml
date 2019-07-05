@@ -19,8 +19,6 @@
 
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
 
-    <context:property-placeholder location="classpath:spring/mailRu.properties" system-properties-mode="OVERRIDE"/>
-
     <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->
     <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver"
           p:viewClass="org.springframework.web.servlet.view.JstlView"
@@ -36,9 +34,19 @@
           p:basename="messages"
           p:defaultEncoding="UTF-8"/>
 
-    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-
-
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
+          p:host="smtp.mail.ru"
+          p:port="465"
+          p:username="noreply.vadim@mail.ru"
+          p:password="ogurec99">
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
     </bean>
 
     <!--<bean id="localeResolver"-->
