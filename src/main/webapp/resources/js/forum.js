@@ -270,7 +270,7 @@ function chooseAllThemes() {
 
 function proofSet(set) {
     if (set.size !== $('.thema-icon').length) {
-        $('#choose-all-themes').empty().removeClass('checked').append('<span style="color: #1474C3 !important;"><i class="far fa-circle"></i></span>');
+        $('#choose-all-themes').empty().removeClass('checked').append('<span style="color: #1474C3 !important;"><i class="far fa-square"></i></span>');
     }
     const del = $('#delete-themes-btn');
     const edit = $('.edit-theme-btn');
