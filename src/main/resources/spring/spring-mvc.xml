@@ -19,6 +19,8 @@
 
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
 
+    <context:property-placeholder location="classpath:spring/mailRu.properties" system-properties-mode="OVERRIDE"/>
+
     <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->
     <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver"
           p:viewClass="org.springframework.web.servlet.view.JstlView"
@@ -30,9 +32,13 @@
     </bean>
 
     <bean id="messageSource"
-          class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="messages"/>
-        <property name="defaultEncoding" value="UTF-8"/>
+          class="org.springframework.context.support.ResourceBundleMessageSource"
+          p:basename="messages"
+          p:defaultEncoding="UTF-8"/>
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+
+
     </bean>
 
     <!--<bean id="localeResolver"-->
