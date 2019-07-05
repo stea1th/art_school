@@ -296,7 +296,7 @@ function succesNoty(icon, text) {
         text: icon + '&nbsp;' + text,
         theme: 'bootstrap-v4',
         layout: 'bottomRight',
-        timeout: 1500,
+        timeout: 1300,
         animation: {
             open: 'animated bounceInLeft',
             close: 'animated bounceOutRight'
@@ -310,7 +310,7 @@ function failNoty(icon, text) {
         text: icon + '&nbsp;' + text,
         theme: 'bootstrap-v4',
         layout: 'bottomRight',
-        timeout: 1500,
+        timeout: 1300,
         animation: {
             open: 'animated bounceInLeft',
             close: 'animated bounceOutRight'

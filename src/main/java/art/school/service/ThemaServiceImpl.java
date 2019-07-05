@@ -76,6 +76,15 @@ public class ThemaServiceImpl implements ThemaService {
 
     @Override
     @Transactional
+    public void updateTitle(int id, String text) {
+        Thema t = get(id);
+        if(t != null){
+            t.setTitel(text);
+        }
+    }
+
+    @Override
+    @Transactional
     public void delete(int id) {
         repository.delete(id);
     }

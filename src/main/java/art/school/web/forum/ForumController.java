@@ -80,9 +80,15 @@ public class ForumController extends AbstractForumController {
     @GetMapping(value = "/delete")
     @ResponseBody
     @Secured("ROLE_ADMIN")
-    public String delete(@RequestParam(name = "arr[]") Integer[] arr) {
+    public void delete(@RequestParam(name = "arr[]") Integer[] arr) {
         deleteAllThemes(arr);
-        return null;
+    }
+
+    @PostMapping(value ="/edit")
+    @ResponseBody
+    @Secured("ROLE_MODERATOR")
+    public void edit(@RequestParam(name = "id") Integer id, @RequestParam(name = "text") String text){
+        updateTitle(id, text);
     }
 
 }

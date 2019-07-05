@@ -98,4 +98,8 @@ public abstract class AbstractForumController {
     protected void deleteAllThemes(Integer[] arr) {
         themaService.deleteAll(arr);
     }
+
+    public void updateTitle(int id, String text){
+        themaService.updateTitle(id, text);
+    }
 }
