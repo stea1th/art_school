@@ -35,8 +35,9 @@
     </td>
     <td class="text-center" style="width: 85px;">
         <div>
+            <spring:message code="app.edit.theme.title" var="editTitle"/>
             <sec:authorize access="hasRole('ROLE_MODERATOR')">
-                <button type="button"  class="btn btn-outline-warning btn-sm edit-theme-btn" style="float:left"
+                <button type="button"  class="btn btn-outline-warning btn-sm edit-theme-btn" title="${editTitle}" style="float:left"
                          hidden><span><i class="fas fa-cog fa-2x"></i></span>
                 </button>
             </sec:authorize>

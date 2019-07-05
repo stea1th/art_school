@@ -72,7 +72,7 @@
     <jsp:param name="buttonName" value="${buttonAccepted}"/>
 </jsp:include>
 
-<spring:message code="app.edit.lesson" var="editTitle"/>
+<spring:message code="app.edit.theme.title" var="editTitle"/>
 <spring:message code="forum.edit" var="buttonAccepted"/>
 <jsp:include page="../fragments/modal.jsp">
     <jsp:param name="modalId" value="edit-title"/>
