@@ -1,4 +1,3 @@
-
 let messageId;
 let answer;
 let set = new Set();
@@ -13,6 +12,8 @@ $(function () {
     chooseAllThemes();
 
     proofSet(set);
+
+    editThemeTitle();
 
 });
 
@@ -40,29 +41,32 @@ function toggleAttach(id) {
 function checkIfBlocked() {
     $.get("/api/kind/check")
         .done(function (data) {
-
             if (data !== "") {
-                var hidden = $('#i18n');
-                var string = [];
-                string.push(
-                    "<div>",
-                    hidden.attr('attentionBlock'),
-                    "</div><br><div>",
-                    hidden.attr('reason'),
-                    ":&nbsp;",
-                    data.reason,
-                    "</div><br><div>",
-                    hidden.attr('blockedTill'),
-                    ":&nbsp;",
-                    data.date,
-                    "</div><br><div>",
-                    hidden.attr('blockedBy'),
-                    ":&nbsp;",
-                    data.blockedByName,
-                    "</div>"
-                );
-                $('#isBlocked .modal-body').html(string);
-                $('#isBlocked').modal("show");
+                showModal({
+                    id: $('#isBlocked'),
+                    init: function () {
+                        var hidden = $('#i18n');
+                        var string = [];
+                        string.push(
+                            "<div>",
+                            hidden.attr('attentionBlock'),
+                            "</div><br><div>",
+                            hidden.attr('reason'),
+                            ":&nbsp;",
+                            data.reason,
+                            "</div><br><div>",
+                            hidden.attr('blockedTill'),
+                            ":&nbsp;",
+                            data.date,
+                            "</div><br><div>",
+                            hidden.attr('blockedBy'),
+                            ":&nbsp;",
+                            data.blockedByName,
+                            "</div>"
+                        );
+                        $('#isBlocked .modal-body').html(string);
+                    }
+                });
             }
         });
     $('#accepted').on('click', function () {
@@ -275,7 +279,7 @@ function proofSet(set) {
     } else {
         del.removeAttr('disabled');
     }
-    if(set.size === 1){
+    if (set.size === 1) {
         $('.thema-icon.checked').parent().parent().find('.edit-theme-btn').removeAttr('hidden');
     } else {
         edit.attr('hidden', 'true');
@@ -308,10 +312,10 @@ function deleteThemes() {
     let arr = Array.from(set);
     $.get("/forum/delete", {arr: arr})
         .done(function () {
-            $('.thema-icon.checked').each(function(){
-                $('.edit-theme-btn').attr('hidden', 'true');
+            $('.edit-theme-btn').attr('hidden', 'true');
+            $('.thema-icon.checked').each(function () {
                 changeColor({
-                    element: $(this).parent().parent()[0],
+                    element: $(this).closest('tr')[0],
                     property: 'background-color',
                     from: '#dbfae2',
                     to: '#fa4547',
@@ -324,12 +328,48 @@ function deleteThemes() {
         });
 }
 
-function editTheme(){
-   console.log(this);
-
+function editThemeTitle() {
+    $('.edit-theme-btn').on('click', function () {
+        showModal({
+            id: $('#edit-title'),
+            init: function () {
+                $('#edit-title .modal-body').html('<form><div id="edit-title-wrapper"><input type="text" class="form-control" id="edit-title-input" maxlength="40" required/></div></form>');
+                const checked = $('.thema-icon.checked');
+                const edited = $('#edited');
+                $('#edit-title-input').val(checked.closest('tr').find('.thema-title-href').text());
+                edited.attr('themaId', checked.data('themaid'));
+                edited.attr('onClick', 'updateTheme()');
+            }
+        });
+    });
 }
 
-function changeColor(config){
+function updateTheme() {
+    let map = new Map();
+    let id = $('#edited').attr('themaId');
+    let text = $('#edit-title-input').val();
+    map.set('#edit-title-wrapper', text);
+
+    if (!isInputEmpty(map)) {
+        $.post('/forum/edit', {id: id, text: text})
+            .done(function () {
+                $('.edit-theme-btn').attr('hidden', 'true');
+                $('#edit-title').modal("hide");
+                changeColor({
+                    element: $('.thema-icon.checked').closest('tr')[0],
+                    property: 'background-color',
+                    from: '#dbfae2',
+                    to: '#fae349',
+                    duration: "1300ms",
+                    timingFunction: "ease-in"
+                });
+                succesNoty('<i class="fas fa-cog"></i>', "Wird geändert!!!");
+                setTimeout("location.reload();", 1300);
+            });
+    }
+}
+
+function changeColor(config) {
     transition.begin(config.element, {
         property: config.property,
         from: config.from,

@@ -23,7 +23,7 @@
                 <c:param name="themaPage" value="${pageNumber}"/>
                 <c:param name="themaSize" value="${size}"/>
             </c:url>
-            <a href="${themaUrl}" onclick="countClicks(${item.id})"><c:out value="${item.titel}"/></a>
+            <a href="${themaUrl}" onclick="countClicks(${item.id})" class="thema-title-href"><c:out value="${item.titel}"/></a>
             <span>&nbsp;<c:out value="${item.creator}"/></span>
             <c:if test="${item.pinned}">
                 <span style="color: red !important;">
@@ -36,8 +36,8 @@
     <td class="text-center" style="width: 85px;">
         <div>
             <sec:authorize access="hasRole('ROLE_MODERATOR')">
-                <button type="button"  class="btn btn-warning edit-theme-btn" style="float:left"
-                        onclick="editTheme()" hidden><span><i class="fas fa-trash"></i></span>
+                <button type="button"  class="btn btn-outline-warning btn-sm edit-theme-btn" style="float:left"
+                         hidden><span><i class="fas fa-cog fa-2x"></i></span>
                 </button>
             </sec:authorize>
         </div>

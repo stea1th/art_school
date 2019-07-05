@@ -31,4 +31,6 @@ public interface ThemaService extends MainServiceInterface<Thema> {
     void countClicks(int id);
 
     void deleteAll(Integer[] arr);
+
+    void updateTitle(int id, String text);
 }

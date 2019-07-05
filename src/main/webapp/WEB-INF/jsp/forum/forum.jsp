@@ -72,6 +72,16 @@
     <jsp:param name="buttonName" value="${buttonAccepted}"/>
 </jsp:include>
 
+<spring:message code="app.edit.lesson" var="editTitle"/>
+<spring:message code="forum.edit" var="buttonAccepted"/>
+<jsp:include page="../fragments/modal.jsp">
+    <jsp:param name="modalId" value="edit-title"/>
+    <jsp:param name="modalTitel" value="${editTitle}"/>
+    <jsp:param name="buttons" value="../buttons/save-and-close.jsp"/>
+    <jsp:param name="saveId" value="edited"/>
+    <jsp:param name="buttonName" value="${buttonAccepted}"/>
+</jsp:include>
+
 </body>
 
 <jsp:include page="../i18n/i18n-forum.jsp">
