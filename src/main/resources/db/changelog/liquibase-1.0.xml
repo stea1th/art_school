@@ -1,0 +1,34 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="1" author="stea1th">
+        <createTable tableName="password">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="password_pkey" nullable="false"/>
+            </column>
+            <column name="admin_passwort" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="passwort" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <sql dbms="postgresql" endDelimiter=";\n"  splitStatements="true"
+             stripComments="true">ALTER TABLE password ALTER COLUMN id SET DEFAULT nextval('global_seq');
+        </sql>
+    </changeSet>
+    <changeSet author="stea1th" id="2">
+        <addForeignKeyConstraint baseColumnNames="u_id" baseTableName="password" constraintName="password_u_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="stea1th" id="3">
+        <update tableName="password">
+            <column name="admin_passwort" valueComputed="(SELECT users.admin_passwort FROM users WHERE password.u_id = users.id"
+        </update>
+    </changeSet>
+    <changeSet author="stea1th" id="4">
+        <update tableName="password">
+            <column name="admin_passwort" valueComputed="(SELECT users.admin_passwort FROM users WHERE password.u_id = users.id"
+        </update>
+    </changeSet>
+
+</databaseChangeLog>

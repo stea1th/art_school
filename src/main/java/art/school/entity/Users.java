@@ -41,12 +41,9 @@ public class Users extends AbstractBaseEntity {
     @Size(min = 3, max = 50)
     private String adresse;
 
-    @Column(name = "admin_passwort", nullable = false)
-    private String adminPasswort;
-
-    @Column(name = "passwort", nullable = false)
-    @NotBlank
-    private String passwort;
+    @OneToMany(mappedBy = "user")
+    @OrderBy(value="id")
+    private List<Password> passwords;
 
     @Column(name = "registriert")
     @NotNull
