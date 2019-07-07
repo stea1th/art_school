@@ -72,7 +72,7 @@
         <unbescape.version>1.1.6.RELEASE</unbescape.version>
 
         <!--Email-->
-        <email.version>1.6.2</email.version>
+        <email.version>1.4.3</email.version>
 
 
     </properties>
@@ -346,8 +346,8 @@
 
         <!--Email-->
         <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
             <version>${email.version}</version>
         </dependency>
 

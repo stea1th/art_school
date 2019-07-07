@@ -34,21 +34,6 @@
           p:basename="messages"
           p:defaultEncoding="UTF-8"/>
 
-    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
-          p:host="smtp.mail.ru"
-          p:port="465"
-          p:username="noreply.vadim@mail.ru"
-          p:password="ogurec99">
-        <property name="javaMailProperties">
-            <props>
-                <prop key="mail.transport.protocol">smtp</prop>
-                <prop key="mail.smtp.auth">true</prop>
-                <prop key="mail.smtp.starttls.enable">true</prop>
-                <prop key="mail.debug">true</prop>
-            </props>
-        </property>
-    </bean>
-
     <!--<bean id="localeResolver"-->
     <!--class="org.springframework.web.servlet.i18n.CookieLocaleResolver">-->
     <!--<property name="defaultLocale" value="de"/>-->
