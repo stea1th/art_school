@@ -1,6 +1,7 @@
 package art.school.web.user;
 
 import art.school.entity.Users;
+import art.school.service.EmailService;
 import art.school.service.UserService;
 import art.school.to.BlockTo;
 import art.school.to.UserTo;
@@ -19,6 +20,9 @@ public abstract class AbstractUserController {
 
     @Autowired
     Messages message;
+
+    @Autowired
+    EmailService emailService;
 
     void accepted() {
         service.accepted();

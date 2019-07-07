@@ -4,12 +4,14 @@ import art.school.entity.Role;
 import art.school.entity.Users;
 import art.school.to.UserTo;
 import art.school.util.FileUtil;
+import art.school.util.PasswordGenerator;
 import art.school.util.RolesUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,14 +28,14 @@ public class UserHelper {
         to.setAdminPasswort(u.getAdminPasswort());
         to.setRoles(u.getRoles()
                 .stream()
-                .sorted((x1, x2) -> x2.ordinal()-x1.ordinal())
+                .sorted(Comparator.comparing(Role::ordinal))
                 .map(Role::getName)
                 .findFirst().orElse(null));
         to.setAktiv(u.getAktiv());
         to.setRegistriert(u.getRegistriert().truncatedTo(ChronoUnit.SECONDS)
                 .toString().replace("T", " "));
         to.setEncodedImage(FileUtil.convertByteArrayToString(u.getImage()));
-        to.setIsAdmin(u.getRoles().stream().map(Role::getName).anyMatch(i-> i.equals("forum.admin")));
+        to.setIsAdmin(u.getRoles().stream().map(Role::getName).anyMatch(i-> i.equals(Role.ROLE_ADMIN.getName())));
 
         return to;
     }
@@ -51,7 +53,7 @@ public class UserHelper {
         u.setName(to.getName());
         u.setEmail(to.getEmail());
         u.setAdresse(to.getAdresse());
-        u.setAdminPasswort((adminPasswort == null || "".equals(adminPasswort)) ? "1" : adminPasswort);
+        u.setAdminPasswort((adminPasswort == null || "".equals(adminPasswort)) ? PasswordGenerator.generate() : adminPasswort);
         u.setAktiv(to.getAktiv());
         u.setRoles(RolesUtil.createRoles(Integer.parseInt(to.getRoles() == null ? "0" : to.getRoles())));
         return u;

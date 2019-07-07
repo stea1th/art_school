@@ -30,10 +30,9 @@
     </bean>
 
     <bean id="messageSource"
-          class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="messages"/>
-        <property name="defaultEncoding" value="UTF-8"/>
-    </bean>
+          class="org.springframework.context.support.ResourceBundleMessageSource"
+          p:basename="messages"
+          p:defaultEncoding="UTF-8"/>
 
     <!--<bean id="localeResolver"-->
     <!--class="org.springframework.web.servlet.i18n.CookieLocaleResolver">-->
