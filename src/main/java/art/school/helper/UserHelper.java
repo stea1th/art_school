@@ -1,11 +1,13 @@
 package art.school.helper;
 
 import art.school.entity.Role;
+import art.school.entity.UserPassword;
 import art.school.entity.Users;
 import art.school.to.UserTo;
 import art.school.util.FileUtil;
 import art.school.util.PasswordGenerator;
 import art.school.util.RolesUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +20,9 @@ import java.util.stream.Collectors;
 @Component
 public class UserHelper {
 
+    @Autowired
+    private UserPasswordHelper userPasswordHelper;
+
     public UserTo createTo(Users u){
         UserTo to = new UserTo();
 
@@ -25,7 +30,7 @@ public class UserHelper {
         to.setName(u.getName());
         to.setAdresse(u.getAdresse());
         to.setEmail(u.getEmail());
-        to.setAdminPasswort(u.getAdminPasswort());
+        to.setAdminPasswort(u.getPasswords().get(0).getAdminPasswort());
         to.setRoles(u.getRoles()
                 .stream()
                 .sorted(Comparator.comparing(Role::ordinal))
@@ -48,23 +53,20 @@ public class UserHelper {
     }
 
     public Users updateUser(Users u, UserTo to) {
-        String adminPasswort = to.getAdminPasswort();
-
         u.setName(to.getName());
         u.setEmail(to.getEmail());
         u.setAdresse(to.getAdresse());
-        u.setAdminPasswort((adminPasswort == null || "".equals(adminPasswort)) ? PasswordGenerator.generate() : adminPasswort);
+        u.setPasswords(updatePasswordForUser(u, to));
         u.setAktiv(to.getAktiv());
         u.setRoles(RolesUtil.createRoles(Integer.parseInt(to.getRoles() == null ? "0" : to.getRoles())));
         return u;
     }
 
     public Users updateProfile(Users u, UserTo to) {
-        String adminPasswort = to.getAdminPasswort();
         MultipartFile file = to.getFile();
         u.setEmail(to.getEmail());
         u.setAdresse(to.getAdresse());
-        u.setAdminPasswort((adminPasswort == null || "".equals(adminPasswort)) ? u.getAdminPasswort() : adminPasswort);
+        u.setPasswords(updatePasswordForUser(u, to));
         u.setImage(file != null ? FileUtil.convertFileToByteArray(file) : to.getRemoveImage() ? null : u.getImage());
 
         return u;
@@ -73,5 +75,12 @@ public class UserHelper {
     public List<UserTo> transformTos(List<Users> list){
         return list.stream().map(this::createTo)
                 .collect(Collectors.toList());
+    }
+
+    public List<UserPassword> updatePasswordForUser(Users u, UserTo to){
+        UserPassword userPassword = userPasswordHelper.createUserPassword(to.getAdminPasswort());
+        List<UserPassword> passwords = u.getPasswords();
+        passwords.add(userPassword);
+        return passwords;
     }
 }

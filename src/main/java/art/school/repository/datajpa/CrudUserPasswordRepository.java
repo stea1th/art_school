@@ -10,7 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface CrudUserPasswordRepository extends JpaRepository<UserPassword, Integer> {
 
-    UserPassword findFirstByUserId(int userId);
+
+    @Query(value = "select u from UserPassword u where u.user.id = :userId and u.registration = max(u.registration)")
+    UserPassword findLatestByUserId(@Param("userId") int userId);
+
 
     @Transactional
     @Modifying

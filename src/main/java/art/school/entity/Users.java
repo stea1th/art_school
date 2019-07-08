@@ -15,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -41,16 +42,16 @@ public class Users extends AbstractBaseEntity {
     @Size(min = 3, max = 50)
     private String adresse;
 
-//    @OneToMany(mappedBy = "user")
-//    @OrderBy(value = "registration")
-//    private List<UserPassword> passwords;
+    @OneToMany(mappedBy = "user")
+    @OrderBy(value = "registration DESC")
+    private List<UserPassword> passwords = new ArrayList<>();
 
-    @Column(name = "admin_passwort", nullable = false)
-    private String adminPasswort;
-
-    @Column(name = "passwort", nullable = false)
-    @NotBlank
-    private String passwort;
+//    @Column(name = "admin_passwort", nullable = false)
+//    private String adminPasswort;
+//
+//    @Column(name = "passwort", nullable = false)
+//    @NotBlank
+//    private String passwort;
 
     @Column(name = "registriert")
     @NotNull

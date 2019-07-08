@@ -47,5 +47,11 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="drop_admin_pass_in users" author="stea1th">
+        <dropColumn tableName="users" columnName="admin_passwort" />
+    </changeSet>
+    <changeSet id="drop_pass_in users" author="stea1th">
+        <dropColumn tableName="users" columnName="passwort" />
+    </changeSet>
 
 </databaseChangeLog>

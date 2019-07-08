@@ -35,6 +35,6 @@ public class UserPasswordRepositoryImpl implements UserPasswordRepository {
 
     @Override
     public UserPassword getLatestByUserId(int userId) {
-        return repository.findFirstByUserId(userId);
+        return repository.findLatestByUserId(userId);
     }
 }

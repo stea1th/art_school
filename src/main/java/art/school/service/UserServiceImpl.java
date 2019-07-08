@@ -2,6 +2,7 @@ package art.school.service;
 
 import art.school.AuthorizedUser;
 import art.school.entity.Block;
+import art.school.entity.UserPassword;
 import art.school.entity.Users;
 import art.school.helper.BlockHelper;
 import art.school.helper.UserHelper;
@@ -39,7 +40,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private BlockHelper blockHelper;
 
-    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    @Autowired
+    private UserPasswordService userPasswordService;
+
+//    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Override
     public void createBlockForUserWithTo(BlockTo to, int id) {
@@ -102,9 +106,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    @Transactional
     public Users create(Users users) {
         Assert.notNull(users, "users must not be null");
-        users.setPasswort(encoder.encode(users.getAdminPasswort()));
+        List<UserPassword> passwords = users.getPasswords();
+        passwords.add(userPasswordService.create(passwords.get(0)));
+
+//        System.out.println("-------------------------------------- " + passwords.get(0));
+//        System.out.println("+++++++++++++++++++++++++++++++++++++++" + passwords.get(passwords.size()-1));
+//        userPasswordService.create(passwords.get(0));
+
+//        users.setPasswort(encoder.encode(users.getAdminPasswort()));
         return repository.save(users);
     }
 
