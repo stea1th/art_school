@@ -33,4 +33,19 @@
         <sql>insert into user_password (u_id, admin_passwort, passwort)
             select u.id, u.admin_passwort, u.passwort from users u;</sql>
     </changeSet>
+    <changeSet id="add_registration_column_into_user_password" author="stea1th">
+        <addColumn tableName="user_password">
+            <column defaultValueComputed="now()" name="registration" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="add_generated_column_into_user_password" author="stea1th">
+        <addColumn tableName="user_password">
+            <column defaultValueBoolean="true" name="generated" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
