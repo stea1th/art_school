@@ -16,8 +16,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "password")
-public class Password extends AbstractBaseEntity{
+@Table(name = "user_password")
+public class UserPassword extends AbstractBaseEntity{
 
     @Column(name = "admin_passwort", nullable = false)
     private String adminPasswort;

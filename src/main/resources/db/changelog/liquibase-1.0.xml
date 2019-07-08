@@ -18,17 +18,19 @@
         </sql>
     </changeSet>
     <changeSet author="stea1th" id="2">
-        <addForeignKeyConstraint baseColumnNames="u_id" baseTableName="password" constraintName="password_u_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+        <addColumn tableName="password">
+            <column name="u_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="u_id" baseTableName="password" constraintName="password_u_id_fkey" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users"/>
     </changeSet>
-    <changeSet author="stea1th" id="3">
-        <update tableName="password">
-            <column name="admin_passwort" valueComputed="(SELECT users.admin_passwort FROM users WHERE password.u_id = users.id"
-        </update>
-    </changeSet>
-    <changeSet author="stea1th" id="4">
-        <update tableName="password">
-            <column name="admin_passwort" valueComputed="(SELECT users.admin_passwort FROM users WHERE password.u_id = users.id"
-        </update>
+    <changeSet author="stea1th" id="rename_password_table">
+        <renameTable oldTableName="password" newTableName="user_password"/>
     </changeSet>
 
+    <changeSet author="stea1th" id="insert_into_user_password">
+        <sql>insert into user_password (u_id, admin_passwort, passwort)
+            select u.id, u.admin_passwort, u.passwort from users u;</sql>
+    </changeSet>
 </databaseChangeLog>
