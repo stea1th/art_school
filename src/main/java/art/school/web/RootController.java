@@ -1,5 +1,6 @@
 package art.school.web;
 
+import art.school.service.UserPasswordService;
 import art.school.util.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -13,8 +14,14 @@ public class RootController {
     @Autowired
     private Messages message;
 
+    @Autowired
+    private UserPasswordService userPasswordService;
+
     @GetMapping("/")
     public String root() {
+        if (userPasswordService.getLatestByUserId(SecurityUtil.getAuthId()).isGenerated()) {
+            return "redirect:profile";
+        }
         return "redirect:forum";
     }
 

@@ -1,11 +1,11 @@
-var fileTypes = [
+const fileTypes = [
     'image/jpeg',
     'image/pjpeg',
     'image/png'
 ];
-var file;
-var imageInput = $('#image-input');
-var err;
+let file;
+const imageInput = $('#image-input');
+let err;
 
 
 $(function () {
@@ -32,26 +32,27 @@ function getProfile(data){
 function saveProfile(){
     $('#saveProfile').on('click', function () {
         let formData = new FormData();
-        let pass = $('#new-passwort').val();
-        let email = $('#email').val();
-        let adresse = $('#adresse').val();
+        const pass = $('#new-passwort');
+        const email = $('#email');
+        const adresse = $('#adresse');
+        const repeat = $('#repeat-passwort');
 
         let map = new Map();
-        map.set('#adresse-div', adresse);
+        map.set('#adresse-div', adresse.val());
 
         let isValid = isInputValid({
-            pass: pass,
-            repeat: $('#repeat-passwort').val(),
+            pass: pass.val(),
+            repeat: repeat.val(),
             repeatInput: '#repeat',
-            email: email,
+            email: email.val(),
             emailInput: '#email-div'
         });
 
         if(isValid && !isInputEmpty(map)){
             formData.append('name', $('#name').val());
-            formData.append('adresse', adresse);
-            formData.append('adminPasswort', pass);
-            formData.append('email', email);
+            formData.append('adresse', adresse.val());
+            formData.append('adminPasswort', pass.val());
+            formData.append('email', email.val());
             formData.append('removeImage', imageInput.attr('del') === 'true');
 
             file = imageInput[0].files[0];
@@ -70,6 +71,8 @@ function saveProfile(){
                 type: 'POST'
             }).done(function(){
                 getUserImageForNavBar();
+                pass.val('');
+                repeat.val('');
                 succesNoty('<i class="far fa-thumbs-up"></i>', $('#i18n').attr('saveProfile'));
             });
         } else {
