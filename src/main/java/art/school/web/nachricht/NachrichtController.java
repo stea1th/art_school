@@ -61,12 +61,12 @@ public class NachrichtController extends AbstractNachrichtController {
         model.addAttribute("list", entry.getKey()
                 .stream()
                 .peek(i -> {
-                    i.setDatum(convertDateToToString(i.getDatumTo(), messageSource, locale));
+                    i.setDatum(convertDateToToString(i.getDatumTo(), message));
                     NachrichtUpdater u = i.getUpdater();
                     if (u != null) {
                         i.setUpdaterInfo(message.get(u.getAction()) + " " +
                                 u.getUser().getName() + " "
-                                + convertDateToToString(transformDateInTo(u.getDatum()), messageSource, locale).toLowerCase());
+                                + convertDateToToString(transformDateInTo(u.getDatum()), message).toLowerCase());
                     }
                 }).collect(Collectors.toList()));
         model.addAttribute("link", "nachricht");

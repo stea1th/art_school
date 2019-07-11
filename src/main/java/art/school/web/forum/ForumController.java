@@ -34,7 +34,7 @@ public class ForumController extends AbstractForumController {
                 .entrySet().iterator().next();
 
         model.addAttribute("list", entry.getKey()
-                .stream().peek(i -> i.setLast(convertDateToToString(i.getDateTo(), messageSource, locale)))
+                .stream().peek(i -> i.setLast(convertDateToToString(i.getDateTo(), message)))
                 .collect(Collectors.toList()));
 
         model.addAttribute("link", "forum");
@@ -84,10 +84,10 @@ public class ForumController extends AbstractForumController {
         deleteAllThemes(arr);
     }
 
-    @PostMapping(value ="/edit")
+    @PostMapping(value = "/edit")
     @ResponseBody
     @Secured("ROLE_MODERATOR")
-    public void edit(@RequestParam(name = "id") Integer id, @RequestParam(name = "text") String text){
+    public void edit(@RequestParam(name = "id") Integer id, @RequestParam(name = "text") String text) {
         updateTitle(id, text);
     }
 

@@ -1,14 +1,12 @@
 package art.school.web.nachricht;
 
 import art.school.entity.Nachricht;
-import art.school.helper.NachrichtHelper;
 import art.school.service.NachrichtService;
 import art.school.service.ThemaService;
 import art.school.service.UserService;
 import art.school.to.NachrichtTo;
 import art.school.util.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -30,9 +28,6 @@ public class AbstractNachrichtController {
 
     @Autowired
     Messages message;
-
-    @Autowired
-    MessageSource messageSource;
 
     public List<Nachricht> getAllByThemaId(int themaId) {
         return nachrichtService.getAllByThemaId(themaId);
@@ -84,7 +79,7 @@ public class AbstractNachrichtController {
         return nachrichtService.getTo(id);
     }
 
-    public NachrichtTo getTo(int id, int page, boolean reload){
+    public NachrichtTo getTo(int id, int page, boolean reload) {
         return nachrichtService.getTo(id, page, reload);
     }
 
