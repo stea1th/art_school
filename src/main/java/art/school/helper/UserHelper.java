@@ -4,6 +4,7 @@ import art.school.entity.Role;
 import art.school.entity.Users;
 import art.school.to.UserTo;
 import art.school.util.FileUtil;
+import art.school.util.PasswordGenerator;
 import art.school.util.RolesUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,7 +28,7 @@ public class UserHelper {
         to.setAdminPasswort(u.getPasswords().get(0).getAdminPasswort());
         to.setRoles(u.getRoles()
                 .stream()
-                .sorted(Comparator.comparing(Role::ordinal).reversed())
+                .sorted(Comparator.comparing(Role::ordinal).reversed()
                 .map(Role::getName)
                 .findFirst().orElse(null));
         to.setAktiv(u.getAktiv());
@@ -35,7 +36,6 @@ public class UserHelper {
                 .toString().replace("T", " "));
         to.setEncodedImage(FileUtil.convertByteArrayToString(u.getImage()));
         to.setIsAdmin(u.getRoles().stream().map(Role::getName).anyMatch(i -> i.equals(Role.ROLE_ADMIN.getName())));
-
         return to;
     }
 
