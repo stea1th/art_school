@@ -22,7 +22,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@ToString
+@ToString(exclude = {"passwords", "roles", "nachrichts", "unterrichts", "blocks"})
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "kind_unique_name_adresse_idx")})
 public class Users extends AbstractBaseEntity {

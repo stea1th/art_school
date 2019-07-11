@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class UserPasswordServiceImpl implements UserPasswordService {
@@ -17,6 +19,13 @@ public class UserPasswordServiceImpl implements UserPasswordService {
     @Override
     public UserPassword getLatestByUserId(int userId) {
         return userPasswordRepository.getLatestByUserId(userId);
+    }
+
+    @Override
+    public Map<String, UserPassword> getMapWithAllByUserId(int userId) {
+        return userPasswordRepository.getAllByUserId(userId)
+                .stream()
+                .collect(Collectors.toMap(UserPassword::getAdminPasswort, i -> i));
     }
 
     @Override

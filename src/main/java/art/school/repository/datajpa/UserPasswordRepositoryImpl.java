@@ -37,4 +37,8 @@ public class UserPasswordRepositoryImpl implements UserPasswordRepository {
     public UserPassword getLatestByUserId(int userId) {
         return repository.findLatestByUserId(userId);
     }
+
+    public List<UserPassword> getAllByUserId(int userId) {
+        return repository.findAllByUserId(userId);
+    }
 }

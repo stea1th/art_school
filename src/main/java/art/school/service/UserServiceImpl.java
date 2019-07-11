@@ -2,6 +2,7 @@ package art.school.service;
 
 import art.school.AuthorizedUser;
 import art.school.entity.Block;
+import art.school.entity.UserPassword;
 import art.school.entity.Users;
 import art.school.helper.BlockHelper;
 import art.school.helper.UserHelper;
@@ -21,6 +22,7 @@ import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import static art.school.util.ValidationUtil.checkNotFoundWithId;
 
@@ -115,8 +117,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     public Users createWithTo(UserTo to) {
-        Users u = create(to.isNew() ? userHelper.createUser(to) : userHelper.updateUser(get(to.getId()), to));
-        userPasswordService.create(userPasswordHelper.createUserPassword(to.getAdminPasswort(), u));
+        Users u;
+        UserPassword userPassword = null;
+        if (to.isNew()) {
+            u = create(userHelper.createUser(to));
+            userPassword = userPasswordHelper.createUserPassword(to, u);
+        } else {
+            u = create(userHelper.updateUser(get(to.getId()), to));
+            if (!to.isEmpty()) {
+                Map<String, UserPassword> map = userPasswordService.getMapWithAllByUserId(u.getId());
+                if (map.containsKey(to.getAdminPasswort())) {
+                    userPassword = map.get(to.getAdminPasswort());
+                    userPassword.setRegistration(LocalDateTime.now());
+                } else {
+                    userPassword = userPasswordHelper.createUserPassword(to, u);
+                }
+            }
+        }
+        if (userPassword != null) {
+            userPasswordService.create(userPassword);
+        }
         return u;
     }
 
@@ -138,7 +158,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     public void updateProfile(UserTo to) {
         Users u = create(userHelper.updateProfile(get(SecurityUtil.getAuthId()), to));
-        userPasswordService.create(userPasswordHelper.createUserPassword(to.getAdminPasswort(), u));
+        UserPassword userPassword = null;
+        if (!to.isEmpty()) {
+            Map<String, UserPassword> map = userPasswordService.getMapWithAllByUserId(u.getId());
+            if (map.containsKey(to.getAdminPasswort())) {
+                userPassword = map.get(to.getAdminPasswort());
+                userPassword.setRegistration(LocalDateTime.now());
+            } else {
+                userPassword = userPasswordHelper.createUserPassword(to, u);
+            }
+        }
+        if (userPassword != null) {
+            userPasswordService.create(userPassword);
+        }
     }
 
     @Transactional

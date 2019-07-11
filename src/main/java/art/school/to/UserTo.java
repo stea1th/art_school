@@ -28,4 +28,8 @@ public class UserTo {
     public boolean isNew() {
         return id == null;
     }
+
+    public boolean isEmpty() {
+        return adminPasswort == null || "".equals(adminPasswort);
+    }
 }

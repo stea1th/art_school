@@ -1,5 +1,6 @@
 package art.school.web;
 
+import art.school.AuthorizedUser;
 import art.school.service.UserPasswordService;
 import art.school.util.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,8 @@ public class RootController {
 
     @GetMapping("/")
     public String root() {
-        if (userPasswordService.getLatestByUserId(SecurityUtil.getAuthId()).isGenerated()) {
+        AuthorizedUser user = SecurityUtil.safeGet();
+        if (user != null && userPasswordService.getLatestByUserId(user.getId()).isGenerated()) {
             return "redirect:profile";
         }
         return "redirect:forum";

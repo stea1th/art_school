@@ -1,13 +1,10 @@
 package art.school.helper;
 
 import art.school.entity.Role;
-import art.school.entity.UserPassword;
 import art.school.entity.Users;
 import art.school.to.UserTo;
 import art.school.util.FileUtil;
-import art.school.util.PasswordGenerator;
 import art.school.util.RolesUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,7 +27,7 @@ public class UserHelper {
         to.setAdminPasswort(u.getPasswords().get(0).getAdminPasswort());
         to.setRoles(u.getRoles()
                 .stream()
-                .sorted(Comparator.comparing(Role::ordinal))
+                .sorted(Comparator.comparing(Role::ordinal).reversed())
                 .map(Role::getName)
                 .findFirst().orElse(null));
         to.setAktiv(u.getAktiv());
