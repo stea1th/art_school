@@ -2,10 +2,10 @@ package art.school.service;
 
 import art.school.AuthorizedUser;
 import art.school.entity.Block;
-import art.school.entity.UserPassword;
 import art.school.entity.Users;
 import art.school.helper.BlockHelper;
 import art.school.helper.UserHelper;
+import art.school.helper.UserPasswordHelper;
 import art.school.repository.BlockRepository;
 import art.school.repository.UserRepository;
 import art.school.to.BlockTo;
@@ -15,7 +15,6 @@ import art.school.web.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -42,6 +41,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserPasswordService userPasswordService;
+
+    @Autowired
+    private UserPasswordHelper userPasswordHelper;
 
 //    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -109,20 +111,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     public Users create(Users users) {
         Assert.notNull(users, "users must not be null");
-        List<UserPassword> passwords = users.getPasswords();
-        passwords.add(userPasswordService.create(passwords.get(0)));
-
-//        System.out.println("-------------------------------------- " + passwords.get(0));
-//        System.out.println("+++++++++++++++++++++++++++++++++++++++" + passwords.get(passwords.size()-1));
-//        userPasswordService.create(passwords.get(0));
-
-//        users.setPasswort(encoder.encode(users.getAdminPasswort()));
         return repository.save(users);
     }
 
     public Users createWithTo(UserTo to) {
-        Users u = to.isNew() ? userHelper.createUser(to) : userHelper.updateUser(get(to.getId()), to);
-        return create(u);
+        Users u = create(to.isNew() ? userHelper.createUser(to) : userHelper.updateUser(get(to.getId()), to));
+        userPasswordService.create(userPasswordHelper.createUserPassword(to.getAdminPasswort(), u));
+        return u;
     }
 
     @Override
@@ -141,8 +136,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     }
 
-    public void updateProfile(UserTo userTo) {
-        create(userHelper.updateProfile(get(SecurityUtil.getAuthId()), userTo));
+    public void updateProfile(UserTo to) {
+        Users u = create(userHelper.updateProfile(get(SecurityUtil.getAuthId()), to));
+        userPasswordService.create(userPasswordHelper.createUserPassword(to.getAdminPasswort(), u));
     }
 
     @Transactional

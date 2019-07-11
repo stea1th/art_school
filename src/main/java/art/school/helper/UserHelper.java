@@ -20,10 +20,7 @@ import java.util.stream.Collectors;
 @Component
 public class UserHelper {
 
-    @Autowired
-    private UserPasswordHelper userPasswordHelper;
-
-    public UserTo createTo(Users u){
+    public UserTo createTo(Users u) {
         UserTo to = new UserTo();
 
         to.setId(u.getId());
@@ -40,7 +37,7 @@ public class UserHelper {
         to.setRegistriert(u.getRegistriert().truncatedTo(ChronoUnit.SECONDS)
                 .toString().replace("T", " "));
         to.setEncodedImage(FileUtil.convertByteArrayToString(u.getImage()));
-        to.setIsAdmin(u.getRoles().stream().map(Role::getName).anyMatch(i-> i.equals(Role.ROLE_ADMIN.getName())));
+        to.setIsAdmin(u.getRoles().stream().map(Role::getName).anyMatch(i -> i.equals(Role.ROLE_ADMIN.getName())));
 
         return to;
     }
@@ -56,7 +53,6 @@ public class UserHelper {
         u.setName(to.getName());
         u.setEmail(to.getEmail());
         u.setAdresse(to.getAdresse());
-        u.setPasswords(updatePasswordForUser(u, to));
         u.setAktiv(to.getAktiv());
         u.setRoles(RolesUtil.createRoles(Integer.parseInt(to.getRoles() == null ? "0" : to.getRoles())));
         return u;
@@ -66,21 +62,13 @@ public class UserHelper {
         MultipartFile file = to.getFile();
         u.setEmail(to.getEmail());
         u.setAdresse(to.getAdresse());
-        u.setPasswords(updatePasswordForUser(u, to));
         u.setImage(file != null ? FileUtil.convertFileToByteArray(file) : to.getRemoveImage() ? null : u.getImage());
 
         return u;
     }
 
-    public List<UserTo> transformTos(List<Users> list){
+    public List<UserTo> transformTos(List<Users> list) {
         return list.stream().map(this::createTo)
                 .collect(Collectors.toList());
-    }
-
-    public List<UserPassword> updatePasswordForUser(Users u, UserTo to){
-        UserPassword userPassword = userPasswordHelper.createUserPassword(to.getAdminPasswort());
-        List<UserPassword> passwords = u.getPasswords();
-        passwords.add(userPassword);
-        return passwords;
     }
 }

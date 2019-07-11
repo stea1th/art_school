@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -45,10 +46,16 @@ public class AdminRestController extends AbstractUserController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ResponseEntity saveOrUpdate(UserTo to) {
-        if(to.isNew()){
-            emailService.sendSimpleEmail("noreply.vadim@mail.ru", "stea1th@mail.ru", "Просто тест", "Пробуем, авось что то и получится!!!!");
-        }
+    public ResponseEntity saveOrUpdate(HttpServletRequest request, UserTo to) {
+//        if(to.isNew()){
+//            emailService.sendSimpleEmail("noreply.vadim@mail.ru", "stea1th@mail.ru", "Просто тест", "Пробуем, авось что то и получится!!!!");
+//        }
+        System.out.println("===================== " + request.getRequestURI());
+        System.out.println("===================== " + request.getRequestURL());
+        System.out.println("===================== " + request.getServerPort());
+        System.out.println("===================== " + request.getLocalPort());
+        System.out.println("===================== " + request.getRemotePort());
+
         createWithTo(to);
         return new ResponseEntity<>(Collections.singletonMap(to.isNew() ? "Save" : "Update", to.getName()), HttpStatus.OK);
     }
