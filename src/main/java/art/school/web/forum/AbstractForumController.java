@@ -7,7 +7,6 @@ import art.school.to.ThemaTo;
 import art.school.util.Messages;
 import art.school.web.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -23,9 +22,6 @@ public abstract class AbstractForumController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    MessageSource messageSource;
 
     @Autowired
     Messages message;
@@ -99,7 +95,7 @@ public abstract class AbstractForumController {
         themaService.deleteAll(arr);
     }
 
-    public void updateTitle(int id, String text){
+    public void updateTitle(int id, String text) {
         themaService.updateTitle(id, text);
     }
 }

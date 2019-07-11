@@ -15,13 +15,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@ToString
+@ToString(exclude = {"passwords", "roles", "nachrichts", "unterrichts", "blocks"})
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "kind_unique_name_adresse_idx")})
 public class Users extends AbstractBaseEntity {
@@ -41,12 +42,16 @@ public class Users extends AbstractBaseEntity {
     @Size(min = 3, max = 50)
     private String adresse;
 
-    @Column(name = "admin_passwort", nullable = false)
-    private String adminPasswort;
+    @OneToMany(mappedBy = "user")
+    @OrderBy(value = "registration DESC")
+    private List<UserPassword> passwords = new ArrayList<>();
 
-    @Column(name = "passwort", nullable = false)
-    @NotBlank
-    private String passwort;
+//    @Column(name = "admin_passwort", nullable = false)
+//    private String adminPasswort;
+//
+//    @Column(name = "passwort", nullable = false)
+//    @NotBlank
+//    private String passwort;
 
     @Column(name = "registriert")
     @NotNull

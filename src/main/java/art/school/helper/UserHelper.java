@@ -18,25 +18,24 @@ import java.util.stream.Collectors;
 @Component
 public class UserHelper {
 
-    public UserTo createTo(Users u){
+    public UserTo createTo(Users u) {
         UserTo to = new UserTo();
 
         to.setId(u.getId());
         to.setName(u.getName());
         to.setAdresse(u.getAdresse());
         to.setEmail(u.getEmail());
-        to.setAdminPasswort(u.getAdminPasswort());
+        to.setAdminPasswort(u.getPasswords().get(0).getAdminPasswort());
         to.setRoles(u.getRoles()
                 .stream()
-                .sorted(Comparator.comparing(Role::ordinal))
+                .sorted(Comparator.comparing(Role::ordinal).reversed()
                 .map(Role::getName)
                 .findFirst().orElse(null));
         to.setAktiv(u.getAktiv());
         to.setRegistriert(u.getRegistriert().truncatedTo(ChronoUnit.SECONDS)
                 .toString().replace("T", " "));
         to.setEncodedImage(FileUtil.convertByteArrayToString(u.getImage()));
-        to.setIsAdmin(u.getRoles().stream().map(Role::getName).anyMatch(i-> i.equals(Role.ROLE_ADMIN.getName())));
-
+        to.setIsAdmin(u.getRoles().stream().map(Role::getName).anyMatch(i -> i.equals(Role.ROLE_ADMIN.getName())));
         return to;
     }
 
@@ -48,29 +47,24 @@ public class UserHelper {
     }
 
     public Users updateUser(Users u, UserTo to) {
-        String adminPasswort = to.getAdminPasswort();
-
         u.setName(to.getName());
         u.setEmail(to.getEmail());
         u.setAdresse(to.getAdresse());
-        u.setAdminPasswort((adminPasswort == null || "".equals(adminPasswort)) ? PasswordGenerator.generate() : adminPasswort);
         u.setAktiv(to.getAktiv());
         u.setRoles(RolesUtil.createRoles(Integer.parseInt(to.getRoles() == null ? "0" : to.getRoles())));
         return u;
     }
 
     public Users updateProfile(Users u, UserTo to) {
-        String adminPasswort = to.getAdminPasswort();
         MultipartFile file = to.getFile();
         u.setEmail(to.getEmail());
         u.setAdresse(to.getAdresse());
-        u.setAdminPasswort((adminPasswort == null || "".equals(adminPasswort)) ? u.getAdminPasswort() : adminPasswort);
         u.setImage(file != null ? FileUtil.convertFileToByteArray(file) : to.getRemoveImage() ? null : u.getImage());
 
         return u;
     }
 
-    public List<UserTo> transformTos(List<Users> list){
+    public List<UserTo> transformTos(List<Users> list) {
         return list.stream().map(this::createTo)
                 .collect(Collectors.toList());
     }

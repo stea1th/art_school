@@ -16,7 +16,7 @@ public class AuthorizedUser extends User {
     private Boolean aktiv;
 
     public AuthorizedUser(Users user) {
-        super(user.getEmail(), user.getPasswort(), user.getAktiv(), true, true, true, user.getRoles());
+        super(user.getEmail(), user.getPasswords().get(0).getPasswort(), user.getAktiv(), true, true, true, user.getRoles());
         this.id = user.getId();
         this.name = user.getName();
         this.roles = user.getRoles();

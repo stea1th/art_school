@@ -19,7 +19,7 @@
         <intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')"/>
 
         <form-login login-page='/login'
-                    default-target-url="/forum"
+                    default-target-url="/"
                     authentication-failure-url="/login?error=true"
                     always-use-default-target="true"/>
         <logout logout-success-url="/login"
