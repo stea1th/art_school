@@ -5,11 +5,10 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 
     <!--SQL-Init-->
@@ -34,6 +33,9 @@
     <context:property-placeholder location="classpath:db/app.properties" system-properties-mode="OVERRIDE"/>
 
     <!--Liquibase-->
+    <!--For refresh or create new DB use:-->
+    <!--p:contexts="test"-->
+    <!--p:dropFirst="true"-->
     <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase"
           p:dataSource-ref="dataSource"
           p:changeLog="classpath:db/changelog/liquibase-master.xml"
@@ -51,14 +53,12 @@
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
           p:dataSource-ref="dataSource"
           p:packagesToScan="art.school.**.entity">
-
         <property name="jpaPropertyMap">
             <map>
                 <entry key="#{T(org.hibernate.cfg.AvailableSettings).FORMAT_SQL}" value="${hibernate.format_sql}"/>
                 <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SQL_COMMENTS}"
                        value="${hibernate.use_sql_comments}"/>
                 <entry key="#{T(org.hibernate.cfg.AvailableSettings).JPA_PROXY_COMPLIANCE}" value="false"/>
-
             </map>
         </property>
 
@@ -72,6 +72,7 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
           p:entityManagerFactory-ref="entityManagerFactory"/>
 
+    <!--Bean for Email-Service-->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
           p:host="${email.host}"
           p:port="${email.port}"
