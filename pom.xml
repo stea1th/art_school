@@ -57,7 +57,7 @@
         <noty.version>3.1.4</noty.version>
 
         <!--JSON-->
-        <jackson-json.version>2.10.1</jackson-json.version>
+        <jackson-json.version>2.12.1</jackson-json.version>
 
         <!--FileUpload-->
         <commons.fileupload.version>1.4</commons.fileupload.version>
